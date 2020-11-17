@@ -1,0 +1,1335 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"plutowu.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Designed to share happiness and learning">
+<meta property="og:type" content="website">
+<meta property="og:title" content="PlutoWu的个人博客">
+<meta property="og:url" content="http://plutowu.top/index.html">
+<meta property="og:site_name" content="PlutoWu的个人博客">
+<meta property="og:description" content="Designed to share happiness and learning">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="Shiyuan Wu">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://plutowu.top/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : true,
+    isPost : false,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>PlutoWu的个人博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="PlutoWu的个人博客" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">PlutoWu的个人博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Programming | Photography | Film</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content index posts-expand">
+            
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://plutowu.top/2020/11/17/Servlet%E5%AE%9E%E4%BE%8B%E6%80%BB%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/1.jpg">
+      <meta itemprop="name" content="Shiyuan Wu">
+      <meta itemprop="description" content="Designed to share happiness and learning">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PlutoWu的个人博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/11/17/Servlet%E5%AE%9E%E4%BE%8B%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">Servlet实例总结</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-11-17 12:02:55 / 修改时间：14:46:59" itemprop="dateCreated datePublished" datetime="2020-11-17T12:02:55+08:00">2020-11-17</time>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>20k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>19 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Servlet实例总结-基于Java、SQLserver、Tomcat"><a href="#Servlet实例总结-基于Java、SQLserver、Tomcat" class="headerlink" title="Servlet实例总结-基于Java、SQLserver、Tomcat"></a>Servlet实例总结-基于Java、SQLserver、Tomcat</h1><h3 id="题目及要求"><a href="#题目及要求" class="headerlink" title="题目及要求:"></a>题目及要求:</h3><h4 id="使用Java-Bean-Servlet-Jsp实现下列目标"><a href="#使用Java-Bean-Servlet-Jsp实现下列目标" class="headerlink" title="使用Java Bean+Servlet+Jsp实现下列目标"></a><strong>使用Java Bean+Servlet+Jsp实现下列目标</strong></h4><ol>
+<li>任务一：在数据库中建立表格T_BOOK(BID, BNAME, BAUTHER, BPRICE, BAMOUNT, BPUBDATE)，并向表中添加一些记录，T_BOOK数据表结构如下：</li>
+</ol>
+<p>表1-2 T_BOOK数据表</p>
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>列名</th>
+<th>含义</th>
+<th>类型</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>BID</td>
+<td>书号</td>
+<td>VARCHAR(20)</td>
+<td>“B0001”</td>
+</tr>
+<tr>
+<td>2</td>
+<td>BNAME</td>
+<td>书名</td>
+<td>VARCHAR(50)</td>
+<td></td>
+</tr>
+<tr>
+<td>3</td>
+<td>BAUTHER</td>
+<td>作者</td>
+<td>VARCHAR(50)</td>
+<td></td>
+</tr>
+<tr>
+<td>4</td>
+<td>BTYPE</td>
+<td>类型</td>
+<td>VARCHAR(50)</td>
+<td>计算机、文学</td>
+</tr>
+<tr>
+<td>5</td>
+<td>BPRICE</td>
+<td>价格</td>
+<td>INT</td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>BAMOUNT</td>
+<td>数量</td>
+<td>INT</td>
+<td></td>
+</tr>
+<tr>
+<td>7</td>
+<td>BPUBDATE</td>
+<td>出版日期</td>
+<td>DATE</td>
+<td>2000-1-1</td>
+</tr>
+</tbody></table>
+<ol start="2">
+<li><p>任务二：编写程序，在JSP页面中提供表单，用户可填写图书数据，向T_BOOK表中添加一条记录。</p>
+</li>
+<li><p>任务三：编写程序，在JSP页面提供按书名模糊查询功能，用户输入书名部分或全部内容，查询的结果显示在JSP页面上。</p>
+</li>
+<li><p>任务四：编写程序，在JSP页面中提供按价格区间查询功能，用户可填写两个价格，查询出两个价格之间的图书结果显示在JSP页面上。</p>
+</li>
+<li><p>任务五：编写程序，在JSP页面中提供按书号更新书籍数量功能，用户输入书号、数量，可更新数据表中的记录。</p>
+</li>
+</ol>
+<hr>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现:"></a>实现:</h3><h5 id="任务1：使用图形化建立数据库及建表，如下图："><a href="#任务1：使用图形化建立数据库及建表，如下图：" class="headerlink" title="任务1：使用图形化建立数据库及建表，如下图："></a>任务1：使用图形化建立数据库及建表，如下图：</h5><p><img src="https://img-blog.csdnimg.cn/20201117121051611.jpg#pic_center" alt="在这里插入图片描述"><img src="https://img-blog.csdnimg.cn/20201117121051621.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzgyNDEzOQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/20201117121051649.jpg#pic_center" alt="在这里插入图片描述"><img src="https://img-blog.csdnimg.cn/20201117142430287.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzgyNDEzOQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/11/17/Servlet%E5%AE%9E%E4%BE%8B%E6%80%BB%E7%BB%93/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://plutowu.top/2020/11/17/%E4%B8%89%E8%A7%92%E5%88%A4%E6%96%AD/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/1.jpg">
+      <meta itemprop="name" content="Shiyuan Wu">
+      <meta itemprop="description" content="Designed to share happiness and learning">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PlutoWu的个人博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/11/17/%E4%B8%89%E8%A7%92%E5%88%A4%E6%96%AD/" class="post-title-link" itemprop="url">三角判断</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-11-17 12:01:54 / 修改时间：12:02:35" itemprop="dateCreated datePublished" datetime="2020-11-17T12:01:54+08:00">2020-11-17</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BC%96%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">编程</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="三角判断-基于C语言"><a href="#三角判断-基于C语言" class="headerlink" title="三角判断-基于C语言"></a>三角判断-基于C语言</h1><p><em>目的：此程序是为了判断输入的三角形三边，并判断三角形类型，包括等腰三角形、等边三角形、直角三角形、一般三角形及错值判定。</em></p>
+<p>代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;math.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">float</span> a, b, c;</span><br><span class="line">   </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;请输入三角形的三边:（用空格隔开，以回车结束）\n&quot;</span>);</span><br><span class="line">    scanf_s(<span class="string">&quot;%f%f%f&quot;</span>, &amp;a, &amp;b, &amp;c);</span><br><span class="line">    <span class="comment">//判断是否满足三角形条件：两边之和是否大于第三边；</span></span><br><span class="line">    <span class="keyword">if</span> (a == <span class="number">0</span> || b == <span class="number">0</span> || c == <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;输入边有空值0，错误！\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (a &lt; <span class="number">0</span> || b &lt; <span class="number">0</span> || c &lt; <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;输入边有负值，错误！\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (a + b &gt; c &amp;&amp; b + c &gt; a &amp;&amp; a + c &gt; a)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//判断三条边是否相等，三边相等即为等边三角形</span></span><br><span class="line">        <span class="keyword">if</span> (a == b &amp;&amp; a == c)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;等边三角形\n&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//判断三角形是否有两天边相等,两边相等即为等腰三角形</span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (a == b || a == c || b == c)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;等腰三角形\n&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//判断是否有两边的平方和大于第三边的平方，即为直角三角形</span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> ((a * a + b * b == c * c) || (a * a + c * c == b * b) || (b * b + c * c == a * a))</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;直角三角形\n&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//其他情况为一般三角形</span></span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;一般三角形\n&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//两边之和小于第三边，不能构成三角形</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;三边不能构成三角形\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    system(<span class="string">&quot;pause&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p><strong>总结：最基本的C语言入门程序，对新手可以很好的了解各个运算符的作用以及if函数的运用。</strong></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://plutowu.top/2020/11/17/%E5%9F%BA%E4%BA%8EC%E8%AF%AD%E8%A8%80%E7%9A%84%E7%A9%BA%E6%A0%BC%E7%BB%9F%E8%AE%A1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/1.jpg">
+      <meta itemprop="name" content="Shiyuan Wu">
+      <meta itemprop="description" content="Designed to share happiness and learning">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PlutoWu的个人博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/11/17/%E5%9F%BA%E4%BA%8EC%E8%AF%AD%E8%A8%80%E7%9A%84%E7%A9%BA%E6%A0%BC%E7%BB%9F%E8%AE%A1/" class="post-title-link" itemprop="url">基于C语言的空格统计</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-11-17 11:59:50 / 修改时间：14:29:37" itemprop="dateCreated datePublished" datetime="2020-11-17T11:59:50+08:00">2020-11-17</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BC%96%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">编程</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="空格统计小程序-基于C语言"><a href="#空格统计小程序-基于C语言" class="headerlink" title="空格统计小程序-基于C语言"></a>空格统计小程序-基于C语言</h1><p><em>首先，做这个程序的目的，是因为软件工程要求实例Jackson块图的实现，要求如下：</em></p>
+<p><em>1）设计程序统计每个记录中空格字符的个数，输出数据的格式是，每读入一个记录（字符串）之后，另起一行打印出这个字符串及其空格数；</em></p>
+<p><em>2）最后打印出文件中空格的总个数。</em></p>
+<p><strong>下面列出代码，请参考，如需要求有差异，可自由修改代码以达成目标（此程序经vs测试通过）</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _CRT_SECURE_NO_WARNINGS     <span class="comment">//解决了在vs中使用fopen()函数报错的问题</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;windows.h&gt;    //调用windows.h头文件实现Sleep()函数，以得到期望的休眠，使得程序不会突兀</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX_FILED 128   <span class="comment">//根据估计文字不超过128字节，所以设定为128</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> buf[MAX_FILED];    <span class="comment">//创造数组用来记录文本</span></span><br><span class="line">    <span class="keyword">int</span> count = <span class="number">0</span>;          <span class="comment">//记录每段文本的空格数</span></span><br><span class="line">    <span class="keyword">int</span> wholecount = <span class="number">0</span>;     <span class="comment">//记录总空格数</span></span><br><span class="line">    <span class="keyword">int</span> len;                <span class="comment">//记录每行字符数</span></span><br><span class="line">    <span class="keyword">char</span> s1[] = <span class="string">&quot;Record 1：How many stages are there in the traditional software development model?&quot;</span>;</span><br><span class="line">    <span class="keyword">char</span> s2[] = <span class="string">&quot;Record 2：After entering the room,walk to the person sitting nearest to you and greet him/her with a “high five”.&quot;</span>;</span><br><span class="line">    <span class="keyword">char</span> s3[] = <span class="string">&quot;Record 3：What are encapsulated into an object?&quot;</span>;</span><br><span class="line">    <span class="keyword">char</span> s4[] = <span class="string">&quot;Record 4：What diagram is the following diagram? Simply describe the meaning of it.&quot;</span>;</span><br><span class="line"> </span><br><span class="line">    <span class="comment">//使用fopen()函数写入txt文件中的文本</span></span><br><span class="line">    FILE* fpWrite = fopen(<span class="string">&quot;Document.txt&quot;</span>, <span class="string">&quot;w&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span> (fpWrite == <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">fprintf</span>(fpWrite, <span class="string">&quot;%s\n&quot;</span>, s1);</span><br><span class="line">    <span class="built_in">fprintf</span>(fpWrite, <span class="string">&quot;%s\n&quot;</span>, s2);</span><br><span class="line">    <span class="built_in">fprintf</span>(fpWrite, <span class="string">&quot;%s\n&quot;</span>, s3);</span><br><span class="line">    <span class="built_in">fprintf</span>(fpWrite, <span class="string">&quot;%s\n&quot;</span>, s4);  </span><br><span class="line">    fclose(fpWrite);</span><br><span class="line">      </span><br><span class="line">    <span class="comment">//使用fopen()函数读取txt文件中的文本</span></span><br><span class="line">    FILE* Readtxt = fopen(<span class="string">&quot;Document.txt&quot;</span>, <span class="string">&quot;r&quot;</span>); <span class="comment">//&quot;r&quot; 以只读方式打开文件，该文件必须存在 | 此文件必须存在于程序根目录下否则无法运行</span></span><br><span class="line">    <span class="keyword">if</span> (Readtxt == <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;正在载入程序，统计中请稍等......\n\n&quot;</span>);</span><br><span class="line">    Sleep(<span class="number">5000</span>);    <span class="comment">//调用Sleep()函数休眠五秒</span></span><br><span class="line">       </span><br><span class="line">    <span class="keyword">while</span> (fgets(buf, MAX_FILED, Readtxt) != <span class="literal">NULL</span>)  <span class="comment">//fgets函数功能为从指定的流中读取数据，每次读取一行（配合fopen()使用是实现逐行读取）</span></span><br><span class="line">    &#123;</span><br><span class="line">        len = <span class="built_in">strlen</span>(buf);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= len; i++)</span><br><span class="line">            <span class="keyword">if</span> (buf[i] == <span class="number">32</span>)   <span class="comment">//判定空格，即空格ASCII码为32</span></span><br><span class="line">                count++;</span><br><span class="line">        wholecount += count;</span><br><span class="line">        buf[len - <span class="number">1</span>] = <span class="string">&#x27;\0&#x27;</span>;  <span class="comment">//通过判断空字符的结尾来确定换行</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%s\n&quot;</span>, buf);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;总字数是：%d\n空格字符数是：%d\n&quot;</span>, len - <span class="number">1</span>, count);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;正在计算下一段句子的空格数，请稍等......\n&quot;</span>);</span><br><span class="line">        Sleep(<span class="number">2000</span>);    <span class="comment">////调用Sleep()函数休眠两秒</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">        count = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;总的空格数为:%d\n&quot;</span>, wholecount);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;文本空格数已全部统计完成，请单击Enter退出程序，谢谢使用此程序^_^\n&quot;</span>);</span><br><span class="line">    fclose(Readtxt);</span><br><span class="line">    system(<span class="string">&quot;pause&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>此外还有Visio绘制的程序流程图</p>
+<p><img src="https://img-blog.csdnimg.cn/20201117142918848.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzgyNDEzOQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<hr>
+<p><strong>希望能在读写C语言读写方面对你有所启发和帮助！</strong></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://plutowu.top/2020/11/17/%E7%8B%A9%E7%8C%8E%E5%BD%B1%E8%AF%84/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/1.jpg">
+      <meta itemprop="name" content="Shiyuan Wu">
+      <meta itemprop="description" content="Designed to share happiness and learning">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PlutoWu的个人博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/11/17/%E7%8B%A9%E7%8C%8E%E5%BD%B1%E8%AF%84/" class="post-title-link" itemprop="url">狩猎影评</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-11-17 11:53:49 / 修改时间：14:32:13" itemprop="dateCreated datePublished" datetime="2020-11-17T11:53:49+08:00">2020-11-17</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%BD%B1%E8%AF%84/" itemprop="url" rel="index"><span itemprop="name">影评</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="狩猎"><a href="#狩猎" class="headerlink" title="狩猎"></a>狩猎</h1><h3 id="秋天萧瑟的气氛，狩猎的季节，猎物却是一个老好人"><a href="#秋天萧瑟的气氛，狩猎的季节，猎物却是一个老好人" class="headerlink" title="-秋天萧瑟的气氛，狩猎的季节，猎物却是一个老好人"></a>-秋天萧瑟的气氛，狩猎的季节，猎物却是一个老好人</h3><p>-节选自知乎个人创作</p>
+<p><img src="https://img-blog.csdnimg.cn/2020111714310397.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzgyNDEzOQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p><em>一部好的电影会让观众在观看时和观看后陷入深深的思考，不论思考的是什么，或是伦理道德，亦或是错综复杂的剧情和演员精湛的演技，也可以是勾起你深埋于心底的一段回忆。</em></p>
+<p><img src="https://img-blog.csdnimg.cn/20201117121107735.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzgyNDEzOQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p><em>《狩猎》就是这样一部影片，但是看过一遍后我不想再重温一遍，因为这部影片给我带来了深深的压抑感，这种压抑深入心中，使我无法对电影内涵做更深一步的思考和探索。</em></p>
+<p><img src="https://img-blog.csdnimg.cn/20201117121107789.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzgyNDEzOQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p><em>看完《狩猎》，我不自觉的想到了韩国电影《熔炉》，同样的压抑感，同样的结局。你认为好人就该得到好报吗，因果循环吗？你错了，这两部电影都揭示出“坏人“的下场会比好人要好，吃亏的也总是心地善良的人。也许正是因为这两部电影共同的压抑感和带来的反思，让我把这两部电影串联在一起。</em></p>
+<p><img src="https://img-blog.csdnimg.cn/20201117121107780.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzgyNDEzOQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p><em>《狩猎》的主要剧情梗概是这样的：男主卢卡斯是一家幼儿园的教师，倍受同事和孩子们的喜爱。但有一个叫卡拉的小女孩在玩游戏的过程中对卢卡斯示好却遭到拒绝。为了报复卢卡斯，卡拉将卢卡斯描述成一个暴露性器官的变态，让他背负了猥亵儿童的罪名，进而成为了小镇排挤的对象。卢卡斯的生活和在小镇的地位发生了巨大的改变，好友、女友、前妻都不在信任他，自己的宠爱的狗也因他而死，儿子被小镇的人侮辱。尽管卡拉告诉了同是卢卡斯朋友的父亲真相，卢卡斯的罪名也不成立，但周围的人已经不能像以前一样对待他，小镇的人们戴上了伪善的面纱，在结尾的一场狩猎中，有人在暗地里开枪差点把卢卡斯打死，电影戛然而止…</em></p>
+<p><em>这部影片的关键人物无疑是卡拉，没有她的谎言，也就没有之后发生的故事。谎言的背后一定有一个原因，也许是她对卢卡斯的爱慕，也许是她早熟的性格，但在我看来却是她家庭的教育和环境。从电影一开始对卡拉家庭的描述可以看出父母对她的管教是非常宽松的，以致于她自己乱跑在超市迷了路，她的父母都没有去寻找，只是认为她出去玩了。同时小镇相对封闭的环境却造就了居民之间相对开放的态度，从卢卡斯能随意的在卡拉家的壁橱中拿出杯子喝水和卡拉哥哥的朋友给卡拉看相片都能看出，这也给卡拉父亲有卢卡斯家的钥匙打下理论基础。所以如此典型的成长环境给了卡拉非常宽松的空间与自由，这与《熔炉》中封闭的学校环境相类似。</em></p>
+<p><em>从电影中我们可以看出，卡拉的父母在表达情感的时候都是非常直接的，相互表达爱意时会在卡拉面前接吻，出现矛盾时会大声争吵，这势必会对卡拉成长中的行为和内心产生巨大的影响。首先，卡拉吻卢卡斯的行为很可能是跟父母学的，孩子在成长的过程中总是不断的模仿学习，学习的最主要方式就是模仿。父母在孩子看到一些不属于这个年龄段的行为时应该做出引导，解释行为代表的意义。但是，小镇和家庭宽松的环境无法让卡拉得到父母及时的教育，才让卡拉做出不合适的举动。与此同时，父母在孩子面前的争吵也使得孩子的内心受到极大的影响，这也间接助使卡拉的报复心增长。在影片中，卡拉没有很好的管理好自己的感情，选错了给予感情的对象。但对于卡拉来说，真正对他好的也许只有卢卡斯一个人，她没有其他选择，才酿成了这种局面。</em></p>
+<p><em>这部电影看完带来的最直观的感受是一种无法发泄的负能量，一种深沉的压抑感，这也许是我对这部电影的另类喜爱吧，就像练琴时弹错了旋律老师就会打你，因为疼了，你才会真正记住。</em></p>
+<p><img src="https://img-blog.csdnimg.cn/20201117121107744.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzgyNDEzOQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p>PS：强烈推荐男主角扮演者麦斯·米克尔森，丹麦男神，精湛的演艺把《狩猎》这部影片撑起，在困境中的绝望，那种无助的眼神真的是天生的演员才能做到。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://plutowu.top/2020/11/17/%E8%BE%9B%E5%BE%B7%E5%8B%92%E7%9A%84%E5%90%8D%E5%8D%95%E5%BD%B1%E8%AF%84/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/1.jpg">
+      <meta itemprop="name" content="Shiyuan Wu">
+      <meta itemprop="description" content="Designed to share happiness and learning">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PlutoWu的个人博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/11/17/%E8%BE%9B%E5%BE%B7%E5%8B%92%E7%9A%84%E5%90%8D%E5%8D%95%E5%BD%B1%E8%AF%84/" class="post-title-link" itemprop="url">辛德勒的名单影评</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-11-17 11:53:49 / 修改时间：14:34:18" itemprop="dateCreated datePublished" datetime="2020-11-17T11:53:49+08:00">2020-11-17</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%BD%B1%E8%AF%84/" itemprop="url" rel="index"><span itemprop="name">影评</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.8k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="辛德勒的名单"><a href="#辛德勒的名单" class="headerlink" title="辛德勒的名单"></a>辛德勒的名单</h1><h3 id="暗黑中的一丝曙光"><a href="#暗黑中的一丝曙光" class="headerlink" title="暗黑中的一丝曙光"></a>暗黑中的一丝曙光</h3><p><img src="https://img-blog.csdnimg.cn/20201117121115471.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzgyNDEzOQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p><strong>——Whoever saves one life ,saves the world entire .*</strong></p>
+<p><strong><em>（当你挽救了一条生命就等于挽救了全世界。）\</em></strong></p>
+<hr>
+<p><em>Schindler’s List（辛德勒的名单）是根据澳大利亚小说家托马斯·肯尼利所著的《辛德勒的名单》改编而成，由导演史蒂文·斯皮尔伯格执导的一部电影。影片再现了德国企业家奥斯卡·辛德勒与其夫人埃米莉·辛德勒在第二次世界大战期间倾家荡产保护了1200余名犹太人面遭法西斯杀害的真实事件。</em></p>
+<p><strong><em>如果你尊重一个人，如果你尊重生命，在那个时候，你记住那些名字，并拯救他们。辛德勒的行为，是荒谬的世界中，人性的反弹。他无法超越这荒谬吗，但他为人类争取回了良知。如果没有这样的良知，我想人类面对自身，也会感到愧疚。\</em></strong></p>
+<p><img src="https://img-blog.csdnimg.cn/20201117121115486.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzgyNDEzOQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p><em>这部电影用黑白画面给人以历史的沧桑感，营造出一种类似纪录片的氛围。整部电影的主旨是和平和救赎，它用清晰的条理给观众展现了一个名叫辛德勒的德国军火商由一开始的贪图一己私利到最后发自内心的想要拯救每个受法西斯迫害的犹太人这一转变过程。</em></p>
+<p><img src="https://img-blog.csdnimg.cn/20201117121115317.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzgyNDEzOQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p><em>首先，整部电影最关键的是人性的救赎。那么，什么是人性？</em></p>
+<p><strong><em>从字面上看，人性应该是长期聚居的人们通过长时间的口耳传承达成的一种对社会行为的集体认知和行为指导。通俗易懂的说，就是我们的道德准则。所以人性并不是电影中遥不可及的大道理，惩恶扬善，助弱扶残，这些都是人性最直接的表现。同样的，人性并非是某些人独有的属性，而是每个人心中的潜意识。\</em></strong></p>
+<hr>
+<p><em>以下便是我对于电影关于人性的解读：</em></p>
+<h2 id="音乐部分"><a href="#音乐部分" class="headerlink" title="音乐部分"></a><strong>音乐部分</strong></h2><p><em>当法西斯举起屠刀残杀无辜的犹太民众时，他们无情冷酷的脸庞将法西斯独有的残暴疯狂展现的一览无遗，我忘不了被纳粹追杀躲藏的妇孺，忘不了纳粹士兵在发现幸存犹太人后一拥而上的扫射，此时画面切换到一个绅士般的纳粹军官坐在犹太人家中的钢琴前拨弄琴键，莫扎特悦耳的乐章伴随着爆豆般的枪声犹如死神的歌声，导演熟练的运用音乐以一种看似荒诞的方式来讽刺纳粹的残暴与变态。</em></p>
+<p><img src="https://img-blog.csdnimg.cn/20201117121115462.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzgyNDEzOQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<hr>
+<h2 id="剧情部分"><a href="#剧情部分" class="headerlink" title="剧情部分"></a><strong>剧情部分</strong></h2><p><em>当辛德勒和妻子骑着马在山上目睹了城市中无辜的犹太民众正在被德国士兵大肆屠杀的野兽行为，当他在混乱的人群中看到那个穿着红衣服的小女孩慌张奔跑，他的内心顿悟了——在这乱世中，就算赚取再多的金钱也换不来人命;没有人性，再奢华再富有也终究只是一具行尸走肉·。影片用了很大篇幅交代辛德勒内心的转变，例如他开始利用自己积攒的人脉为工厂中的犹太工人谋取一线生机；在他的生日舞会上不顾他人的眼光亲吻了前来祝贺的犹太女士。</em></p>
+<p><img src="https://img-blog.csdnimg.cn/20201117121115445.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzgyNDEzOQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<h2 id="色彩部分"><a href="#色彩部分" class="headerlink" title="色彩部分"></a><strong>色彩部分</strong></h2><p><em>当电影即将结尾时，辛德勒看见纳粹士兵挖出那些在集中营被屠杀的人们的尸体，镜头给到身穿红色长裙女孩的身影躺在尸体堆中等待火花，小女孩的尸体早已腐烂，辛德勒的内心再次颤动。由于整部电影色彩为黑白，导演对小女孩的身影单独运用局部色相，使得画面具有冲击感。在黑白的尸体中，那一抹红显得异常刺眼，在这黑暗的时代，童真被无情淹没，希望被冷酷摧毁，更激起了观众对于人性的思考。</em></p>
+<p><img src="https://img-blog.csdnimg.cn/20201117121115397.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzgyNDEzOQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p><em>最后辛德勒终于明白了人性的意义，明白了名单意味着什么，该去做什么，他用尽自己的每一份力量，只为多救一人。这与电影开头那个唯利是图的军火商截然不同，辛德勒完成了人性的蜕变，这样的背景给了辛德勒自我救赎的机会，让他明白了生命的意义。后辛德勒终于明白了人性的意义，明白了名单意味着什么，该去做什么，他用尽自己的每一份力量，只为多救一人。这与电影开头那个唯利是图的军火商截然不同，辛德勒完成了人性的蜕变，这样的背景给了辛德勒自我救赎的机会，让他明白了生命的意义。</em></p>
+<p><em>最后辛德勒终于明白了人性的意义，明白了名单意味着什么，该去做什么，他用尽自己的每一份力量，只为多救一人。这与电影开头那个唯利是图的军火商截然不同，辛德勒完成了人性的蜕变，这样的背景给了辛德勒自我救赎的机会，让他明白了生命的意义。</em></p>
+<p><em>战争中虽然有人性曙光的闪耀，但更多的是黑暗与绝望。对于战争，以平民百姓的角度，无论属于哪一方，都没有真正的胜者。</em></p>
+<p><img src="https://img-blog.csdnimg.cn/20201117121115395.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzgyNDEzOQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p><strong>Today is history. Today will be remembered. Years from now the young will ask with wonder about this day. Today is history and you are part of it.</strong></p>
+<p><strong><em>身在和平年代无法体会战争年代的绝望，我们该庆幸自己出生在这个时代，愿世间没有战争。\</em></strong></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://plutowu.top/2020/11/16/%E7%9D%A1%E5%89%8D%E6%95%85%E4%BA%8B-%E7%9B%B8%E9%81%87/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/1.jpg">
+      <meta itemprop="name" content="Shiyuan Wu">
+      <meta itemprop="description" content="Designed to share happiness and learning">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PlutoWu的个人博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/11/16/%E7%9D%A1%E5%89%8D%E6%95%85%E4%BA%8B-%E7%9B%B8%E9%81%87/" class="post-title-link" itemprop="url">睡前故事-相遇</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-11-16 23:26:30 / 修改时间：23:27:52" itemprop="dateCreated datePublished" datetime="2020-11-16T23:26:30+08:00">2020-11-16</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%85%E4%BA%8B/" itemprop="url" rel="index"><span itemprop="name">故事</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>649</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="相遇"><a href="#相遇" class="headerlink" title="相遇"></a>相遇</h1><p>骑士生活在m王国，有一天m王国的国王Arthur在外征战时被俘，但因为敌国的君主看到了Arthur的乐观与不屈，决定放了他，但抛给他一个难题“女人真正想要的是什么？”，若回答出来则可以获得自由，给予了一年期限。</p>
+<p>于是Arthur开始向身边的人询问这个问题，母亲、妹妹、牧师……但没人能给出满意的答案。</p>
+<p>有一位智者找到Arthur，并告诉他，城堡外的森林里有一位女巫，但性格刁蛮古怪，要求离谱。</p>
+<p>眼看期限将至，无可奈何的Arthur找到了女巫，女巫答应回答他的问题，但条件是要和骑士结婚。</p>
+<p>看着眼前丑陋不堪，散发着难闻气味的女巫，再看看跟自己多年挚友，威武高大的骑士。Arthur拒绝了，他不忍看到自己为了自由而牺牲兄弟。</p>
+<p>骑士知道这个消息后，毅然决然地对Arthur说：”我愿意娶她，为了您和国家。“</p>
+<p>于是婚礼被公诸于世，而Arthur也得到了问题的答案”女人真正想要的，是主宰自己的命运。”</p>
+<p>每个人都知道女巫说出的答案是真理，毫无疑问Arthur恢复了自由。</p>
+<p>婚礼上，女巫没有形象的行为举止令Arthur觉得恶心并忍不住哭泣，但骑士却一如既往的谦和。</p>
+<p>新婚之夜，骑士不顾别人的阻拦毅然决然地走进新房，准备面对一切，然而一个从未见过面的绝世美女却躺在了他的床上，女巫说：“我在一天的时间里，一半是丑陋的女巫，一半是倾城的美女，骑士，你想我白天变成美女还是晚上变成美女？”</p>
+<p>骑士回答道：“既然你说女人真正想要的是主宰自己的命运，那么就由你自己决定吧！”</p>
+<p>女巫终于热泪盈眶，“我选择白天夜晚都是美丽的女人，因为我爱你！”</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://plutowu.top/2020/11/16/%E7%9D%A1%E5%89%8D%E6%95%85%E4%BA%8B-%E9%AA%91%E5%A3%AB%E4%B8%8E%E6%81%B6%E9%BE%99/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/1.jpg">
+      <meta itemprop="name" content="Shiyuan Wu">
+      <meta itemprop="description" content="Designed to share happiness and learning">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PlutoWu的个人博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/11/16/%E7%9D%A1%E5%89%8D%E6%95%85%E4%BA%8B-%E9%AA%91%E5%A3%AB%E4%B8%8E%E6%81%B6%E9%BE%99/" class="post-title-link" itemprop="url">睡前故事-骑士与恶龙</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-11-16 23:26:30 / 修改时间：23:29:07" itemprop="dateCreated datePublished" datetime="2020-11-16T23:26:30+08:00">2020-11-16</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%85%E4%BA%8B/" itemprop="url" rel="index"><span itemprop="name">故事</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.8k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="骑士与恶龙"><a href="#骑士与恶龙" class="headerlink" title="骑士与恶龙"></a>骑士与恶龙</h1><p>今天是骑士与女巫在外冒险的第397天了，他们并着肩走在一望无垠的大草原上，微风拂面，已入正暑的气温略显炎热，落下的夕阳犹如一个火球一般映照着大地。</p>
+<p>一路上，这对默契的伙伴有说有笑，但远处却有一只巨大的瞳孔正在盯着他们…</p>
+<p>走到河边，太阳已经落下，两人熟练的扎好帐篷、升起篝火。远处低沉的狼嚎声在广阔的草原显得额外响亮，但下一瞬却又突然中止，似乎在预示着什么。</p>
+<p>两个人躺在草地上，抬头看着星星，诉说着这一路走来的经历-生与死的战斗、默契的配合和每天看星星的习惯…自从上次打败年以后，这对搭档已经经历了许多有趣但又危险的冒险。</p>
+<p>正当两个人各自回帐篷，准备休息时，一声巨大的气流共振声传来，一双巨大的瞳孔在空中盯着地上的两人，下一刻便直接俯冲向两人。</p>
+<p>两人敏捷的躲过这一击，通过篝火的映照看到了一只巨大的黑色巨龙，骑士赶忙拔出剑鞘内的长剑，举起盾站在女巫面前，女巫则举起魔法棒护在骑士身后，多次的战斗让他们锻炼出了非常难得的默契。</p>
+<p>巨龙悬停在空中，双方就这么僵持着，巨龙开口，发出低沉又巨大的声音：“今天你们只能走一个人，另一个将永远的留在这里。”</p>
+<p>“还没试过你怎么知道只能走一个人…”骑士回应。</p>
+<p>巨龙再一次冲向骑士，女巫举起魔法棒，念着咒语，瞬间一道屏障展开在两人面前，但巨龙的撞击令这一道隐形的屏障碎裂，虽然延缓了一下巨龙的速度，但巨大的龙爪伴随着空气撕裂的低鸣拍打而来，骑士用长剑用力劈向巨爪，一瞬间巨大的冲击将两边都震开一段距离，骑士看着手中颤抖的长剑，虎口已经渗出鲜血。</p>
+<p>“看来今天不好对付了。如果一会形势还是这么差，我掩护你先走。”骑士对着女巫讲。</p>
+<p>“不！要走一起走，要死留下来一起死。”女巫不满的说道。</p>
+<p>骑士再次咬牙，握紧手中的长剑，巨龙再次直直地冲向骑士，女巫用魔法砸出一个火球。龙爪丝毫没有减速直接撞向火球，虽然被烫伤但速度不减地砸向骑士，骑士左手用盾挡下巨爪，并用右手的长剑回击，砍下了数块鳞片，但自己被震飞出去。</p>
+<p>几次迂回，女巫耗尽了法力，对战两方都背负了各自的信仰，巨龙只为了自己嗜血的本性，骑士为了他身后的女孩，现在双方都遍体鳞伤，巨龙翅膀和身体都布满了长剑划开的口子，骑士也浑身带有血渍。巨龙沉重的喘息，心脏像汽车引擎跳动着，黄色的巨瞳虽然浑浊但仍然发出巨大的威压。</p>
+<p>骑士知道这是一场只有一个人站着的战斗，他想起了去世的导师留下的剑谱，最后一条禁忌之术是用自己的血来填充长剑的杀意，但副作用却会迷失自己。但此时已经无法思考，只能使用禁忌之术，划开自己的手腕，鲜血一滴滴的滴到长剑上，长剑逐渐变成红色，骑士的瞳孔也逐渐变红，在最后一刻说：“女巫，如果我战死了，你赶紧逃离这里，如果我赢了，杀了我。”</p>
+<p>女巫失去了法力，只能在一旁看着这个场景，内心也在纠结着如何拯救骑士。</p>
+<p>随着仪式的完成，骑士仿佛蜕变成了血色覆盖的杀神。骑士挥出一击，血色的剑刃和巨龙的翅膀撞击，下一瞬巨龙的翅膀像蛋糕一样被切成两半，但龙爪也在骑士身上留下了三道血痕。</p>
+<p>再次经历几次交手，巨龙已经走到了生命的尽头，骑士也在死撑着目前的状态，巨龙深知自己生命受到巨大的威胁，拼出生命的全部力量，从口中吐出龙之炎息，骑士将头举过头顶，用尽全力劈下，在龙炎中劈出了一道缺口，直取巨龙的头颅而去，随着最后一声哀鸣，巨龙倒下了。</p>
+<p>骑士也用剑抵着大地，单膝跪下，“我赢了，女巫，杀了我吧，我不知道什么时候会失控。我一直都很爱你，很爱很爱你，不能陪你到老了，对不起…”</p>
+<p>女巫红着眼眶，“我不可能做这样的事，我们会一直走下去直到终老。”</p>
+<p>说完，骑士背后长出了一对黑色的翅膀，“屠龙者，最后终将变成恶龙。”典故所记载的却是事实，这是巨龙的诅咒。下一刻，骑士抓住了女巫的脖子，龙的嗜血此时控制了骑士，但又松开了，内心仅存的对女巫的爱和人性暂时抑制了龙性，骑士举起长剑，“我知道你下不了手，这是我最后能救你的方法了，对不起。”</p>
+<p>骑士将长剑刺入了自己的心脏，嘴角带着笑，缓慢的倒下了。</p>
+<p>“骑士，不！”女巫嘶吼着。一滴滴泪水滴落在骑士的伤口上，悄无声息的变化发生在骑士身上，伤口正在痊愈，肤色也从雪白逐渐恢复血色。</p>
+<p>女巫没有想到的是，在她离开自己的母亲也是她的女巫导师时，母亲没有告诉她女巫带有最真挚爱的眼泪是能治愈一切的物品，但一生只能生效一次。</p>
+<p>骑士缓慢的睁开了眼睛，看着女巫哭泣，“我还没死呢…”</p>
+<p>女巫不敢相信眼前的一切，紧紧的抱住骑士，骑士抚摸着女巫的头，也许这就是天意吧，骑士不明所以的恢复了。</p>
+<p>这一天好漫长，两人相互抱着，第二天的朝阳升起…</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://plutowu.top/2020/11/16/%E7%9D%A1%E5%89%8D%E6%95%85%E4%BA%8B-%E8%AE%B0%E5%BF%86%E6%A3%AE%E6%9E%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/1.jpg">
+      <meta itemprop="name" content="Shiyuan Wu">
+      <meta itemprop="description" content="Designed to share happiness and learning">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PlutoWu的个人博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/11/16/%E7%9D%A1%E5%89%8D%E6%95%85%E4%BA%8B-%E8%AE%B0%E5%BF%86%E6%A3%AE%E6%9E%97/" class="post-title-link" itemprop="url">睡前故事-记忆森林</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-11-16 23:26:30 / 修改时间：23:29:50" itemprop="dateCreated datePublished" datetime="2020-11-16T23:26:30+08:00">2020-11-16</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%85%E4%BA%8B/" itemprop="url" rel="index"><span itemprop="name">故事</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.5k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="记忆森林"><a href="#记忆森林" class="headerlink" title="记忆森林"></a>记忆森林</h1><p>自从上次击败巨龙以后，一起探险的女巫和骑士一直牵着手从未放开过。</p>
+<p>经过几天跋涉，他们走进了一片森林中，这个森林中的大树都如参天般，从他们的视角只能看到一片绿色的灌木和草坪，颜色万千、大小不一的花朵。</p>
+<p>但他们进入森林后，从天上看去，仿佛森林像一个移动的迷宫，一棵棵树如同一道道墙在不断移动，刚才的进口已经被封上。</p>
+<p>骑士在进来时，在第一颗树上绑上了红色的丝带，但此时此刻，那条红色的丝带却出现在了眼前，骑士警觉地回头说：“女巫，小心，这片森林有问题。”女巫用魔法棒在巫师帽里召唤出一只信鸽，信鸽飞出大树包围的范围，提供给女巫的是移动迷宫的奇异景象。女巫将见到的情景告诉骑士，并用魔法生成了一个红色的细绳在两个人的手腕连着。</p>
+<p>这时奇异的事情发生了，一只矮矮的小精灵，头上长着兔子耳朵，出现在了两人面前，并说道：“这个森林是森林之神留下的记忆森林，只有正直、善良和懂得爱的人才能离开。你们必须经过考验才能离开，考验为期三天，如果你们还记得彼此，那么考验通过。假如失败，你们将失去一切记忆，并永远留在这个森林。”说完，便离开了两人的视野。</p>
+<p>天暗下来了，两人熟练的搭起了帐篷，骑士钉好地钉，女巫将帐篷展开。女巫用魔法升起了篝火，因为森林的遮挡看不到星星，这一晚两个人都在帐篷里，骑士警戒着，女巫则进入了梦乡。梦里，女巫梦到了之前的一切经历，童年、少年和青年遇到骑士后的一点一滴。</p>
+<p>第二天，天蒙蒙亮，女巫醒了，轻声嘀咕“我是谁？我在哪？”。</p>
+<p>旁边的骑士彻夜未眠，一直守护着女巫，他想抱过去，但随之而来的是一声清脆的巴掌声。“流氓！你干什么？”骑士一脸懵逼地看向女巫，“是我呀，骑士。陪你一起冒险的骑士。”</p>
+<p>“骑士？那我是谁？”“你是女巫，我们一起探险一年多了。天，可能是森林的考验。”</p>
+<p>“什么考验？”“我们得互相记得曾经的事才能离开这片森林。”</p>
+<p>“饿了吧，这是留下的干粮，你吃了吧”说完，骑士拿出了包好的干粮。</p>
+<p>“不吃，万一你在里面下毒怎么办…”骑士无奈地掰下一小块吃了一口。</p>
+<p>“走吧，得出去找找办法，让你恢复记忆。”骑士走在前面，女巫跟在后面，向森林的深处进发。</p>
+<p>走了一段时间，他们终于走入了森林的中心地区，整个森林围绕着一个湖，湖中心有一个小树包裹着的小岛。一时之间，他们无法进入湖心岛，而且湖中还有鳄鱼的存在，冒出的头已经说明了它们危险的存在。骑士只能把帐篷扎在湖的旁边，他坚信湖心岛一定有解决的线索或者方法。骑士开始砍伐一些树枝，制作船只。女巫直直地看着眼前这个男人，却什么也想不到，但心里却有一种特殊的感觉。</p>
+<p>骑士造船直到下午才完成，他自己一个人乘着小船，慢慢地划桨向湖心岛进发，他叮嘱了女巫留意他的情况，稍有不对立刻用系在船上的绳子把他拉回来。一开始，湖面安静，一切顺利，但进行到旅程的三分之一时，几只鳄鱼朝着小船游来，骑士拔出长剑，准备迎战。鳄鱼下一刻突然地跃出水面，直扑骑士而去，但骑士用剑挑飞扑来的鳄鱼，不想伤及动物的他只能被动的对付着鳄鱼。但更糟糕的是，在旅程的三分之二时，水面形成了一个漩涡，说明水下有强大的吸力在把所有东西往里拉，鳄鱼也不见了，但小船却无法前进，被牢牢的吸住，一点一点的朝着漩涡中心移动，骑士赶忙叫女巫拉绳子，自己借小船踏了一步，抓住绳子回到了岸边。</p>
+<p>天色逐渐变黑，篝火再次升起，这次骑士识相的没有进帐篷，女巫一个人在帐篷脑袋空空的，想想起什么却又想不起来，骑士则一如既往的像一块石头一样，守护着女巫。</p>
+<p>又过了一晚，第三天，两人都是整晚没有休息，骑士在守护，女巫在努力回忆着什么。</p>
+<p>第三天清晨，鸟鸣声响彻森林，女巫仿佛之间记起了一些魔法，其中就包括飞行法术。走出帐篷，对骑士说：“我能送你过去，我记起飞行法术了。”骑士放心的将后背交给女巫，但女巫施法后却自己飞了起来直奔湖心岛而去，内心强烈渴求找回记忆，和对骑士莫名的感觉让她想自己去找寻答案。“诶，别走！”骑士望着渐渐飞远的女巫只能重新想办法渡湖。</p>
+<p>女巫进入湖心岛，看到整座岛屿都围绕着一颗古树，这棵古树的年纪怕是有女巫的几十倍大。古树上结着许多果实，红的、绿的、蓝的，各式各样，奇妙的是每个果实上都如同屏幕一般播放着女巫的一段记忆。小时戴着比自己还高的巫师帽跟着妈妈学习魔法、长大自己一个人在外面闯荡帮助人们、和骑士一起战胜巨龙……这些记忆存在于一个个果实上。树的周围有一层绿色的结界保护，女巫尝试着用手碰了一下，刺骨的剧痛使女巫发出叫声并连忙将手收回。骑士听到女巫的叫声，放下手中的树枝，直接跳下了湖，朝对面游去。</p>
+<p>骑士一边用长剑击退朝他游来的鳄鱼，一边用尽全力抵抗着漩涡的吸力。女巫正在尝试用自己的身躯越过结界，但难忍的剧痛让她一次次后退，又一次次前进，发出低沉的叫声。骑士已经担心到了极点，拼了全力终于抵达了对岸。这一次，女巫积攒了全部的力气，朝着结界冲了过去，骑士赶忙在身后追着，但被结界撞了回来。女巫过去了，拖着在这些年的冒险中收到的疼痛总和还要多的痛。</p>
+<p>女巫摘下一颗果实，吃了下去，一段儿时的记忆立马浮现在脑海之中，紧接着的是一段段快乐的回忆，快乐让她嘴角带着笑。紧接着是骑士曾经死去的回忆，这些痛苦的记忆，吃下去后，女巫不停的哭泣落泪，抑制不了心中的悲伤。骑士硬扛着结界的痛苦，迈过去了半个身子，女巫不断地吃下了果实，酸甜苦辣的回忆不断冲击着脑海。等到女巫吃下最后一个果子，骑士才进入了结界内，女巫的脸绯红着，最后的果子是关于骑士的回忆，曾经的点点滴滴，牵着的手、落日下的拥抱和誓死的保护。女巫抱住了冲来的骑士，他们完成了最后的考验，恢复记忆。</p>
+<p>森林之神从树中走出，缓缓的向着两人靠近。“恭喜你们，两个好孩子，你们是近十年来通过的唯一一对恋人。互相的爱让骑士能击退鳄鱼、逃出漩涡并进入结界，让女巫能进入结界、吃下记忆果实。孩子们，我祝福你们长长久久，爱能让你们突破任何艰难险阻。这是森林的出口，再见了，孩子们。”说罢，指向两人身后的丛林，丛林仿佛收到了召唤，分裂出一道缝隙。</p>
+<p>骑士和女巫牵着手，向森林之神点头，并向出口走去，踏出一步，便回到了来时的石路上。</p>
+<p>这次的经历让两人更加爱并信任彼此，考验的收获是手腕的红绳更加牢固了。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://plutowu.top/2020/11/16/Servlet/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/1.jpg">
+      <meta itemprop="name" content="Shiyuan Wu">
+      <meta itemprop="description" content="Designed to share happiness and learning">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PlutoWu的个人博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/11/16/Servlet/" class="post-title-link" itemprop="url">Servlet</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-11-16 12:24:49 / 修改时间：12:28:45" itemprop="dateCreated datePublished" datetime="2020-11-16T12:24:49+08:00">2020-11-16</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BC%96%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">编程</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.6k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Welcome to my Blog! This is my first article. The following are my study notes for learning Servlet.</p>
+<h1 id="Reasonable-use-of-SQL-statements"><a href="#Reasonable-use-of-SQL-statements" class="headerlink" title="Reasonable use of SQL statements"></a>Reasonable use of SQL statements</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">String sql = &quot;<span class="keyword">insert</span> <span class="keyword">into</span> T_BOOK(BID,BNAME,BAUTHER,BTYPE,BPRICE,BAMOUNT,BPUBDATE)<span class="string">&quot;;</span></span><br><span class="line"><span class="string">sql=sql+&quot;</span> <span class="keyword">values</span>(<span class="string">&#x27;&quot;+BID+&quot;&#x27;</span>,<span class="string">&#x27;&quot;+BNAME+&quot;&#x27;</span>,<span class="string">&#x27;&quot;+BAUTHER+&quot;&#x27;</span>,<span class="string">&#x27;&quot;+BTYPE+&quot;&#x27;</span>,<span class="string">&#x27;&quot;+BPRICE+&quot;&#x27;</span>,<span class="string">&quot;+BAMOUNT+&quot;</span>,<span class="string">&#x27;&quot;+BPUBDATE+&quot;&#x27;</span>)<span class="string">&quot;;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">String sql = &quot;</span><span class="keyword">update</span> T_BOOK <span class="keyword">set</span> BAMOUNT = <span class="string">&quot;+BAMOUNT+&quot;</span> <span class="keyword">where</span> BID = <span class="string">&#x27;&quot;+BID+&quot;&#x27;</span><span class="string">&quot;;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">String sql = &quot;</span><span class="keyword">select</span> * <span class="keyword">from</span> T_BOOK <span class="keyword">where</span> BNAME <span class="keyword">like</span> <span class="string">&#x27;%&quot;+input+&quot;%&#x27;</span><span class="string">&quot;;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">String sql = &quot;</span><span class="keyword">select</span> * <span class="keyword">from</span> T_BOOK <span class="keyword">where</span> BPRICE <span class="keyword">between</span> <span class="string">&quot;+Low+&quot;</span> <span class="keyword">and</span> <span class="string">&quot;+High;</span></span><br></pre></td></tr></table></figure>
+
+<p><em>Proficiency in the SQL language is a prerequisite for implementing various operations through the servlet link to the database.</em></p>
+<p><em>Mastering the most basic insert, update and conditional search statements can achieve most database operations.</em></p>
+<hr>
+<h1 id="Connect-to-the-database-via-JDBC"><a href="#Connect-to-the-database-via-JDBC" class="headerlink" title="Connect to the database via JDBC"></a>Connect to the database via JDBC</h1><figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="module-access"><span class="module"><span class="identifier">Class</span>.</span></span><span class="keyword">for</span><span class="constructor">Name(<span class="string">&quot;com.microsoft.sqlserver.jdbc.SQLServerDriver&quot;</span>)</span>.<span class="keyword">new</span><span class="constructor">Instance()</span>;</span><br><span class="line">			String url=<span class="string">&quot;jdbc:sqlserver://localhost:1433;databaseName=?&quot;</span>;</span><br><span class="line">			String user=<span class="string">&quot;user&quot;</span>;</span><br><span class="line">			String password=<span class="string">&quot;password&quot;</span>;</span><br><span class="line">			conn=<span class="module-access"><span class="module"><span class="identifier">DriverManager</span>.</span></span>get<span class="constructor">Connection(<span class="params">url</span>, <span class="params">user</span>, <span class="params">password</span>)</span>;</span><br></pre></td></tr></table></figure>
+
+<p><em>The project adopting MVC mode is to use JDBC technology to connect to the database.</em></p>
+<p><em>Please add sqljdbc.jar in the lib folder of WEB-INF to ensure that JDBC can be successfully called.</em></p>
+<hr>
+<h1 id="Use-of-Servlet-annotations"><a href="#Use-of-Servlet-annotations" class="headerlink" title="Use of Servlet annotations"></a>Use of Servlet annotations</h1><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@WebServlet(<span class="meta-string">&quot;/Classname&quot;</span>)</span></span><br></pre></td></tr></table></figure>
+
+<p><em>Using Servlet annotations can eliminate extra comments in web.xml, making the program more concise and portable.</em></p>
+<hr>
+<p>Thank you for reading, I hope these tips can help you learn Servlet better.</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Shiyuan Wu"
+      src="/images/1.jpg">
+  <p class="site-author-name" itemprop="name">Shiyuan Wu</p>
+  <div class="site-description" itemprop="description">Designed to share happiness and learning</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+      
+      
+		<script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+		<script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+		<div class="widget-wrap">
+			<h3 class="widget-title">Tag Cloud</h3>
+			<div id="myCanvasContainer" class="widget tagcloud">
+				<canvas width="250" height="250" id="resCanvas" style="width=100%">
+            <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C%E8%AF%AD%E8%A8%80/" rel="tag">C语言</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java-Web/" rel="tag">Java Web</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Servlet/" rel="tag">Servlet</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%89%E8%A7%92%E5%88%A4%E6%96%AD/" rel="tag">三角判断</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E5%B0%8F%E7%BB%93/" rel="tag">学习小结</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BD%B1%E8%AF%84/" rel="tag">影评</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%8B%A9%E7%8C%8E/" rel="tag">狩猎</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%B5%E5%BD%B1/" rel="tag">电影</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%B5%E5%BD%B1%E5%88%86%E6%9E%90/" rel="tag">电影分析</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9D%A1%E5%89%8D%E6%95%85%E4%BA%8B/" rel="tag">睡前故事</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A8%8B%E5%BA%8F%E5%AE%9E%E7%8E%B0/" rel="tag">程序实现</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A9%BA%E6%A0%BC%E7%BB%9F%E8%AE%A1/" rel="tag">空格统计</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/" rel="tag">编程笔记</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" rel="tag">软件工程</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BE%9B%E5%BE%B7%E5%8B%92%E7%9A%84%E5%90%8D%E5%8D%95/" rel="tag">辛德勒的名单</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%AA%91%E5%A3%AB%E4%B8%8E%E5%A5%B3%E5%B7%AB/" rel="tag">骑士与女巫</a><span class="tag-list-count">3</span></li></ul>
+				</canvas>
+			</div>
+		</div>
+		
+
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Shiyuan Wu</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">33k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">30 分钟</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener external nofollow noreferrer" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener external nofollow noreferrer" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/three-waves.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

@@ -20,17 +20,30 @@
     var CONFIG = {"hostname":"plutowu.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="Designed to share happiness and learning">
-<meta property="og:type" content="website">
-<meta property="og:title" content="PlutoWu的个人博客">
-<meta property="og:url" content="http://plutowu.top/tags/Java-Web/index.html">
+  <meta name="description" content="Git Clone速度过慢解决方案1.方案一 使用gitclone.com加速访问gitclone加速的官网https:&#x2F;&#x2F;gitclone.com&#x2F;，可以通过搜索栏搜索克隆项目  其也提供了三种自定义加速方法（省去在GitClone搜索相应文件） 123方法一（替换URL）git clone https:&#x2F;&#x2F;gitclone.com&#x2F;github.com&#x2F;tendermint&#x2F;tendermin">
+<meta property="og:type" content="article">
+<meta property="og:title" content="git clone加速问题解决方案">
+<meta property="og:url" content="http://plutowu.top/2020/11/17/git-clone%E5%8A%A0%E9%80%9F%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/index.html">
 <meta property="og:site_name" content="PlutoWu的个人博客">
-<meta property="og:description" content="Designed to share happiness and learning">
+<meta property="og:description" content="Git Clone速度过慢解决方案1.方案一 使用gitclone.com加速访问gitclone加速的官网https:&#x2F;&#x2F;gitclone.com&#x2F;，可以通过搜索栏搜索克隆项目  其也提供了三种自定义加速方法（省去在GitClone搜索相应文件） 123方法一（替换URL）git clone https:&#x2F;&#x2F;gitclone.com&#x2F;github.com&#x2F;tendermint&#x2F;tendermin">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201117222630897.png">
+<meta property="og:image" content="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201117223120221.png">
+<meta property="og:image" content="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2020-11-17_23-27-48.png">
+<meta property="og:image" content="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2020-11-17_23-32-22.png">
+<meta property="og:image" content="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2020-11-17_23-34-39.png">
+<meta property="og:image" content="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2020-11-17_23-36-37.png">
+<meta property="og:image" content="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2020-11-17_23-38-41.png">
+<meta property="article:published_time" content="2020-11-17T14:23:46.000Z">
+<meta property="article:modified_time" content="2020-11-17T15:49:38.638Z">
 <meta property="article:author" content="Shiyuan Wu">
+<meta property="article:tag" content="git">
+<meta property="article:tag" content="教程">
+<meta property="article:tag" content="经验分享">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201117222630897.png">
 
-<link rel="canonical" href="http://plutowu.top/tags/Java-Web/">
+<link rel="canonical" href="http://plutowu.top/2020/11/17/git-clone%E5%8A%A0%E9%80%9F%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">
 
 
 <script id="page-configurations">
@@ -38,12 +51,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>标签: Java Web | PlutoWu的个人博客</title>
+  <title>git clone加速问题解决方案 | PlutoWu的个人博客</title>
   
 
 
@@ -174,71 +187,150 @@
         <div class="content-wrap">
           
 
-          <div class="content tag">
+          <div class="content post posts-expand">
             
 
+    
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <h2 class="collection-header">Java Web
-          <small>标签</small>
-        </h2>
-      </div>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://plutowu.top/2020/11/17/git-clone%E5%8A%A0%E9%80%9F%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/1.jpg">
+      <meta itemprop="name" content="Shiyuan Wu">
+      <meta itemprop="description" content="Designed to share happiness and learning">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PlutoWu的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          git clone加速问题解决方案
+        </h1>
+
+        <div class="post-meta">
+        
+        
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-11-17 22:23:46 / 修改时间：23:49:38" itemprop="dateCreated datePublished" datetime="2020-11-17T22:23:46+08:00">2020-11-17</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%99%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">教程</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>573</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <span class="collection-header">2020</span>
-    </div>
+        <h1 id="Git-Clone速度过慢解决方案"><a href="#Git-Clone速度过慢解决方案" class="headerlink" title="Git Clone速度过慢解决方案"></a>Git Clone速度过慢解决方案</h1><h1 id="1-方案一-使用gitclone-com加速"><a href="#1-方案一-使用gitclone-com加速" class="headerlink" title="1.方案一 使用gitclone.com加速"></a>1.方案一 使用gitclone.com加速</h1><p><strong><em>访问gitclone加速的官网<a target="_blank" rel="noopener external nofollow noreferrer" href="https://gitclone.com/%EF%BC%8C%E5%8F%AF%E4%BB%A5%E9%80%9A%E8%BF%87%E6%90%9C%E7%B4%A2%E6%A0%8F%E6%90%9C%E7%B4%A2%E5%85%8B%E9%9A%86%E9%A1%B9%E7%9B%AE">https://gitclone.com/，可以通过搜索栏搜索克隆项目</a></em></strong></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201117222630897.png"></p>
+<p><strong>其也提供了三种自定义加速方法（省去在GitClone搜索相应文件）</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">方法一（替换URL）</span><br><span class="line"></span><br><span class="line">git clone https://gitclone.com/github.com/tendermint/tendermint.git</span><br></pre></td></tr></table></figure>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">方法二（设置git参数）</span><br><span class="line"></span><br><span class="line">git config --global url.&quot;https://gitclone.com/&quot;.insteadOf https://</span><br><span class="line">git clone https://github.com/tendermint/tendermint.git</span><br></pre></td></tr></table></figure>
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-11-17T12:02:55+08:00"
-              content="2020-11-17">
-          11-17
-        </time>
-      </div>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">方法三（使用cgit客户端）</span><br><span class="line">cgit clone https://github.com/tendermint/tendermint.git</span><br></pre></td></tr></table></figure>
 
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/11/17/Servlet%E5%AE%9E%E4%BE%8B%E6%80%BB%E7%BB%93/" itemprop="url">
-            <span itemprop="name">Servlet实例总结</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-11-16T12:24:49+08:00"
-              content="2020-11-16">
-          11-16
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/11/16/Servlet/" itemprop="url">
-            <span itemprop="name">Servlet</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
+<p><strong>搜索图例：</strong></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201117223120221.png"></p>
+<h1 id="2-方案二-使用Gitee转载仓库"><a href="#2-方案二-使用Gitee转载仓库" class="headerlink" title="2.方案二 使用Gitee转载仓库"></a>2.方案二 使用Gitee转载仓库</h1><h2 id="1-登录gitee-com"><a href="#1-登录gitee-com" class="headerlink" title="1.登录gitee.com"></a>1.登录gitee.com</h2><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2020-11-17_23-27-48.png"></p>
+<h2 id="2-获取GitHub仓库URL"><a href="#2-获取GitHub仓库URL" class="headerlink" title="2.获取GitHub仓库URL"></a>2.获取GitHub仓库URL</h2><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2020-11-17_23-32-22.png"></p>
+<h2 id="3-填写URL"><a href="#3-填写URL" class="headerlink" title="3.填写URL"></a>3.填写URL</h2><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2020-11-17_23-34-39.png"></p>
+<h2 id="4-拉取仓库到Gitee完成"><a href="#4-拉取仓库到Gitee完成" class="headerlink" title="4.拉取仓库到Gitee完成"></a>4.拉取仓库到Gitee完成</h2><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2020-11-17_23-36-37.png"></p>
+<h2 id="5-git-clone仓库"><a href="#5-git-clone仓库" class="headerlink" title="5.git clone仓库"></a>5.git clone仓库</h2><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2020-11-17_23-38-41.png"></p>
+<hr>
+<p><strong>总的来说，两种方法中gitclone.com会出现时常不稳定的现象，不过大部分时间都能够以高速克隆仓库。不到必要时刻，不推荐使用gitee二次搬运仓库，因为流程较为繁琐</strong></p>
 
     </div>
-  </div>
-  
-  
-  
 
+    
+    
+    
+      
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Shiyuan Wu
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://plutowu.top/2020/11/17/git-clone%E5%8A%A0%E9%80%9F%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" title="git clone加速问题解决方案">http://plutowu.top/2020/11/17/git-clone加速问题解决方案/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener external nofollow noreferrer" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/git/" rel="tag"># git</a>
+              <a href="/tags/%E6%95%99%E7%A8%8B/" rel="tag"># 教程</a>
+              <a href="/tags/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%AB/" rel="tag"># 经验分享</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/11/17/Servlet%E5%AE%9E%E4%BE%8B%E6%80%BB%E7%BB%93/" rel="prev" title="Servlet实例总结">
+      <i class="fa fa-chevron-left"></i> Servlet实例总结
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
   
 
 
@@ -291,6 +383,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Git-Clone%E9%80%9F%E5%BA%A6%E8%BF%87%E6%85%A2%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="nav-number">1.</span> <span class="nav-text">Git Clone速度过慢解决方案</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E6%96%B9%E6%A1%88%E4%B8%80-%E4%BD%BF%E7%94%A8gitclone-com%E5%8A%A0%E9%80%9F"><span class="nav-number">2.</span> <span class="nav-text">1.方案一 使用gitclone.com加速</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E6%96%B9%E6%A1%88%E4%BA%8C-%E4%BD%BF%E7%94%A8Gitee%E8%BD%AC%E8%BD%BD%E4%BB%93%E5%BA%93"><span class="nav-number">3.</span> <span class="nav-text">2.方案二 使用Gitee转载仓库</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E7%99%BB%E5%BD%95gitee-com"><span class="nav-number">3.1.</span> <span class="nav-text">1.登录gitee.com</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E8%8E%B7%E5%8F%96GitHub%E4%BB%93%E5%BA%93URL"><span class="nav-number">3.2.</span> <span class="nav-text">2.获取GitHub仓库URL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%A1%AB%E5%86%99URL"><span class="nav-number">3.3.</span> <span class="nav-text">3.填写URL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E6%8B%89%E5%8F%96%E4%BB%93%E5%BA%93%E5%88%B0Gitee%E5%AE%8C%E6%88%90"><span class="nav-number">3.4.</span> <span class="nav-text">4.拉取仓库到Gitee完成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-git-clone%E4%BB%93%E5%BA%93"><span class="nav-number">3.5.</span> <span class="nav-text">5.git clone仓库</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 

@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/P.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/P.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"plutowu.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Swagger 了解Swagger的概念及作用 了解前后端分离 在springboot中集成swagger  Swagger简介 前言：  　　接口文档对于前后端开发人员都十分重要。尤其近几年流行前后端分离后接口文档又变成重中之重。接口文档固然重要，但是由于项 目周期等原因后端人员经常出现无法及时更新，导致前端人员抱怨接 口文档和实际情况不一致。 　　很多人员会抱怨别人写的接口文档不规范，不及时更">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Swagger笔记">
+<meta property="og:url" content="http://plutowu.top/2020/11/19/Swagger%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="PlutoWu的个人博客">
+<meta property="og:description" content="Swagger 了解Swagger的概念及作用 了解前后端分离 在springboot中集成swagger  Swagger简介 前言：  　　接口文档对于前后端开发人员都十分重要。尤其近几年流行前后端分离后接口文档又变成重中之重。接口文档固然重要，但是由于项 目周期等原因后端人员经常出现无法及时更新，导致前端人员抱怨接 口文档和实际情况不一致。 　　很多人员会抱怨别人写的接口文档不规范，不及时更">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201119192400412.png">
+<meta property="og:image" content="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201119185622792.png">
+<meta property="og:image" content="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201119193024261.png">
+<meta property="og:image" content="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201119193738092.png">
+<meta property="og:image" content="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201119195647700.png">
+<meta property="og:image" content="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201119200703587.png">
+<meta property="og:image" content="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201119201309428.png">
+<meta property="og:image" content="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201119202436940.png">
+<meta property="og:image" content="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201119205520715.png">
+<meta property="og:image" content="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201119205838266.png">
+<meta property="og:image" content="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201119205659138.png">
+<meta property="og:image" content="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201119210101794.png">
+<meta property="og:image" content="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201119210351394.png">
+<meta property="article:published_time" content="2020-11-19T10:46:43.000Z">
+<meta property="article:modified_time" content="2020-11-19T13:15:27.744Z">
+<meta property="article:author" content="Shiyuan Wu">
+<meta property="article:tag" content="Java Web">
+<meta property="article:tag" content="学习笔记">
+<meta property="article:tag" content="Swagger">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201119192400412.png">
+
+<link rel="canonical" href="http://plutowu.top/2020/11/19/Swagger%E7%AC%94%E8%AE%B0/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Swagger笔记 | PlutoWu的个人博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="PlutoWu的个人博客" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">PlutoWu的个人博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Programming | Photography | Film</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/PlutoWu-Cn" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener external nofollow noreferrer" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://plutowu.top/2020/11/19/Swagger%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/1.jpg">
+      <meta itemprop="name" content="Shiyuan Wu">
+      <meta itemprop="description" content="Designed to share happiness and learning">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PlutoWu的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Swagger笔记
+        </h1>
+
+        <div class="post-meta">
+        
+        
+		<i class="fa fa-thumb-tack"></i>
+		<font color="RED">置顶</font>
+		<span class="post-meta-divider">|</span>
+		
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-11-19 18:46:43 / 修改时间：21:15:27" itemprop="dateCreated datePublished" datetime="2020-11-19T18:46:43+08:00">2020-11-19</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BC%96%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">编程</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BC%96%E7%A8%8B/Java-Web/" itemprop="url" rel="index"><span itemprop="name">Java Web</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BC%96%E7%A8%8B/Java-Web/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>6.8k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>6 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Swagger"><a href="#Swagger" class="headerlink" title="Swagger"></a>Swagger</h1><ul>
+<li>了解Swagger的概念及作用</li>
+<li>了解前后端分离</li>
+<li>在springboot中集成swagger</li>
+</ul>
+<h2 id="Swagger简介"><a href="#Swagger简介" class="headerlink" title="Swagger简介"></a>Swagger简介</h2><ul>
+<li><h3 id="前言："><a href="#前言：" class="headerlink" title="前言："></a><strong>前言</strong>：</h3></li>
+</ul>
+<p>　　接口文档对于前后端开发人员都十分重要。尤其近几年流行前后端分离后接口文档又变成重中之重。接口文档固然重要，但是由于项 目周期等原因后端人员经常出现无法及时更新，导致前端人员抱怨接 口文档和实际情况不一致。</p>
+<p>　　很多人员会抱怨别人写的接口文档不规范，不及时更新。当时当 自己写的时候确实最烦去写接口文档。这种痛苦只有亲身经历才会牢 记于心。</p>
+<p>　　如果接口文档可以实时动态生成就不会出现上面问题。</p>
+<p>　　<strong>Swagger</strong> 可以完美的解决上面的问题。</p>
+<a id="more"></a>
+
+<ul>
+<li><h3 id="Open-API："><a href="#Open-API：" class="headerlink" title="Open API："></a><strong>Open API</strong>：</h3></li>
+</ul>
+<p>　　Open API 规范(OpenAPI Specification)以前叫做 Swagger 规范，是REST API 的 API 描述格式。</p>
+<p>　　Open API 文件允许描述整个 API，包括：</p>
+<p>　　　　· 每个访问地址的类型。POST 或 GET。</p>
+<p>　　　　·每个操作的参数。包括输入输出参数。</p>
+<p>　　　　·认证方法。</p>
+<p>　　　　·连接信息，声明，使用团队和其他信息。</p>
+<p>　　Open API 规范可以使用 YAML 或 JSON 格式进行编写。这样更利于我们和机器进行阅读。</p>
+<p>　　OpenAPI 规范（OAS）为 RESTful API 定义了一个与语言无关的标 准接口，允许人和计算机发现和理解服务的功能，而无需访问源代码， 文档或通过网络流量检查。正确定义后，消费者可以使用最少量的实 现逻辑来理解远程服务并与之交互。然后，文档生成工具可以使用 OpenAPI 定义来显示 API，使用各 种编程语言生成服务器和客户端的代码生成工具，测试工具以及许多 其他用例。</p>
+<ul>
+<li><h3 id="Swagger-简介："><a href="#Swagger-简介：" class="headerlink" title="Swagger 简介："></a><strong>Swagger 简介</strong>：</h3></li>
+</ul>
+<p>　　Swagger 是一套围绕 Open API 规范构建的开源工具，可以帮助设 计，构建，记录和使用 REST API。</p>
+<p>　　Swagger 工具包括的组件：</p>
+<p>　　　　Swagger Editor  ：基于浏览器编辑器，可以在里面编写 Open API规范。类似 Markdown 具有实时预览描述文件的功能。</p>
+<p>　　　　Swagger UI：将 Open API 规范呈现为交互式 API 文档。用可视化UI 展示描述文件。</p>
+<p>　　　　Swagger Codegen：将 OpenAPI 规范生成为服务器存根和客户端 库。通过 Swagger Codegen 可以将描述文件生成 html 格式和 cwiki 形 式的接口文档，同时也可以生成多种言语的客户端和服务端代码。</p>
+<p>　　　　Swagger Inspector：和 Swagger UI 有点类似，但是可以返回更多 信息，也会保存请求的实际参数数据。</p>
+<p>　　　　Swagger Hub：集成了上面所有项目的各个功能，你可以以项目 和版本为单位，将你的描述文件上传到 Swagger Hub 中。在 Swagger Hub 中可以完成上面项目的所有工作，需要注册账号，分免费版和收费版。</p>
+<p>　　　　使用 Swagger，就是把相关的信息存储在它定义的描述文件里面（yml 或 json 格式），再通过维护这个描述文件可以去更新接口文档， 以及生成各端代码。</p>
+<ul>
+<li><h3 id="官网：https-swagger-io"><a href="#官网：https-swagger-io" class="headerlink" title="官网：https://swagger.io/"></a>官网：<a target="_blank" rel="noopener external nofollow noreferrer" href="https://swagger.io/">https://swagger.io/</a></h3></li>
+</ul>
+<h2 id="SpringBoot集成Swagger"><a href="#SpringBoot集成Swagger" class="headerlink" title="SpringBoot集成Swagger"></a>SpringBoot集成Swagger</h2><p><strong>SpringBoot集成Swagger</strong> =&gt; <strong>springfox</strong>，两个jar包</p>
+<ul>
+<li><strong><a target="_blank" rel="noopener external nofollow noreferrer" href="https://mvnrepository.com/artifact/io.springfox/springfox-swagger2">Springfox-swagger2</a></strong></li>
+<li><a target="_blank" rel="noopener external nofollow noreferrer" href="https://mvnrepository.com/artifact/io.springfox/springfox-swagger-ui">springfox-swagger-ui</a></li>
+</ul>
+<p><strong>使用Swagger</strong></p>
+<p>要求：jdk 1.8 + 否则swagger2无法运行</p>
+<p>步骤：</p>
+<ol>
+<li><p>新建一个SpringBoot-web项目</p>
+</li>
+<li><p>添加Maven依赖（注意：2.9.2版本之前，之后的不行）</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger-ui --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.springfox<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>springfox-swagger-ui<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.9.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger2 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.springfox<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>springfox-swagger2<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.9.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>编写HelloController，测试Swagger</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping(&quot;/hello&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">hello</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;hello&quot;</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<ol start="4">
+<li><p>在配置类编写SwaggerConfig，并配置注解</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@EnableSwagger2</span>         <span class="comment">//开启Swagger2</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SwaggerConfig</span> </span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>访问<a target="_blank" rel="noopener external nofollow noreferrer" href="http://localhost:8080/swagger-ui.html#/%EF%BC%8C%E5%8F%AF%E4%BB%A5%E7%9C%8B%E5%88%B0Swagger-ui%E7%95%8C%E9%9D%A2">http://localhost:8080/swagger-ui.html#/，可以看到Swagger-ui界面</a></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201119192400412.png" alt="image-20201119192400412"></p>
+</li>
+</ol>
+<h2 id="配置Swagger"><a href="#配置Swagger" class="headerlink" title="配置Swagger"></a>配置Swagger</h2><ol>
+<li>Swagger通过Docekt的bean实例实现</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 配置了Swagger的Docket的bean实例</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Docket <span class="title">docket</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Docket(DocumentationType.SWAGGER_2)</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><p>配置Swagger信息可以通过——&gt;apiInfo    </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//配置Swagger信息-&gt;apiInfo</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> ApiInfo <span class="title">apiInfo</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">        Contact contact = <span class="keyword">new</span> Contact(<span class="string">&quot;PlutoWu&quot;</span>, <span class="string">&quot;https://www.plutowu.top/&quot;</span>, <span class="string">&quot;p1utowu@qq.com&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> ApiInfo(</span><br><span class="line">                <span class="string">&quot;Pluto的SwaggerAPI文档&quot;</span>,</span><br><span class="line">                <span class="string">&quot;PlutoWu Swagger&quot;</span>,</span><br><span class="line">                <span class="string">&quot;v1.0&quot;</span>,</span><br><span class="line">                <span class="string">&quot;https://www.plutowu.top/&quot;</span>,</span><br><span class="line">                contact,</span><br><span class="line">                <span class="string">&quot;Apache 2.0&quot;</span>,</span><br><span class="line">                <span class="string">&quot;http://www.apache.org/licenses/LICENSE-2.0&quot;</span>,</span><br><span class="line">                <span class="keyword">new</span> ArrayList());</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Docekt关联apiInfo以实现Swagger-UI页面的自主化</p>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Docket <span class="title">docket</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Docket(DocumentationType.SWAGGER_2)</span><br><span class="line">                .apiInfo(apiInfo());</span><br><span class="line">                &#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li><p>重新访问<a target="_blank" rel="noopener external nofollow noreferrer" href="http://localhost:8080/swagger-ui.html#/%EF%BC%8C%E5%A6%82%E4%B8%8B%E5%9B%BE%E6%89%80%E7%A4%BA">http://localhost:8080/swagger-ui.html#/，如下图所示</a></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201119185622792.png" alt="image-20201119185622792"></p>
+</li>
+</ol>
+<h2 id="配置Swagger扫描接口"><a href="#配置Swagger扫描接口" class="headerlink" title="配置Swagger扫描接口"></a>配置Swagger扫描接口</h2><ol>
+<li><p>通过设置Docket下的select()实现对扫描接口的配置</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Docket <span class="title">docket</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Docket(DocumentationType.SWAGGER_2)</span><br><span class="line">            .apiInfo(apiInfo())</span><br><span class="line">            .select()</span><br><span class="line">            <span class="comment">// RequestHandlerSelectors，配置要扫描接口的方式</span></span><br><span class="line">            <span class="comment">// basePackage指定要扫描的包</span></span><br><span class="line">            <span class="comment">// any()：扫描全部</span></span><br><span class="line">            <span class="comment">// none()：不扫描</span></span><br><span class="line">            <span class="comment">// withClassAnnotation：扫描类上的注解，参数是一个注解的反射对象</span></span><br><span class="line">            <span class="comment">// withMethodAnnotation：扫描方法上的注解</span></span><br><span class="line">            .apis(RequestHandlerSelectors.basePackage(<span class="string">&quot;com.pluto.swagger.controller&quot;</span>))</span><br><span class="line">            <span class="comment">// path()：过滤什么路径</span></span><br><span class="line">            <span class="comment">// .paths(PathSelectors.ant(&quot;/pluto/**&quot;))</span></span><br><span class="line">            .build();</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>现在只能扫描到controller包下的接口</p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201119193024261.png" alt="image-20201119193024261"></p>
+</li>
+<li><p>以下为可选的方式包括指定接口、包以及路径</p>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// RequestHandlerSelectors，配置要扫描接口的方式</span></span><br><span class="line"><span class="comment">// basePackage指定要扫描的包</span></span><br><span class="line"><span class="comment">// any()：扫描全部</span></span><br><span class="line"><span class="comment">// none()：不扫描</span></span><br><span class="line"><span class="comment">// regex(final String pathRegex)：通过正则表达式控制</span></span><br><span class="line"><span class="comment">// ant(final String antPattern)：通过ant()控制</span></span><br><span class="line"><span class="comment">// withClassAnnotation：扫描类上的注解，参数是一个注解的反射对象</span></span><br><span class="line"><span class="comment">// withMethodAnnotation：扫描方法上的注解</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// path()：过滤什么路径</span></span><br><span class="line">.paths(PathSelectors.ant(<span class="string">&quot;/pluto/**&quot;</span>))</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="配置Swagger开关"><a href="#配置Swagger开关" class="headerlink" title="配置Swagger开关"></a>配置Swagger开关</h2><ol>
+<li><p>在Docket下添加如下配置即可实现开关Swagger</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Docket <span class="title">docket</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Docket(DocumentationType.SWAGGER_2)</span><br><span class="line">            .apiInfo(apiInfo())</span><br><span class="line">            .enable(<span class="keyword">false</span>) <span class="comment">// 开关Swagger</span></span><br><span class="line">            .build();</span><br><span class="line">     &#125;</span><br></pre></td></tr></table></figure>
+
+<p>置于false即可看到以下页面</p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201119193738092.png" alt="image-20201119193738092"></p>
+</li>
+<li><p>如何动态配置当项目处于test、dev环境时显示swagger，处于prod时不显示？</p>
+<ul>
+<li>判断是否为生产环境  flag = false</li>
+</ul>
+<ul>
+<li>注入enable  (flag)</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 应用名称</span></span><br><span class="line"><span class="meta">spring.application.name</span>=<span class="string">swagger-demo</span></span><br><span class="line"><span class="comment"># 应用服务 WEB 访问端口</span></span><br><span class="line"><span class="meta">server.port</span>=<span class="string">8080</span></span><br><span class="line"><span class="meta">spring.profiles.active</span>=<span class="string">dev</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Docket <span class="title">docket</span><span class="params">(Environment environment)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 设置要显示的Swagger环境</span></span><br><span class="line">        Profiles profiles = Profiles.of(<span class="string">&quot;dev&quot;</span>,<span class="string">&quot;test&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 通过environment.acceptsProfiles判断自己是否处于自己设定的环境中</span></span><br><span class="line">        <span class="keyword">boolean</span> flag = environment.acceptsProfiles(profiles);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Docket(DocumentationType.SWAGGER_2)</span><br><span class="line">               .apiInfo(apiInfo())</span><br><span class="line">               .enable(<span class="keyword">true</span>)</span><br><span class="line">               .select()</span><br><span class="line">               .apis(RequestHandlerSelectors.basePackage(<span class="string">&quot;com.pluto.swagger.controller&quot;</span>))</span><br><span class="line">               .paths(PathSelectors.ant(<span class="string">&quot;/pluto/**&quot;</span>))</span><br><span class="line">               .build();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201119195647700.png" alt="image-20201119195647700"></p>
+<p><strong>同理，配置文件更改环境为prod即可切换为发布版本，端口也要相应更改为8082。</strong></p>
+<h2 id="配置API分组"><a href="#配置API分组" class="headerlink" title="配置API分组"></a>配置API分组</h2><ol>
+<li>默认分组为default，可以通过groupName()方法进行配置分组</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> <span class="keyword">new</span> Docket(DocumentationType.SWAGGER_2)</span><br><span class="line">                .apiInfo(apiInfo())</span><br><span class="line">                .groupName(<span class="string">&quot;Pluto&quot;</span>) <span class="comment">// 配置分组</span></span><br><span class="line">                .enable(<span class="keyword">true</span>)</span><br><span class="line">                .select()</span><br><span class="line">                ......</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>重启服务页面显示分组</li>
+</ol>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201119200703587.png" alt="image-20201119200703587"></p>
+<ol start="3">
+<li>配置多个分组——配置多个Docket（别忘了@Bean注解，否则无法注册为实例）</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Docket <span class="title">docket1</span><span class="params">()</span></span>&#123;</span><br><span class="line">       <span class="keyword">return</span> <span class="keyword">new</span> Docket(DocumentationType.SWAGGER_2).groupName(<span class="string">&quot;YaYa&quot;</span>);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Bean</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> Docket <span class="title">docket2</span><span class="params">()</span></span>&#123;</span><br><span class="line">       <span class="keyword">return</span> <span class="keyword">new</span> Docket(DocumentationType.SWAGGER_2).groupName(<span class="string">&quot;XiaoGuo&quot;</span>);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Bean</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> Docket <span class="title">docket3</span><span class="params">()</span></span>&#123;</span><br><span class="line">       <span class="keyword">return</span> <span class="keyword">new</span> Docket(DocumentationType.SWAGGER_2).groupName(<span class="string">&quot;Lily&quot;</span>);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>重启服务，页面可见多个分组</li>
+</ol>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201119201309428.png" alt="image-20201119201309428"></p>
+<h2 id="实体配置"><a href="#实体配置" class="headerlink" title="实体配置"></a>实体配置</h2><ol>
+<li>新建实体类</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ApiModel(&quot;用户实体类&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ApiModelProperty(&quot;用户名&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> String username;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ApiModelProperty(&quot;密码&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> String password;</span><br><span class="line">    </span><br><span class="line">    ......</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>配置Controller类，添加请求接口</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 只要我们的接口中，返回值存在实体类，它就会被扫描到Swagger中</span></span><br><span class="line">    <span class="meta">@PostMapping(value = &quot;/user&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> User <span class="title">user</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> User();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>重启服务，查看实体类被扫描</li>
+</ol>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201119202436940.png" alt="image-20201119202436940"></p>
+<p><strong><em>注意：并非@ApiModel让实体类被扫描，而是只要出现在接口方法的返回值上的实体类都会被扫描到，@ApiModelProperty和@ApiModel只是为实体类添加注释所用。</em></strong></p>
+<ul>
+<li>@ApiModel为类添加注释</li>
+<li>@ApiModelProperty为类具体属性添加注释</li>
+</ul>
+<h2 id="常用Swagger注解"><a href="#常用Swagger注解" class="headerlink" title="常用Swagger注解"></a>常用Swagger注解</h2><p>Swagger的所有注解定义在io.swagger.annotations包下</p>
+<p>下面列一些经常用到的，未列举出来的可以另行查阅说明：</p>
+<table>
+<thead>
+<tr>
+<th align="center"><strong>Swagger注解</strong></th>
+<th align="center"><strong>简单说明</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">@Api(tags = “xxx模块说明”)</td>
+<td align="center">作用在模块类上</td>
+</tr>
+<tr>
+<td align="center">@ApiOperation(“xxx接口说明”)</td>
+<td align="center">作用在接口方法上</td>
+</tr>
+<tr>
+<td align="center">@ApiModel(“xxxPOJO说明”)</td>
+<td align="center">作用在模型类上：如VO、BO</td>
+</tr>
+<tr>
+<td align="center">@ApiModelProperty(value = “xxx属性说明”,hidden = true)</td>
+<td align="center">作用在类方法和属性上，hidden设置为true可以隐藏该属性</td>
+</tr>
+<tr>
+<td align="center">@ApiParam(“xxx参数说明”)</td>
+<td align="center">作用在参数、方法和字段上，类似@ApiModelProperty</td>
+</tr>
+</tbody></table>
+<h2 id="Swagger-GET-POST-测试功能"><a href="#Swagger-GET-POST-测试功能" class="headerlink" title="Swagger(GET/POST)测试功能"></a>Swagger(GET/POST)测试功能</h2><ol>
+<li>Controller方法前添加==@ApiOeration==注释</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ApiOperation(&quot;Post测试类&quot;)</span></span><br><span class="line">    <span class="meta">@PostMapping(value = &quot;/post&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> User <span class="title">post</span><span class="params">(<span class="meta">@ApiParam(&quot;用户名&quot;)</span> User user)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> user;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>重启服务进入Swagger-ui界面进行测试</li>
+</ol>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201119205520715.png" alt="image-20201119205520715"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201119205838266.png" alt="image-20201119205838266"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201119205659138.png" alt="image-20201119205659138"></p>
+<p><strong>总结：</strong></p>
+<ul>
+<li>添加注释到一些较难理解的接口或属性，以便增加可读性</li>
+<li>可在线测试</li>
+<li>API实时更新</li>
+</ul>
+<p>==注意：在正式版本发布时，需关闭Swagger！！！==</p>
+<ul>
+<li>处于安全考虑</li>
+<li>节省内存</li>
+</ul>
+<h2 id="拓展（Swagger皮肤切换）"><a href="#拓展（Swagger皮肤切换）" class="headerlink" title="拓展（Swagger皮肤切换）"></a>拓展（Swagger皮肤切换）</h2><ul>
+<li>bootstrap-ui <strong>访问 <a target="_blank" rel="noopener external nofollow noreferrer" href="http://localhost:8080/doc.html">http://localhost:8080/doc.html</a></strong>进入UI</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 引入swagger-bootstrap-ui包 /doc.html--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.github.xiaoymin<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>swagger-bootstrap-ui<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.9.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201119210101794.png" alt="image-20201119210101794"></p>
+<ul>
+<li>mg-ui <strong>访问 <a target="_blank" rel="noopener external nofollow noreferrer" href="http://localhost:8080/document.html">http://localhost:8080/document.html</a></strong>进入UI</li>
+</ul>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201119210351394.png" alt="image-20201119210351394"></p>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2020\11\17\Servlet实例总结\" rel="bookmark">Servlet实例总结</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2020\11\16\Servlet\" rel="bookmark">Servlet</a></div>
+    </li>
+  </ul>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Shiyuan Wu
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://plutowu.top/2020/11/19/Swagger%E7%AC%94%E8%AE%B0/" title="Swagger笔记">http://plutowu.top/2020/11/19/Swagger笔记/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener external nofollow noreferrer" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Java-Web/" rel="tag"># Java Web</a>
+              <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag"># 学习笔记</a>
+              <a href="/tags/Swagger/" rel="tag"># Swagger</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/11/18/%E7%9D%A1%E5%89%8D%E6%95%85%E4%BA%8B-%E6%B4%BB%E4%BA%86100%E4%B8%87%E6%AC%A1%E7%9A%84%E7%8C%AB/" rel="prev" title="睡前故事-活了100万次的猫">
+      <i class="fa fa-chevron-left"></i> 睡前故事-活了100万次的猫
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/11/19/%E7%9D%A1%E5%89%8D%E6%95%85%E4%BA%8B-%E5%96%9D%E9%85%92/" rel="next" title="睡前故事-喝酒">
+      睡前故事-喝酒 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Swagger"><span class="nav-number">1.</span> <span class="nav-text">Swagger</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Swagger%E7%AE%80%E4%BB%8B"><span class="nav-number">1.1.</span> <span class="nav-text">Swagger简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E8%A8%80%EF%BC%9A"><span class="nav-number">1.1.1.</span> <span class="nav-text">前言：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Open-API%EF%BC%9A"><span class="nav-number">1.1.2.</span> <span class="nav-text">Open API：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Swagger-%E7%AE%80%E4%BB%8B%EF%BC%9A"><span class="nav-number">1.1.3.</span> <span class="nav-text">Swagger 简介：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%98%E7%BD%91%EF%BC%9Ahttps-swagger-io"><span class="nav-number">1.1.4.</span> <span class="nav-text">官网：https:&#x2F;&#x2F;swagger.io&#x2F;</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SpringBoot%E9%9B%86%E6%88%90Swagger"><span class="nav-number">1.2.</span> <span class="nav-text">SpringBoot集成Swagger</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AESwagger"><span class="nav-number">1.3.</span> <span class="nav-text">配置Swagger</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AESwagger%E6%89%AB%E6%8F%8F%E6%8E%A5%E5%8F%A3"><span class="nav-number">1.4.</span> <span class="nav-text">配置Swagger扫描接口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AESwagger%E5%BC%80%E5%85%B3"><span class="nav-number">1.5.</span> <span class="nav-text">配置Swagger开关</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEAPI%E5%88%86%E7%BB%84"><span class="nav-number">1.6.</span> <span class="nav-text">配置API分组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E4%BD%93%E9%85%8D%E7%BD%AE"><span class="nav-number">1.7.</span> <span class="nav-text">实体配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8Swagger%E6%B3%A8%E8%A7%A3"><span class="nav-number">1.8.</span> <span class="nav-text">常用Swagger注解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Swagger-GET-POST-%E6%B5%8B%E8%AF%95%E5%8A%9F%E8%83%BD"><span class="nav-number">1.9.</span> <span class="nav-text">Swagger(GET&#x2F;POST)测试功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8B%93%E5%B1%95%EF%BC%88Swagger%E7%9A%AE%E8%82%A4%E5%88%87%E6%8D%A2%EF%BC%89"><span class="nav-number">1.10.</span> <span class="nav-text">拓展（Swagger皮肤切换）</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Shiyuan Wu"
+      src="/images/1.jpg">
+  <p class="site-author-name" itemprop="name">Shiyuan Wu</p>
+  <div class="site-description" itemprop="description">Designed to share happiness and learning</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+      
+      
+		<script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+		<script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+		<div class="widget-wrap">
+			<h3 class="widget-title">Tag Cloud</h3>
+			<div id="myCanvasContainer" class="widget tagcloud">
+				<canvas width="250" height="250" id="resCanvas" style="width=100%">
+            <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C%E8%AF%AD%E8%A8%80/" rel="tag">C语言</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java-Web/" rel="tag">Java Web</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Servlet/" rel="tag">Servlet</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/" rel="tag">Swagger</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%89%E8%A7%92%E5%88%A4%E6%96%AD/" rel="tag">三角判断</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%84%BF%E7%AB%A5%E6%96%87%E5%AD%A6/" rel="tag">儿童文学</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E5%B0%8F%E7%BB%93/" rel="tag">学习小结</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">学习笔记</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BD%B1%E8%AF%84/" rel="tag">影评</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%99%E7%A8%8B/" rel="tag">教程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%8B%A9%E7%8C%8E/" rel="tag">狩猎</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%B5%E5%BD%B1/" rel="tag">电影</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%B5%E5%BD%B1%E5%88%86%E6%9E%90/" rel="tag">电影分析</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9D%A1%E5%89%8D%E6%95%85%E4%BA%8B/" rel="tag">睡前故事</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A8%8B%E5%BA%8F%E5%AE%9E%E7%8E%B0/" rel="tag">程序实现</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A9%BA%E6%A0%BC%E7%BB%9F%E8%AE%A1/" rel="tag">空格统计</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AB%A5%E8%AF%9D/" rel="tag">童话</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%AB/" rel="tag">经验分享</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/" rel="tag">编程笔记</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AC%E8%BD%BD/" rel="tag">转载</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" rel="tag">软件工程</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BE%9B%E5%BE%B7%E5%8B%92%E7%9A%84%E5%90%8D%E5%8D%95/" rel="tag">辛德勒的名单</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%AA%91%E5%A3%AB%E4%B8%8E%E5%A5%B3%E5%B7%AB/" rel="tag">骑士与女巫</a><span class="tag-list-count">3</span></li></ul>
+				</canvas>
+			</div>
+		</div>
+		
+
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Shiyuan Wu</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">44k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">40 分钟</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener external nofollow noreferrer" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener external nofollow noreferrer" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/canvas_lines.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

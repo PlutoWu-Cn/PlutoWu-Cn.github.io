@@ -2,13 +2,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://plutowu.top/2020/11/21/ui%E9%A1%B9%E7%9B%AE/</loc>
-    
-    <lastmod>2020-11-21</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://plutowu.top/2020/11/21/vue-%E6%90%AD%E5%BB%BAvue+element-ui%E9%A1%B9%E7%9B%AE/</loc>
     
     <lastmod>2020-11-21</lastmod>
@@ -186,6 +179,20 @@
   </url>
   
   <url>
+    <loc>http://plutowu.top/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</loc>
+    <lastmod>2020-11-21</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://plutowu.top/tags/Swagger/</loc>
+    <lastmod>2020-11-21</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://plutowu.top/tags/git/</loc>
     <lastmod>2020-11-21</lastmod>
     <changefreq>daily</changefreq>
@@ -207,14 +214,14 @@
   </url>
   
   <url>
-    <loc>http://plutowu.top/tags/vue/</loc>
+    <loc>http://plutowu.top/tags/Vue/</loc>
     <lastmod>2020-11-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>http://plutowu.top/tags/element-ui/</loc>
+    <loc>http://plutowu.top/tags/Element-UI/</loc>
     <lastmod>2020-11-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -222,20 +229,6 @@
   
   <url>
     <loc>http://plutowu.top/tags/%E7%BB%84%E4%BB%B6%E5%8C%96%E5%BC%80%E5%8F%91/</loc>
-    <lastmod>2020-11-21</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://plutowu.top/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</loc>
-    <lastmod>2020-11-21</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://plutowu.top/tags/Swagger/</loc>
     <lastmod>2020-11-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -363,6 +356,13 @@
   </url>
   
   <url>
+    <loc>http://plutowu.top/categories/%E7%BC%96%E7%A8%8B/Vue/</loc>
+    <lastmod>2020-11-21</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://plutowu.top/categories/%E7%BC%96%E7%A8%8B/Java-Web/</loc>
     <lastmod>2020-11-21</lastmod>
     <changefreq>daily</changefreq>
@@ -377,13 +377,6 @@
   </url>
   
   <url>
-    <loc>http://plutowu.top/categories/%E6%95%99%E7%A8%8B/Git/</loc>
-    <lastmod>2020-11-21</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://plutowu.top/categories/%E5%BD%B1%E8%AF%84/</loc>
     <lastmod>2020-11-21</lastmod>
     <changefreq>daily</changefreq>
@@ -391,14 +384,21 @@
   </url>
   
   <url>
-    <loc>http://plutowu.top/categories/%E7%BC%96%E7%A8%8B/Vue/</loc>
+    <loc>http://plutowu.top/categories/%E7%9D%A1%E5%89%8D%E6%95%85%E4%BA%8B/</loc>
     <lastmod>2020-11-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>http://plutowu.top/categories/%E7%9D%A1%E5%89%8D%E6%95%85%E4%BA%8B/</loc>
+    <loc>http://plutowu.top/categories/%E6%95%99%E7%A8%8B/Git/</loc>
+    <lastmod>2020-11-21</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://plutowu.top/categories/%E7%BC%96%E7%A8%8B/Vue/Element-UI/</loc>
     <lastmod>2020-11-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -413,13 +413,6 @@
   
   <url>
     <loc>http://plutowu.top/categories/%E6%95%85%E4%BA%8B/</loc>
-    <lastmod>2020-11-21</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://plutowu.top/categories/%E7%BC%96%E7%A8%8B/Vue/Element-UI/</loc>
     <lastmod>2020-11-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>

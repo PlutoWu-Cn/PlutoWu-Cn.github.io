@@ -241,10 +241,12 @@
   </entry>
   <entry>
     <title>vue-搭建vue+element ui项目</title>
-    <url>/2020/11/21/ui%E9%A1%B9%E7%9B%AE/</url>
+    <url>/2020/11/21/vue-%E6%90%AD%E5%BB%BAvue+element-ui%E9%A1%B9%E7%9B%AE/</url>
     <content><![CDATA[<h1 id="搭建Vue-Element-UI项目（通过Vue-UI）"><a href="#搭建Vue-Element-UI项目（通过Vue-UI）" class="headerlink" title="搭建Vue+Element-UI项目（通过Vue-UI）"></a>搭建Vue+Element-UI项目（通过Vue-UI）</h1><h2 id="1-启动命令行，进入Vue-UI"><a href="#1-启动命令行，进入Vue-UI" class="headerlink" title="1.启动命令行，进入Vue-UI"></a>1.启动命令行，进入Vue-UI</h2><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121094336554.png" alt="image-20201121094336554"></p>
 <p>输入<a href="http://localhost:8000，即可进入UI界面">http://localhost:8000，即可进入UI界面</a></p>
 <p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121094647023.png" alt="image-20201121094647023"></p>
+<a id="more"></a>
+
 <h2 id="2-进入Vue项目管理器，新建项目"><a href="#2-进入Vue项目管理器，新建项目" class="headerlink" title="2.进入Vue项目管理器，新建项目"></a>2.进入Vue项目管理器，新建项目</h2><p>进入Vue项目管理器，进行新建或删除项目等操作</p>
 <p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121094734271.png" alt="image-20201121094734271"></p>
 <p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121094904195.png" alt="image-20201121094904195"></p>
@@ -289,15 +291,10 @@
         <category>Element UI</category>
       </categories>
       <tags>
-        <tag>vue</tag>
-        <tag>element ui</tag>
+        <tag>Vue</tag>
+        <tag>Element UI</tag>
         <tag>组件化开发</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>vue-搭建vue+element ui项目</title>
-    <url>/2020/11/21/vue-%E6%90%AD%E5%BB%BAvue+element-ui%E9%A1%B9%E7%9B%AE/</url>
-    <content><![CDATA[]]></content>
   </entry>
   <entry>
     <title>睡前故事-放开那条恶龙</title>

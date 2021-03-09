@@ -1,6 +1,453 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Java后端面试笔记</title>
+    <url>/2021/03/09/Java%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<h1 id="Java后端面试笔记"><a href="#Java后端面试笔记" class="headerlink" title="Java后端面试笔记"></a>Java后端面试笔记</h1><h2 id="JVM相关"><a href="#JVM相关" class="headerlink" title="JVM相关"></a>JVM相关</h2><h3 id="1-修改Java字节码"><a href="#1-修改Java字节码" class="headerlink" title="1.修改Java字节码"></a>1.修改Java字节码</h3><p>在OpenJDK里有一个<code>AsmTools</code>项目，用来生成正确的或者不正确的java <code>.class</code>文件，主要用来测试和验证。</p>
+<p><code>AsmTools</code>引入了两种表示<code>.class</code>文件的语法：</p>
+<ul>
+<li><p>JASM</p>
+<p>用类似java本身的语法来定义类和函数，字节码指令则很像传统的汇编。</p>
+</li>
+<li><p>JCOD</p>
+<p>整个<code>.class</code>用容器的方式来表示，可以很清楚表示类文件的结构。</p>
+</li>
+</ul>
+<p>重要的是两种语法的文件都是可以和<code>.class</code>互相转换的。</p>
+<p>在这里主要使用<code>JASM</code>语法。</p>
+<a id="more"></a>
+
+<h4 id="生成asmtools-jar"><a href="#生成asmtools-jar" class="headerlink" title="生成asmtools.jar"></a>生成asmtools.jar</h4><p>如果你的机器没有安装 <code>Mercurial</code>，请先安装(Mericurial 类似 Git 和 SVN，是一个分布式版本控制系统，使用 Python 编写，OpenJDK 就托管在 Mercurial 平台上)</p>
+<p>然后执行以下命令：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">// Clone代码</span><br><span class="line">hg clone ://hg.openjdk.java.net/code-tools/asmtools</span><br><span class="line"></span><br><span class="line">// 编译</span><br><span class="line">cd asmtools/build</span><br><span class="line">ant</span><br></pre></td></tr></table></figure>
+
+<p>即可得到asmtools.jar文件。</p>
+<h4 id="准备一个Example"><a href="#准备一个Example" class="headerlink" title="准备一个Example"></a>准备一个Example</h4><p>Foo.java</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Foo</span> </span>&#123;</span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">boolean</span> flag = <span class="keyword">true</span>;</span><br><span class="line">  <span class="keyword">if</span> (flag) System.out.println(<span class="string">&quot;Hello, Java!&quot;</span>);</span><br><span class="line">  <span class="keyword">if</span> (flag == <span class="keyword">true</span>) System.out.println(<span class="string">&quot;Hello, JVM!&quot;</span>);</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>javac Foo.java</code>命令生成Foo.class文件，使用JD-GUI打开内容如下：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.PrintStream;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Foo</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] paramArrayOfString)</span></span></span><br><span class="line"><span class="function">  </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span> (i != <span class="number">0</span>) &#123;</span><br><span class="line">      System.out.println(<span class="string">&quot;Hello, Java!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (i == <span class="number">1</span>) &#123;</span><br><span class="line">      System.out.println(<span class="string">&quot;Hello, JVM!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>java Foo</code>命令运行Foo.class文件输出结果：</p>
+<figure class="highlight autohotkey"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Hello,</span> Java!</span><br><span class="line"><span class="built_in">Hello,</span> JVM!</span><br></pre></td></tr></table></figure>
+
+<h4 id="由class文件生成jasm文件"><a href="#由class文件生成jasm文件" class="headerlink" title="由class文件生成jasm文件"></a>由class文件生成jasm文件</h4><p>如下命令将class文件中的内容转换成对应的jasm语法：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">java -jar asmtools.jar jdis Foo.class</span><br></pre></td></tr></table></figure>
+
+<p>上面输出的内容会直接打印在终端，当然你也可以把它输入到文件中：</p>
+<figure class="highlight reasonml"><table><tr><td class="code"><pre><span class="line">java -jar asmtools.jar jdis <span class="module-access"><span class="module"><span class="identifier">Foo</span>.</span></span><span class="keyword">class</span> &gt; <span class="module-access"><span class="module"><span class="identifier">Foo</span>.</span></span>jasm</span><br></pre></td></tr></table></figure>
+
+<p>Foo.jasm 文件内容如下：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">super</span> <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Foo</span></span></span><br><span class="line">    version 52:0</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> Method <span class="string">&quot;&lt;init&gt;&quot;</span>:<span class="string">&quot;()V&quot;</span></span><br><span class="line">    stack <span class="number">1</span> locals <span class="number">1</span></span><br><span class="line">&#123;</span><br><span class="line">        aload_0;</span><br><span class="line">        invokespecial   Method java/lang/Object.<span class="string">&quot;&lt;init&gt;&quot;</span>:<span class="string">&quot;()V&quot;</span>;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> Method main:<span class="string">&quot;([Ljava/lang/String;)V&quot;</span></span><br><span class="line">    stack <span class="number">2</span> locals <span class="number">2</span></span><br><span class="line">&#123;</span><br><span class="line">        iconst_1;</span><br><span class="line">        istore_1;</span><br><span class="line">        iload_1;</span><br><span class="line">        ifeq    L14;</span><br><span class="line">        getstatic   Field java/lang/System.out:<span class="string">&quot;Ljava/io/PrintStream;&quot;</span>;</span><br><span class="line">        ldc String <span class="string">&quot;Hello, Java!&quot;</span>;</span><br><span class="line">        invokevirtual   Method java/io/PrintStream.println:<span class="string">&quot;(Ljava/lang/String;)V&quot;</span>;</span><br><span class="line">    L14:    stack_frame_type append;</span><br><span class="line">        locals_map <span class="keyword">int</span>;</span><br><span class="line">        iload_1;</span><br><span class="line">        iconst_1;</span><br><span class="line">        if_icmpne   L27;</span><br><span class="line">        getstatic   Field java/lang/System.out:<span class="string">&quot;Ljava/io/PrintStream;&quot;</span>;</span><br><span class="line">        ldc String <span class="string">&quot;Hello, JVM!&quot;</span>;</span><br><span class="line">        invokevirtual   Method java/io/PrintStream.println:<span class="string">&quot;(Ljava/lang/String;)V&quot;</span>;</span><br><span class="line">    L27:    stack_frame_type same;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#125; <span class="comment">// end Class Foo</span></span><br></pre></td></tr></table></figure>
+
+<p>为了将 Foo.class 中的 <code>int i = 1;</code> 修改成 <code>int i = 2;</code>，我们需要替换 Foo.jasm 文件中的 <code>iconst_1</code> 为 <code>iconst_2</code>。</p>
+<h4 id="由jasm文件生成class文件"><a href="#由jasm文件生成class文件" class="headerlink" title="由jasm文件生成class文件"></a>由jasm文件生成class文件</h4><p>执行如下命令：</p>
+<figure class="highlight mipsasm"><table><tr><td class="code"><pre><span class="line"><span class="keyword">java </span>-<span class="keyword">jar </span>asmtools.<span class="keyword">jar </span><span class="keyword">jasm </span>Foo.<span class="keyword">jasm</span></span><br></pre></td></tr></table></figure>
+
+<p>这时再用 JD-GUI 打开 Foo.class 文件，内容如下：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.PrintStream;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Foo</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] paramArrayOfString)</span></span></span><br><span class="line"><span class="function">  </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">if</span> (i != <span class="number">0</span>) &#123;</span><br><span class="line">      System.out.println(<span class="string">&quot;Hello, Java!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (i == <span class="number">1</span>) &#123;</span><br><span class="line">      System.out.println(<span class="string">&quot;Hello, JVM!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>看到 i 的确由 1 变成 2 了。</p>
+<p><code>java Foo</code> 输出内容如下：</p>
+<figure class="highlight autohotkey"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Hello,</span> Java!</span><br></pre></td></tr></table></figure>
+
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>其实就两个命令：</p>
+<ul>
+<li>由 class 文件生成 jasm 文件：<code>java -jar asmtools.jar jdis Foo.class &gt; Foo.jasm</code></li>
+<li>由 jasm 文件生成 class 文件：<code>java -jar asmtools.jar jasm Foo.jasm</code></li>
+</ul>
+]]></content>
+      <categories>
+        <category>面试</category>
+        <category>Java</category>
+        <category>笔记</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>笔记</tag>
+        <tag>面试</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>睡前故事-白雪为嫁</title>
+    <url>/2020/11/23/%E7%9D%A1%E5%89%8D%E6%95%85%E4%BA%8B-%E7%99%BD%E9%9B%AA%E4%B8%BA%E5%AB%81/</url>
+    <content><![CDATA[<p>风暴戾地撞着窗，这个冬天格外冰冷。</p>
+<p>“你听话呀。”母亲的声音疲惫而心疼，“他家条件差得很，还有两个兄弟没成家。你跟过去吃没得吃、穿没得穿，只有受苦啊！”</p>
+<p>她和母亲并排躺在床上，抿着嘴唇并不出声，唯有泪珠成串滚落，很快浸湿枕巾。</p>
+<p>母亲侧着身，用右手柔柔帮她擦着泪，也有些哽咽：“妈妈都是为你好，你醒点事，好么？他平日里就会打架闹事，不是个有出息的人。”</p>
+<p>她吸了一下鼻子，眼睛执拗地闭着，无声哭泣。</p>
+<p>“明天去把孩子拿掉就好了。”母亲的声音在耳边继续着，她有她的苦心与疼爱，“时间久了你就不难过了，妈妈给你找个好婆家，保证比他强，过日子总归是要吃饱穿暖。”</p>
+<p>她抬了抬右手，没能抬动。</p>
+<p>母亲警觉地握紧了她的手。</p>
+<p>她的右手和母亲的左手紧紧绑在一起，布条还打了死结。</p>
+<p>“你们三兄妹里，妈妈最疼你，哪里能看着你吃苦。”母亲见止不住她的泪，自己的眼泪也落了下来，“你这个苕伢子……”</p>
+<p>母亲哭了一阵，帮她掖好被子，终于结束了劝慰，“很晚了，好好睡一觉，天亮妈妈就带你去医院。”</p>
+<a id="more"></a>
+
+<hr>
+<p>时间，怎么这么难熬呢？</p>
+<p>眼泪，好像流干了。</p>
+<p>眼睛涩涩的，她一动不动，静静听着旁边的呼吸声。</p>
+<p>呼吸很平稳，应是已睡熟了。但她仍不敢动，她知道机会只有一次。</p>
+<p>她很累，东躲西藏，最终还是被家人抓回来，已经身心俱疲。但她一点睡意也没有，她在心里默默地算着时间。</p>
+<p>这会儿应该是凌晨了，外面的房间很久没有动静，父亲应该也睡了。</p>
+<p>她试探着侧转身体，面对母亲。母亲闭着眼睛，毫无反应。</p>
+<p>母亲也很累了，这阵子她一定也很难过吧？她那么疼爱儿女。</p>
+<p>可是，对不起妈妈，这次我不能听话。她在黑夜里看着母亲隐约的脸，心里默默说道。</p>
+<p>沉默不是顺从，是在等这唯一的机会。</p>
+<p>她小心翼翼地去解绑着手的布条，死结很难解，她只能一点一点的艰难挪动。</p>
+<p>她心里很着急，但她强迫自己的动作更轻柔一些。</p>
+<p>结慢慢、慢慢松开，母亲突然嘟囔了一句什么！</p>
+<p>她全身都僵硬了！一动不敢动，假装自己熟睡着。但心脏跳动得如此剧烈，几乎提到了嗓子眼。</p>
+<p>但母亲接下来并没有其他动作，那句话也听不清楚，只是一句梦呓。</p>
+<p>她平复着心跳，缓慢地将布条解开。</p>
+<p>一只手压着被子，不让寒意透进来，身体小心翼翼往床下挪。</p>
+<p>终于，双脚落地。</p>
+<p>地面冰凉刺骨，但她已经顾不得那么多。</p>
+<p>时间紧迫！机会过了明天就不再有！</p>
+<p>她甚至来不及去穿一双鞋子，去拿一件外套。</p>
+<p>她踮着赤脚，做贼一般地挪出房间。</p>
+<p>从父亲的床边蹑手蹑脚走过，掩耳盗铃般地不敢看他一眼。</p>
+<p>来到堂屋，她轻轻抬起门栓，将大门缓缓拉开。</p>
+<p>嘶~！</p>
+<p>外面的寒风猛地灌了进来，将她整个人都浇凉。</p>
+<p>但她却精神一振，把门拉开到仅容一人进出的空间，就赶紧侧身钻了出去。</p>
+<p>她缓缓合上大门，仅着睡衣，赤足投入了漫天风雪中。</p>
+<hr>
+<p>这夜可真冷呵！</p>
+<p>她冻得牙齿打颤，全身上下没一处不冷。</p>
+<p>尤其踩在雪上的赤足，已经麻木得似乎没有了感觉。</p>
+<p>但她只管捂着她的小腹，一脚深一脚浅地往前迈。</p>
+<p>这是孩子。</p>
+<p>这是我的孩子。</p>
+<p>这是我和他的孩子！</p>
+<p>她开始跑，用劲跑，使出全身力气的跑。</p>
+<p>跑在这条那么熟悉的路上！跑在去他家的路上！</p>
+<p>不到两公里的距离，她乌黑的头发上已经披满白雪。</p>
+<p>她全身都快冻僵了，但总有一股子力气不知从哪里涌出来。</p>
+<p>她终于站到了他家门前。</p>
+<p>她敲门，用力敲门，大声喊他的名字。</p>
+<p>房间里响起重物坠地的声音，继而是急促的脚步声，男人猛地撞出来，拉开房门！</p>
+<p>他看到了怎样的一幅情景？</p>
+<p>门外立着的，是面色苍白、瑟瑟发抖却灼灼与他对视的女子。</p>
+<p>她的皮肤如雪，十里八乡没有哪个女子有这般白净。</p>
+<p>她紧抿着已冻得乌青的唇，就那么俏生生立在雪中！</p>
+<p>眼泪一下子就涌了出来，这是他以为将永远失去的她！</p>
+<p>他一把将她从雪地里抱起，牢牢抱进怀里。</p>
+<p>白茫茫的雪夜啊，风刀割不开的恋人。</p>
+<p>这一夜。</p>
+<p>有多少人见证了漫天风雪，就有多少人看到了白色婚纱。</p>
+]]></content>
+      <categories>
+        <category>睡前故事</category>
+      </categories>
+      <tags>
+        <tag>Hide</tag>
+        <tag>睡前故事</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>睡前故事-女巫</title>
+    <url>/2020/11/22/%E7%9D%A1%E5%89%8D%E6%95%85%E4%BA%8B-%E5%A5%B3%E5%B7%AB/</url>
+    <content><![CDATA[<p>“你知道吗，从遇见你的那天起，我心里，就种下了一个愿望……”</p>
+<p>女巫瘫坐在地上，她仰起脸，怔怔地望着身前伤痕累累的男人，两行晶莹的泪水从脸颊滑落。</p>
+<a id="more"></a>
+
+<hr>
+<p>十五年前。</p>
+<p>女巫骑着扫帚在天上散心，远远地望见一道黑烟。</p>
+<p>她飞到黑烟的源头察看，这里本来是一处村落，现在变成了一片废墟，四处都是断壁残垣，空气中弥漫着烧焦的木头与鲜血的混合气味。</p>
+<p>她在废墟中翻找了很久，最终在一个大水缸下面发现一个幸存的小男孩。</p>
+<p>女巫兴奋地把他抱了起来。</p>
+<p>年仅五岁的小男孩在空中流着眼泪，瑟瑟发抖地问：“女……女巫阿姨，你会吃掉我吗？”</p>
+<p>女巫皱了皱好看的柳叶眉，捏着他白皙的脸颊，说：“叫姐姐！”</p>
+<p>这时，一群拿着锄头和镰刀的村民赶了过来。</p>
+<p>他们远远地望见女巫抱着的小男孩。</p>
+<p>人群顿时沸沸扬扬地呼喊了起来。</p>
+<p>“快，抓住她！一定是那个女巫毁了这个村子！”</p>
+<p>“我的上帝啊，谁能救救那个可怜的孩子！”</p>
+<p>见村民们赶来，女巫连忙抱起小男孩，骑上扫帚飞走了。</p>
+<hr>
+<p>不久之后，女巫被冠以屠村的罪名，全国通缉。</p>
+<p>对此，她毫不在乎，优哉游哉地在自己的魔法小屋里玩养成游戏，他每天教小男孩调配药剂，感应魔法。</p>
+<p>只要他一偷懒，她的魔杖便会毫不留情地敲打他的脑袋。</p>
+<p>只不过，每当女巫想要教训他的时候，他就用胖乎乎的小手捂着头顶，瞪着水汪汪的大眼睛可怜巴巴地望着她。</p>
+<p>于是，女巫的处罚常常会半途而废。</p>
+<p>这样的日子过得很快，转眼男孩就长大了。</p>
+<p>他二十岁的时候，已经长得比女巫要高大得多，女巫踮起脚尖只能勉强碰到他的额头。</p>
+<p>她再也不能随心所欲地敲打他的头顶了，每当她要处罚他的时候，他只要伸直胳膊按住女巫的头，她不管怎么挥舞魔杖也碰不到他。</p>
+<p>女巫只好自己躲到书房，一边生闷气一边翻阅《男人的一百种烹饪方法》。</p>
+<p>每当这时候，他都会做她最爱吃的蛋包饭，宠溺地看着她一边傲娇地说不好吃一边不停嘴地吃光一整盘蛋包饭。</p>
+<hr>
+<p>这天是采购日，他自己骑着扫帚出门采购食材，她待在家里百无聊赖地翻着书。</p>
+<p>突然，一支燃烧的箭矢射了进来。</p>
+<p>女巫黑色袍子上的防御法阵瞬间触发。</p>
+<p>她挡住了箭，拿着法杖飘到了屋外。</p>
+<p>那是一大群赏金猎人，其中不乏职业的女巫杀手。</p>
+<p>“终于还是来了吗？”</p>
+<p>他带着一堆食材返回的时候，家已经变成了一堆废墟，女巫拄着魔杖站在地上，她身上的法袍已经残破不堪，白皙的肌肤上，殷红的鲜血直流。</p>
+<p>女巫抬头望见了他，他的眼中燃烧着怒火。</p>
+<p>“滚开！小屁孩不要在这里碍事！”</p>
+<p>女巫朝他吼道。</p>
+<p>他缓缓走向了她，摸了摸她的头，说：“十五年了，我还不了解你嘛。”</p>
+<p>他拿着魔杖，背对着她说：“你知道吗，从遇见你的那天起，我心里，就种下了一个愿望……”</p>
+<p>话还没说完，无数的箭矢就朝着他射了过来，他的魔杖闪烁着光芒，站在他身前抵挡着一切攻击。</p>
+<p>女巫瘫坐在地上，她仰起脸，怔怔地望着身前伤痕累累的男人，两行晶莹的泪水从脸颊滑落。</p>
+<p>这场战斗不知道持续了多久，他的魔杖终于折断了，而对面还站着的赏金猎人也寥寥无几。</p>
+<p>“再加把劲，只要把这个女巫的尸体带回去，咱们就有一辈子都花不完的赏金啦！”</p>
+<p>话音刚落，一支箭矢就朝着女巫射了过去。</p>
+<p>他飞身扑到了她的身前，紧紧地抱住了她，用背部挡住了那支箭。</p>
+<p>这时，一个骑士骑着马飞奔了过来，他朝着赏金猎人们大喊着：“国王有令，屠村的罪魁祸首已经落网，是一群山贼，女巫无罪！女巫无罪！”</p>
+<p>女巫流着泪摸着他渐渐失去血色的脸颊。</p>
+<p>“为什么……为什么？”</p>
+<p>他笑了笑，宠溺地摸了摸她的额头，说：“我种下的愿望是……保护你，一辈子。”</p>
+<p>他撑着地面站起身来，背对着不知所措的人群，横着抱起女巫，缓缓地离开了。</p>
+<p>女巫被他用公主抱的姿势抱在怀里，她说：“你的伤，没关系吗？”</p>
+<p>他笑了笑，说：“没关系，一会把箭取出来，你给我用魔法治疗一下就好啦。”</p>
+<p>“我……我们要去哪儿。”</p>
+<p>“我们一起，去找一个新家。”</p>
+<p>晚安</p>
+<p>早安</p>
+]]></content>
+      <categories>
+        <category>睡前故事</category>
+      </categories>
+      <tags>
+        <tag>Hide</tag>
+        <tag>睡前故事</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>SpringBoot-bug解决</title>
+    <url>/2020/11/21/SpringBoot-bug%E8%A7%A3%E5%86%B3/</url>
+    <content><![CDATA[<h1 id="SpringBoot-BUG解决"><a href="#SpringBoot-BUG解决" class="headerlink" title="SpringBoot-BUG解决"></a>SpringBoot-BUG解决</h1><h2 id="1-跨域配置失效（SpringBoot版本问题）"><a href="#1-跨域配置失效（SpringBoot版本问题）" class="headerlink" title="1.跨域配置失效（SpringBoot版本问题）"></a>1.跨域配置失效（SpringBoot版本问题）</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CrosConfig</span> <span class="keyword">implements</span> <span class="title">WebMvcConfigurer</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addCorsMappings</span><span class="params">(CorsRegistry registry)</span> </span>&#123;</span><br><span class="line">        registry.addMapping(<span class="string">&quot;/**&quot;</span>)</span><br><span class="line">                .allowedOrigins(<span class="string">&quot;*&quot;</span>)</span><br><span class="line">                .allowedMethods(<span class="string">&quot;GET&quot;</span>, <span class="string">&quot;HEAD&quot;</span>, <span class="string">&quot;POST&quot;</span>, <span class="string">&quot;PUT&quot;</span>, <span class="string">&quot;DELETE&quot;</span>, <span class="string">&quot;OPTIONS&quot;</span>)</span><br><span class="line">                .allowCredentials(<span class="keyword">true</span>)</span><br><span class="line">                .maxAge(<span class="number">3600</span>)</span><br><span class="line">                .allowedHeaders(<span class="string">&quot;*&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>采用SpringBoot 2.4.0版本下，配置跨域，报错</p>
+<a id="more"></a>
+
+<p><em>java.lang.IllegalArgumentException: When allowCredentials is true, allowedOrigins cannot contain the special value “＊”since that cannot be set on the “Access-Control-Allow-Origin” response header. To allow credentials to a set of origins, list them explicitly or consider using “allowedOriginPatterns” instead</em></p>
+<p>错误为：当设置了<code>allowCredentials=true</code>的时候，服务器端响应的<code>Access-Control-Allow-Origin</code>头，它的值不能是<code>*</code>，必须要明确的指定出客户端的<code>origin</code>。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">.allowedOrigins(<span class="string">&quot;http://localhost&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>指明具体客户端<code>origin</code>后，虽无报错，但浏览器访问仍然显示跨域失败。</p>
+<p>==最终方法：将SpringBoot版本切换为2.2.x，成功解决==</p>
+<p>…..尚未完结，持续更新</p>
+]]></content>
+      <categories>
+        <category>编程</category>
+        <category>Java Web</category>
+      </categories>
+      <tags>
+        <tag>Java Web</tag>
+        <tag>笔记</tag>
+        <tag>Swagger</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>vue-搭建vue+element ui项目</title>
+    <url>/2020/11/21/vue-%E6%90%AD%E5%BB%BAvue+element-ui%E9%A1%B9%E7%9B%AE/</url>
+    <content><![CDATA[<h1 id="搭建Vue-Element-UI项目（通过Vue-UI）"><a href="#搭建Vue-Element-UI项目（通过Vue-UI）" class="headerlink" title="搭建Vue+Element-UI项目（通过Vue-UI）"></a>搭建Vue+Element-UI项目（通过Vue-UI）</h1><h2 id="1-启动命令行，进入Vue-UI"><a href="#1-启动命令行，进入Vue-UI" class="headerlink" title="1.启动命令行，进入Vue-UI"></a>1.启动命令行，进入Vue-UI</h2><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121094336554.png" alt="image-20201121094336554"></p>
+<p>输入<a href="http://localhost:8000，即可进入UI界面">http://localhost:8000，即可进入UI界面</a></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121094647023.png" alt="image-20201121094647023"></p>
+<a id="more"></a>
+
+<h2 id="2-进入Vue项目管理器，新建项目"><a href="#2-进入Vue项目管理器，新建项目" class="headerlink" title="2.进入Vue项目管理器，新建项目"></a>2.进入Vue项目管理器，新建项目</h2><p>进入Vue项目管理器，进行新建或删除项目等操作</p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121094734271.png" alt="image-20201121094734271"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121094904195.png" alt="image-20201121094904195"></p>
+<p>存在三种选项，管理现有项目、新建项目和导入项目，我们选择创建项目</p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121095201637.png" alt="image-20201121095201637"></p>
+<ul>
+<li>创建新项目Step1-详情</li>
+</ul>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121095418245.png" alt="image-20201121095418245"></p>
+<ul>
+<li>创建新项目Step2-预设</li>
+</ul>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121095637943.png" alt="image-20201121095637943"></p>
+<ul>
+<li>创建新项目Step3-功能选择</li>
+</ul>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121100002708.png" alt="image-20201121100002708"></p>
+<ul>
+<li>创建新项目Step4-配置</li>
+</ul>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121100134876.png" alt="image-20201121100134876"></p>
+<p>此时会询问是否创建为预设，可选择否或保留此预设，保留预设可免去重复配置</p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121100207810.png" alt="image-20201121100207810"></p>
+<h2 id="3-配置新项目"><a href="#3-配置新项目" class="headerlink" title="3.配置新项目"></a>3.配置新项目</h2><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121100350314.png" alt="image-20201121100350314"></p>
+<p>进入项目管理器下，插件选项，安装所需插件</p>
+<p>这里我们选择Element-ui与axios</p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121100526996.png" alt="image-20201121100526996"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121100551055.png" alt="image-20201121100551055"></p>
+<p>均点击安装即可</p>
+<p>安装完成，即完成项目搭建</p>
+<h2 id="4-进入VS-Code查看成果"><a href="#4-进入VS-Code查看成果" class="headerlink" title="4.进入VS Code查看成果"></a>4.进入VS Code查看成果</h2><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121101030358.png" alt="image-20201121101030358"></p>
+<p>开启NPM脚本-serve，开启热部署</p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121101123455.png" alt="image-20201121101123455"></p>
+<p>可进入相应端口，实时查看项目，编辑完项目后CTRL+S保存即可完成更新，NPM脚本会重新编译</p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121101327645.png" alt="image-20201121101327645"></p>
+<hr>
+<p><strong>至此，Vue+Element项目搭建完成，接下来就可以开始你的渐进式开发了！</strong></p>
+]]></content>
+      <categories>
+        <category>编程</category>
+        <category>Vue</category>
+        <category>Element UI</category>
+      </categories>
+      <tags>
+        <tag>Vue</tag>
+        <tag>Element UI</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>睡前故事-放开那条恶龙</title>
+    <url>/2020/11/20/%E7%9D%A1%E5%89%8D%E6%95%85%E4%BA%8B-%E6%94%BE%E5%BC%80%E9%82%A3%E6%9D%A1%E6%81%B6%E9%BE%99/</url>
+    <content><![CDATA[<p>龙宝宝有个梦想——抓一只……呸，抓一位公主。</p>
+<p>为什么要抓公主呢？</p>
+<p>因为龙族有一项特殊的成人礼——抓公主。</p>
+<p>只有在王宫骑士重重包围之下抓走公主的龙，才能成为一条伟大的巨龙。</p>
+<a id="more"></a>
+
+<hr>
+<p>为了实现自己的梦想，龙宝宝变身成一个俊美的少年，每天都背着一个小麻袋，拎着一根小木棍，在王城里瞎逛。</p>
+<p>他的计划是：</p>
+<p>遇见公主</p>
+<p>打晕公主</p>
+<p>装进麻袋</p>
+<p>溜之大吉</p>
+<p>一个月过去了，他始终没能见到公主。</p>
+<p>渐渐的，他失去了瞎逛的动力。每天只是把袋子和棍子扔在一边，坐在墙角看着来往的路人，看看哪一个有可能是公主。</p>
+<p>有时候一天下来，袋子里还能多几个铜币。</p>
+<p>这天，他像往常一样坐在墙角。</p>
+<p>迎面走过来一个牵着白马的少女。</p>
+<p>“喂，小乞丐。”</p>
+<p>“我不是小乞丐！”</p>
+<p>他一下子站起来，瞪着少女说。</p>
+<p>龙宝宝心想，要不是你长得还挺漂亮，我一口吃掉你，你信不信。</p>
+<p>但就算你好看，也不能侮辱龙族的尊严！</p>
+<p>“那你是什么？”</p>
+<p>“我是龙……龙……”</p>
+<p>他正支支吾吾不知道怎么隐瞒自己的身份，一支王国骑士巡逻队远远地朝这里走来。</p>
+<p>“来不及了，小乞丐，把棍子给我！”</p>
+<p>“哦，好。”</p>
+<p>龙宝宝呆呆地把棍子递了过去。</p>
+<p>“可能会很疼，你忍着点儿哈。”</p>
+<p>“啊？为什……”</p>
+<p>他的话还没说完，只觉得眼前一黑，失去了意识。</p>
+<p>他再次睁开眼睛的时候，眼前一片漆黑。</p>
+<p>他使劲扭动着身体，发现自己被绳子绑住了。</p>
+<p>少女那清脆的嗓音从外面传来。</p>
+<p>“小乞丐，你别乱动，我放你出来。”</p>
+<p>说完，少女把他从麻袋里倒了出来。</p>
+<p>他一边大口呼吸着新鲜空气，又一边观察着下四周，这是在城外的森林里，只有火堆，白马和少女。</p>
+<p>少女坐在火堆旁，拍了拍他的肩膀，说：“实话跟你说吧，我是王国的公主，最近离家出走，缺个仆人，我观察你很久了，觉得你是个很好的人选。”</p>
+<p>龙宝宝目瞪口呆地听着，少女自顾自地说着。</p>
+<p>“我的计划就是接近你，打晕你，装进麻袋，然后溜之大吉。”</p>
+<p>“你看，多么完美的计划，你还自带麻袋和木棍，简直太贴心了！”</p>
+<p>龙宝宝心想，这计划似曾相识啊，等等，她说她是谁来着，公……公主？</p>
+<p>我……我成功啦？</p>
+<p>“话说，你为什么要离家出走呢？”</p>
+<p>“我想成为一位伟大的战士，每一位伟大的战士都要经历一场特殊的成人礼。”</p>
+<hr>
+<p>“什么？”</p>
+<p>“屠龙！”</p>
+<p>“……”</p>
+<p>于是，龙宝宝和公主踏上了“屠龙”的旅程。</p>
+<p>公主似乎很虚弱，他们足足走了半个月，才走出了森林。</p>
+<p>但是，在森林的边缘，他们终于还是遇到了王国骑士团。</p>
+<p>骑士们不敢对公主动手，所有火力都迎向了公主身边的少年。</p>
+<p>一番激战过后，少年被揍得伤痕累累，奄奄一息地倒在地上。</p>
+<p>“住手！”</p>
+<p>“你们别打了，我跟你们回去。”</p>
+<p>公主伏在少年的耳边轻轻地说：“回家吧，龙宝宝，别再想着抓公主啦。”</p>
+<p>少年的眼睛圆瞪着，难以置信地望向她。</p>
+<p>公主回头，留给他一个含泪的微笑。</p>
+<p>有人说成长是一个过程，但龙宝宝的成长，只是一个瞬间。</p>
+<p>他站起身来，身上逐渐布满了黑色的鳞片，一对翅膀从背后钻了出来，瞬间就遮蔽了整片天空。</p>
+<p>巨大的翅膀扇动起来，飓风席卷了整片森林。</p>
+<p>只是一次呼吸的时间，黑影就笼罩了整个骑士团。</p>
+<p>“把公主还给我！”</p>
+<p>巨龙把公主带回了自己的洞穴，又变成了奄奄一息的少年。</p>
+<p>“现在，你只要杀了我，就可以变成伟大的战士了。”</p>
+<p>公主把剑抽了出来，刺向了少年。</p>
+<p>少年缓缓闭上眼睛。</p>
+<p>他听到剑摔落的声音，感到一丝丝热气喷在自己的耳朵上。</p>
+<p>他睁开眼睛，公主倒在自己的身上。</p>
+<p>“你是怎么发现我是龙的？”</p>
+<p>“每一位屠龙战士，血脉里都隐藏着分辨龙的能力，只不过，当他们爱上一条龙的时候，便虚弱的再也挥不动剑了。”</p>
+<p>他盯着她，说：“你知道吗，当我第一次看到你的时候，就已经想好孩子叫什么了。”</p>
+<p>晚安</p>
+<p>早安</p>
+]]></content>
+      <categories>
+        <category>睡前故事</category>
+      </categories>
+      <tags>
+        <tag>Hide</tag>
+        <tag>睡前故事</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>睡前故事-喝酒</title>
+    <url>/2020/11/19/%E7%9D%A1%E5%89%8D%E6%95%85%E4%BA%8B-%E5%96%9D%E9%85%92/</url>
+    <content><![CDATA[<p>山上有一只小狐狸。</p>
+<p>她在山上修炼了一百年，终于化出了人形。</p>
+<p>一出关，她就迫不及待地跑下了山。</p>
+<p>“一百年啦，也不知道人间变成什么样了。”</p>
+<a id="more"></a>
+
+<hr>
+<p>没走多远，她就嗅到一股香气，她仔细闻了闻，是酒香！</p>
+<p>她擦了擦口水，摇身一变化成一个妙龄少女，又把尾巴往裙子里塞了塞。</p>
+<p>她寻着酒香来到了山下的小镇上，小镇里车水马龙，远处的集市人声鼎沸。</p>
+<p>她瞪着好奇宝宝一般的大眼睛，望着青石板的小路，络绎不绝的马车，以及，不远处的酒肆。</p>
+<p>她一路小跑着来到了酒肆，叫道：“小二，来一碗酒！”</p>
+<p>酒肆的小伙计瞅了瞅她，心里嘀咕道“大白天的一个人姑娘家出来喝酒，还真是少见。”想归想，他还是盛了一碗酒，送到小狐狸面前。</p>
+<p>“客官，请慢用。”</p>
+<p>小狐狸端起碗一饮而尽，这酒可真香啊！</p>
+<p>她喝了一碗又一碗，直到喝得酩酊大醉，才满意地摸了摸小肚子，出了门。</p>
+<p>自此，小狐狸天天下山喝酒，她的积蓄也越来越少。</p>
+<p>她仔细琢磨了一下，再这样喝下去，钱肯定不够花，不如把小石子变成铜钱付账。可是，小石子的法术只能维持一会儿，用不了多久就会变回去，这样不就把酒肆给坑了？人家做个小本生意也不容易，左思右想，小狐狸决定在小镇上用法术行医赚钱，赚到的钱再用来买酒喝，嗯，就这么办！</p>
+<hr>
+<p>第二天，小狐狸就变成少女的模样，扛着一个“再世华佗”的小旗子，下了山。</p>
+<p>她在小镇的集市上摆了个小摊子，生意就算是开张了。</p>
+<p>一开始，小镇上的百姓还不相她，觉得这么年轻的姑娘，哪里会什么医术。没过多久，李家爷爷多年的老寒腿被她轻轻松松治好了，她的小摊子前立马排起了长队。</p>
+<p>来找她看病的都是在医馆买不起药的穷人，小狐狸心软，不忍心收他们的钱。</p>
+<p>天色晚了，小狐狸打起自己的小包袱收摊回家，她的小包袱里装得满满的，有宋家奶奶塞的馍馍，还有刘家爷爷送的萝卜，只是一个铜板都没有。</p>
+<p>她挑着包袱路过酒肆，闻着酒香擦了擦口水，可她摸了摸自己的包袱，叹了口气，心想：“算了，起码今晚能吃顿饱饭。”</p>
+<p>这样想着，她慢慢走开了。</p>
+<p>这时，酒肆的小伙计追了出来。</p>
+<p>望着她的背影喊道：“唉，姑娘留步，我请你喝酒！”</p>
+<p>她的两个小耳朵立马树了起来，几乎飞一般地跑到小伙计面前，盯着他说：“你说什么？再说一遍！”</p>
+<p>小伙计擦了擦汗，说：“我……我请你喝酒。”</p>
+<p>“哈哈哈哈，原来这家酒馆就是你开的呀，看不出来啊，小掌柜！”</p>
+<p>小狐狸一边抱着酒坛子，一边拍着小伙计的肩膀说。</p>
+<p>小伙计腼腆地笑了笑，说：“你治好了那么多乡亲，都不要钱，请你喝点酒算什么！以后，你若是想喝酒，尽管来便是了。”</p>
+<p>她的脸上布满了红晕，打着酒嗝说：“嘿嘿嘿，你可真……真是个好人！”</p>
+<p>小伙计的脸红了红，讪讪地笑着，挠了挠头。</p>
+<hr>
+<p>夜深了，小狐狸喝得酩酊大醉，露出了原形，倒头便睡。</p>
+<p>小伙计叹了口气，把她背在了身上，往山上走去。</p>
+<p>风一吹，小狐狸毛绒绒的耳朵动了动，蹭的小伙计的脖子发痒，他说：“你醒啦。”</p>
+<p>小狐狸的声音有些发颤，说：“你……你是什么时候发现的？”</p>
+<p>他笑着说：“你每次来店里喝酒，喝醉了连尾巴都藏不住，你说呢？”</p>
+<p>小狐狸哼唧着用小爪子在他背上锤了几下，说：“你……你……”</p>
+<p>“好啦好啦，其实，小狐狸就挺可爱的。”</p>
+<p>小狐狸的脸红了，她用蚊子一般的声音说：“那你觉得，我变成人，和变回小狐狸，哪个好看？”</p>
+<p>小伙计笑了笑，毫不犹豫地回答：“都好看！”</p>
+<p>小狐狸的脸红得发烫，她把脸埋进了小伙计的背上，用小爪子捂着，没过多久，又睡着了。</p>
+<p>晚安</p>
+<p>早安</p>
+]]></content>
+      <categories>
+        <category>睡前故事</category>
+      </categories>
+      <tags>
+        <tag>Hide</tag>
+        <tag>睡前故事</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Swagger笔记</title>
     <url>/2020/11/19/Swagger%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<h1 id="Swagger"><a href="#Swagger" class="headerlink" title="Swagger"></a>Swagger</h1><ul>
@@ -235,441 +682,8 @@
       </categories>
       <tags>
         <tag>Java Web</tag>
-        <tag>学习笔记</tag>
+        <tag>笔记</tag>
         <tag>Swagger</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Java后端面试笔记</title>
-    <url>/2021/03/09/Java%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<h1 id="Java后端面试笔记"><a href="#Java后端面试笔记" class="headerlink" title="Java后端面试笔记"></a>Java后端面试笔记</h1><h2 id="JVM相关"><a href="#JVM相关" class="headerlink" title="JVM相关"></a>JVM相关</h2><h3 id="1-修改Java字节码"><a href="#1-修改Java字节码" class="headerlink" title="1.修改Java字节码"></a>1.修改Java字节码</h3><p>在OpenJDK里有一个<code>AsmTools</code>项目，用来生成正确的或者不正确的java <code>.class</code>文件，主要用来测试和验证。</p>
-<p><code>AsmTools</code>引入了两种表示<code>.class</code>文件的语法：</p>
-<ul>
-<li><p>JASM</p>
-<p>用类似java本身的语法来定义类和函数，字节码指令则很像传统的汇编。</p>
-</li>
-<li><p>JCOD</p>
-<p>整个<code>.class</code>用容器的方式来表示，可以很清楚表示类文件的结构。</p>
-</li>
-</ul>
-<p>重要的是两种语法的文件都是可以和<code>.class</code>互相转换的。</p>
-<p>在这里主要使用<code>JASM</code>语法。</p>
-<h4 id="生成asmtools-jar"><a href="#生成asmtools-jar" class="headerlink" title="生成asmtools.jar"></a>生成asmtools.jar</h4><p>如果你的机器没有安装 <code>Mercurial</code>，请先安装(Mericurial 类似 Git 和 SVN，是一个分布式版本控制系统，使用 Python 编写，OpenJDK 就托管在 Mercurial 平台上)</p>
-<p>然后执行以下命令：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">// Clone代码</span><br><span class="line">hg clone ://hg.openjdk.java.net/code-tools/asmtools</span><br><span class="line"></span><br><span class="line">// 编译</span><br><span class="line">cd asmtools/build</span><br><span class="line">ant</span><br></pre></td></tr></table></figure>
-
-<p>即可得到asmtools.jar文件。</p>
-<h4 id="准备一个Example"><a href="#准备一个Example" class="headerlink" title="准备一个Example"></a>准备一个Example</h4><p>Foo.java</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Foo</span> </span>&#123;</span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">boolean</span> flag = <span class="keyword">true</span>;</span><br><span class="line">  <span class="keyword">if</span> (flag) System.out.println(<span class="string">&quot;Hello, Java!&quot;</span>);</span><br><span class="line">  <span class="keyword">if</span> (flag == <span class="keyword">true</span>) System.out.println(<span class="string">&quot;Hello, JVM!&quot;</span>);</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><code>javac Foo.java</code>命令生成Foo.class文件，使用JD-GUI打开内容如下：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.PrintStream;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Foo</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] paramArrayOfString)</span></span></span><br><span class="line"><span class="function">  </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span> (i != <span class="number">0</span>) &#123;</span><br><span class="line">      System.out.println(<span class="string">&quot;Hello, Java!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (i == <span class="number">1</span>) &#123;</span><br><span class="line">      System.out.println(<span class="string">&quot;Hello, JVM!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><code>java Foo</code>命令运行Foo.class文件输出结果：</p>
-<figure class="highlight autohotkey"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Hello,</span> Java!</span><br><span class="line"><span class="built_in">Hello,</span> JVM!</span><br></pre></td></tr></table></figure>
-
-<h4 id="由class文件生成jasm文件"><a href="#由class文件生成jasm文件" class="headerlink" title="由class文件生成jasm文件"></a>由class文件生成jasm文件</h4><p>如下命令将class文件中的内容转换成对应的jasm语法：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">java -jar asmtools.jar jdis Foo.class</span><br></pre></td></tr></table></figure>
-
-<p>上面输出的内容会直接打印在终端，当然你也可以把它输入到文件中：</p>
-<figure class="highlight reasonml"><table><tr><td class="code"><pre><span class="line">java -jar asmtools.jar jdis <span class="module-access"><span class="module"><span class="identifier">Foo</span>.</span></span><span class="keyword">class</span> &gt; <span class="module-access"><span class="module"><span class="identifier">Foo</span>.</span></span>jasm</span><br></pre></td></tr></table></figure>
-
-<p>Foo.jasm 文件内容如下：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">super</span> <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Foo</span></span></span><br><span class="line">    version 52:0</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> Method <span class="string">&quot;&lt;init&gt;&quot;</span>:<span class="string">&quot;()V&quot;</span></span><br><span class="line">    stack <span class="number">1</span> locals <span class="number">1</span></span><br><span class="line">&#123;</span><br><span class="line">        aload_0;</span><br><span class="line">        invokespecial   Method java/lang/Object.<span class="string">&quot;&lt;init&gt;&quot;</span>:<span class="string">&quot;()V&quot;</span>;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> Method main:<span class="string">&quot;([Ljava/lang/String;)V&quot;</span></span><br><span class="line">    stack <span class="number">2</span> locals <span class="number">2</span></span><br><span class="line">&#123;</span><br><span class="line">        iconst_1;</span><br><span class="line">        istore_1;</span><br><span class="line">        iload_1;</span><br><span class="line">        ifeq    L14;</span><br><span class="line">        getstatic   Field java/lang/System.out:<span class="string">&quot;Ljava/io/PrintStream;&quot;</span>;</span><br><span class="line">        ldc String <span class="string">&quot;Hello, Java!&quot;</span>;</span><br><span class="line">        invokevirtual   Method java/io/PrintStream.println:<span class="string">&quot;(Ljava/lang/String;)V&quot;</span>;</span><br><span class="line">    L14:    stack_frame_type append;</span><br><span class="line">        locals_map <span class="keyword">int</span>;</span><br><span class="line">        iload_1;</span><br><span class="line">        iconst_1;</span><br><span class="line">        if_icmpne   L27;</span><br><span class="line">        getstatic   Field java/lang/System.out:<span class="string">&quot;Ljava/io/PrintStream;&quot;</span>;</span><br><span class="line">        ldc String <span class="string">&quot;Hello, JVM!&quot;</span>;</span><br><span class="line">        invokevirtual   Method java/io/PrintStream.println:<span class="string">&quot;(Ljava/lang/String;)V&quot;</span>;</span><br><span class="line">    L27:    stack_frame_type same;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#125; <span class="comment">// end Class Foo</span></span><br></pre></td></tr></table></figure>
-
-<p>为了将 Foo.class 中的 <code>int i = 1;</code> 修改成 <code>int i = 2;</code>，我们需要替换 Foo.jasm 文件中的 <code>iconst_1</code> 为 <code>iconst_2</code>。</p>
-<h4 id="由jasm文件生成class文件"><a href="#由jasm文件生成class文件" class="headerlink" title="由jasm文件生成class文件"></a>由jasm文件生成class文件</h4><p>执行如下命令：</p>
-<figure class="highlight mipsasm"><table><tr><td class="code"><pre><span class="line"><span class="keyword">java </span>-<span class="keyword">jar </span>asmtools.<span class="keyword">jar </span><span class="keyword">jasm </span>Foo.<span class="keyword">jasm</span></span><br></pre></td></tr></table></figure>
-
-<p>这时再用 JD-GUI 打开 Foo.class 文件，内容如下：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.PrintStream;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Foo</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] paramArrayOfString)</span></span></span><br><span class="line"><span class="function">  </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">if</span> (i != <span class="number">0</span>) &#123;</span><br><span class="line">      System.out.println(<span class="string">&quot;Hello, Java!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (i == <span class="number">1</span>) &#123;</span><br><span class="line">      System.out.println(<span class="string">&quot;Hello, JVM!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>看到 i 的确由 1 变成 2 了。</p>
-<p><code>java Foo</code> 输出内容如下：</p>
-<figure class="highlight autohotkey"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Hello,</span> Java!</span><br></pre></td></tr></table></figure>
-
-<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>其实就两个命令：</p>
-<ul>
-<li>由 class 文件生成 jasm 文件：<code>java -jar asmtools.jar jdis Foo.class &gt; Foo.jasm</code></li>
-<li>由 jasm 文件生成 class 文件：<code>java -jar asmtools.jar jasm Foo.jasm</code></li>
-</ul>
-]]></content>
-      <categories>
-        <category>面试</category>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>编程笔记</tag>
-        <tag>Java</tag>
-        <tag>面试</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>睡前故事-白雪为嫁</title>
-    <url>/2020/11/23/%E7%9D%A1%E5%89%8D%E6%95%85%E4%BA%8B-%E7%99%BD%E9%9B%AA%E4%B8%BA%E5%AB%81/</url>
-    <content><![CDATA[<p>风暴戾地撞着窗，这个冬天格外冰冷。</p>
-<p>“你听话呀。”母亲的声音疲惫而心疼，“他家条件差得很，还有两个兄弟没成家。你跟过去吃没得吃、穿没得穿，只有受苦啊！”</p>
-<p>她和母亲并排躺在床上，抿着嘴唇并不出声，唯有泪珠成串滚落，很快浸湿枕巾。</p>
-<p>母亲侧着身，用右手柔柔帮她擦着泪，也有些哽咽：“妈妈都是为你好，你醒点事，好么？他平日里就会打架闹事，不是个有出息的人。”</p>
-<p>她吸了一下鼻子，眼睛执拗地闭着，无声哭泣。</p>
-<p>“明天去把孩子拿掉就好了。”母亲的声音在耳边继续着，她有她的苦心与疼爱，“时间久了你就不难过了，妈妈给你找个好婆家，保证比他强，过日子总归是要吃饱穿暖。”</p>
-<p>她抬了抬右手，没能抬动。</p>
-<p>母亲警觉地握紧了她的手。</p>
-<p>她的右手和母亲的左手紧紧绑在一起，布条还打了死结。</p>
-<p>“你们三兄妹里，妈妈最疼你，哪里能看着你吃苦。”母亲见止不住她的泪，自己的眼泪也落了下来，“你这个苕伢子……”</p>
-<p>母亲哭了一阵，帮她掖好被子，终于结束了劝慰，“很晚了，好好睡一觉，天亮妈妈就带你去医院。”</p>
-<a id="more"></a>
-
-<hr>
-<p>时间，怎么这么难熬呢？</p>
-<p>眼泪，好像流干了。</p>
-<p>眼睛涩涩的，她一动不动，静静听着旁边的呼吸声。</p>
-<p>呼吸很平稳，应是已睡熟了。但她仍不敢动，她知道机会只有一次。</p>
-<p>她很累，东躲西藏，最终还是被家人抓回来，已经身心俱疲。但她一点睡意也没有，她在心里默默地算着时间。</p>
-<p>这会儿应该是凌晨了，外面的房间很久没有动静，父亲应该也睡了。</p>
-<p>她试探着侧转身体，面对母亲。母亲闭着眼睛，毫无反应。</p>
-<p>母亲也很累了，这阵子她一定也很难过吧？她那么疼爱儿女。</p>
-<p>可是，对不起妈妈，这次我不能听话。她在黑夜里看着母亲隐约的脸，心里默默说道。</p>
-<p>沉默不是顺从，是在等这唯一的机会。</p>
-<p>她小心翼翼地去解绑着手的布条，死结很难解，她只能一点一点的艰难挪动。</p>
-<p>她心里很着急，但她强迫自己的动作更轻柔一些。</p>
-<p>结慢慢、慢慢松开，母亲突然嘟囔了一句什么！</p>
-<p>她全身都僵硬了！一动不敢动，假装自己熟睡着。但心脏跳动得如此剧烈，几乎提到了嗓子眼。</p>
-<p>但母亲接下来并没有其他动作，那句话也听不清楚，只是一句梦呓。</p>
-<p>她平复着心跳，缓慢地将布条解开。</p>
-<p>一只手压着被子，不让寒意透进来，身体小心翼翼往床下挪。</p>
-<p>终于，双脚落地。</p>
-<p>地面冰凉刺骨，但她已经顾不得那么多。</p>
-<p>时间紧迫！机会过了明天就不再有！</p>
-<p>她甚至来不及去穿一双鞋子，去拿一件外套。</p>
-<p>她踮着赤脚，做贼一般地挪出房间。</p>
-<p>从父亲的床边蹑手蹑脚走过，掩耳盗铃般地不敢看他一眼。</p>
-<p>来到堂屋，她轻轻抬起门栓，将大门缓缓拉开。</p>
-<p>嘶~！</p>
-<p>外面的寒风猛地灌了进来，将她整个人都浇凉。</p>
-<p>但她却精神一振，把门拉开到仅容一人进出的空间，就赶紧侧身钻了出去。</p>
-<p>她缓缓合上大门，仅着睡衣，赤足投入了漫天风雪中。</p>
-<hr>
-<p>这夜可真冷呵！</p>
-<p>她冻得牙齿打颤，全身上下没一处不冷。</p>
-<p>尤其踩在雪上的赤足，已经麻木得似乎没有了感觉。</p>
-<p>但她只管捂着她的小腹，一脚深一脚浅地往前迈。</p>
-<p>这是孩子。</p>
-<p>这是我的孩子。</p>
-<p>这是我和他的孩子！</p>
-<p>她开始跑，用劲跑，使出全身力气的跑。</p>
-<p>跑在这条那么熟悉的路上！跑在去他家的路上！</p>
-<p>不到两公里的距离，她乌黑的头发上已经披满白雪。</p>
-<p>她全身都快冻僵了，但总有一股子力气不知从哪里涌出来。</p>
-<p>她终于站到了他家门前。</p>
-<p>她敲门，用力敲门，大声喊他的名字。</p>
-<p>房间里响起重物坠地的声音，继而是急促的脚步声，男人猛地撞出来，拉开房门！</p>
-<p>他看到了怎样的一幅情景？</p>
-<p>门外立着的，是面色苍白、瑟瑟发抖却灼灼与他对视的女子。</p>
-<p>她的皮肤如雪，十里八乡没有哪个女子有这般白净。</p>
-<p>她紧抿着已冻得乌青的唇，就那么俏生生立在雪中！</p>
-<p>眼泪一下子就涌了出来，这是他以为将永远失去的她！</p>
-<p>他一把将她从雪地里抱起，牢牢抱进怀里。</p>
-<p>白茫茫的雪夜啊，风刀割不开的恋人。</p>
-<p>这一夜。</p>
-<p>有多少人见证了漫天风雪，就有多少人看到了白色婚纱。</p>
-]]></content>
-      <categories>
-        <category>睡前故事</category>
-      </categories>
-      <tags>
-        <tag>睡前故事</tag>
-        <tag>转载</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>睡前故事-女巫</title>
-    <url>/2020/11/22/%E7%9D%A1%E5%89%8D%E6%95%85%E4%BA%8B-%E5%A5%B3%E5%B7%AB/</url>
-    <content><![CDATA[<p>“你知道吗，从遇见你的那天起，我心里，就种下了一个愿望……”</p>
-<p>女巫瘫坐在地上，她仰起脸，怔怔地望着身前伤痕累累的男人，两行晶莹的泪水从脸颊滑落。</p>
-<a id="more"></a>
-
-<hr>
-<p>十五年前。</p>
-<p>女巫骑着扫帚在天上散心，远远地望见一道黑烟。</p>
-<p>她飞到黑烟的源头察看，这里本来是一处村落，现在变成了一片废墟，四处都是断壁残垣，空气中弥漫着烧焦的木头与鲜血的混合气味。</p>
-<p>她在废墟中翻找了很久，最终在一个大水缸下面发现一个幸存的小男孩。</p>
-<p>女巫兴奋地把他抱了起来。</p>
-<p>年仅五岁的小男孩在空中流着眼泪，瑟瑟发抖地问：“女……女巫阿姨，你会吃掉我吗？”</p>
-<p>女巫皱了皱好看的柳叶眉，捏着他白皙的脸颊，说：“叫姐姐！”</p>
-<p>这时，一群拿着锄头和镰刀的村民赶了过来。</p>
-<p>他们远远地望见女巫抱着的小男孩。</p>
-<p>人群顿时沸沸扬扬地呼喊了起来。</p>
-<p>“快，抓住她！一定是那个女巫毁了这个村子！”</p>
-<p>“我的上帝啊，谁能救救那个可怜的孩子！”</p>
-<p>见村民们赶来，女巫连忙抱起小男孩，骑上扫帚飞走了。</p>
-<hr>
-<p>不久之后，女巫被冠以屠村的罪名，全国通缉。</p>
-<p>对此，她毫不在乎，优哉游哉地在自己的魔法小屋里玩养成游戏，他每天教小男孩调配药剂，感应魔法。</p>
-<p>只要他一偷懒，她的魔杖便会毫不留情地敲打他的脑袋。</p>
-<p>只不过，每当女巫想要教训他的时候，他就用胖乎乎的小手捂着头顶，瞪着水汪汪的大眼睛可怜巴巴地望着她。</p>
-<p>于是，女巫的处罚常常会半途而废。</p>
-<p>这样的日子过得很快，转眼男孩就长大了。</p>
-<p>他二十岁的时候，已经长得比女巫要高大得多，女巫踮起脚尖只能勉强碰到他的额头。</p>
-<p>她再也不能随心所欲地敲打他的头顶了，每当她要处罚他的时候，他只要伸直胳膊按住女巫的头，她不管怎么挥舞魔杖也碰不到他。</p>
-<p>女巫只好自己躲到书房，一边生闷气一边翻阅《男人的一百种烹饪方法》。</p>
-<p>每当这时候，他都会做她最爱吃的蛋包饭，宠溺地看着她一边傲娇地说不好吃一边不停嘴地吃光一整盘蛋包饭。</p>
-<hr>
-<p>这天是采购日，他自己骑着扫帚出门采购食材，她待在家里百无聊赖地翻着书。</p>
-<p>突然，一支燃烧的箭矢射了进来。</p>
-<p>女巫黑色袍子上的防御法阵瞬间触发。</p>
-<p>她挡住了箭，拿着法杖飘到了屋外。</p>
-<p>那是一大群赏金猎人，其中不乏职业的女巫杀手。</p>
-<p>“终于还是来了吗？”</p>
-<p>他带着一堆食材返回的时候，家已经变成了一堆废墟，女巫拄着魔杖站在地上，她身上的法袍已经残破不堪，白皙的肌肤上，殷红的鲜血直流。</p>
-<p>女巫抬头望见了他，他的眼中燃烧着怒火。</p>
-<p>“滚开！小屁孩不要在这里碍事！”</p>
-<p>女巫朝他吼道。</p>
-<p>他缓缓走向了她，摸了摸她的头，说：“十五年了，我还不了解你嘛。”</p>
-<p>他拿着魔杖，背对着她说：“你知道吗，从遇见你的那天起，我心里，就种下了一个愿望……”</p>
-<p>话还没说完，无数的箭矢就朝着他射了过来，他的魔杖闪烁着光芒，站在他身前抵挡着一切攻击。</p>
-<p>女巫瘫坐在地上，她仰起脸，怔怔地望着身前伤痕累累的男人，两行晶莹的泪水从脸颊滑落。</p>
-<p>这场战斗不知道持续了多久，他的魔杖终于折断了，而对面还站着的赏金猎人也寥寥无几。</p>
-<p>“再加把劲，只要把这个女巫的尸体带回去，咱们就有一辈子都花不完的赏金啦！”</p>
-<p>话音刚落，一支箭矢就朝着女巫射了过去。</p>
-<p>他飞身扑到了她的身前，紧紧地抱住了她，用背部挡住了那支箭。</p>
-<p>这时，一个骑士骑着马飞奔了过来，他朝着赏金猎人们大喊着：“国王有令，屠村的罪魁祸首已经落网，是一群山贼，女巫无罪！女巫无罪！”</p>
-<p>女巫流着泪摸着他渐渐失去血色的脸颊。</p>
-<p>“为什么……为什么？”</p>
-<p>他笑了笑，宠溺地摸了摸她的额头，说：“我种下的愿望是……保护你，一辈子。”</p>
-<p>他撑着地面站起身来，背对着不知所措的人群，横着抱起女巫，缓缓地离开了。</p>
-<p>女巫被他用公主抱的姿势抱在怀里，她说：“你的伤，没关系吗？”</p>
-<p>他笑了笑，说：“没关系，一会把箭取出来，你给我用魔法治疗一下就好啦。”</p>
-<p>“我……我们要去哪儿。”</p>
-<p>“我们一起，去找一个新家。”</p>
-<p>晚安</p>
-<p>早安</p>
-]]></content>
-      <categories>
-        <category>故事</category>
-      </categories>
-      <tags>
-        <tag>睡前故事</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>SpringBoot-bug解决</title>
-    <url>/2020/11/21/SpringBoot-bug%E8%A7%A3%E5%86%B3/</url>
-    <content><![CDATA[<h1 id="SpringBoot-BUG解决"><a href="#SpringBoot-BUG解决" class="headerlink" title="SpringBoot-BUG解决"></a>SpringBoot-BUG解决</h1><h2 id="1-跨域配置失效（SpringBoot版本问题）"><a href="#1-跨域配置失效（SpringBoot版本问题）" class="headerlink" title="1.跨域配置失效（SpringBoot版本问题）"></a>1.跨域配置失效（SpringBoot版本问题）</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CrosConfig</span> <span class="keyword">implements</span> <span class="title">WebMvcConfigurer</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addCorsMappings</span><span class="params">(CorsRegistry registry)</span> </span>&#123;</span><br><span class="line">        registry.addMapping(<span class="string">&quot;/**&quot;</span>)</span><br><span class="line">                .allowedOrigins(<span class="string">&quot;*&quot;</span>)</span><br><span class="line">                .allowedMethods(<span class="string">&quot;GET&quot;</span>, <span class="string">&quot;HEAD&quot;</span>, <span class="string">&quot;POST&quot;</span>, <span class="string">&quot;PUT&quot;</span>, <span class="string">&quot;DELETE&quot;</span>, <span class="string">&quot;OPTIONS&quot;</span>)</span><br><span class="line">                .allowCredentials(<span class="keyword">true</span>)</span><br><span class="line">                .maxAge(<span class="number">3600</span>)</span><br><span class="line">                .allowedHeaders(<span class="string">&quot;*&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>采用SpringBoot 2.4.0版本下，配置跨域，报错</p>
-<p><em>java.lang.IllegalArgumentException: When allowCredentials is true, allowedOrigins cannot contain the special value “＊”since that cannot be set on the “Access-Control-Allow-Origin” response header. To allow credentials to a set of origins, list them explicitly or consider using “allowedOriginPatterns” instead</em></p>
-<p>错误为：当设置了<code>allowCredentials=true</code>的时候，服务器端响应的<code>Access-Control-Allow-Origin</code>头，它的值不能是<code>*</code>，必须要明确的指定出客户端的<code>origin</code>。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">.allowedOrigins(<span class="string">&quot;http://localhost&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-<p>指明具体客户端<code>origin</code>后，虽无报错，但浏览器访问仍然显示跨域失败。</p>
-<p>==最终方法：将SpringBoot版本切换为2.2.x，成功解决==</p>
-<p>…..尚未完结，持续更新</p>
-]]></content>
-  </entry>
-  <entry>
-    <title>vue-搭建vue+element ui项目</title>
-    <url>/2020/11/21/vue-%E6%90%AD%E5%BB%BAvue+element-ui%E9%A1%B9%E7%9B%AE/</url>
-    <content><![CDATA[<h1 id="搭建Vue-Element-UI项目（通过Vue-UI）"><a href="#搭建Vue-Element-UI项目（通过Vue-UI）" class="headerlink" title="搭建Vue+Element-UI项目（通过Vue-UI）"></a>搭建Vue+Element-UI项目（通过Vue-UI）</h1><h2 id="1-启动命令行，进入Vue-UI"><a href="#1-启动命令行，进入Vue-UI" class="headerlink" title="1.启动命令行，进入Vue-UI"></a>1.启动命令行，进入Vue-UI</h2><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121094336554.png" alt="image-20201121094336554"></p>
-<p>输入<a href="http://localhost:8000，即可进入UI界面">http://localhost:8000，即可进入UI界面</a></p>
-<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121094647023.png" alt="image-20201121094647023"></p>
-<a id="more"></a>
-
-<h2 id="2-进入Vue项目管理器，新建项目"><a href="#2-进入Vue项目管理器，新建项目" class="headerlink" title="2.进入Vue项目管理器，新建项目"></a>2.进入Vue项目管理器，新建项目</h2><p>进入Vue项目管理器，进行新建或删除项目等操作</p>
-<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121094734271.png" alt="image-20201121094734271"></p>
-<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121094904195.png" alt="image-20201121094904195"></p>
-<p>存在三种选项，管理现有项目、新建项目和导入项目，我们选择创建项目</p>
-<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121095201637.png" alt="image-20201121095201637"></p>
-<ul>
-<li>创建新项目Step1-详情</li>
-</ul>
-<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121095418245.png" alt="image-20201121095418245"></p>
-<ul>
-<li>创建新项目Step2-预设</li>
-</ul>
-<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121095637943.png" alt="image-20201121095637943"></p>
-<ul>
-<li>创建新项目Step3-功能选择</li>
-</ul>
-<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121100002708.png" alt="image-20201121100002708"></p>
-<ul>
-<li>创建新项目Step4-配置</li>
-</ul>
-<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121100134876.png" alt="image-20201121100134876"></p>
-<p>此时会询问是否创建为预设，可选择否或保留此预设，保留预设可免去重复配置</p>
-<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121100207810.png" alt="image-20201121100207810"></p>
-<h2 id="3-配置新项目"><a href="#3-配置新项目" class="headerlink" title="3.配置新项目"></a>3.配置新项目</h2><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121100350314.png" alt="image-20201121100350314"></p>
-<p>进入项目管理器下，插件选项，安装所需插件</p>
-<p>这里我们选择Element-ui与axios</p>
-<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121100526996.png" alt="image-20201121100526996"></p>
-<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121100551055.png" alt="image-20201121100551055"></p>
-<p>均点击安装即可</p>
-<p>安装完成，即完成项目搭建</p>
-<h2 id="4-进入VS-Code查看成果"><a href="#4-进入VS-Code查看成果" class="headerlink" title="4.进入VS Code查看成果"></a>4.进入VS Code查看成果</h2><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121101030358.png" alt="image-20201121101030358"></p>
-<p>开启NPM脚本-serve，开启热部署</p>
-<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121101123455.png" alt="image-20201121101123455"></p>
-<p>可进入相应端口，实时查看项目，编辑完项目后CTRL+S保存即可完成更新，NPM脚本会重新编译</p>
-<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121101327645.png" alt="image-20201121101327645"></p>
-<hr>
-<p><strong>至此，Vue+Element项目搭建完成，接下来就可以开始你的渐进式开发了！</strong></p>
-]]></content>
-      <categories>
-        <category>编程</category>
-        <category>Vue</category>
-        <category>Element UI</category>
-      </categories>
-      <tags>
-        <tag>Vue</tag>
-        <tag>Element UI</tag>
-        <tag>组件化开发</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>睡前故事-放开那条恶龙</title>
-    <url>/2020/11/20/%E7%9D%A1%E5%89%8D%E6%95%85%E4%BA%8B-%E6%94%BE%E5%BC%80%E9%82%A3%E6%9D%A1%E6%81%B6%E9%BE%99/</url>
-    <content><![CDATA[<p>龙宝宝有个梦想——抓一只……呸，抓一位公主。</p>
-<p>为什么要抓公主呢？</p>
-<p>因为龙族有一项特殊的成人礼——抓公主。</p>
-<p>只有在王宫骑士重重包围之下抓走公主的龙，才能成为一条伟大的巨龙。</p>
-<a id="more"></a>
-
-<hr>
-<p>为了实现自己的梦想，龙宝宝变身成一个俊美的少年，每天都背着一个小麻袋，拎着一根小木棍，在王城里瞎逛。</p>
-<p>他的计划是：</p>
-<p>遇见公主</p>
-<p>打晕公主</p>
-<p>装进麻袋</p>
-<p>溜之大吉</p>
-<p>一个月过去了，他始终没能见到公主。</p>
-<p>渐渐的，他失去了瞎逛的动力。每天只是把袋子和棍子扔在一边，坐在墙角看着来往的路人，看看哪一个有可能是公主。</p>
-<p>有时候一天下来，袋子里还能多几个铜币。</p>
-<p>这天，他像往常一样坐在墙角。</p>
-<p>迎面走过来一个牵着白马的少女。</p>
-<p>“喂，小乞丐。”</p>
-<p>“我不是小乞丐！”</p>
-<p>他一下子站起来，瞪着少女说。</p>
-<p>龙宝宝心想，要不是你长得还挺漂亮，我一口吃掉你，你信不信。</p>
-<p>但就算你好看，也不能侮辱龙族的尊严！</p>
-<p>“那你是什么？”</p>
-<p>“我是龙……龙……”</p>
-<p>他正支支吾吾不知道怎么隐瞒自己的身份，一支王国骑士巡逻队远远地朝这里走来。</p>
-<p>“来不及了，小乞丐，把棍子给我！”</p>
-<p>“哦，好。”</p>
-<p>龙宝宝呆呆地把棍子递了过去。</p>
-<p>“可能会很疼，你忍着点儿哈。”</p>
-<p>“啊？为什……”</p>
-<p>他的话还没说完，只觉得眼前一黑，失去了意识。</p>
-<p>他再次睁开眼睛的时候，眼前一片漆黑。</p>
-<p>他使劲扭动着身体，发现自己被绳子绑住了。</p>
-<p>少女那清脆的嗓音从外面传来。</p>
-<p>“小乞丐，你别乱动，我放你出来。”</p>
-<p>说完，少女把他从麻袋里倒了出来。</p>
-<p>他一边大口呼吸着新鲜空气，又一边观察着下四周，这是在城外的森林里，只有火堆，白马和少女。</p>
-<p>少女坐在火堆旁，拍了拍他的肩膀，说：“实话跟你说吧，我是王国的公主，最近离家出走，缺个仆人，我观察你很久了，觉得你是个很好的人选。”</p>
-<p>龙宝宝目瞪口呆地听着，少女自顾自地说着。</p>
-<p>“我的计划就是接近你，打晕你，装进麻袋，然后溜之大吉。”</p>
-<p>“你看，多么完美的计划，你还自带麻袋和木棍，简直太贴心了！”</p>
-<p>龙宝宝心想，这计划似曾相识啊，等等，她说她是谁来着，公……公主？</p>
-<p>我……我成功啦？</p>
-<p>“话说，你为什么要离家出走呢？”</p>
-<p>“我想成为一位伟大的战士，每一位伟大的战士都要经历一场特殊的成人礼。”</p>
-<hr>
-<p>“什么？”</p>
-<p>“屠龙！”</p>
-<p>“……”</p>
-<p>于是，龙宝宝和公主踏上了“屠龙”的旅程。</p>
-<p>公主似乎很虚弱，他们足足走了半个月，才走出了森林。</p>
-<p>但是，在森林的边缘，他们终于还是遇到了王国骑士团。</p>
-<p>骑士们不敢对公主动手，所有火力都迎向了公主身边的少年。</p>
-<p>一番激战过后，少年被揍得伤痕累累，奄奄一息地倒在地上。</p>
-<p>“住手！”</p>
-<p>“你们别打了，我跟你们回去。”</p>
-<p>公主伏在少年的耳边轻轻地说：“回家吧，龙宝宝，别再想着抓公主啦。”</p>
-<p>少年的眼睛圆瞪着，难以置信地望向她。</p>
-<p>公主回头，留给他一个含泪的微笑。</p>
-<p>有人说成长是一个过程，但龙宝宝的成长，只是一个瞬间。</p>
-<p>他站起身来，身上逐渐布满了黑色的鳞片，一对翅膀从背后钻了出来，瞬间就遮蔽了整片天空。</p>
-<p>巨大的翅膀扇动起来，飓风席卷了整片森林。</p>
-<p>只是一次呼吸的时间，黑影就笼罩了整个骑士团。</p>
-<p>“把公主还给我！”</p>
-<p>巨龙把公主带回了自己的洞穴，又变成了奄奄一息的少年。</p>
-<p>“现在，你只要杀了我，就可以变成伟大的战士了。”</p>
-<p>公主把剑抽了出来，刺向了少年。</p>
-<p>少年缓缓闭上眼睛。</p>
-<p>他听到剑摔落的声音，感到一丝丝热气喷在自己的耳朵上。</p>
-<p>他睁开眼睛，公主倒在自己的身上。</p>
-<p>“你是怎么发现我是龙的？”</p>
-<p>“每一位屠龙战士，血脉里都隐藏着分辨龙的能力，只不过，当他们爱上一条龙的时候，便虚弱的再也挥不动剑了。”</p>
-<p>他盯着她，说：“你知道吗，当我第一次看到你的时候，就已经想好孩子叫什么了。”</p>
-<p>晚安</p>
-<p>早安</p>
-]]></content>
-      <categories>
-        <category>睡前故事</category>
-      </categories>
-      <tags>
-        <tag>睡前故事</tag>
-        <tag>转载</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>睡前故事-喝酒</title>
-    <url>/2020/11/19/%E7%9D%A1%E5%89%8D%E6%95%85%E4%BA%8B-%E5%96%9D%E9%85%92/</url>
-    <content><![CDATA[<p>山上有一只小狐狸。</p>
-<p>她在山上修炼了一百年，终于化出了人形。</p>
-<p>一出关，她就迫不及待地跑下了山。</p>
-<p>“一百年啦，也不知道人间变成什么样了。”</p>
-<a id="more"></a>
-
-<hr>
-<p>没走多远，她就嗅到一股香气，她仔细闻了闻，是酒香！</p>
-<p>她擦了擦口水，摇身一变化成一个妙龄少女，又把尾巴往裙子里塞了塞。</p>
-<p>她寻着酒香来到了山下的小镇上，小镇里车水马龙，远处的集市人声鼎沸。</p>
-<p>她瞪着好奇宝宝一般的大眼睛，望着青石板的小路，络绎不绝的马车，以及，不远处的酒肆。</p>
-<p>她一路小跑着来到了酒肆，叫道：“小二，来一碗酒！”</p>
-<p>酒肆的小伙计瞅了瞅她，心里嘀咕道“大白天的一个人姑娘家出来喝酒，还真是少见。”想归想，他还是盛了一碗酒，送到小狐狸面前。</p>
-<p>“客官，请慢用。”</p>
-<p>小狐狸端起碗一饮而尽，这酒可真香啊！</p>
-<p>她喝了一碗又一碗，直到喝得酩酊大醉，才满意地摸了摸小肚子，出了门。</p>
-<p>自此，小狐狸天天下山喝酒，她的积蓄也越来越少。</p>
-<p>她仔细琢磨了一下，再这样喝下去，钱肯定不够花，不如把小石子变成铜钱付账。可是，小石子的法术只能维持一会儿，用不了多久就会变回去，这样不就把酒肆给坑了？人家做个小本生意也不容易，左思右想，小狐狸决定在小镇上用法术行医赚钱，赚到的钱再用来买酒喝，嗯，就这么办！</p>
-<hr>
-<p>第二天，小狐狸就变成少女的模样，扛着一个“再世华佗”的小旗子，下了山。</p>
-<p>她在小镇的集市上摆了个小摊子，生意就算是开张了。</p>
-<p>一开始，小镇上的百姓还不相她，觉得这么年轻的姑娘，哪里会什么医术。没过多久，李家爷爷多年的老寒腿被她轻轻松松治好了，她的小摊子前立马排起了长队。</p>
-<p>来找她看病的都是在医馆买不起药的穷人，小狐狸心软，不忍心收他们的钱。</p>
-<p>天色晚了，小狐狸打起自己的小包袱收摊回家，她的小包袱里装得满满的，有宋家奶奶塞的馍馍，还有刘家爷爷送的萝卜，只是一个铜板都没有。</p>
-<p>她挑着包袱路过酒肆，闻着酒香擦了擦口水，可她摸了摸自己的包袱，叹了口气，心想：“算了，起码今晚能吃顿饱饭。”</p>
-<p>这样想着，她慢慢走开了。</p>
-<p>这时，酒肆的小伙计追了出来。</p>
-<p>望着她的背影喊道：“唉，姑娘留步，我请你喝酒！”</p>
-<p>她的两个小耳朵立马树了起来，几乎飞一般地跑到小伙计面前，盯着他说：“你说什么？再说一遍！”</p>
-<p>小伙计擦了擦汗，说：“我……我请你喝酒。”</p>
-<p>“哈哈哈哈，原来这家酒馆就是你开的呀，看不出来啊，小掌柜！”</p>
-<p>小狐狸一边抱着酒坛子，一边拍着小伙计的肩膀说。</p>
-<p>小伙计腼腆地笑了笑，说：“你治好了那么多乡亲，都不要钱，请你喝点酒算什么！以后，你若是想喝酒，尽管来便是了。”</p>
-<p>她的脸上布满了红晕，打着酒嗝说：“嘿嘿嘿，你可真……真是个好人！”</p>
-<p>小伙计的脸红了红，讪讪地笑着，挠了挠头。</p>
-<hr>
-<p>夜深了，小狐狸喝得酩酊大醉，露出了原形，倒头便睡。</p>
-<p>小伙计叹了口气，把她背在了身上，往山上走去。</p>
-<p>风一吹，小狐狸毛绒绒的耳朵动了动，蹭的小伙计的脖子发痒，他说：“你醒啦。”</p>
-<p>小狐狸的声音有些发颤，说：“你……你是什么时候发现的？”</p>
-<p>他笑着说：“你每次来店里喝酒，喝醉了连尾巴都藏不住，你说呢？”</p>
-<p>小狐狸哼唧着用小爪子在他背上锤了几下，说：“你……你……”</p>
-<p>“好啦好啦，其实，小狐狸就挺可爱的。”</p>
-<p>小狐狸的脸红了，她用蚊子一般的声音说：“那你觉得，我变成人，和变回小狐狸，哪个好看？”</p>
-<p>小伙计笑了笑，毫不犹豫地回答：“都好看！”</p>
-<p>小狐狸的脸红得发烫，她把脸埋进了小伙计的背上，用小爪子捂着，没过多久，又睡着了。</p>
-<p>晚安</p>
-<p>早安</p>
-]]></content>
-      <categories>
-        <category>睡前故事</category>
-      </categories>
-      <tags>
-        <tag>睡前故事</tag>
-        <tag>转载</tag>
       </tags>
   </entry>
   <entry>
@@ -775,10 +789,8 @@
         <category>睡前故事</category>
       </categories>
       <tags>
+        <tag>Hide</tag>
         <tag>睡前故事</tag>
-        <tag>转载</tag>
-        <tag>童话</tag>
-        <tag>儿童文学</tag>
       </tags>
   </entry>
   <entry>
@@ -812,7 +824,6 @@
       <tags>
         <tag>git</tag>
         <tag>教程</tag>
-        <tag>经验分享</tag>
       </tags>
   </entry>
   <entry>
@@ -957,11 +968,9 @@
         <category>Java Web</category>
       </categories>
       <tags>
-        <tag>编程笔记</tag>
-        <tag>Java</tag>
         <tag>Servlet</tag>
         <tag>Java Web</tag>
-        <tag>学习小结</tag>
+        <tag>Java</tag>
       </tags>
   </entry>
   <entry>
@@ -981,10 +990,7 @@
         <category>C</category>
       </categories>
       <tags>
-        <tag>软件工程</tag>
-        <tag>程序实现</tag>
         <tag>C语言</tag>
-        <tag>三角判断</tag>
       </tags>
   </entry>
   <entry>
@@ -1011,10 +1017,7 @@
         <category>C</category>
       </categories>
       <tags>
-        <tag>软件工程</tag>
-        <tag>程序实现</tag>
         <tag>C语言</tag>
-        <tag>空格统计</tag>
       </tags>
   </entry>
   <entry>
@@ -1041,10 +1044,8 @@
         <category>影评</category>
       </categories>
       <tags>
-        <tag>狩猎</tag>
-        <tag>电影</tag>
         <tag>影评</tag>
-        <tag>电影分析</tag>
+        <tag>Hide</tag>
       </tags>
   </entry>
   <entry>
@@ -1083,10 +1084,8 @@
         <category>影评</category>
       </categories>
       <tags>
-        <tag>电影</tag>
         <tag>影评</tag>
-        <tag>电影分析</tag>
-        <tag>辛德勒的名单</tag>
+        <tag>Hide</tag>
       </tags>
   </entry>
   <entry>
@@ -1108,9 +1107,10 @@
 <p>女巫终于热泪盈眶，“我选择白天夜晚都是美丽的女人，因为我爱你！”</p>
 ]]></content>
       <categories>
-        <category>故事</category>
+        <category>睡前故事</category>
       </categories>
       <tags>
+        <tag>Hide</tag>
         <tag>睡前故事</tag>
         <tag>骑士与女巫</tag>
       </tags>
@@ -1148,9 +1148,10 @@
 <p>这次的经历让两人更加爱并信任彼此，考验的收获是手腕的红绳更加牢固了。</p>
 ]]></content>
       <categories>
-        <category>故事</category>
+        <category>睡前故事</category>
       </categories>
       <tags>
+        <tag>Hide</tag>
         <tag>睡前故事</tag>
         <tag>骑士与女巫</tag>
       </tags>
@@ -1188,9 +1189,10 @@
 <p>这一天好漫长，两人相互抱着，第二天的朝阳升起…</p>
 ]]></content>
       <categories>
-        <category>故事</category>
+        <category>睡前故事</category>
       </categories>
       <tags>
+        <tag>Hide</tag>
         <tag>睡前故事</tag>
         <tag>骑士与女巫</tag>
       </tags>
@@ -1220,11 +1222,9 @@
         <category>Java Web</category>
       </categories>
       <tags>
-        <tag>编程笔记</tag>
-        <tag>Java</tag>
         <tag>Servlet</tag>
         <tag>Java Web</tag>
-        <tag>学习小结</tag>
+        <tag>Java</tag>
       </tags>
   </entry>
 </search>

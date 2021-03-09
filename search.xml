@@ -234,9 +234,74 @@
         <category>笔记</category>
       </categories>
       <tags>
+        <tag>Java Web</tag>
         <tag>学习笔记</tag>
         <tag>Swagger</tag>
-        <tag>Java Web</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Java后端面试笔记</title>
+    <url>/2021/03/09/Java%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<h1 id="Java后端面试笔记"><a href="#Java后端面试笔记" class="headerlink" title="Java后端面试笔记"></a>Java后端面试笔记</h1><h2 id="JVM相关"><a href="#JVM相关" class="headerlink" title="JVM相关"></a>JVM相关</h2><h3 id="1-修改Java字节码"><a href="#1-修改Java字节码" class="headerlink" title="1.修改Java字节码"></a>1.修改Java字节码</h3><p>在OpenJDK里有一个<code>AsmTools</code>项目，用来生成正确的或者不正确的java <code>.class</code>文件，主要用来测试和验证。</p>
+<p><code>AsmTools</code>引入了两种表示<code>.class</code>文件的语法：</p>
+<ul>
+<li><p>JASM</p>
+<p>用类似java本身的语法来定义类和函数，字节码指令则很像传统的汇编。</p>
+</li>
+<li><p>JCOD</p>
+<p>整个<code>.class</code>用容器的方式来表示，可以很清楚表示类文件的结构。</p>
+</li>
+</ul>
+<p>重要的是两种语法的文件都是可以和<code>.class</code>互相转换的。</p>
+<p>在这里主要使用<code>JASM</code>语法。</p>
+<h4 id="生成asmtools-jar"><a href="#生成asmtools-jar" class="headerlink" title="生成asmtools.jar"></a>生成asmtools.jar</h4><p>如果你的机器没有安装 <code>Mercurial</code>，请先安装(Mericurial 类似 Git 和 SVN，是一个分布式版本控制系统，使用 Python 编写，OpenJDK 就托管在 Mercurial 平台上)</p>
+<p>然后执行以下命令：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">// Clone代码</span><br><span class="line">hg clone ://hg.openjdk.java.net/code-tools/asmtools</span><br><span class="line"></span><br><span class="line">// 编译</span><br><span class="line">cd asmtools/build</span><br><span class="line">ant</span><br></pre></td></tr></table></figure>
+
+<p>即可得到asmtools.jar文件。</p>
+<h4 id="准备一个Example"><a href="#准备一个Example" class="headerlink" title="准备一个Example"></a>准备一个Example</h4><p>Foo.java</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Foo</span> </span>&#123;</span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">boolean</span> flag = <span class="keyword">true</span>;</span><br><span class="line">  <span class="keyword">if</span> (flag) System.out.println(<span class="string">&quot;Hello, Java!&quot;</span>);</span><br><span class="line">  <span class="keyword">if</span> (flag == <span class="keyword">true</span>) System.out.println(<span class="string">&quot;Hello, JVM!&quot;</span>);</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>javac Foo.java</code>命令生成Foo.class文件，使用JD-GUI打开内容如下：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.PrintStream;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Foo</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] paramArrayOfString)</span></span></span><br><span class="line"><span class="function">  </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span> (i != <span class="number">0</span>) &#123;</span><br><span class="line">      System.out.println(<span class="string">&quot;Hello, Java!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (i == <span class="number">1</span>) &#123;</span><br><span class="line">      System.out.println(<span class="string">&quot;Hello, JVM!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>java Foo</code>命令运行Foo.class文件输出结果：</p>
+<figure class="highlight autohotkey"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Hello,</span> Java!</span><br><span class="line"><span class="built_in">Hello,</span> JVM!</span><br></pre></td></tr></table></figure>
+
+<h4 id="由class文件生成jasm文件"><a href="#由class文件生成jasm文件" class="headerlink" title="由class文件生成jasm文件"></a>由class文件生成jasm文件</h4><p>如下命令将class文件中的内容转换成对应的jasm语法：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">java -jar asmtools.jar jdis Foo.class</span><br></pre></td></tr></table></figure>
+
+<p>上面输出的内容会直接打印在终端，当然你也可以把它输入到文件中：</p>
+<figure class="highlight reasonml"><table><tr><td class="code"><pre><span class="line">java -jar asmtools.jar jdis <span class="module-access"><span class="module"><span class="identifier">Foo</span>.</span></span><span class="keyword">class</span> &gt; <span class="module-access"><span class="module"><span class="identifier">Foo</span>.</span></span>jasm</span><br></pre></td></tr></table></figure>
+
+<p>Foo.jasm 文件内容如下：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">super</span> <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Foo</span></span></span><br><span class="line">    version 52:0</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> Method <span class="string">&quot;&lt;init&gt;&quot;</span>:<span class="string">&quot;()V&quot;</span></span><br><span class="line">    stack <span class="number">1</span> locals <span class="number">1</span></span><br><span class="line">&#123;</span><br><span class="line">        aload_0;</span><br><span class="line">        invokespecial   Method java/lang/Object.<span class="string">&quot;&lt;init&gt;&quot;</span>:<span class="string">&quot;()V&quot;</span>;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> Method main:<span class="string">&quot;([Ljava/lang/String;)V&quot;</span></span><br><span class="line">    stack <span class="number">2</span> locals <span class="number">2</span></span><br><span class="line">&#123;</span><br><span class="line">        iconst_1;</span><br><span class="line">        istore_1;</span><br><span class="line">        iload_1;</span><br><span class="line">        ifeq    L14;</span><br><span class="line">        getstatic   Field java/lang/System.out:<span class="string">&quot;Ljava/io/PrintStream;&quot;</span>;</span><br><span class="line">        ldc String <span class="string">&quot;Hello, Java!&quot;</span>;</span><br><span class="line">        invokevirtual   Method java/io/PrintStream.println:<span class="string">&quot;(Ljava/lang/String;)V&quot;</span>;</span><br><span class="line">    L14:    stack_frame_type append;</span><br><span class="line">        locals_map <span class="keyword">int</span>;</span><br><span class="line">        iload_1;</span><br><span class="line">        iconst_1;</span><br><span class="line">        if_icmpne   L27;</span><br><span class="line">        getstatic   Field java/lang/System.out:<span class="string">&quot;Ljava/io/PrintStream;&quot;</span>;</span><br><span class="line">        ldc String <span class="string">&quot;Hello, JVM!&quot;</span>;</span><br><span class="line">        invokevirtual   Method java/io/PrintStream.println:<span class="string">&quot;(Ljava/lang/String;)V&quot;</span>;</span><br><span class="line">    L27:    stack_frame_type same;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#125; <span class="comment">// end Class Foo</span></span><br></pre></td></tr></table></figure>
+
+<p>为了将 Foo.class 中的 <code>int i = 1;</code> 修改成 <code>int i = 2;</code>，我们需要替换 Foo.jasm 文件中的 <code>iconst_1</code> 为 <code>iconst_2</code>。</p>
+<h4 id="由jasm文件生成class文件"><a href="#由jasm文件生成class文件" class="headerlink" title="由jasm文件生成class文件"></a>由jasm文件生成class文件</h4><p>执行如下命令：</p>
+<figure class="highlight mipsasm"><table><tr><td class="code"><pre><span class="line"><span class="keyword">java </span>-<span class="keyword">jar </span>asmtools.<span class="keyword">jar </span><span class="keyword">jasm </span>Foo.<span class="keyword">jasm</span></span><br></pre></td></tr></table></figure>
+
+<p>这时再用 JD-GUI 打开 Foo.class 文件，内容如下：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.PrintStream;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Foo</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] paramArrayOfString)</span></span></span><br><span class="line"><span class="function">  </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">if</span> (i != <span class="number">0</span>) &#123;</span><br><span class="line">      System.out.println(<span class="string">&quot;Hello, Java!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (i == <span class="number">1</span>) &#123;</span><br><span class="line">      System.out.println(<span class="string">&quot;Hello, JVM!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>看到 i 的确由 1 变成 2 了。</p>
+<p><code>java Foo</code> 输出内容如下：</p>
+<figure class="highlight autohotkey"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Hello,</span> Java!</span><br></pre></td></tr></table></figure>
+
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>其实就两个命令：</p>
+<ul>
+<li>由 class 文件生成 jasm 文件：<code>java -jar asmtools.jar jdis Foo.class &gt; Foo.jasm</code></li>
+<li>由 jasm 文件生成 class 文件：<code>java -jar asmtools.jar jasm Foo.jasm</code></li>
+</ul>
+]]></content>
+      <categories>
+        <category>面试</category>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>编程笔记</tag>
+        <tag>Java</tag>
+        <tag>面试</tag>
       </tags>
   </entry>
   <entry>
@@ -253,6 +318,8 @@
 <p>她的右手和母亲的左手紧紧绑在一起，布条还打了死结。</p>
 <p>“你们三兄妹里，妈妈最疼你，哪里能看着你吃苦。”母亲见止不住她的泪，自己的眼泪也落了下来，“你这个苕伢子……”</p>
 <p>母亲哭了一阵，帮她掖好被子，终于结束了劝慰，“很晚了，好好睡一觉，天亮妈妈就带你去医院。”</p>
+<a id="more"></a>
+
 <hr>
 <p>时间，怎么这么难熬呢？</p>
 <p>眼泪，好像流干了。</p>
@@ -311,8 +378,8 @@
         <category>睡前故事</category>
       </categories>
       <tags>
-        <tag>转载</tag>
         <tag>睡前故事</tag>
+        <tag>转载</tag>
       </tags>
   </entry>
   <entry>
@@ -541,8 +608,8 @@
         <category>睡前故事</category>
       </categories>
       <tags>
-        <tag>转载</tag>
         <tag>睡前故事</tag>
+        <tag>转载</tag>
       </tags>
   </entry>
   <entry>
@@ -601,8 +668,8 @@
         <category>睡前故事</category>
       </categories>
       <tags>
-        <tag>转载</tag>
         <tag>睡前故事</tag>
+        <tag>转载</tag>
       </tags>
   </entry>
   <entry>
@@ -708,8 +775,8 @@
         <category>睡前故事</category>
       </categories>
       <tags>
-        <tag>转载</tag>
         <tag>睡前故事</tag>
+        <tag>转载</tag>
         <tag>童话</tag>
         <tag>儿童文学</tag>
       </tags>
@@ -890,11 +957,11 @@
         <category>Java Web</category>
       </categories>
       <tags>
-        <tag>Java Web</tag>
-        <tag>Servlet</tag>
         <tag>编程笔记</tag>
-        <tag>学习小结</tag>
         <tag>Java</tag>
+        <tag>Servlet</tag>
+        <tag>Java Web</tag>
+        <tag>学习小结</tag>
       </tags>
   </entry>
   <entry>
@@ -1153,11 +1220,11 @@
         <category>Java Web</category>
       </categories>
       <tags>
-        <tag>Java Web</tag>
-        <tag>Servlet</tag>
         <tag>编程笔记</tag>
-        <tag>学习小结</tag>
         <tag>Java</tag>
+        <tag>Servlet</tag>
+        <tag>Java Web</tag>
+        <tag>学习小结</tag>
       </tags>
   </entry>
 </search>

@@ -6,7 +6,7 @@
   <link href="http://plutowu.top/atom.xml" rel="self"/>
   
   <link href="http://plutowu.top/"/>
-  <updated>2020-11-23T15:25:08.057Z</updated>
+  <updated>2021-03-09T14:07:14.302Z</updated>
   <id>http://plutowu.top/</id>
   
   <author>
@@ -17,31 +17,65 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Java后端面试笔记</title>
+    <link href="http://plutowu.top/2021/03/09/Java%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0/"/>
+    <id>http://plutowu.top/2021/03/09/Java%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0/</id>
+    <published>2021-03-09T13:40:16.000Z</published>
+    <updated>2021-03-09T14:07:14.302Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Java后端面试笔记"><a href="#Java后端面试笔记" class="headerlink" title="Java后端面试笔记"></a>Java后端面试笔记</h1><h2 id="JVM相关"><a href="#JVM相关" class="headerlink" title="JVM相关"></a>JVM相关</h2><h3 id="1-修改Java字节码"><a href="#1-修改Java字节码" class="headerlink" title="1.修改Java字节码"></a>1.修改Java字节码</h3><p>在OpenJDK里有一个<code>AsmTools</code>项目，用来生成正确的或者不正确的java <code>.class</code>文件，主要用来测试和验证。</p><p><code>AsmTools</code>引入了两种表示<code>.class</code>文件的语法：</p><ul><li><p>JASM</p><p>用类似java本身的语法来定义类和函数，字节码指令则很像传统的汇编。</p></li><li><p>JCOD</p><p>整个<code>.class</code>用容器的方式来表示，可以很清楚表示类文件的结构。</p></li></ul><p>重要的是两种语法的文件都是可以和<code>.class</code>互相转换的。</p><p>在这里主要使用<code>JASM</code>语法。</p><h4 id="生成asmtools-jar"><a href="#生成asmtools-jar" class="headerlink" title="生成asmtools.jar"></a>生成asmtools.jar</h4><p>如果你的机器没有安装 <code>Mercurial</code>，请先安装(Mericurial 类似 Git 和 SVN，是一个分布式版本控制系统，使用 Python 编写，OpenJDK 就托管在 Mercurial 平台上)</p><p>然后执行以下命令：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// Clone代码</span><br><span class="line">hg clone ://hg.openjdk.java.net/code-tools/asmtools</span><br><span class="line"></span><br><span class="line">// 编译</span><br><span class="line">cd asmtools/build</span><br><span class="line">ant</span><br></pre></td></tr></table></figure><p>即可得到asmtools.jar文件。</p><h4 id="准备一个Example"><a href="#准备一个Example" class="headerlink" title="准备一个Example"></a>准备一个Example</h4><p>Foo.java</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Foo</span> </span>&#123;</span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">boolean</span> flag = <span class="keyword">true</span>;</span><br><span class="line">  <span class="keyword">if</span> (flag) System.out.println(<span class="string">&quot;Hello, Java!&quot;</span>);</span><br><span class="line">  <span class="keyword">if</span> (flag == <span class="keyword">true</span>) System.out.println(<span class="string">&quot;Hello, JVM!&quot;</span>);</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p><code>javac Foo.java</code>命令生成Foo.class文件，使用JD-GUI打开内容如下：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.PrintStream;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Foo</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] paramArrayOfString)</span></span></span><br><span class="line"><span class="function">  </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span> (i != <span class="number">0</span>) &#123;</span><br><span class="line">      System.out.println(<span class="string">&quot;Hello, Java!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (i == <span class="number">1</span>) &#123;</span><br><span class="line">      System.out.println(<span class="string">&quot;Hello, JVM!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p><code>java Foo</code>命令运行Foo.class文件输出结果：</p><figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Hello,</span> Java!</span><br><span class="line"><span class="built_in">Hello,</span> JVM!</span><br></pre></td></tr></table></figure><h4 id="由class文件生成jasm文件"><a href="#由class文件生成jasm文件" class="headerlink" title="由class文件生成jasm文件"></a>由class文件生成jasm文件</h4><p>如下命令将class文件中的内容转换成对应的jasm语法：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar asmtools.jar jdis Foo.class</span><br></pre></td></tr></table></figure><p>上面输出的内容会直接打印在终端，当然你也可以把它输入到文件中：</p><figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar asmtools.jar jdis <span class="module-access"><span class="module"><span class="identifier">Foo</span>.</span></span><span class="keyword">class</span> &gt; <span class="module-access"><span class="module"><span class="identifier">Foo</span>.</span></span>jasm</span><br></pre></td></tr></table></figure><p>Foo.jasm 文件内容如下：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">super</span> <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Foo</span></span></span><br><span class="line">    version 52:0</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> Method <span class="string">&quot;&lt;init&gt;&quot;</span>:<span class="string">&quot;()V&quot;</span></span><br><span class="line">    stack <span class="number">1</span> locals <span class="number">1</span></span><br><span class="line">&#123;</span><br><span class="line">        aload_0;</span><br><span class="line">        invokespecial   Method java/lang/Object.<span class="string">&quot;&lt;init&gt;&quot;</span>:<span class="string">&quot;()V&quot;</span>;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> Method main:<span class="string">&quot;([Ljava/lang/String;)V&quot;</span></span><br><span class="line">    stack <span class="number">2</span> locals <span class="number">2</span></span><br><span class="line">&#123;</span><br><span class="line">        iconst_1;</span><br><span class="line">        istore_1;</span><br><span class="line">        iload_1;</span><br><span class="line">        ifeq    L14;</span><br><span class="line">        getstatic   Field java/lang/System.out:<span class="string">&quot;Ljava/io/PrintStream;&quot;</span>;</span><br><span class="line">        ldc String <span class="string">&quot;Hello, Java!&quot;</span>;</span><br><span class="line">        invokevirtual   Method java/io/PrintStream.println:<span class="string">&quot;(Ljava/lang/String;)V&quot;</span>;</span><br><span class="line">    L14:    stack_frame_type append;</span><br><span class="line">        locals_map <span class="keyword">int</span>;</span><br><span class="line">        iload_1;</span><br><span class="line">        iconst_1;</span><br><span class="line">        if_icmpne   L27;</span><br><span class="line">        getstatic   Field java/lang/System.out:<span class="string">&quot;Ljava/io/PrintStream;&quot;</span>;</span><br><span class="line">        ldc String <span class="string">&quot;Hello, JVM!&quot;</span>;</span><br><span class="line">        invokevirtual   Method java/io/PrintStream.println:<span class="string">&quot;(Ljava/lang/String;)V&quot;</span>;</span><br><span class="line">    L27:    stack_frame_type same;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#125; <span class="comment">// end Class Foo</span></span><br></pre></td></tr></table></figure><p>为了将 Foo.class 中的 <code>int i = 1;</code> 修改成 <code>int i = 2;</code>，我们需要替换 Foo.jasm 文件中的 <code>iconst_1</code> 为 <code>iconst_2</code>。</p><h4 id="由jasm文件生成class文件"><a href="#由jasm文件生成class文件" class="headerlink" title="由jasm文件生成class文件"></a>由jasm文件生成class文件</h4><p>执行如下命令：</p><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">java </span>-<span class="keyword">jar </span>asmtools.<span class="keyword">jar </span><span class="keyword">jasm </span>Foo.<span class="keyword">jasm</span></span><br></pre></td></tr></table></figure><p>这时再用 JD-GUI 打开 Foo.class 文件，内容如下：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.PrintStream;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Foo</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] paramArrayOfString)</span></span></span><br><span class="line"><span class="function">  </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">if</span> (i != <span class="number">0</span>) &#123;</span><br><span class="line">      System.out.println(<span class="string">&quot;Hello, Java!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (i == <span class="number">1</span>) &#123;</span><br><span class="line">      System.out.println(<span class="string">&quot;Hello, JVM!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>看到 i 的确由 1 变成 2 了。</p><p><code>java Foo</code> 输出内容如下：</p><figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Hello,</span> Java!</span><br></pre></td></tr></table></figure><h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>其实就两个命令：</p><ul><li>由 class 文件生成 jasm 文件：<code>java -jar asmtools.jar jdis Foo.class &gt; Foo.jasm</code></li><li>由 jasm 文件生成 class 文件：<code>java -jar asmtools.jar jasm Foo.jasm</code></li></ul>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;Java后端面试笔记&quot;&gt;&lt;a href=&quot;#Java后端面试笔记&quot; class=&quot;headerlink&quot; title=&quot;Java后端面试笔记&quot;&gt;&lt;/a&gt;Java后端面试笔记&lt;/h1&gt;&lt;h2 id=&quot;JVM相关&quot;&gt;&lt;a href=&quot;#JVM相关&quot; class=&quot;he</summary>
+      
+    
+    
+    
+    <category term="面试" scheme="http://plutowu.top/categories/%E9%9D%A2%E8%AF%95/"/>
+    
+    <category term="Java" scheme="http://plutowu.top/categories/%E9%9D%A2%E8%AF%95/Java/"/>
+    
+    
+    <category term="编程笔记" scheme="http://plutowu.top/tags/%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/"/>
+    
+    <category term="Java" scheme="http://plutowu.top/tags/Java/"/>
+    
+    <category term="面试" scheme="http://plutowu.top/tags/%E9%9D%A2%E8%AF%95/"/>
+    
+  </entry>
+  
+  <entry>
     <title>睡前故事-白雪为嫁</title>
     <link href="http://plutowu.top/2020/11/23/%E7%9D%A1%E5%89%8D%E6%95%85%E4%BA%8B-%E7%99%BD%E9%9B%AA%E4%B8%BA%E5%AB%81/"/>
     <id>http://plutowu.top/2020/11/23/%E7%9D%A1%E5%89%8D%E6%95%85%E4%BA%8B-%E7%99%BD%E9%9B%AA%E4%B8%BA%E5%AB%81/</id>
     <published>2020-11-23T15:23:59.000Z</published>
-    <updated>2020-11-23T15:25:08.057Z</updated>
+    <updated>2020-11-23T15:28:05.538Z</updated>
     
-    <content type="html"><![CDATA[<p>风暴戾地撞着窗，这个冬天格外冰冷。</p><p>“你听话呀。”母亲的声音疲惫而心疼，“他家条件差得很，还有两个兄弟没成家。你跟过去吃没得吃、穿没得穿，只有受苦啊！”</p><p>她和母亲并排躺在床上，抿着嘴唇并不出声，唯有泪珠成串滚落，很快浸湿枕巾。</p><p>母亲侧着身，用右手柔柔帮她擦着泪，也有些哽咽：“妈妈都是为你好，你醒点事，好么？他平日里就会打架闹事，不是个有出息的人。”</p><p>她吸了一下鼻子，眼睛执拗地闭着，无声哭泣。</p><p>“明天去把孩子拿掉就好了。”母亲的声音在耳边继续着，她有她的苦心与疼爱，“时间久了你就不难过了，妈妈给你找个好婆家，保证比他强，过日子总归是要吃饱穿暖。”</p><p>她抬了抬右手，没能抬动。</p><p>母亲警觉地握紧了她的手。</p><p>她的右手和母亲的左手紧紧绑在一起，布条还打了死结。</p><p>“你们三兄妹里，妈妈最疼你，哪里能看着你吃苦。”母亲见止不住她的泪，自己的眼泪也落了下来，“你这个苕伢子……”</p><p>母亲哭了一阵，帮她掖好被子，终于结束了劝慰，“很晚了，好好睡一觉，天亮妈妈就带你去医院。”</p><hr><p>时间，怎么这么难熬呢？</p><p>眼泪，好像流干了。</p><p>眼睛涩涩的，她一动不动，静静听着旁边的呼吸声。</p><p>呼吸很平稳，应是已睡熟了。但她仍不敢动，她知道机会只有一次。</p><p>她很累，东躲西藏，最终还是被家人抓回来，已经身心俱疲。但她一点睡意也没有，她在心里默默地算着时间。</p><p>这会儿应该是凌晨了，外面的房间很久没有动静，父亲应该也睡了。</p><p>她试探着侧转身体，面对母亲。母亲闭着眼睛，毫无反应。</p><p>母亲也很累了，这阵子她一定也很难过吧？她那么疼爱儿女。</p><p>可是，对不起妈妈，这次我不能听话。她在黑夜里看着母亲隐约的脸，心里默默说道。</p><p>沉默不是顺从，是在等这唯一的机会。</p><p>她小心翼翼地去解绑着手的布条，死结很难解，她只能一点一点的艰难挪动。</p><p>她心里很着急，但她强迫自己的动作更轻柔一些。</p><p>结慢慢、慢慢松开，母亲突然嘟囔了一句什么！</p><p>她全身都僵硬了！一动不敢动，假装自己熟睡着。但心脏跳动得如此剧烈，几乎提到了嗓子眼。</p><p>但母亲接下来并没有其他动作，那句话也听不清楚，只是一句梦呓。</p><p>她平复着心跳，缓慢地将布条解开。</p><p>一只手压着被子，不让寒意透进来，身体小心翼翼往床下挪。</p><p>终于，双脚落地。</p><p>地面冰凉刺骨，但她已经顾不得那么多。</p><p>时间紧迫！机会过了明天就不再有！</p><p>她甚至来不及去穿一双鞋子，去拿一件外套。</p><p>她踮着赤脚，做贼一般地挪出房间。</p><p>从父亲的床边蹑手蹑脚走过，掩耳盗铃般地不敢看他一眼。</p><p>来到堂屋，她轻轻抬起门栓，将大门缓缓拉开。</p><p>嘶~！</p><p>外面的寒风猛地灌了进来，将她整个人都浇凉。</p><p>但她却精神一振，把门拉开到仅容一人进出的空间，就赶紧侧身钻了出去。</p><p>她缓缓合上大门，仅着睡衣，赤足投入了漫天风雪中。</p><hr><p>这夜可真冷呵！</p><p>她冻得牙齿打颤，全身上下没一处不冷。</p><p>尤其踩在雪上的赤足，已经麻木得似乎没有了感觉。</p><p>但她只管捂着她的小腹，一脚深一脚浅地往前迈。</p><p>这是孩子。</p><p>这是我的孩子。</p><p>这是我和他的孩子！</p><p>她开始跑，用劲跑，使出全身力气的跑。</p><p>跑在这条那么熟悉的路上！跑在去他家的路上！</p><p>不到两公里的距离，她乌黑的头发上已经披满白雪。</p><p>她全身都快冻僵了，但总有一股子力气不知从哪里涌出来。</p><p>她终于站到了他家门前。</p><p>她敲门，用力敲门，大声喊他的名字。</p><p>房间里响起重物坠地的声音，继而是急促的脚步声，男人猛地撞出来，拉开房门！</p><p>他看到了怎样的一幅情景？</p><p>门外立着的，是面色苍白、瑟瑟发抖却灼灼与他对视的女子。</p><p>她的皮肤如雪，十里八乡没有哪个女子有这般白净。</p><p>她紧抿着已冻得乌青的唇，就那么俏生生立在雪中！</p><p>眼泪一下子就涌了出来，这是他以为将永远失去的她！</p><p>他一把将她从雪地里抱起，牢牢抱进怀里。</p><p>白茫茫的雪夜啊，风刀割不开的恋人。</p><p>这一夜。</p><p>有多少人见证了漫天风雪，就有多少人看到了白色婚纱。</p>]]></content>
+    <content type="html"><![CDATA[<p>风暴戾地撞着窗，这个冬天格外冰冷。</p><p>“你听话呀。”母亲的声音疲惫而心疼，“他家条件差得很，还有两个兄弟没成家。你跟过去吃没得吃、穿没得穿，只有受苦啊！”</p><p>她和母亲并排躺在床上，抿着嘴唇并不出声，唯有泪珠成串滚落，很快浸湿枕巾。</p><p>母亲侧着身，用右手柔柔帮她擦着泪，也有些哽咽：“妈妈都是为你好，你醒点事，好么？他平日里就会打架闹事，不是个有出息的人。”</p><p>她吸了一下鼻子，眼睛执拗地闭着，无声哭泣。</p><p>“明天去把孩子拿掉就好了。”母亲的声音在耳边继续着，她有她的苦心与疼爱，“时间久了你就不难过了，妈妈给你找个好婆家，保证比他强，过日子总归是要吃饱穿暖。”</p><p>她抬了抬右手，没能抬动。</p><p>母亲警觉地握紧了她的手。</p><p>她的右手和母亲的左手紧紧绑在一起，布条还打了死结。</p><p>“你们三兄妹里，妈妈最疼你，哪里能看着你吃苦。”母亲见止不住她的泪，自己的眼泪也落了下来，“你这个苕伢子……”</p><p>母亲哭了一阵，帮她掖好被子，终于结束了劝慰，“很晚了，好好睡一觉，天亮妈妈就带你去医院。”</p><a id="more"></a><hr><p>时间，怎么这么难熬呢？</p><p>眼泪，好像流干了。</p><p>眼睛涩涩的，她一动不动，静静听着旁边的呼吸声。</p><p>呼吸很平稳，应是已睡熟了。但她仍不敢动，她知道机会只有一次。</p><p>她很累，东躲西藏，最终还是被家人抓回来，已经身心俱疲。但她一点睡意也没有，她在心里默默地算着时间。</p><p>这会儿应该是凌晨了，外面的房间很久没有动静，父亲应该也睡了。</p><p>她试探着侧转身体，面对母亲。母亲闭着眼睛，毫无反应。</p><p>母亲也很累了，这阵子她一定也很难过吧？她那么疼爱儿女。</p><p>可是，对不起妈妈，这次我不能听话。她在黑夜里看着母亲隐约的脸，心里默默说道。</p><p>沉默不是顺从，是在等这唯一的机会。</p><p>她小心翼翼地去解绑着手的布条，死结很难解，她只能一点一点的艰难挪动。</p><p>她心里很着急，但她强迫自己的动作更轻柔一些。</p><p>结慢慢、慢慢松开，母亲突然嘟囔了一句什么！</p><p>她全身都僵硬了！一动不敢动，假装自己熟睡着。但心脏跳动得如此剧烈，几乎提到了嗓子眼。</p><p>但母亲接下来并没有其他动作，那句话也听不清楚，只是一句梦呓。</p><p>她平复着心跳，缓慢地将布条解开。</p><p>一只手压着被子，不让寒意透进来，身体小心翼翼往床下挪。</p><p>终于，双脚落地。</p><p>地面冰凉刺骨，但她已经顾不得那么多。</p><p>时间紧迫！机会过了明天就不再有！</p><p>她甚至来不及去穿一双鞋子，去拿一件外套。</p><p>她踮着赤脚，做贼一般地挪出房间。</p><p>从父亲的床边蹑手蹑脚走过，掩耳盗铃般地不敢看他一眼。</p><p>来到堂屋，她轻轻抬起门栓，将大门缓缓拉开。</p><p>嘶~！</p><p>外面的寒风猛地灌了进来，将她整个人都浇凉。</p><p>但她却精神一振，把门拉开到仅容一人进出的空间，就赶紧侧身钻了出去。</p><p>她缓缓合上大门，仅着睡衣，赤足投入了漫天风雪中。</p><hr><p>这夜可真冷呵！</p><p>她冻得牙齿打颤，全身上下没一处不冷。</p><p>尤其踩在雪上的赤足，已经麻木得似乎没有了感觉。</p><p>但她只管捂着她的小腹，一脚深一脚浅地往前迈。</p><p>这是孩子。</p><p>这是我的孩子。</p><p>这是我和他的孩子！</p><p>她开始跑，用劲跑，使出全身力气的跑。</p><p>跑在这条那么熟悉的路上！跑在去他家的路上！</p><p>不到两公里的距离，她乌黑的头发上已经披满白雪。</p><p>她全身都快冻僵了，但总有一股子力气不知从哪里涌出来。</p><p>她终于站到了他家门前。</p><p>她敲门，用力敲门，大声喊他的名字。</p><p>房间里响起重物坠地的声音，继而是急促的脚步声，男人猛地撞出来，拉开房门！</p><p>他看到了怎样的一幅情景？</p><p>门外立着的，是面色苍白、瑟瑟发抖却灼灼与他对视的女子。</p><p>她的皮肤如雪，十里八乡没有哪个女子有这般白净。</p><p>她紧抿着已冻得乌青的唇，就那么俏生生立在雪中！</p><p>眼泪一下子就涌了出来，这是他以为将永远失去的她！</p><p>他一把将她从雪地里抱起，牢牢抱进怀里。</p><p>白茫茫的雪夜啊，风刀割不开的恋人。</p><p>这一夜。</p><p>有多少人见证了漫天风雪，就有多少人看到了白色婚纱。</p>]]></content>
     
     
-      
-      
     <summary type="html">&lt;p&gt;风暴戾地撞着窗，这个冬天格外冰冷。&lt;/p&gt;
 &lt;p&gt;“你听话呀。”母亲的声音疲惫而心疼，“他家条件差得很，还有两个兄弟没成家。你跟过去吃没得吃、穿没得穿，只有受苦啊！”&lt;/p&gt;
 &lt;p&gt;她和母亲并排躺在床上，抿着嘴唇并不出声，唯有泪珠成串滚落，很快浸湿枕巾。&lt;/p&gt;
-&lt;p&gt;母亲</summary>
-      
+&lt;p&gt;母亲侧着身，用右手柔柔帮她擦着泪，也有些哽咽：“妈妈都是为你好，你醒点事，好么？他平日里就会打架闹事，不是个有出息的人。”&lt;/p&gt;
+&lt;p&gt;她吸了一下鼻子，眼睛执拗地闭着，无声哭泣。&lt;/p&gt;
+&lt;p&gt;“明天去把孩子拿掉就好了。”母亲的声音在耳边继续着，她有她的苦心与疼爱，“时间久了你就不难过了，妈妈给你找个好婆家，保证比他强，过日子总归是要吃饱穿暖。”&lt;/p&gt;
+&lt;p&gt;她抬了抬右手，没能抬动。&lt;/p&gt;
+&lt;p&gt;母亲警觉地握紧了她的手。&lt;/p&gt;
+&lt;p&gt;她的右手和母亲的左手紧紧绑在一起，布条还打了死结。&lt;/p&gt;
+&lt;p&gt;“你们三兄妹里，妈妈最疼你，哪里能看着你吃苦。”母亲见止不住她的泪，自己的眼泪也落了下来，“你这个苕伢子……”&lt;/p&gt;
+&lt;p&gt;母亲哭了一阵，帮她掖好被子，终于结束了劝慰，“很晚了，好好睡一觉，天亮妈妈就带你去医院。”&lt;/p&gt;</summary>
     
     
     
     <category term="睡前故事" scheme="http://plutowu.top/categories/%E7%9D%A1%E5%89%8D%E6%95%85%E4%BA%8B/"/>
     
     
-    <category term="转载" scheme="http://plutowu.top/tags/%E8%BD%AC%E8%BD%BD/"/>
-    
     <category term="睡前故事" scheme="http://plutowu.top/tags/%E7%9D%A1%E5%89%8D%E6%95%85%E4%BA%8B/"/>
+    
+    <category term="转载" scheme="http://plutowu.top/tags/%E8%BD%AC%E8%BD%BD/"/>
     
   </entry>
   
@@ -138,9 +172,9 @@
     <category term="睡前故事" scheme="http://plutowu.top/categories/%E7%9D%A1%E5%89%8D%E6%95%85%E4%BA%8B/"/>
     
     
-    <category term="转载" scheme="http://plutowu.top/tags/%E8%BD%AC%E8%BD%BD/"/>
-    
     <category term="睡前故事" scheme="http://plutowu.top/tags/%E7%9D%A1%E5%89%8D%E6%95%85%E4%BA%8B/"/>
+    
+    <category term="转载" scheme="http://plutowu.top/tags/%E8%BD%AC%E8%BD%BD/"/>
     
   </entry>
   
@@ -164,9 +198,9 @@
     <category term="睡前故事" scheme="http://plutowu.top/categories/%E7%9D%A1%E5%89%8D%E6%95%85%E4%BA%8B/"/>
     
     
-    <category term="转载" scheme="http://plutowu.top/tags/%E8%BD%AC%E8%BD%BD/"/>
-    
     <category term="睡前故事" scheme="http://plutowu.top/tags/%E7%9D%A1%E5%89%8D%E6%95%85%E4%BA%8B/"/>
+    
+    <category term="转载" scheme="http://plutowu.top/tags/%E8%BD%AC%E8%BD%BD/"/>
     
   </entry>
   
@@ -202,11 +236,11 @@
     <category term="笔记" scheme="http://plutowu.top/categories/%E7%BC%96%E7%A8%8B/Java-Web/%E7%AC%94%E8%AE%B0/"/>
     
     
+    <category term="Java Web" scheme="http://plutowu.top/tags/Java-Web/"/>
+    
     <category term="学习笔记" scheme="http://plutowu.top/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     
     <category term="Swagger" scheme="http://plutowu.top/tags/Swagger/"/>
-    
-    <category term="Java Web" scheme="http://plutowu.top/tags/Java-Web/"/>
     
   </entry>
   
@@ -230,9 +264,9 @@
     <category term="睡前故事" scheme="http://plutowu.top/categories/%E7%9D%A1%E5%89%8D%E6%95%85%E4%BA%8B/"/>
     
     
-    <category term="转载" scheme="http://plutowu.top/tags/%E8%BD%AC%E8%BD%BD/"/>
-    
     <category term="睡前故事" scheme="http://plutowu.top/tags/%E7%9D%A1%E5%89%8D%E6%95%85%E4%BA%8B/"/>
+    
+    <category term="转载" scheme="http://plutowu.top/tags/%E8%BD%AC%E8%BD%BD/"/>
     
     <category term="童话" scheme="http://plutowu.top/tags/%E7%AB%A5%E8%AF%9D/"/>
     
@@ -360,15 +394,15 @@
     <category term="Java Web" scheme="http://plutowu.top/categories/%E7%BC%96%E7%A8%8B/Java-Web/"/>
     
     
-    <category term="Java Web" scheme="http://plutowu.top/tags/Java-Web/"/>
+    <category term="编程笔记" scheme="http://plutowu.top/tags/%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/"/>
+    
+    <category term="Java" scheme="http://plutowu.top/tags/Java/"/>
     
     <category term="Servlet" scheme="http://plutowu.top/tags/Servlet/"/>
     
-    <category term="编程笔记" scheme="http://plutowu.top/tags/%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/"/>
+    <category term="Java Web" scheme="http://plutowu.top/tags/Java-Web/"/>
     
     <category term="学习小结" scheme="http://plutowu.top/tags/%E5%AD%A6%E4%B9%A0%E5%B0%8F%E7%BB%93/"/>
-    
-    <category term="Java" scheme="http://plutowu.top/tags/Java/"/>
     
   </entry>
   
@@ -588,15 +622,15 @@
     <category term="Java Web" scheme="http://plutowu.top/categories/%E7%BC%96%E7%A8%8B/Java-Web/"/>
     
     
-    <category term="Java Web" scheme="http://plutowu.top/tags/Java-Web/"/>
+    <category term="编程笔记" scheme="http://plutowu.top/tags/%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/"/>
+    
+    <category term="Java" scheme="http://plutowu.top/tags/Java/"/>
     
     <category term="Servlet" scheme="http://plutowu.top/tags/Servlet/"/>
     
-    <category term="编程笔记" scheme="http://plutowu.top/tags/%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/"/>
+    <category term="Java Web" scheme="http://plutowu.top/tags/Java-Web/"/>
     
     <category term="学习小结" scheme="http://plutowu.top/tags/%E5%AD%A6%E4%B9%A0%E5%B0%8F%E7%BB%93/"/>
-    
-    <category term="Java" scheme="http://plutowu.top/tags/Java/"/>
     
   </entry>
   

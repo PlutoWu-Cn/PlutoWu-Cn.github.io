@@ -63,158 +63,39 @@
         <category>笔记</category>
       </categories>
       <tags>
-        <tag>Java</tag>
         <tag>笔记</tag>
+        <tag>Java</tag>
         <tag>面试</tag>
       </tags>
   </entry>
   <entry>
-    <title>睡前故事-白雪为嫁</title>
-    <url>/2020/11/23/%E7%9D%A1%E5%89%8D%E6%95%85%E4%BA%8B-%E7%99%BD%E9%9B%AA%E4%B8%BA%E5%AB%81/</url>
-    <content><![CDATA[<p>风暴戾地撞着窗，这个冬天格外冰冷。</p>
-<p>“你听话呀。”母亲的声音疲惫而心疼，“他家条件差得很，还有两个兄弟没成家。你跟过去吃没得吃、穿没得穿，只有受苦啊！”</p>
-<p>她和母亲并排躺在床上，抿着嘴唇并不出声，唯有泪珠成串滚落，很快浸湿枕巾。</p>
-<p>母亲侧着身，用右手柔柔帮她擦着泪，也有些哽咽：“妈妈都是为你好，你醒点事，好么？他平日里就会打架闹事，不是个有出息的人。”</p>
-<p>她吸了一下鼻子，眼睛执拗地闭着，无声哭泣。</p>
-<p>“明天去把孩子拿掉就好了。”母亲的声音在耳边继续着，她有她的苦心与疼爱，“时间久了你就不难过了，妈妈给你找个好婆家，保证比他强，过日子总归是要吃饱穿暖。”</p>
-<p>她抬了抬右手，没能抬动。</p>
-<p>母亲警觉地握紧了她的手。</p>
-<p>她的右手和母亲的左手紧紧绑在一起，布条还打了死结。</p>
-<p>“你们三兄妹里，妈妈最疼你，哪里能看着你吃苦。”母亲见止不住她的泪，自己的眼泪也落了下来，“你这个苕伢子……”</p>
-<p>母亲哭了一阵，帮她掖好被子，终于结束了劝慰，“很晚了，好好睡一觉，天亮妈妈就带你去医院。”</p>
-<a id="more"></a>
+    <title>Servlet</title>
+    <url>/2020/11/16/Servlet/</url>
+    <content><![CDATA[<p><strong><em>Welcome to my Blog! This is my first article. The following are my study notes for learning Servlet.</em></strong></p>
+<h1 id="Reasonable-use-of-SQL-statements"><a href="#Reasonable-use-of-SQL-statements" class="headerlink" title="Reasonable use of SQL statements"></a>Reasonable use of SQL statements</h1><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">String sql = <span class="string">&quot;insert into T_BOOK(BID,BNAME,BAUTHER,BTYPE,BPRICE,BAMOUNT,BPUBDATE)&quot;</span>;</span><br><span class="line">sql=sql+<span class="string">&quot; values(&#x27;&quot;</span>+BID+<span class="string">&quot;&#x27;,&#x27;&quot;</span>+BNAME+<span class="string">&quot;&#x27;,&#x27;&quot;</span>+BAUTHER+<span class="string">&quot;&#x27;,&#x27;&quot;</span>+BTYPE+<span class="string">&quot;&#x27;,&#x27;&quot;</span>+BPRICE+<span class="string">&quot;&#x27;,&quot;</span>+BAMOUNT+<span class="string">&quot;,&#x27;&quot;</span>+BPUBDATE+<span class="string">&quot;&#x27;)&quot;</span>;</span><br><span class="line"></span><br><span class="line">String sql = <span class="string">&quot;update T_BOOK set BAMOUNT = &quot;</span>+BAMOUNT+<span class="string">&quot; where BID = &#x27;&quot;</span>+BID+<span class="string">&quot;&#x27;&quot;</span>;</span><br><span class="line"></span><br><span class="line">String sql = <span class="string">&quot;select * from T_BOOK where BNAME like &#x27;%&quot;</span>+input+<span class="string">&quot;%&#x27;&quot;</span>;</span><br><span class="line"></span><br><span class="line">String sql = <span class="string">&quot;select * from T_BOOK where BPRICE between &quot;</span>+Low+<span class="string">&quot; and &quot;</span>+High;</span><br></pre></td></tr></table></figure>
 
+<p><em>Proficiency in the SQL language is a prerequisite for implementing various operations through the servlet link to the database.</em></p>
+<p><em>Mastering the most basic insert, update and conditional search statements can achieve most database operations.</em></p>
 <hr>
-<p>时间，怎么这么难熬呢？</p>
-<p>眼泪，好像流干了。</p>
-<p>眼睛涩涩的，她一动不动，静静听着旁边的呼吸声。</p>
-<p>呼吸很平稳，应是已睡熟了。但她仍不敢动，她知道机会只有一次。</p>
-<p>她很累，东躲西藏，最终还是被家人抓回来，已经身心俱疲。但她一点睡意也没有，她在心里默默地算着时间。</p>
-<p>这会儿应该是凌晨了，外面的房间很久没有动静，父亲应该也睡了。</p>
-<p>她试探着侧转身体，面对母亲。母亲闭着眼睛，毫无反应。</p>
-<p>母亲也很累了，这阵子她一定也很难过吧？她那么疼爱儿女。</p>
-<p>可是，对不起妈妈，这次我不能听话。她在黑夜里看着母亲隐约的脸，心里默默说道。</p>
-<p>沉默不是顺从，是在等这唯一的机会。</p>
-<p>她小心翼翼地去解绑着手的布条，死结很难解，她只能一点一点的艰难挪动。</p>
-<p>她心里很着急，但她强迫自己的动作更轻柔一些。</p>
-<p>结慢慢、慢慢松开，母亲突然嘟囔了一句什么！</p>
-<p>她全身都僵硬了！一动不敢动，假装自己熟睡着。但心脏跳动得如此剧烈，几乎提到了嗓子眼。</p>
-<p>但母亲接下来并没有其他动作，那句话也听不清楚，只是一句梦呓。</p>
-<p>她平复着心跳，缓慢地将布条解开。</p>
-<p>一只手压着被子，不让寒意透进来，身体小心翼翼往床下挪。</p>
-<p>终于，双脚落地。</p>
-<p>地面冰凉刺骨，但她已经顾不得那么多。</p>
-<p>时间紧迫！机会过了明天就不再有！</p>
-<p>她甚至来不及去穿一双鞋子，去拿一件外套。</p>
-<p>她踮着赤脚，做贼一般地挪出房间。</p>
-<p>从父亲的床边蹑手蹑脚走过，掩耳盗铃般地不敢看他一眼。</p>
-<p>来到堂屋，她轻轻抬起门栓，将大门缓缓拉开。</p>
-<p>嘶~！</p>
-<p>外面的寒风猛地灌了进来，将她整个人都浇凉。</p>
-<p>但她却精神一振，把门拉开到仅容一人进出的空间，就赶紧侧身钻了出去。</p>
-<p>她缓缓合上大门，仅着睡衣，赤足投入了漫天风雪中。</p>
+<h1 id="Connect-to-the-database-via-JDBC"><a href="#Connect-to-the-database-via-JDBC" class="headerlink" title="Connect to the database via JDBC"></a>Connect to the database via JDBC</h1><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Class.forName(<span class="string">&quot;com.microsoft.sqlserver.jdbc.SQLServerDriver&quot;</span>).newInstance();</span><br><span class="line">			String url=<span class="string">&quot;jdbc:sqlserver://localhost:1433;databaseName=?&quot;</span>;</span><br><span class="line">			String user=<span class="string">&quot;user&quot;</span>;</span><br><span class="line">			String password=<span class="string">&quot;password&quot;</span>;</span><br><span class="line">			conn=DriverManager.getConnection(url, user, password);</span><br></pre></td></tr></table></figure>
+
+<p><em>The project adopting MVC mode is to use JDBC technology to connect to the database.</em></p>
+<p><em>Please add sqljdbc.jar in the lib folder of WEB-INF to ensure that JDBC can be successfully called.</em></p>
 <hr>
-<p>这夜可真冷呵！</p>
-<p>她冻得牙齿打颤，全身上下没一处不冷。</p>
-<p>尤其踩在雪上的赤足，已经麻木得似乎没有了感觉。</p>
-<p>但她只管捂着她的小腹，一脚深一脚浅地往前迈。</p>
-<p>这是孩子。</p>
-<p>这是我的孩子。</p>
-<p>这是我和他的孩子！</p>
-<p>她开始跑，用劲跑，使出全身力气的跑。</p>
-<p>跑在这条那么熟悉的路上！跑在去他家的路上！</p>
-<p>不到两公里的距离，她乌黑的头发上已经披满白雪。</p>
-<p>她全身都快冻僵了，但总有一股子力气不知从哪里涌出来。</p>
-<p>她终于站到了他家门前。</p>
-<p>她敲门，用力敲门，大声喊他的名字。</p>
-<p>房间里响起重物坠地的声音，继而是急促的脚步声，男人猛地撞出来，拉开房门！</p>
-<p>他看到了怎样的一幅情景？</p>
-<p>门外立着的，是面色苍白、瑟瑟发抖却灼灼与他对视的女子。</p>
-<p>她的皮肤如雪，十里八乡没有哪个女子有这般白净。</p>
-<p>她紧抿着已冻得乌青的唇，就那么俏生生立在雪中！</p>
-<p>眼泪一下子就涌了出来，这是他以为将永远失去的她！</p>
-<p>他一把将她从雪地里抱起，牢牢抱进怀里。</p>
-<p>白茫茫的雪夜啊，风刀割不开的恋人。</p>
-<p>这一夜。</p>
-<p>有多少人见证了漫天风雪，就有多少人看到了白色婚纱。</p>
+<h1 id="Use-of-Servlet-annotations"><a href="#Use-of-Servlet-annotations" class="headerlink" title="Use of Servlet annotations"></a>Use of Servlet annotations</h1><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@WebServlet(&quot;/Classname&quot;)</span></span><br></pre></td></tr></table></figure>
+
+<p><em>Using Servlet annotations can eliminate extra comments in web.xml, making the program more concise and portable.</em></p>
+<hr>
+<p><strong>Thank you for reading, I hope these tips can help you learn Servlet better.</strong></p>
 ]]></content>
       <categories>
-        <category>睡前故事</category>
+        <category>编程</category>
+        <category>Java Web</category>
       </categories>
       <tags>
-        <tag>Hide</tag>
-        <tag>睡前故事</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>睡前故事-女巫</title>
-    <url>/2020/11/22/%E7%9D%A1%E5%89%8D%E6%95%85%E4%BA%8B-%E5%A5%B3%E5%B7%AB/</url>
-    <content><![CDATA[<p>“你知道吗，从遇见你的那天起，我心里，就种下了一个愿望……”</p>
-<p>女巫瘫坐在地上，她仰起脸，怔怔地望着身前伤痕累累的男人，两行晶莹的泪水从脸颊滑落。</p>
-<a id="more"></a>
-
-<hr>
-<p>十五年前。</p>
-<p>女巫骑着扫帚在天上散心，远远地望见一道黑烟。</p>
-<p>她飞到黑烟的源头察看，这里本来是一处村落，现在变成了一片废墟，四处都是断壁残垣，空气中弥漫着烧焦的木头与鲜血的混合气味。</p>
-<p>她在废墟中翻找了很久，最终在一个大水缸下面发现一个幸存的小男孩。</p>
-<p>女巫兴奋地把他抱了起来。</p>
-<p>年仅五岁的小男孩在空中流着眼泪，瑟瑟发抖地问：“女……女巫阿姨，你会吃掉我吗？”</p>
-<p>女巫皱了皱好看的柳叶眉，捏着他白皙的脸颊，说：“叫姐姐！”</p>
-<p>这时，一群拿着锄头和镰刀的村民赶了过来。</p>
-<p>他们远远地望见女巫抱着的小男孩。</p>
-<p>人群顿时沸沸扬扬地呼喊了起来。</p>
-<p>“快，抓住她！一定是那个女巫毁了这个村子！”</p>
-<p>“我的上帝啊，谁能救救那个可怜的孩子！”</p>
-<p>见村民们赶来，女巫连忙抱起小男孩，骑上扫帚飞走了。</p>
-<hr>
-<p>不久之后，女巫被冠以屠村的罪名，全国通缉。</p>
-<p>对此，她毫不在乎，优哉游哉地在自己的魔法小屋里玩养成游戏，他每天教小男孩调配药剂，感应魔法。</p>
-<p>只要他一偷懒，她的魔杖便会毫不留情地敲打他的脑袋。</p>
-<p>只不过，每当女巫想要教训他的时候，他就用胖乎乎的小手捂着头顶，瞪着水汪汪的大眼睛可怜巴巴地望着她。</p>
-<p>于是，女巫的处罚常常会半途而废。</p>
-<p>这样的日子过得很快，转眼男孩就长大了。</p>
-<p>他二十岁的时候，已经长得比女巫要高大得多，女巫踮起脚尖只能勉强碰到他的额头。</p>
-<p>她再也不能随心所欲地敲打他的头顶了，每当她要处罚他的时候，他只要伸直胳膊按住女巫的头，她不管怎么挥舞魔杖也碰不到他。</p>
-<p>女巫只好自己躲到书房，一边生闷气一边翻阅《男人的一百种烹饪方法》。</p>
-<p>每当这时候，他都会做她最爱吃的蛋包饭，宠溺地看着她一边傲娇地说不好吃一边不停嘴地吃光一整盘蛋包饭。</p>
-<hr>
-<p>这天是采购日，他自己骑着扫帚出门采购食材，她待在家里百无聊赖地翻着书。</p>
-<p>突然，一支燃烧的箭矢射了进来。</p>
-<p>女巫黑色袍子上的防御法阵瞬间触发。</p>
-<p>她挡住了箭，拿着法杖飘到了屋外。</p>
-<p>那是一大群赏金猎人，其中不乏职业的女巫杀手。</p>
-<p>“终于还是来了吗？”</p>
-<p>他带着一堆食材返回的时候，家已经变成了一堆废墟，女巫拄着魔杖站在地上，她身上的法袍已经残破不堪，白皙的肌肤上，殷红的鲜血直流。</p>
-<p>女巫抬头望见了他，他的眼中燃烧着怒火。</p>
-<p>“滚开！小屁孩不要在这里碍事！”</p>
-<p>女巫朝他吼道。</p>
-<p>他缓缓走向了她，摸了摸她的头，说：“十五年了，我还不了解你嘛。”</p>
-<p>他拿着魔杖，背对着她说：“你知道吗，从遇见你的那天起，我心里，就种下了一个愿望……”</p>
-<p>话还没说完，无数的箭矢就朝着他射了过来，他的魔杖闪烁着光芒，站在他身前抵挡着一切攻击。</p>
-<p>女巫瘫坐在地上，她仰起脸，怔怔地望着身前伤痕累累的男人，两行晶莹的泪水从脸颊滑落。</p>
-<p>这场战斗不知道持续了多久，他的魔杖终于折断了，而对面还站着的赏金猎人也寥寥无几。</p>
-<p>“再加把劲，只要把这个女巫的尸体带回去，咱们就有一辈子都花不完的赏金啦！”</p>
-<p>话音刚落，一支箭矢就朝着女巫射了过去。</p>
-<p>他飞身扑到了她的身前，紧紧地抱住了她，用背部挡住了那支箭。</p>
-<p>这时，一个骑士骑着马飞奔了过来，他朝着赏金猎人们大喊着：“国王有令，屠村的罪魁祸首已经落网，是一群山贼，女巫无罪！女巫无罪！”</p>
-<p>女巫流着泪摸着他渐渐失去血色的脸颊。</p>
-<p>“为什么……为什么？”</p>
-<p>他笑了笑，宠溺地摸了摸她的额头，说：“我种下的愿望是……保护你，一辈子。”</p>
-<p>他撑着地面站起身来，背对着不知所措的人群，横着抱起女巫，缓缓地离开了。</p>
-<p>女巫被他用公主抱的姿势抱在怀里，她说：“你的伤，没关系吗？”</p>
-<p>他笑了笑，说：“没关系，一会把箭取出来，你给我用魔法治疗一下就好啦。”</p>
-<p>“我……我们要去哪儿。”</p>
-<p>“我们一起，去找一个新家。”</p>
-<p>晚安</p>
-<p>早安</p>
-]]></content>
-      <categories>
-        <category>睡前故事</category>
-      </categories>
-      <tags>
-        <tag>Hide</tag>
-        <tag>睡前故事</tag>
+        <tag>Java</tag>
+        <tag>Servlet</tag>
+        <tag>Java Web</tag>
       </tags>
   </entry>
   <entry>
@@ -238,213 +119,9 @@
         <category>Java Web</category>
       </categories>
       <tags>
-        <tag>Java Web</tag>
         <tag>笔记</tag>
+        <tag>Java Web</tag>
         <tag>Swagger</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>vue-搭建vue+element ui项目</title>
-    <url>/2020/11/21/vue-%E6%90%AD%E5%BB%BAvue+element-ui%E9%A1%B9%E7%9B%AE/</url>
-    <content><![CDATA[<h1 id="搭建Vue-Element-UI项目（通过Vue-UI）"><a href="#搭建Vue-Element-UI项目（通过Vue-UI）" class="headerlink" title="搭建Vue+Element-UI项目（通过Vue-UI）"></a>搭建Vue+Element-UI项目（通过Vue-UI）</h1><h2 id="1-启动命令行，进入Vue-UI"><a href="#1-启动命令行，进入Vue-UI" class="headerlink" title="1.启动命令行，进入Vue-UI"></a>1.启动命令行，进入Vue-UI</h2><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121094336554.png" alt="image-20201121094336554"></p>
-<p>输入<a href="http://localhost:8000，即可进入UI界面">http://localhost:8000，即可进入UI界面</a></p>
-<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121094647023.png" alt="image-20201121094647023"></p>
-<a id="more"></a>
-
-<h2 id="2-进入Vue项目管理器，新建项目"><a href="#2-进入Vue项目管理器，新建项目" class="headerlink" title="2.进入Vue项目管理器，新建项目"></a>2.进入Vue项目管理器，新建项目</h2><p>进入Vue项目管理器，进行新建或删除项目等操作</p>
-<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121094734271.png" alt="image-20201121094734271"></p>
-<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121094904195.png" alt="image-20201121094904195"></p>
-<p>存在三种选项，管理现有项目、新建项目和导入项目，我们选择创建项目</p>
-<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121095201637.png" alt="image-20201121095201637"></p>
-<ul>
-<li>创建新项目Step1-详情</li>
-</ul>
-<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121095418245.png" alt="image-20201121095418245"></p>
-<ul>
-<li>创建新项目Step2-预设</li>
-</ul>
-<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121095637943.png" alt="image-20201121095637943"></p>
-<ul>
-<li>创建新项目Step3-功能选择</li>
-</ul>
-<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121100002708.png" alt="image-20201121100002708"></p>
-<ul>
-<li>创建新项目Step4-配置</li>
-</ul>
-<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121100134876.png" alt="image-20201121100134876"></p>
-<p>此时会询问是否创建为预设，可选择否或保留此预设，保留预设可免去重复配置</p>
-<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121100207810.png" alt="image-20201121100207810"></p>
-<h2 id="3-配置新项目"><a href="#3-配置新项目" class="headerlink" title="3.配置新项目"></a>3.配置新项目</h2><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121100350314.png" alt="image-20201121100350314"></p>
-<p>进入项目管理器下，插件选项，安装所需插件</p>
-<p>这里我们选择Element-ui与axios</p>
-<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121100526996.png" alt="image-20201121100526996"></p>
-<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121100551055.png" alt="image-20201121100551055"></p>
-<p>均点击安装即可</p>
-<p>安装完成，即完成项目搭建</p>
-<h2 id="4-进入VS-Code查看成果"><a href="#4-进入VS-Code查看成果" class="headerlink" title="4.进入VS Code查看成果"></a>4.进入VS Code查看成果</h2><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121101030358.png" alt="image-20201121101030358"></p>
-<p>开启NPM脚本-serve，开启热部署</p>
-<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121101123455.png" alt="image-20201121101123455"></p>
-<p>可进入相应端口，实时查看项目，编辑完项目后CTRL+S保存即可完成更新，NPM脚本会重新编译</p>
-<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121101327645.png" alt="image-20201121101327645"></p>
-<hr>
-<p><strong>至此，Vue+Element项目搭建完成，接下来就可以开始你的渐进式开发了！</strong></p>
-]]></content>
-      <categories>
-        <category>编程</category>
-        <category>Vue</category>
-        <category>Element UI</category>
-      </categories>
-      <tags>
-        <tag>Vue</tag>
-        <tag>Element UI</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>睡前故事-放开那条恶龙</title>
-    <url>/2020/11/20/%E7%9D%A1%E5%89%8D%E6%95%85%E4%BA%8B-%E6%94%BE%E5%BC%80%E9%82%A3%E6%9D%A1%E6%81%B6%E9%BE%99/</url>
-    <content><![CDATA[<p>龙宝宝有个梦想——抓一只……呸，抓一位公主。</p>
-<p>为什么要抓公主呢？</p>
-<p>因为龙族有一项特殊的成人礼——抓公主。</p>
-<p>只有在王宫骑士重重包围之下抓走公主的龙，才能成为一条伟大的巨龙。</p>
-<a id="more"></a>
-
-<hr>
-<p>为了实现自己的梦想，龙宝宝变身成一个俊美的少年，每天都背着一个小麻袋，拎着一根小木棍，在王城里瞎逛。</p>
-<p>他的计划是：</p>
-<p>遇见公主</p>
-<p>打晕公主</p>
-<p>装进麻袋</p>
-<p>溜之大吉</p>
-<p>一个月过去了，他始终没能见到公主。</p>
-<p>渐渐的，他失去了瞎逛的动力。每天只是把袋子和棍子扔在一边，坐在墙角看着来往的路人，看看哪一个有可能是公主。</p>
-<p>有时候一天下来，袋子里还能多几个铜币。</p>
-<p>这天，他像往常一样坐在墙角。</p>
-<p>迎面走过来一个牵着白马的少女。</p>
-<p>“喂，小乞丐。”</p>
-<p>“我不是小乞丐！”</p>
-<p>他一下子站起来，瞪着少女说。</p>
-<p>龙宝宝心想，要不是你长得还挺漂亮，我一口吃掉你，你信不信。</p>
-<p>但就算你好看，也不能侮辱龙族的尊严！</p>
-<p>“那你是什么？”</p>
-<p>“我是龙……龙……”</p>
-<p>他正支支吾吾不知道怎么隐瞒自己的身份，一支王国骑士巡逻队远远地朝这里走来。</p>
-<p>“来不及了，小乞丐，把棍子给我！”</p>
-<p>“哦，好。”</p>
-<p>龙宝宝呆呆地把棍子递了过去。</p>
-<p>“可能会很疼，你忍着点儿哈。”</p>
-<p>“啊？为什……”</p>
-<p>他的话还没说完，只觉得眼前一黑，失去了意识。</p>
-<p>他再次睁开眼睛的时候，眼前一片漆黑。</p>
-<p>他使劲扭动着身体，发现自己被绳子绑住了。</p>
-<p>少女那清脆的嗓音从外面传来。</p>
-<p>“小乞丐，你别乱动，我放你出来。”</p>
-<p>说完，少女把他从麻袋里倒了出来。</p>
-<p>他一边大口呼吸着新鲜空气，又一边观察着下四周，这是在城外的森林里，只有火堆，白马和少女。</p>
-<p>少女坐在火堆旁，拍了拍他的肩膀，说：“实话跟你说吧，我是王国的公主，最近离家出走，缺个仆人，我观察你很久了，觉得你是个很好的人选。”</p>
-<p>龙宝宝目瞪口呆地听着，少女自顾自地说着。</p>
-<p>“我的计划就是接近你，打晕你，装进麻袋，然后溜之大吉。”</p>
-<p>“你看，多么完美的计划，你还自带麻袋和木棍，简直太贴心了！”</p>
-<p>龙宝宝心想，这计划似曾相识啊，等等，她说她是谁来着，公……公主？</p>
-<p>我……我成功啦？</p>
-<p>“话说，你为什么要离家出走呢？”</p>
-<p>“我想成为一位伟大的战士，每一位伟大的战士都要经历一场特殊的成人礼。”</p>
-<hr>
-<p>“什么？”</p>
-<p>“屠龙！”</p>
-<p>“……”</p>
-<p>于是，龙宝宝和公主踏上了“屠龙”的旅程。</p>
-<p>公主似乎很虚弱，他们足足走了半个月，才走出了森林。</p>
-<p>但是，在森林的边缘，他们终于还是遇到了王国骑士团。</p>
-<p>骑士们不敢对公主动手，所有火力都迎向了公主身边的少年。</p>
-<p>一番激战过后，少年被揍得伤痕累累，奄奄一息地倒在地上。</p>
-<p>“住手！”</p>
-<p>“你们别打了，我跟你们回去。”</p>
-<p>公主伏在少年的耳边轻轻地说：“回家吧，龙宝宝，别再想着抓公主啦。”</p>
-<p>少年的眼睛圆瞪着，难以置信地望向她。</p>
-<p>公主回头，留给他一个含泪的微笑。</p>
-<p>有人说成长是一个过程，但龙宝宝的成长，只是一个瞬间。</p>
-<p>他站起身来，身上逐渐布满了黑色的鳞片，一对翅膀从背后钻了出来，瞬间就遮蔽了整片天空。</p>
-<p>巨大的翅膀扇动起来，飓风席卷了整片森林。</p>
-<p>只是一次呼吸的时间，黑影就笼罩了整个骑士团。</p>
-<p>“把公主还给我！”</p>
-<p>巨龙把公主带回了自己的洞穴，又变成了奄奄一息的少年。</p>
-<p>“现在，你只要杀了我，就可以变成伟大的战士了。”</p>
-<p>公主把剑抽了出来，刺向了少年。</p>
-<p>少年缓缓闭上眼睛。</p>
-<p>他听到剑摔落的声音，感到一丝丝热气喷在自己的耳朵上。</p>
-<p>他睁开眼睛，公主倒在自己的身上。</p>
-<p>“你是怎么发现我是龙的？”</p>
-<p>“每一位屠龙战士，血脉里都隐藏着分辨龙的能力，只不过，当他们爱上一条龙的时候，便虚弱的再也挥不动剑了。”</p>
-<p>他盯着她，说：“你知道吗，当我第一次看到你的时候，就已经想好孩子叫什么了。”</p>
-<p>晚安</p>
-<p>早安</p>
-]]></content>
-      <categories>
-        <category>睡前故事</category>
-      </categories>
-      <tags>
-        <tag>Hide</tag>
-        <tag>睡前故事</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>睡前故事-喝酒</title>
-    <url>/2020/11/19/%E7%9D%A1%E5%89%8D%E6%95%85%E4%BA%8B-%E5%96%9D%E9%85%92/</url>
-    <content><![CDATA[<p>山上有一只小狐狸。</p>
-<p>她在山上修炼了一百年，终于化出了人形。</p>
-<p>一出关，她就迫不及待地跑下了山。</p>
-<p>“一百年啦，也不知道人间变成什么样了。”</p>
-<a id="more"></a>
-
-<hr>
-<p>没走多远，她就嗅到一股香气，她仔细闻了闻，是酒香！</p>
-<p>她擦了擦口水，摇身一变化成一个妙龄少女，又把尾巴往裙子里塞了塞。</p>
-<p>她寻着酒香来到了山下的小镇上，小镇里车水马龙，远处的集市人声鼎沸。</p>
-<p>她瞪着好奇宝宝一般的大眼睛，望着青石板的小路，络绎不绝的马车，以及，不远处的酒肆。</p>
-<p>她一路小跑着来到了酒肆，叫道：“小二，来一碗酒！”</p>
-<p>酒肆的小伙计瞅了瞅她，心里嘀咕道“大白天的一个人姑娘家出来喝酒，还真是少见。”想归想，他还是盛了一碗酒，送到小狐狸面前。</p>
-<p>“客官，请慢用。”</p>
-<p>小狐狸端起碗一饮而尽，这酒可真香啊！</p>
-<p>她喝了一碗又一碗，直到喝得酩酊大醉，才满意地摸了摸小肚子，出了门。</p>
-<p>自此，小狐狸天天下山喝酒，她的积蓄也越来越少。</p>
-<p>她仔细琢磨了一下，再这样喝下去，钱肯定不够花，不如把小石子变成铜钱付账。可是，小石子的法术只能维持一会儿，用不了多久就会变回去，这样不就把酒肆给坑了？人家做个小本生意也不容易，左思右想，小狐狸决定在小镇上用法术行医赚钱，赚到的钱再用来买酒喝，嗯，就这么办！</p>
-<hr>
-<p>第二天，小狐狸就变成少女的模样，扛着一个“再世华佗”的小旗子，下了山。</p>
-<p>她在小镇的集市上摆了个小摊子，生意就算是开张了。</p>
-<p>一开始，小镇上的百姓还不相她，觉得这么年轻的姑娘，哪里会什么医术。没过多久，李家爷爷多年的老寒腿被她轻轻松松治好了，她的小摊子前立马排起了长队。</p>
-<p>来找她看病的都是在医馆买不起药的穷人，小狐狸心软，不忍心收他们的钱。</p>
-<p>天色晚了，小狐狸打起自己的小包袱收摊回家，她的小包袱里装得满满的，有宋家奶奶塞的馍馍，还有刘家爷爷送的萝卜，只是一个铜板都没有。</p>
-<p>她挑着包袱路过酒肆，闻着酒香擦了擦口水，可她摸了摸自己的包袱，叹了口气，心想：“算了，起码今晚能吃顿饱饭。”</p>
-<p>这样想着，她慢慢走开了。</p>
-<p>这时，酒肆的小伙计追了出来。</p>
-<p>望着她的背影喊道：“唉，姑娘留步，我请你喝酒！”</p>
-<p>她的两个小耳朵立马树了起来，几乎飞一般地跑到小伙计面前，盯着他说：“你说什么？再说一遍！”</p>
-<p>小伙计擦了擦汗，说：“我……我请你喝酒。”</p>
-<p>“哈哈哈哈，原来这家酒馆就是你开的呀，看不出来啊，小掌柜！”</p>
-<p>小狐狸一边抱着酒坛子，一边拍着小伙计的肩膀说。</p>
-<p>小伙计腼腆地笑了笑，说：“你治好了那么多乡亲，都不要钱，请你喝点酒算什么！以后，你若是想喝酒，尽管来便是了。”</p>
-<p>她的脸上布满了红晕，打着酒嗝说：“嘿嘿嘿，你可真……真是个好人！”</p>
-<p>小伙计的脸红了红，讪讪地笑着，挠了挠头。</p>
-<hr>
-<p>夜深了，小狐狸喝得酩酊大醉，露出了原形，倒头便睡。</p>
-<p>小伙计叹了口气，把她背在了身上，往山上走去。</p>
-<p>风一吹，小狐狸毛绒绒的耳朵动了动，蹭的小伙计的脖子发痒，他说：“你醒啦。”</p>
-<p>小狐狸的声音有些发颤，说：“你……你是什么时候发现的？”</p>
-<p>他笑着说：“你每次来店里喝酒，喝醉了连尾巴都藏不住，你说呢？”</p>
-<p>小狐狸哼唧着用小爪子在他背上锤了几下，说：“你……你……”</p>
-<p>“好啦好啦，其实，小狐狸就挺可爱的。”</p>
-<p>小狐狸的脸红了，她用蚊子一般的声音说：“那你觉得，我变成人，和变回小狐狸，哪个好看？”</p>
-<p>小伙计笑了笑，毫不犹豫地回答：“都好看！”</p>
-<p>小狐狸的脸红得发烫，她把脸埋进了小伙计的背上，用小爪子捂着，没过多久，又睡着了。</p>
-<p>晚安</p>
-<p>早安</p>
-]]></content>
-      <categories>
-        <category>睡前故事</category>
-      </categories>
-      <tags>
-        <tag>Hide</tag>
-        <tag>睡前故事</tag>
       </tags>
   </entry>
   <entry>
@@ -681,9 +358,392 @@
         <category>笔记</category>
       </categories>
       <tags>
-        <tag>Java Web</tag>
         <tag>笔记</tag>
+        <tag>Java Web</tag>
         <tag>Swagger</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>git clone加速问题解决方案</title>
+    <url>/2020/11/17/git-clone%E5%8A%A0%E9%80%9F%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</url>
+    <content><![CDATA[<h1 id="Git-Clone速度过慢解决方案"><a href="#Git-Clone速度过慢解决方案" class="headerlink" title="Git Clone速度过慢解决方案"></a>Git Clone速度过慢解决方案</h1><h1 id="1-方案一-使用gitclone-com加速"><a href="#1-方案一-使用gitclone-com加速" class="headerlink" title="1.方案一 使用gitclone.com加速"></a>1.方案一 使用gitclone.com加速</h1><p><strong><em>访问gitclone加速的官网<a href="https://gitclone.com,可以通过搜索栏搜索克隆项目/">https://gitclone.com，可以通过搜索栏搜索克隆项目</a></em></strong></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201117222630897.png"></p>
+<a id="more"></a>
+
+<p><strong>其也提供了三种自定义加速方法（省去在GitClone搜索相应文件）</strong></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">方法一（替换URL）</span><br><span class="line"></span><br><span class="line">git clone https://gitclone.com/github.com/tendermint/tendermint.git</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">方法二（设置git参数）</span><br><span class="line"></span><br><span class="line">git config --global url.&quot;https://gitclone.com/&quot;.insteadOf https://</span><br><span class="line">git clone https://github.com/tendermint/tendermint.git</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">方法三（使用cgit客户端）</span><br><span class="line"></span><br><span class="line">cgit clone https://github.com/tendermint/tendermint.git</span><br></pre></td></tr></table></figure>
+
+<p><strong>搜索图例：</strong></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201117223120221.png"></p>
+<h1 id="2-方案二-使用Gitee转载仓库"><a href="#2-方案二-使用Gitee转载仓库" class="headerlink" title="2.方案二 使用Gitee转载仓库"></a>2.方案二 使用Gitee转载仓库</h1><h2 id="1-登录gitee-com"><a href="#1-登录gitee-com" class="headerlink" title="1.登录gitee.com"></a>1.登录gitee.com</h2><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2020-11-17_23-27-48.png"></p>
+<h2 id="2-获取GitHub仓库URL"><a href="#2-获取GitHub仓库URL" class="headerlink" title="2.获取GitHub仓库URL"></a>2.获取GitHub仓库URL</h2><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2020-11-17_23-32-22.png"></p>
+<h2 id="3-填写URL"><a href="#3-填写URL" class="headerlink" title="3.填写URL"></a>3.填写URL</h2><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2020-11-17_23-34-39.png"></p>
+<h2 id="4-拉取仓库到Gitee完成"><a href="#4-拉取仓库到Gitee完成" class="headerlink" title="4.拉取仓库到Gitee完成"></a>4.拉取仓库到Gitee完成</h2><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2020-11-17_23-36-37.png"></p>
+<h2 id="5-git-clone仓库"><a href="#5-git-clone仓库" class="headerlink" title="5.git clone仓库"></a>5.git clone仓库</h2><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2020-11-17_23-38-41.png"></p>
+<hr>
+<p><strong>总的来说，两种方法中gitclone.com会出现时常不稳定的现象，不过大部分时间都能够以高速克隆仓库。不到必要时刻，不推荐使用gitee二次搬运仓库，因为流程较为繁琐</strong></p>
+]]></content>
+      <categories>
+        <category>教程</category>
+        <category>Git</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+        <tag>教程</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>vue-搭建vue+element ui项目</title>
+    <url>/2020/11/21/vue-%E6%90%AD%E5%BB%BAvue+element-ui%E9%A1%B9%E7%9B%AE/</url>
+    <content><![CDATA[<h1 id="搭建Vue-Element-UI项目（通过Vue-UI）"><a href="#搭建Vue-Element-UI项目（通过Vue-UI）" class="headerlink" title="搭建Vue+Element-UI项目（通过Vue-UI）"></a>搭建Vue+Element-UI项目（通过Vue-UI）</h1><h2 id="1-启动命令行，进入Vue-UI"><a href="#1-启动命令行，进入Vue-UI" class="headerlink" title="1.启动命令行，进入Vue-UI"></a>1.启动命令行，进入Vue-UI</h2><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121094336554.png" alt="image-20201121094336554"></p>
+<p>输入<a href="http://localhost:8000，即可进入UI界面">http://localhost:8000，即可进入UI界面</a></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121094647023.png" alt="image-20201121094647023"></p>
+<a id="more"></a>
+
+<h2 id="2-进入Vue项目管理器，新建项目"><a href="#2-进入Vue项目管理器，新建项目" class="headerlink" title="2.进入Vue项目管理器，新建项目"></a>2.进入Vue项目管理器，新建项目</h2><p>进入Vue项目管理器，进行新建或删除项目等操作</p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121094734271.png" alt="image-20201121094734271"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121094904195.png" alt="image-20201121094904195"></p>
+<p>存在三种选项，管理现有项目、新建项目和导入项目，我们选择创建项目</p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121095201637.png" alt="image-20201121095201637"></p>
+<ul>
+<li>创建新项目Step1-详情</li>
+</ul>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121095418245.png" alt="image-20201121095418245"></p>
+<ul>
+<li>创建新项目Step2-预设</li>
+</ul>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121095637943.png" alt="image-20201121095637943"></p>
+<ul>
+<li>创建新项目Step3-功能选择</li>
+</ul>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121100002708.png" alt="image-20201121100002708"></p>
+<ul>
+<li>创建新项目Step4-配置</li>
+</ul>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121100134876.png" alt="image-20201121100134876"></p>
+<p>此时会询问是否创建为预设，可选择否或保留此预设，保留预设可免去重复配置</p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121100207810.png" alt="image-20201121100207810"></p>
+<h2 id="3-配置新项目"><a href="#3-配置新项目" class="headerlink" title="3.配置新项目"></a>3.配置新项目</h2><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121100350314.png" alt="image-20201121100350314"></p>
+<p>进入项目管理器下，插件选项，安装所需插件</p>
+<p>这里我们选择Element-ui与axios</p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121100526996.png" alt="image-20201121100526996"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121100551055.png" alt="image-20201121100551055"></p>
+<p>均点击安装即可</p>
+<p>安装完成，即完成项目搭建</p>
+<h2 id="4-进入VS-Code查看成果"><a href="#4-进入VS-Code查看成果" class="headerlink" title="4.进入VS Code查看成果"></a>4.进入VS Code查看成果</h2><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121101030358.png" alt="image-20201121101030358"></p>
+<p>开启NPM脚本-serve，开启热部署</p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121101123455.png" alt="image-20201121101123455"></p>
+<p>可进入相应端口，实时查看项目，编辑完项目后CTRL+S保存即可完成更新，NPM脚本会重新编译</p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121101327645.png" alt="image-20201121101327645"></p>
+<hr>
+<p><strong>至此，Vue+Element项目搭建完成，接下来就可以开始你的渐进式开发了！</strong></p>
+]]></content>
+      <categories>
+        <category>编程</category>
+        <category>Vue</category>
+        <category>Element UI</category>
+      </categories>
+      <tags>
+        <tag>Vue</tag>
+        <tag>Element UI</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>三角判断</title>
+    <url>/2020/11/17/%E4%B8%89%E8%A7%92%E5%88%A4%E6%96%AD/</url>
+    <content><![CDATA[<h1 id="三角判断-基于C语言"><a href="#三角判断-基于C语言" class="headerlink" title="三角判断-基于C语言"></a>三角判断-基于C语言</h1><p><em>目的：此程序是为了判断输入的三角形三边，并判断三角形类型，包括等腰三角形、等边三角形、直角三角形、一般三角形及错值判定。</em></p>
+<a id="more"></a>
+
+<p>代码如下：</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;math.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">float</span> a, b, c;</span><br><span class="line">   </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;请输入三角形的三边:（用空格隔开，以回车结束）\n&quot;</span>);</span><br><span class="line">    scanf_s(<span class="string">&quot;%f%f%f&quot;</span>, &amp;a, &amp;b, &amp;c);</span><br><span class="line">    <span class="comment">//判断是否满足三角形条件：两边之和是否大于第三边；</span></span><br><span class="line">    <span class="keyword">if</span> (a == <span class="number">0</span> || b == <span class="number">0</span> || c == <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;输入边有空值0，错误！\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (a &lt; <span class="number">0</span> || b &lt; <span class="number">0</span> || c &lt; <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;输入边有负值，错误！\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (a + b &gt; c &amp;&amp; b + c &gt; a &amp;&amp; a + c &gt; a)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//判断三条边是否相等，三边相等即为等边三角形</span></span><br><span class="line">        <span class="keyword">if</span> (a == b &amp;&amp; a == c)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;等边三角形\n&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//判断三角形是否有两天边相等,两边相等即为等腰三角形</span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (a == b || a == c || b == c)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;等腰三角形\n&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//判断是否有两边的平方和大于第三边的平方，即为直角三角形</span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> ((a * a + b * b == c * c) || (a * a + c * c == b * b) || (b * b + c * c == a * a))</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;直角三角形\n&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//其他情况为一般三角形</span></span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;一般三角形\n&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//两边之和小于第三边，不能构成三角形</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;三边不能构成三角形\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    system(<span class="string">&quot;pause&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p><strong>总结：最基本的C语言入门程序，对新手可以很好的了解各个运算符的作用以及if函数的运用。</strong></p>
+]]></content>
+      <categories>
+        <category>编程</category>
+        <category>C</category>
+      </categories>
+      <tags>
+        <tag>C语言</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>基于C语言的空格统计</title>
+    <url>/2020/11/17/%E5%9F%BA%E4%BA%8EC%E8%AF%AD%E8%A8%80%E7%9A%84%E7%A9%BA%E6%A0%BC%E7%BB%9F%E8%AE%A1/</url>
+    <content><![CDATA[<h1 id="空格统计小程序-基于C语言"><a href="#空格统计小程序-基于C语言" class="headerlink" title="空格统计小程序-基于C语言"></a>空格统计小程序-基于C语言</h1><p><em>首先，做这个程序的目的，是因为软件工程要求实例Jackson块图的实现，要求如下：</em></p>
+<p><em>1）设计程序统计每个记录中空格字符的个数，输出数据的格式是，每读入一个记录（字符串）之后，另起一行打印出这个字符串及其空格数；</em></p>
+<p><em>2）最后打印出文件中空格的总个数。</em></p>
+<a id="more"></a>
+
+
+
+<p><strong>下面列出代码，请参考，如需要求有差异，可自由修改代码以达成目标（此程序经vs测试通过）</strong></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _CRT_SECURE_NO_WARNINGS     <span class="comment">//解决了在vs中使用fopen()函数报错的问题</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;windows.h&gt;    //调用windows.h头文件实现Sleep()函数，以得到期望的休眠，使得程序不会突兀</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX_FILED 128   <span class="comment">//根据估计文字不超过128字节，所以设定为128</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> buf[MAX_FILED];    <span class="comment">//创造数组用来记录文本</span></span><br><span class="line">    <span class="keyword">int</span> count = <span class="number">0</span>;          <span class="comment">//记录每段文本的空格数</span></span><br><span class="line">    <span class="keyword">int</span> wholecount = <span class="number">0</span>;     <span class="comment">//记录总空格数</span></span><br><span class="line">    <span class="keyword">int</span> len;                <span class="comment">//记录每行字符数</span></span><br><span class="line">    <span class="keyword">char</span> s1[] = <span class="string">&quot;Record 1：How many stages are there in the traditional software development model?&quot;</span>;</span><br><span class="line">    <span class="keyword">char</span> s2[] = <span class="string">&quot;Record 2：After entering the room,walk to the person sitting nearest to you and greet him/her with a “high five”.&quot;</span>;</span><br><span class="line">    <span class="keyword">char</span> s3[] = <span class="string">&quot;Record 3：What are encapsulated into an object?&quot;</span>;</span><br><span class="line">    <span class="keyword">char</span> s4[] = <span class="string">&quot;Record 4：What diagram is the following diagram? Simply describe the meaning of it.&quot;</span>;</span><br><span class="line"> </span><br><span class="line">    <span class="comment">//使用fopen()函数写入txt文件中的文本</span></span><br><span class="line">    FILE* fpWrite = fopen(<span class="string">&quot;Document.txt&quot;</span>, <span class="string">&quot;w&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span> (fpWrite == <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">fprintf</span>(fpWrite, <span class="string">&quot;%s\n&quot;</span>, s1);</span><br><span class="line">    <span class="built_in">fprintf</span>(fpWrite, <span class="string">&quot;%s\n&quot;</span>, s2);</span><br><span class="line">    <span class="built_in">fprintf</span>(fpWrite, <span class="string">&quot;%s\n&quot;</span>, s3);</span><br><span class="line">    <span class="built_in">fprintf</span>(fpWrite, <span class="string">&quot;%s\n&quot;</span>, s4);  </span><br><span class="line">    fclose(fpWrite);</span><br><span class="line">      </span><br><span class="line">    <span class="comment">//使用fopen()函数读取txt文件中的文本</span></span><br><span class="line">    FILE* Readtxt = fopen(<span class="string">&quot;Document.txt&quot;</span>, <span class="string">&quot;r&quot;</span>); <span class="comment">//&quot;r&quot; 以只读方式打开文件，该文件必须存在 | 此文件必须存在于程序根目录下否则无法运行</span></span><br><span class="line">    <span class="keyword">if</span> (Readtxt == <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;正在载入程序，统计中请稍等......\n\n&quot;</span>);</span><br><span class="line">    Sleep(<span class="number">5000</span>);    <span class="comment">//调用Sleep()函数休眠五秒</span></span><br><span class="line">       </span><br><span class="line">    <span class="keyword">while</span> (fgets(buf, MAX_FILED, Readtxt) != <span class="literal">NULL</span>)  <span class="comment">//fgets函数功能为从指定的流中读取数据，每次读取一行（配合fopen()使用是实现逐行读取）</span></span><br><span class="line">    &#123;</span><br><span class="line">        len = <span class="built_in">strlen</span>(buf);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= len; i++)</span><br><span class="line">            <span class="keyword">if</span> (buf[i] == <span class="number">32</span>)   <span class="comment">//判定空格，即空格ASCII码为32</span></span><br><span class="line">                count++;</span><br><span class="line">        wholecount += count;</span><br><span class="line">        buf[len - <span class="number">1</span>] = <span class="string">&#x27;\0&#x27;</span>;  <span class="comment">//通过判断空字符的结尾来确定换行</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%s\n&quot;</span>, buf);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;总字数是：%d\n空格字符数是：%d\n&quot;</span>, len - <span class="number">1</span>, count);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;正在计算下一段句子的空格数，请稍等......\n&quot;</span>);</span><br><span class="line">        Sleep(<span class="number">2000</span>);    <span class="comment">////调用Sleep()函数休眠两秒</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">        count = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;总的空格数为:%d\n&quot;</span>, wholecount);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;文本空格数已全部统计完成，请单击Enter退出程序，谢谢使用此程序^_^\n&quot;</span>);</span><br><span class="line">    fclose(Readtxt);</span><br><span class="line">    system(<span class="string">&quot;pause&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>此外还有Visio绘制的程序流程图</p>
+<p><img src="https://img-blog.csdnimg.cn/20201117142918848.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzgyNDEzOQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<hr>
+<p><strong>希望能在读写C语言读写方面对你有所启发和帮助！</strong></p>
+]]></content>
+      <categories>
+        <category>编程</category>
+        <category>C</category>
+      </categories>
+      <tags>
+        <tag>C语言</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>狩猎影评</title>
+    <url>/2020/11/17/%E7%8B%A9%E7%8C%8E%E5%BD%B1%E8%AF%84/</url>
+    <content><![CDATA[<h1 id="狩猎"><a href="#狩猎" class="headerlink" title="狩猎"></a>狩猎</h1><h3 id="秋天萧瑟的气氛，狩猎的季节，猎物却是一个老好人"><a href="#秋天萧瑟的气氛，狩猎的季节，猎物却是一个老好人" class="headerlink" title="-秋天萧瑟的气氛，狩猎的季节，猎物却是一个老好人"></a>-秋天萧瑟的气氛，狩猎的季节，猎物却是一个老好人</h3><p>-节选自知乎个人创作</p>
+<p><img src="https://img-blog.csdnimg.cn/2020111714310397.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzgyNDEzOQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p><em>一部好的电影会让观众在观看时和观看后陷入深深的思考，不论思考的是什么，或是伦理道德，亦或是错综复杂的剧情和演员精湛的演技，也可以是勾起你深埋于心底的一段回忆。</em></p>
+<a id="more"></a>
+
+<p><img src="https://img-blog.csdnimg.cn/20201117121107735.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzgyNDEzOQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p><em>《狩猎》就是这样一部影片，但是看过一遍后我不想再重温一遍，因为这部影片给我带来了深深的压抑感，这种压抑深入心中，使我无法对电影内涵做更深一步的思考和探索。</em></p>
+<p><img src="https://img-blog.csdnimg.cn/20201117121107789.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzgyNDEzOQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p><em>看完《狩猎》，我不自觉的想到了韩国电影《熔炉》，同样的压抑感，同样的结局。你认为好人就该得到好报吗，因果循环吗？你错了，这两部电影都揭示出“坏人“的下场会比好人要好，吃亏的也总是心地善良的人。也许正是因为这两部电影共同的压抑感和带来的反思，让我把这两部电影串联在一起。</em></p>
+<p><img src="https://img-blog.csdnimg.cn/20201117121107780.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzgyNDEzOQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p><em>《狩猎》的主要剧情梗概是这样的：男主卢卡斯是一家幼儿园的教师，倍受同事和孩子们的喜爱。但有一个叫卡拉的小女孩在玩游戏的过程中对卢卡斯示好却遭到拒绝。为了报复卢卡斯，卡拉将卢卡斯描述成一个暴露性器官的变态，让他背负了猥亵儿童的罪名，进而成为了小镇排挤的对象。卢卡斯的生活和在小镇的地位发生了巨大的改变，好友、女友、前妻都不在信任他，自己的宠爱的狗也因他而死，儿子被小镇的人侮辱。尽管卡拉告诉了同是卢卡斯朋友的父亲真相，卢卡斯的罪名也不成立，但周围的人已经不能像以前一样对待他，小镇的人们戴上了伪善的面纱，在结尾的一场狩猎中，有人在暗地里开枪差点把卢卡斯打死，电影戛然而止…</em></p>
+<p><em>这部影片的关键人物无疑是卡拉，没有她的谎言，也就没有之后发生的故事。谎言的背后一定有一个原因，也许是她对卢卡斯的爱慕，也许是她早熟的性格，但在我看来却是她家庭的教育和环境。从电影一开始对卡拉家庭的描述可以看出父母对她的管教是非常宽松的，以致于她自己乱跑在超市迷了路，她的父母都没有去寻找，只是认为她出去玩了。同时小镇相对封闭的环境却造就了居民之间相对开放的态度，从卢卡斯能随意的在卡拉家的壁橱中拿出杯子喝水和卡拉哥哥的朋友给卡拉看相片都能看出，这也给卡拉父亲有卢卡斯家的钥匙打下理论基础。所以如此典型的成长环境给了卡拉非常宽松的空间与自由，这与《熔炉》中封闭的学校环境相类似。</em></p>
+<p><em>从电影中我们可以看出，卡拉的父母在表达情感的时候都是非常直接的，相互表达爱意时会在卡拉面前接吻，出现矛盾时会大声争吵，这势必会对卡拉成长中的行为和内心产生巨大的影响。首先，卡拉吻卢卡斯的行为很可能是跟父母学的，孩子在成长的过程中总是不断的模仿学习，学习的最主要方式就是模仿。父母在孩子看到一些不属于这个年龄段的行为时应该做出引导，解释行为代表的意义。但是，小镇和家庭宽松的环境无法让卡拉得到父母及时的教育，才让卡拉做出不合适的举动。与此同时，父母在孩子面前的争吵也使得孩子的内心受到极大的影响，这也间接助使卡拉的报复心增长。在影片中，卡拉没有很好的管理好自己的感情，选错了给予感情的对象。但对于卡拉来说，真正对他好的也许只有卢卡斯一个人，她没有其他选择，才酿成了这种局面。</em></p>
+<p><em>这部电影看完带来的最直观的感受是一种无法发泄的负能量，一种深沉的压抑感，这也许是我对这部电影的另类喜爱吧，就像练琴时弹错了旋律老师就会打你，因为疼了，你才会真正记住。</em></p>
+<p><img src="https://img-blog.csdnimg.cn/20201117121107744.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzgyNDEzOQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p>PS：强烈推荐男主角扮演者麦斯·米克尔森，丹麦男神，精湛的演艺把《狩猎》这部影片撑起，在困境中的绝望，那种无助的眼神真的是天生的演员才能做到。</p>
+]]></content>
+      <categories>
+        <category>影评</category>
+      </categories>
+      <tags>
+        <tag>影评</tag>
+        <tag>Hide</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>睡前故事-喝酒</title>
+    <url>/2020/11/19/%E7%9D%A1%E5%89%8D%E6%95%85%E4%BA%8B-%E5%96%9D%E9%85%92/</url>
+    <content><![CDATA[<p>山上有一只小狐狸。</p>
+<p>她在山上修炼了一百年，终于化出了人形。</p>
+<p>一出关，她就迫不及待地跑下了山。</p>
+<p>“一百年啦，也不知道人间变成什么样了。”</p>
+<a id="more"></a>
+
+<hr>
+<p>没走多远，她就嗅到一股香气，她仔细闻了闻，是酒香！</p>
+<p>她擦了擦口水，摇身一变化成一个妙龄少女，又把尾巴往裙子里塞了塞。</p>
+<p>她寻着酒香来到了山下的小镇上，小镇里车水马龙，远处的集市人声鼎沸。</p>
+<p>她瞪着好奇宝宝一般的大眼睛，望着青石板的小路，络绎不绝的马车，以及，不远处的酒肆。</p>
+<p>她一路小跑着来到了酒肆，叫道：“小二，来一碗酒！”</p>
+<p>酒肆的小伙计瞅了瞅她，心里嘀咕道“大白天的一个人姑娘家出来喝酒，还真是少见。”想归想，他还是盛了一碗酒，送到小狐狸面前。</p>
+<p>“客官，请慢用。”</p>
+<p>小狐狸端起碗一饮而尽，这酒可真香啊！</p>
+<p>她喝了一碗又一碗，直到喝得酩酊大醉，才满意地摸了摸小肚子，出了门。</p>
+<p>自此，小狐狸天天下山喝酒，她的积蓄也越来越少。</p>
+<p>她仔细琢磨了一下，再这样喝下去，钱肯定不够花，不如把小石子变成铜钱付账。可是，小石子的法术只能维持一会儿，用不了多久就会变回去，这样不就把酒肆给坑了？人家做个小本生意也不容易，左思右想，小狐狸决定在小镇上用法术行医赚钱，赚到的钱再用来买酒喝，嗯，就这么办！</p>
+<hr>
+<p>第二天，小狐狸就变成少女的模样，扛着一个“再世华佗”的小旗子，下了山。</p>
+<p>她在小镇的集市上摆了个小摊子，生意就算是开张了。</p>
+<p>一开始，小镇上的百姓还不相她，觉得这么年轻的姑娘，哪里会什么医术。没过多久，李家爷爷多年的老寒腿被她轻轻松松治好了，她的小摊子前立马排起了长队。</p>
+<p>来找她看病的都是在医馆买不起药的穷人，小狐狸心软，不忍心收他们的钱。</p>
+<p>天色晚了，小狐狸打起自己的小包袱收摊回家，她的小包袱里装得满满的，有宋家奶奶塞的馍馍，还有刘家爷爷送的萝卜，只是一个铜板都没有。</p>
+<p>她挑着包袱路过酒肆，闻着酒香擦了擦口水，可她摸了摸自己的包袱，叹了口气，心想：“算了，起码今晚能吃顿饱饭。”</p>
+<p>这样想着，她慢慢走开了。</p>
+<p>这时，酒肆的小伙计追了出来。</p>
+<p>望着她的背影喊道：“唉，姑娘留步，我请你喝酒！”</p>
+<p>她的两个小耳朵立马树了起来，几乎飞一般地跑到小伙计面前，盯着他说：“你说什么？再说一遍！”</p>
+<p>小伙计擦了擦汗，说：“我……我请你喝酒。”</p>
+<p>“哈哈哈哈，原来这家酒馆就是你开的呀，看不出来啊，小掌柜！”</p>
+<p>小狐狸一边抱着酒坛子，一边拍着小伙计的肩膀说。</p>
+<p>小伙计腼腆地笑了笑，说：“你治好了那么多乡亲，都不要钱，请你喝点酒算什么！以后，你若是想喝酒，尽管来便是了。”</p>
+<p>她的脸上布满了红晕，打着酒嗝说：“嘿嘿嘿，你可真……真是个好人！”</p>
+<p>小伙计的脸红了红，讪讪地笑着，挠了挠头。</p>
+<hr>
+<p>夜深了，小狐狸喝得酩酊大醉，露出了原形，倒头便睡。</p>
+<p>小伙计叹了口气，把她背在了身上，往山上走去。</p>
+<p>风一吹，小狐狸毛绒绒的耳朵动了动，蹭的小伙计的脖子发痒，他说：“你醒啦。”</p>
+<p>小狐狸的声音有些发颤，说：“你……你是什么时候发现的？”</p>
+<p>他笑着说：“你每次来店里喝酒，喝醉了连尾巴都藏不住，你说呢？”</p>
+<p>小狐狸哼唧着用小爪子在他背上锤了几下，说：“你……你……”</p>
+<p>“好啦好啦，其实，小狐狸就挺可爱的。”</p>
+<p>小狐狸的脸红了，她用蚊子一般的声音说：“那你觉得，我变成人，和变回小狐狸，哪个好看？”</p>
+<p>小伙计笑了笑，毫不犹豫地回答：“都好看！”</p>
+<p>小狐狸的脸红得发烫，她把脸埋进了小伙计的背上，用小爪子捂着，没过多久，又睡着了。</p>
+<p>晚安</p>
+<p>早安</p>
+]]></content>
+      <categories>
+        <category>睡前故事</category>
+      </categories>
+      <tags>
+        <tag>Hide</tag>
+        <tag>睡前故事</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>睡前故事-女巫</title>
+    <url>/2020/11/22/%E7%9D%A1%E5%89%8D%E6%95%85%E4%BA%8B-%E5%A5%B3%E5%B7%AB/</url>
+    <content><![CDATA[<p>“你知道吗，从遇见你的那天起，我心里，就种下了一个愿望……”</p>
+<p>女巫瘫坐在地上，她仰起脸，怔怔地望着身前伤痕累累的男人，两行晶莹的泪水从脸颊滑落。</p>
+<a id="more"></a>
+
+<hr>
+<p>十五年前。</p>
+<p>女巫骑着扫帚在天上散心，远远地望见一道黑烟。</p>
+<p>她飞到黑烟的源头察看，这里本来是一处村落，现在变成了一片废墟，四处都是断壁残垣，空气中弥漫着烧焦的木头与鲜血的混合气味。</p>
+<p>她在废墟中翻找了很久，最终在一个大水缸下面发现一个幸存的小男孩。</p>
+<p>女巫兴奋地把他抱了起来。</p>
+<p>年仅五岁的小男孩在空中流着眼泪，瑟瑟发抖地问：“女……女巫阿姨，你会吃掉我吗？”</p>
+<p>女巫皱了皱好看的柳叶眉，捏着他白皙的脸颊，说：“叫姐姐！”</p>
+<p>这时，一群拿着锄头和镰刀的村民赶了过来。</p>
+<p>他们远远地望见女巫抱着的小男孩。</p>
+<p>人群顿时沸沸扬扬地呼喊了起来。</p>
+<p>“快，抓住她！一定是那个女巫毁了这个村子！”</p>
+<p>“我的上帝啊，谁能救救那个可怜的孩子！”</p>
+<p>见村民们赶来，女巫连忙抱起小男孩，骑上扫帚飞走了。</p>
+<hr>
+<p>不久之后，女巫被冠以屠村的罪名，全国通缉。</p>
+<p>对此，她毫不在乎，优哉游哉地在自己的魔法小屋里玩养成游戏，他每天教小男孩调配药剂，感应魔法。</p>
+<p>只要他一偷懒，她的魔杖便会毫不留情地敲打他的脑袋。</p>
+<p>只不过，每当女巫想要教训他的时候，他就用胖乎乎的小手捂着头顶，瞪着水汪汪的大眼睛可怜巴巴地望着她。</p>
+<p>于是，女巫的处罚常常会半途而废。</p>
+<p>这样的日子过得很快，转眼男孩就长大了。</p>
+<p>他二十岁的时候，已经长得比女巫要高大得多，女巫踮起脚尖只能勉强碰到他的额头。</p>
+<p>她再也不能随心所欲地敲打他的头顶了，每当她要处罚他的时候，他只要伸直胳膊按住女巫的头，她不管怎么挥舞魔杖也碰不到他。</p>
+<p>女巫只好自己躲到书房，一边生闷气一边翻阅《男人的一百种烹饪方法》。</p>
+<p>每当这时候，他都会做她最爱吃的蛋包饭，宠溺地看着她一边傲娇地说不好吃一边不停嘴地吃光一整盘蛋包饭。</p>
+<hr>
+<p>这天是采购日，他自己骑着扫帚出门采购食材，她待在家里百无聊赖地翻着书。</p>
+<p>突然，一支燃烧的箭矢射了进来。</p>
+<p>女巫黑色袍子上的防御法阵瞬间触发。</p>
+<p>她挡住了箭，拿着法杖飘到了屋外。</p>
+<p>那是一大群赏金猎人，其中不乏职业的女巫杀手。</p>
+<p>“终于还是来了吗？”</p>
+<p>他带着一堆食材返回的时候，家已经变成了一堆废墟，女巫拄着魔杖站在地上，她身上的法袍已经残破不堪，白皙的肌肤上，殷红的鲜血直流。</p>
+<p>女巫抬头望见了他，他的眼中燃烧着怒火。</p>
+<p>“滚开！小屁孩不要在这里碍事！”</p>
+<p>女巫朝他吼道。</p>
+<p>他缓缓走向了她，摸了摸她的头，说：“十五年了，我还不了解你嘛。”</p>
+<p>他拿着魔杖，背对着她说：“你知道吗，从遇见你的那天起，我心里，就种下了一个愿望……”</p>
+<p>话还没说完，无数的箭矢就朝着他射了过来，他的魔杖闪烁着光芒，站在他身前抵挡着一切攻击。</p>
+<p>女巫瘫坐在地上，她仰起脸，怔怔地望着身前伤痕累累的男人，两行晶莹的泪水从脸颊滑落。</p>
+<p>这场战斗不知道持续了多久，他的魔杖终于折断了，而对面还站着的赏金猎人也寥寥无几。</p>
+<p>“再加把劲，只要把这个女巫的尸体带回去，咱们就有一辈子都花不完的赏金啦！”</p>
+<p>话音刚落，一支箭矢就朝着女巫射了过去。</p>
+<p>他飞身扑到了她的身前，紧紧地抱住了她，用背部挡住了那支箭。</p>
+<p>这时，一个骑士骑着马飞奔了过来，他朝着赏金猎人们大喊着：“国王有令，屠村的罪魁祸首已经落网，是一群山贼，女巫无罪！女巫无罪！”</p>
+<p>女巫流着泪摸着他渐渐失去血色的脸颊。</p>
+<p>“为什么……为什么？”</p>
+<p>他笑了笑，宠溺地摸了摸她的额头，说：“我种下的愿望是……保护你，一辈子。”</p>
+<p>他撑着地面站起身来，背对着不知所措的人群，横着抱起女巫，缓缓地离开了。</p>
+<p>女巫被他用公主抱的姿势抱在怀里，她说：“你的伤，没关系吗？”</p>
+<p>他笑了笑，说：“没关系，一会把箭取出来，你给我用魔法治疗一下就好啦。”</p>
+<p>“我……我们要去哪儿。”</p>
+<p>“我们一起，去找一个新家。”</p>
+<p>晚安</p>
+<p>早安</p>
+]]></content>
+      <categories>
+        <category>睡前故事</category>
+      </categories>
+      <tags>
+        <tag>Hide</tag>
+        <tag>睡前故事</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>睡前故事-放开那条恶龙</title>
+    <url>/2020/11/20/%E7%9D%A1%E5%89%8D%E6%95%85%E4%BA%8B-%E6%94%BE%E5%BC%80%E9%82%A3%E6%9D%A1%E6%81%B6%E9%BE%99/</url>
+    <content><![CDATA[<p>龙宝宝有个梦想——抓一只……呸，抓一位公主。</p>
+<p>为什么要抓公主呢？</p>
+<p>因为龙族有一项特殊的成人礼——抓公主。</p>
+<p>只有在王宫骑士重重包围之下抓走公主的龙，才能成为一条伟大的巨龙。</p>
+<a id="more"></a>
+
+<hr>
+<p>为了实现自己的梦想，龙宝宝变身成一个俊美的少年，每天都背着一个小麻袋，拎着一根小木棍，在王城里瞎逛。</p>
+<p>他的计划是：</p>
+<p>遇见公主</p>
+<p>打晕公主</p>
+<p>装进麻袋</p>
+<p>溜之大吉</p>
+<p>一个月过去了，他始终没能见到公主。</p>
+<p>渐渐的，他失去了瞎逛的动力。每天只是把袋子和棍子扔在一边，坐在墙角看着来往的路人，看看哪一个有可能是公主。</p>
+<p>有时候一天下来，袋子里还能多几个铜币。</p>
+<p>这天，他像往常一样坐在墙角。</p>
+<p>迎面走过来一个牵着白马的少女。</p>
+<p>“喂，小乞丐。”</p>
+<p>“我不是小乞丐！”</p>
+<p>他一下子站起来，瞪着少女说。</p>
+<p>龙宝宝心想，要不是你长得还挺漂亮，我一口吃掉你，你信不信。</p>
+<p>但就算你好看，也不能侮辱龙族的尊严！</p>
+<p>“那你是什么？”</p>
+<p>“我是龙……龙……”</p>
+<p>他正支支吾吾不知道怎么隐瞒自己的身份，一支王国骑士巡逻队远远地朝这里走来。</p>
+<p>“来不及了，小乞丐，把棍子给我！”</p>
+<p>“哦，好。”</p>
+<p>龙宝宝呆呆地把棍子递了过去。</p>
+<p>“可能会很疼，你忍着点儿哈。”</p>
+<p>“啊？为什……”</p>
+<p>他的话还没说完，只觉得眼前一黑，失去了意识。</p>
+<p>他再次睁开眼睛的时候，眼前一片漆黑。</p>
+<p>他使劲扭动着身体，发现自己被绳子绑住了。</p>
+<p>少女那清脆的嗓音从外面传来。</p>
+<p>“小乞丐，你别乱动，我放你出来。”</p>
+<p>说完，少女把他从麻袋里倒了出来。</p>
+<p>他一边大口呼吸着新鲜空气，又一边观察着下四周，这是在城外的森林里，只有火堆，白马和少女。</p>
+<p>少女坐在火堆旁，拍了拍他的肩膀，说：“实话跟你说吧，我是王国的公主，最近离家出走，缺个仆人，我观察你很久了，觉得你是个很好的人选。”</p>
+<p>龙宝宝目瞪口呆地听着，少女自顾自地说着。</p>
+<p>“我的计划就是接近你，打晕你，装进麻袋，然后溜之大吉。”</p>
+<p>“你看，多么完美的计划，你还自带麻袋和木棍，简直太贴心了！”</p>
+<p>龙宝宝心想，这计划似曾相识啊，等等，她说她是谁来着，公……公主？</p>
+<p>我……我成功啦？</p>
+<p>“话说，你为什么要离家出走呢？”</p>
+<p>“我想成为一位伟大的战士，每一位伟大的战士都要经历一场特殊的成人礼。”</p>
+<hr>
+<p>“什么？”</p>
+<p>“屠龙！”</p>
+<p>“……”</p>
+<p>于是，龙宝宝和公主踏上了“屠龙”的旅程。</p>
+<p>公主似乎很虚弱，他们足足走了半个月，才走出了森林。</p>
+<p>但是，在森林的边缘，他们终于还是遇到了王国骑士团。</p>
+<p>骑士们不敢对公主动手，所有火力都迎向了公主身边的少年。</p>
+<p>一番激战过后，少年被揍得伤痕累累，奄奄一息地倒在地上。</p>
+<p>“住手！”</p>
+<p>“你们别打了，我跟你们回去。”</p>
+<p>公主伏在少年的耳边轻轻地说：“回家吧，龙宝宝，别再想着抓公主啦。”</p>
+<p>少年的眼睛圆瞪着，难以置信地望向她。</p>
+<p>公主回头，留给他一个含泪的微笑。</p>
+<p>有人说成长是一个过程，但龙宝宝的成长，只是一个瞬间。</p>
+<p>他站起身来，身上逐渐布满了黑色的鳞片，一对翅膀从背后钻了出来，瞬间就遮蔽了整片天空。</p>
+<p>巨大的翅膀扇动起来，飓风席卷了整片森林。</p>
+<p>只是一次呼吸的时间，黑影就笼罩了整个骑士团。</p>
+<p>“把公主还给我！”</p>
+<p>巨龙把公主带回了自己的洞穴，又变成了奄奄一息的少年。</p>
+<p>“现在，你只要杀了我，就可以变成伟大的战士了。”</p>
+<p>公主把剑抽了出来，刺向了少年。</p>
+<p>少年缓缓闭上眼睛。</p>
+<p>他听到剑摔落的声音，感到一丝丝热气喷在自己的耳朵上。</p>
+<p>他睁开眼睛，公主倒在自己的身上。</p>
+<p>“你是怎么发现我是龙的？”</p>
+<p>“每一位屠龙战士，血脉里都隐藏着分辨龙的能力，只不过，当他们爱上一条龙的时候，便虚弱的再也挥不动剑了。”</p>
+<p>他盯着她，说：“你知道吗，当我第一次看到你的时候，就已经想好孩子叫什么了。”</p>
+<p>晚安</p>
+<p>早安</p>
+]]></content>
+      <categories>
+        <category>睡前故事</category>
+      </categories>
+      <tags>
+        <tag>Hide</tag>
+        <tag>睡前故事</tag>
       </tags>
   </entry>
   <entry>
@@ -794,36 +854,230 @@
       </tags>
   </entry>
   <entry>
-    <title>git clone加速问题解决方案</title>
-    <url>/2020/11/17/git-clone%E5%8A%A0%E9%80%9F%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</url>
-    <content><![CDATA[<h1 id="Git-Clone速度过慢解决方案"><a href="#Git-Clone速度过慢解决方案" class="headerlink" title="Git Clone速度过慢解决方案"></a>Git Clone速度过慢解决方案</h1><h1 id="1-方案一-使用gitclone-com加速"><a href="#1-方案一-使用gitclone-com加速" class="headerlink" title="1.方案一 使用gitclone.com加速"></a>1.方案一 使用gitclone.com加速</h1><p><strong><em>访问gitclone加速的官网<a href="https://gitclone.com,可以通过搜索栏搜索克隆项目/">https://gitclone.com，可以通过搜索栏搜索克隆项目</a></em></strong></p>
-<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201117222630897.png"></p>
+    <title>睡前故事-相遇</title>
+    <url>/2020/11/16/%E7%9D%A1%E5%89%8D%E6%95%85%E4%BA%8B-%E7%9B%B8%E9%81%87/</url>
+    <content><![CDATA[<h1 id="相遇"><a href="#相遇" class="headerlink" title="相遇"></a>相遇</h1><p>骑士生活在m王国，有一天m王国的国王Arthur在外征战时被俘，但因为敌国的君主看到了Arthur的乐观与不屈，决定放了他，但抛给他一个难题“女人真正想要的是什么？”，若回答出来则可以获得自由，给予了一年期限。</p>
+<p>于是Arthur开始向身边的人询问这个问题，母亲、妹妹、牧师……但没人能给出满意的答案。</p>
 <a id="more"></a>
 
-<p><strong>其也提供了三种自定义加速方法（省去在GitClone搜索相应文件）</strong></p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">方法一（替换URL）</span><br><span class="line"></span><br><span class="line">git clone https://gitclone.com/github.com/tendermint/tendermint.git</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">方法二（设置git参数）</span><br><span class="line"></span><br><span class="line">git config --global url.&quot;https://gitclone.com/&quot;.insteadOf https://</span><br><span class="line">git clone https://github.com/tendermint/tendermint.git</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">方法三（使用cgit客户端）</span><br><span class="line"></span><br><span class="line">cgit clone https://github.com/tendermint/tendermint.git</span><br></pre></td></tr></table></figure>
-
-<p><strong>搜索图例：</strong></p>
-<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201117223120221.png"></p>
-<h1 id="2-方案二-使用Gitee转载仓库"><a href="#2-方案二-使用Gitee转载仓库" class="headerlink" title="2.方案二 使用Gitee转载仓库"></a>2.方案二 使用Gitee转载仓库</h1><h2 id="1-登录gitee-com"><a href="#1-登录gitee-com" class="headerlink" title="1.登录gitee.com"></a>1.登录gitee.com</h2><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2020-11-17_23-27-48.png"></p>
-<h2 id="2-获取GitHub仓库URL"><a href="#2-获取GitHub仓库URL" class="headerlink" title="2.获取GitHub仓库URL"></a>2.获取GitHub仓库URL</h2><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2020-11-17_23-32-22.png"></p>
-<h2 id="3-填写URL"><a href="#3-填写URL" class="headerlink" title="3.填写URL"></a>3.填写URL</h2><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2020-11-17_23-34-39.png"></p>
-<h2 id="4-拉取仓库到Gitee完成"><a href="#4-拉取仓库到Gitee完成" class="headerlink" title="4.拉取仓库到Gitee完成"></a>4.拉取仓库到Gitee完成</h2><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2020-11-17_23-36-37.png"></p>
-<h2 id="5-git-clone仓库"><a href="#5-git-clone仓库" class="headerlink" title="5.git clone仓库"></a>5.git clone仓库</h2><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2020-11-17_23-38-41.png"></p>
-<hr>
-<p><strong>总的来说，两种方法中gitclone.com会出现时常不稳定的现象，不过大部分时间都能够以高速克隆仓库。不到必要时刻，不推荐使用gitee二次搬运仓库，因为流程较为繁琐</strong></p>
+<p>有一位智者找到Arthur，并告诉他，城堡外的森林里有一位女巫，但性格刁蛮古怪，要求离谱。</p>
+<p>眼看期限将至，无可奈何的Arthur找到了女巫，女巫答应回答他的问题，但条件是要和骑士结婚。</p>
+<p>看着眼前丑陋不堪，散发着难闻气味的女巫，再看看跟自己多年挚友，威武高大的骑士。Arthur拒绝了，他不忍看到自己为了自由而牺牲兄弟。</p>
+<p>骑士知道这个消息后，毅然决然地对Arthur说：”我愿意娶她，为了您和国家。“</p>
+<p>于是婚礼被公诸于世，而Arthur也得到了问题的答案”女人真正想要的，是主宰自己的命运。”</p>
+<p>每个人都知道女巫说出的答案是真理，毫无疑问Arthur恢复了自由。</p>
+<p>婚礼上，女巫没有形象的行为举止令Arthur觉得恶心并忍不住哭泣，但骑士却一如既往的谦和。</p>
+<p>新婚之夜，骑士不顾别人的阻拦毅然决然地走进新房，准备面对一切，然而一个从未见过面的绝世美女却躺在了他的床上，女巫说：“我在一天的时间里，一半是丑陋的女巫，一半是倾城的美女，骑士，你想我白天变成美女还是晚上变成美女？”</p>
+<p>骑士回答道：“既然你说女人真正想要的是主宰自己的命运，那么就由你自己决定吧！”</p>
+<p>女巫终于热泪盈眶，“我选择白天夜晚都是美丽的女人，因为我爱你！”</p>
 ]]></content>
       <categories>
-        <category>教程</category>
-        <category>Git</category>
+        <category>睡前故事</category>
       </categories>
       <tags>
-        <tag>git</tag>
-        <tag>教程</tag>
+        <tag>Hide</tag>
+        <tag>睡前故事</tag>
+        <tag>骑士与女巫</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>睡前故事-白雪为嫁</title>
+    <url>/2020/11/23/%E7%9D%A1%E5%89%8D%E6%95%85%E4%BA%8B-%E7%99%BD%E9%9B%AA%E4%B8%BA%E5%AB%81/</url>
+    <content><![CDATA[<p>风暴戾地撞着窗，这个冬天格外冰冷。</p>
+<p>“你听话呀。”母亲的声音疲惫而心疼，“他家条件差得很，还有两个兄弟没成家。你跟过去吃没得吃、穿没得穿，只有受苦啊！”</p>
+<p>她和母亲并排躺在床上，抿着嘴唇并不出声，唯有泪珠成串滚落，很快浸湿枕巾。</p>
+<p>母亲侧着身，用右手柔柔帮她擦着泪，也有些哽咽：“妈妈都是为你好，你醒点事，好么？他平日里就会打架闹事，不是个有出息的人。”</p>
+<p>她吸了一下鼻子，眼睛执拗地闭着，无声哭泣。</p>
+<p>“明天去把孩子拿掉就好了。”母亲的声音在耳边继续着，她有她的苦心与疼爱，“时间久了你就不难过了，妈妈给你找个好婆家，保证比他强，过日子总归是要吃饱穿暖。”</p>
+<p>她抬了抬右手，没能抬动。</p>
+<p>母亲警觉地握紧了她的手。</p>
+<p>她的右手和母亲的左手紧紧绑在一起，布条还打了死结。</p>
+<p>“你们三兄妹里，妈妈最疼你，哪里能看着你吃苦。”母亲见止不住她的泪，自己的眼泪也落了下来，“你这个苕伢子……”</p>
+<p>母亲哭了一阵，帮她掖好被子，终于结束了劝慰，“很晚了，好好睡一觉，天亮妈妈就带你去医院。”</p>
+<a id="more"></a>
+
+<hr>
+<p>时间，怎么这么难熬呢？</p>
+<p>眼泪，好像流干了。</p>
+<p>眼睛涩涩的，她一动不动，静静听着旁边的呼吸声。</p>
+<p>呼吸很平稳，应是已睡熟了。但她仍不敢动，她知道机会只有一次。</p>
+<p>她很累，东躲西藏，最终还是被家人抓回来，已经身心俱疲。但她一点睡意也没有，她在心里默默地算着时间。</p>
+<p>这会儿应该是凌晨了，外面的房间很久没有动静，父亲应该也睡了。</p>
+<p>她试探着侧转身体，面对母亲。母亲闭着眼睛，毫无反应。</p>
+<p>母亲也很累了，这阵子她一定也很难过吧？她那么疼爱儿女。</p>
+<p>可是，对不起妈妈，这次我不能听话。她在黑夜里看着母亲隐约的脸，心里默默说道。</p>
+<p>沉默不是顺从，是在等这唯一的机会。</p>
+<p>她小心翼翼地去解绑着手的布条，死结很难解，她只能一点一点的艰难挪动。</p>
+<p>她心里很着急，但她强迫自己的动作更轻柔一些。</p>
+<p>结慢慢、慢慢松开，母亲突然嘟囔了一句什么！</p>
+<p>她全身都僵硬了！一动不敢动，假装自己熟睡着。但心脏跳动得如此剧烈，几乎提到了嗓子眼。</p>
+<p>但母亲接下来并没有其他动作，那句话也听不清楚，只是一句梦呓。</p>
+<p>她平复着心跳，缓慢地将布条解开。</p>
+<p>一只手压着被子，不让寒意透进来，身体小心翼翼往床下挪。</p>
+<p>终于，双脚落地。</p>
+<p>地面冰凉刺骨，但她已经顾不得那么多。</p>
+<p>时间紧迫！机会过了明天就不再有！</p>
+<p>她甚至来不及去穿一双鞋子，去拿一件外套。</p>
+<p>她踮着赤脚，做贼一般地挪出房间。</p>
+<p>从父亲的床边蹑手蹑脚走过，掩耳盗铃般地不敢看他一眼。</p>
+<p>来到堂屋，她轻轻抬起门栓，将大门缓缓拉开。</p>
+<p>嘶~！</p>
+<p>外面的寒风猛地灌了进来，将她整个人都浇凉。</p>
+<p>但她却精神一振，把门拉开到仅容一人进出的空间，就赶紧侧身钻了出去。</p>
+<p>她缓缓合上大门，仅着睡衣，赤足投入了漫天风雪中。</p>
+<hr>
+<p>这夜可真冷呵！</p>
+<p>她冻得牙齿打颤，全身上下没一处不冷。</p>
+<p>尤其踩在雪上的赤足，已经麻木得似乎没有了感觉。</p>
+<p>但她只管捂着她的小腹，一脚深一脚浅地往前迈。</p>
+<p>这是孩子。</p>
+<p>这是我的孩子。</p>
+<p>这是我和他的孩子！</p>
+<p>她开始跑，用劲跑，使出全身力气的跑。</p>
+<p>跑在这条那么熟悉的路上！跑在去他家的路上！</p>
+<p>不到两公里的距离，她乌黑的头发上已经披满白雪。</p>
+<p>她全身都快冻僵了，但总有一股子力气不知从哪里涌出来。</p>
+<p>她终于站到了他家门前。</p>
+<p>她敲门，用力敲门，大声喊他的名字。</p>
+<p>房间里响起重物坠地的声音，继而是急促的脚步声，男人猛地撞出来，拉开房门！</p>
+<p>他看到了怎样的一幅情景？</p>
+<p>门外立着的，是面色苍白、瑟瑟发抖却灼灼与他对视的女子。</p>
+<p>她的皮肤如雪，十里八乡没有哪个女子有这般白净。</p>
+<p>她紧抿着已冻得乌青的唇，就那么俏生生立在雪中！</p>
+<p>眼泪一下子就涌了出来，这是他以为将永远失去的她！</p>
+<p>他一把将她从雪地里抱起，牢牢抱进怀里。</p>
+<p>白茫茫的雪夜啊，风刀割不开的恋人。</p>
+<p>这一夜。</p>
+<p>有多少人见证了漫天风雪，就有多少人看到了白色婚纱。</p>
+]]></content>
+      <categories>
+        <category>睡前故事</category>
+      </categories>
+      <tags>
+        <tag>Hide</tag>
+        <tag>睡前故事</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>睡前故事-骑士与恶龙</title>
+    <url>/2020/11/16/%E7%9D%A1%E5%89%8D%E6%95%85%E4%BA%8B-%E9%AA%91%E5%A3%AB%E4%B8%8E%E6%81%B6%E9%BE%99/</url>
+    <content><![CDATA[<h1 id="骑士与恶龙"><a href="#骑士与恶龙" class="headerlink" title="骑士与恶龙"></a>骑士与恶龙</h1><p>今天是骑士与女巫在外冒险的第397天了，他们并着肩走在一望无垠的大草原上，微风拂面，已入正暑的气温略显炎热，落下的夕阳犹如一个火球一般映照着大地。</p>
+<p>一路上，这对默契的伙伴有说有笑，但远处却有一只巨大的瞳孔正在盯着他们…</p>
+<p>走到河边，太阳已经落下，两人熟练的扎好帐篷、升起篝火。远处低沉的狼嚎声在广阔的草原显得额外响亮，但下一瞬却又突然中止，似乎在预示着什么。</p>
+<p>两个人躺在草地上，抬头看着星星，诉说着这一路走来的经历-生与死的战斗、默契的配合和每天看星星的习惯…自从上次打败年以后，这对搭档已经经历了许多有趣但又危险的冒险。</p>
+<p>正当两个人各自回帐篷，准备休息时，一声巨大的气流共振声传来，一双巨大的瞳孔在空中盯着地上的两人，下一刻便直接俯冲向两人。</p>
+<a id="more"></a>
+
+<p>两人敏捷的躲过这一击，通过篝火的映照看到了一只巨大的黑色巨龙，骑士赶忙拔出剑鞘内的长剑，举起盾站在女巫面前，女巫则举起魔法棒护在骑士身后，多次的战斗让他们锻炼出了非常难得的默契。</p>
+<p>巨龙悬停在空中，双方就这么僵持着，巨龙开口，发出低沉又巨大的声音：“今天你们只能走一个人，另一个将永远的留在这里。”</p>
+<p>“还没试过你怎么知道只能走一个人…”骑士回应。</p>
+<p>巨龙再一次冲向骑士，女巫举起魔法棒，念着咒语，瞬间一道屏障展开在两人面前，但巨龙的撞击令这一道隐形的屏障碎裂，虽然延缓了一下巨龙的速度，但巨大的龙爪伴随着空气撕裂的低鸣拍打而来，骑士用长剑用力劈向巨爪，一瞬间巨大的冲击将两边都震开一段距离，骑士看着手中颤抖的长剑，虎口已经渗出鲜血。</p>
+<p>“看来今天不好对付了。如果一会形势还是这么差，我掩护你先走。”骑士对着女巫讲。</p>
+<p>“不！要走一起走，要死留下来一起死。”女巫不满的说道。</p>
+<p>骑士再次咬牙，握紧手中的长剑，巨龙再次直直地冲向骑士，女巫用魔法砸出一个火球。龙爪丝毫没有减速直接撞向火球，虽然被烫伤但速度不减地砸向骑士，骑士左手用盾挡下巨爪，并用右手的长剑回击，砍下了数块鳞片，但自己被震飞出去。</p>
+<p>几次迂回，女巫耗尽了法力，对战两方都背负了各自的信仰，巨龙只为了自己嗜血的本性，骑士为了他身后的女孩，现在双方都遍体鳞伤，巨龙翅膀和身体都布满了长剑划开的口子，骑士也浑身带有血渍。巨龙沉重的喘息，心脏像汽车引擎跳动着，黄色的巨瞳虽然浑浊但仍然发出巨大的威压。</p>
+<p>骑士知道这是一场只有一个人站着的战斗，他想起了去世的导师留下的剑谱，最后一条禁忌之术是用自己的血来填充长剑的杀意，但副作用却会迷失自己。但此时已经无法思考，只能使用禁忌之术，划开自己的手腕，鲜血一滴滴的滴到长剑上，长剑逐渐变成红色，骑士的瞳孔也逐渐变红，在最后一刻说：“女巫，如果我战死了，你赶紧逃离这里，如果我赢了，杀了我。”</p>
+<p>女巫失去了法力，只能在一旁看着这个场景，内心也在纠结着如何拯救骑士。</p>
+<p>随着仪式的完成，骑士仿佛蜕变成了血色覆盖的杀神。骑士挥出一击，血色的剑刃和巨龙的翅膀撞击，下一瞬巨龙的翅膀像蛋糕一样被切成两半，但龙爪也在骑士身上留下了三道血痕。</p>
+<p>再次经历几次交手，巨龙已经走到了生命的尽头，骑士也在死撑着目前的状态，巨龙深知自己生命受到巨大的威胁，拼出生命的全部力量，从口中吐出龙之炎息，骑士将头举过头顶，用尽全力劈下，在龙炎中劈出了一道缺口，直取巨龙的头颅而去，随着最后一声哀鸣，巨龙倒下了。</p>
+<p>骑士也用剑抵着大地，单膝跪下，“我赢了，女巫，杀了我吧，我不知道什么时候会失控。我一直都很爱你，很爱很爱你，不能陪你到老了，对不起…”</p>
+<p>女巫红着眼眶，“我不可能做这样的事，我们会一直走下去直到终老。”</p>
+<p>说完，骑士背后长出了一对黑色的翅膀，“屠龙者，最后终将变成恶龙。”典故所记载的却是事实，这是巨龙的诅咒。下一刻，骑士抓住了女巫的脖子，龙的嗜血此时控制了骑士，但又松开了，内心仅存的对女巫的爱和人性暂时抑制了龙性，骑士举起长剑，“我知道你下不了手，这是我最后能救你的方法了，对不起。”</p>
+<p>骑士将长剑刺入了自己的心脏，嘴角带着笑，缓慢的倒下了。</p>
+<p>“骑士，不！”女巫嘶吼着。一滴滴泪水滴落在骑士的伤口上，悄无声息的变化发生在骑士身上，伤口正在痊愈，肤色也从雪白逐渐恢复血色。</p>
+<p>女巫没有想到的是，在她离开自己的母亲也是她的女巫导师时，母亲没有告诉她女巫带有最真挚爱的眼泪是能治愈一切的物品，但一生只能生效一次。</p>
+<p>骑士缓慢的睁开了眼睛，看着女巫哭泣，“我还没死呢…”</p>
+<p>女巫不敢相信眼前的一切，紧紧的抱住骑士，骑士抚摸着女巫的头，也许这就是天意吧，骑士不明所以的恢复了。</p>
+<p>这一天好漫长，两人相互抱着，第二天的朝阳升起…</p>
+]]></content>
+      <categories>
+        <category>睡前故事</category>
+      </categories>
+      <tags>
+        <tag>Hide</tag>
+        <tag>睡前故事</tag>
+        <tag>骑士与女巫</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>睡前故事-记忆森林</title>
+    <url>/2020/11/16/%E7%9D%A1%E5%89%8D%E6%95%85%E4%BA%8B-%E8%AE%B0%E5%BF%86%E6%A3%AE%E6%9E%97/</url>
+    <content><![CDATA[<h1 id="记忆森林"><a href="#记忆森林" class="headerlink" title="记忆森林"></a>记忆森林</h1><p>自从上次击败巨龙以后，一起探险的女巫和骑士一直牵着手从未放开过。</p>
+<p>经过几天跋涉，他们走进了一片森林中，这个森林中的大树都如参天般，从他们的视角只能看到一片绿色的灌木和草坪，颜色万千、大小不一的花朵。</p>
+<a id="more"></a>
+
+<p>但他们进入森林后，从天上看去，仿佛森林像一个移动的迷宫，一棵棵树如同一道道墙在不断移动，刚才的进口已经被封上。</p>
+<p>骑士在进来时，在第一颗树上绑上了红色的丝带，但此时此刻，那条红色的丝带却出现在了眼前，骑士警觉地回头说：“女巫，小心，这片森林有问题。”女巫用魔法棒在巫师帽里召唤出一只信鸽，信鸽飞出大树包围的范围，提供给女巫的是移动迷宫的奇异景象。女巫将见到的情景告诉骑士，并用魔法生成了一个红色的细绳在两个人的手腕连着。</p>
+<p>这时奇异的事情发生了，一只矮矮的小精灵，头上长着兔子耳朵，出现在了两人面前，并说道：“这个森林是森林之神留下的记忆森林，只有正直、善良和懂得爱的人才能离开。你们必须经过考验才能离开，考验为期三天，如果你们还记得彼此，那么考验通过。假如失败，你们将失去一切记忆，并永远留在这个森林。”说完，便离开了两人的视野。</p>
+<p>天暗下来了，两人熟练的搭起了帐篷，骑士钉好地钉，女巫将帐篷展开。女巫用魔法升起了篝火，因为森林的遮挡看不到星星，这一晚两个人都在帐篷里，骑士警戒着，女巫则进入了梦乡。梦里，女巫梦到了之前的一切经历，童年、少年和青年遇到骑士后的一点一滴。</p>
+<!-- more -->
+
+<p>第二天，天蒙蒙亮，女巫醒了，轻声嘀咕“我是谁？我在哪？”。</p>
+<p>旁边的骑士彻夜未眠，一直守护着女巫，他想抱过去，但随之而来的是一声清脆的巴掌声。“流氓！你干什么？”骑士一脸懵逼地看向女巫，“是我呀，骑士。陪你一起冒险的骑士。”</p>
+<p>“骑士？那我是谁？”“你是女巫，我们一起探险一年多了。天，可能是森林的考验。”</p>
+<p>“什么考验？”“我们得互相记得曾经的事才能离开这片森林。”</p>
+<p>“饿了吧，这是留下的干粮，你吃了吧”说完，骑士拿出了包好的干粮。</p>
+<p>“不吃，万一你在里面下毒怎么办…”骑士无奈地掰下一小块吃了一口。</p>
+<p>“走吧，得出去找找办法，让你恢复记忆。”骑士走在前面，女巫跟在后面，向森林的深处进发。</p>
+<p>走了一段时间，他们终于走入了森林的中心地区，整个森林围绕着一个湖，湖中心有一个小树包裹着的小岛。一时之间，他们无法进入湖心岛，而且湖中还有鳄鱼的存在，冒出的头已经说明了它们危险的存在。骑士只能把帐篷扎在湖的旁边，他坚信湖心岛一定有解决的线索或者方法。骑士开始砍伐一些树枝，制作船只。女巫直直地看着眼前这个男人，却什么也想不到，但心里却有一种特殊的感觉。</p>
+<p>骑士造船直到下午才完成，他自己一个人乘着小船，慢慢地划桨向湖心岛进发，他叮嘱了女巫留意他的情况，稍有不对立刻用系在船上的绳子把他拉回来。一开始，湖面安静，一切顺利，但进行到旅程的三分之一时，几只鳄鱼朝着小船游来，骑士拔出长剑，准备迎战。鳄鱼下一刻突然地跃出水面，直扑骑士而去，但骑士用剑挑飞扑来的鳄鱼，不想伤及动物的他只能被动的对付着鳄鱼。但更糟糕的是，在旅程的三分之二时，水面形成了一个漩涡，说明水下有强大的吸力在把所有东西往里拉，鳄鱼也不见了，但小船却无法前进，被牢牢的吸住，一点一点的朝着漩涡中心移动，骑士赶忙叫女巫拉绳子，自己借小船踏了一步，抓住绳子回到了岸边。</p>
+<p>天色逐渐变黑，篝火再次升起，这次骑士识相的没有进帐篷，女巫一个人在帐篷脑袋空空的，想想起什么却又想不起来，骑士则一如既往的像一块石头一样，守护着女巫。</p>
+<p>又过了一晚，第三天，两人都是整晚没有休息，骑士在守护，女巫在努力回忆着什么。</p>
+<p>第三天清晨，鸟鸣声响彻森林，女巫仿佛之间记起了一些魔法，其中就包括飞行法术。走出帐篷，对骑士说：“我能送你过去，我记起飞行法术了。”骑士放心的将后背交给女巫，但女巫施法后却自己飞了起来直奔湖心岛而去，内心强烈渴求找回记忆，和对骑士莫名的感觉让她想自己去找寻答案。“诶，别走！”骑士望着渐渐飞远的女巫只能重新想办法渡湖。</p>
+<p>女巫进入湖心岛，看到整座岛屿都围绕着一颗古树，这棵古树的年纪怕是有女巫的几十倍大。古树上结着许多果实，红的、绿的、蓝的，各式各样，奇妙的是每个果实上都如同屏幕一般播放着女巫的一段记忆。小时戴着比自己还高的巫师帽跟着妈妈学习魔法、长大自己一个人在外面闯荡帮助人们、和骑士一起战胜巨龙……这些记忆存在于一个个果实上。树的周围有一层绿色的结界保护，女巫尝试着用手碰了一下，刺骨的剧痛使女巫发出叫声并连忙将手收回。骑士听到女巫的叫声，放下手中的树枝，直接跳下了湖，朝对面游去。</p>
+<p>骑士一边用长剑击退朝他游来的鳄鱼，一边用尽全力抵抗着漩涡的吸力。女巫正在尝试用自己的身躯越过结界，但难忍的剧痛让她一次次后退，又一次次前进，发出低沉的叫声。骑士已经担心到了极点，拼了全力终于抵达了对岸。这一次，女巫积攒了全部的力气，朝着结界冲了过去，骑士赶忙在身后追着，但被结界撞了回来。女巫过去了，拖着在这些年的冒险中收到的疼痛总和还要多的痛。</p>
+<p>女巫摘下一颗果实，吃了下去，一段儿时的记忆立马浮现在脑海之中，紧接着的是一段段快乐的回忆，快乐让她嘴角带着笑。紧接着是骑士曾经死去的回忆，这些痛苦的记忆，吃下去后，女巫不停的哭泣落泪，抑制不了心中的悲伤。骑士硬扛着结界的痛苦，迈过去了半个身子，女巫不断地吃下了果实，酸甜苦辣的回忆不断冲击着脑海。等到女巫吃下最后一个果子，骑士才进入了结界内，女巫的脸绯红着，最后的果子是关于骑士的回忆，曾经的点点滴滴，牵着的手、落日下的拥抱和誓死的保护。女巫抱住了冲来的骑士，他们完成了最后的考验，恢复记忆。</p>
+<p>森林之神从树中走出，缓缓的向着两人靠近。“恭喜你们，两个好孩子，你们是近十年来通过的唯一一对恋人。互相的爱让骑士能击退鳄鱼、逃出漩涡并进入结界，让女巫能进入结界、吃下记忆果实。孩子们，我祝福你们长长久久，爱能让你们突破任何艰难险阻。这是森林的出口，再见了，孩子们。”说罢，指向两人身后的丛林，丛林仿佛收到了召唤，分裂出一道缝隙。</p>
+<p>骑士和女巫牵着手，向森林之神点头，并向出口走去，踏出一步，便回到了来时的石路上。</p>
+<p>这次的经历让两人更加爱并信任彼此，考验的收获是手腕的红绳更加牢固了。</p>
+]]></content>
+      <categories>
+        <category>睡前故事</category>
+      </categories>
+      <tags>
+        <tag>Hide</tag>
+        <tag>睡前故事</tag>
+        <tag>骑士与女巫</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>辛德勒的名单影评</title>
+    <url>/2020/11/17/%E8%BE%9B%E5%BE%B7%E5%8B%92%E7%9A%84%E5%90%8D%E5%8D%95%E5%BD%B1%E8%AF%84/</url>
+    <content><![CDATA[<h1 id="辛德勒的名单"><a href="#辛德勒的名单" class="headerlink" title="辛德勒的名单"></a>辛德勒的名单</h1><h3 id="暗黑中的一丝曙光"><a href="#暗黑中的一丝曙光" class="headerlink" title="暗黑中的一丝曙光"></a>暗黑中的一丝曙光</h3><p><img src="https://img-blog.csdnimg.cn/20201117121115471.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzgyNDEzOQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p><strong>——Whoever saves one life ,saves the world entire .*</strong></p>
+<p><strong><em>（当你挽救了一条生命就等于挽救了全世界。）\</em></strong></p>
+<a id="more"></a>
+
+<hr>
+<p><em>Schindler’s List（辛德勒的名单）是根据澳大利亚小说家托马斯·肯尼利所著的《辛德勒的名单》改编而成，由导演史蒂文·斯皮尔伯格执导的一部电影。影片再现了德国企业家奥斯卡·辛德勒与其夫人埃米莉·辛德勒在第二次世界大战期间倾家荡产保护了1200余名犹太人面遭法西斯杀害的真实事件。</em></p>
+<p><strong><em>如果你尊重一个人，如果你尊重生命，在那个时候，你记住那些名字，并拯救他们。辛德勒的行为，是荒谬的世界中，人性的反弹。他无法超越这荒谬吗，但他为人类争取回了良知。如果没有这样的良知，我想人类面对自身，也会感到愧疚。\</em></strong></p>
+<p><img src="https://img-blog.csdnimg.cn/20201117121115486.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzgyNDEzOQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p><em>这部电影用黑白画面给人以历史的沧桑感，营造出一种类似纪录片的氛围。整部电影的主旨是和平和救赎，它用清晰的条理给观众展现了一个名叫辛德勒的德国军火商由一开始的贪图一己私利到最后发自内心的想要拯救每个受法西斯迫害的犹太人这一转变过程。</em></p>
+<p><img src="https://img-blog.csdnimg.cn/20201117121115317.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzgyNDEzOQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p><em>首先，整部电影最关键的是人性的救赎。那么，什么是人性？</em></p>
+<p><strong><em>从字面上看，人性应该是长期聚居的人们通过长时间的口耳传承达成的一种对社会行为的集体认知和行为指导。通俗易懂的说，就是我们的道德准则。所以人性并不是电影中遥不可及的大道理，惩恶扬善，助弱扶残，这些都是人性最直接的表现。同样的，人性并非是某些人独有的属性，而是每个人心中的潜意识。\</em></strong></p>
+<hr>
+<p><em>以下便是我对于电影关于人性的解读：</em></p>
+<h2 id="音乐部分"><a href="#音乐部分" class="headerlink" title="音乐部分"></a><strong>音乐部分</strong></h2><p><em>当法西斯举起屠刀残杀无辜的犹太民众时，他们无情冷酷的脸庞将法西斯独有的残暴疯狂展现的一览无遗，我忘不了被纳粹追杀躲藏的妇孺，忘不了纳粹士兵在发现幸存犹太人后一拥而上的扫射，此时画面切换到一个绅士般的纳粹军官坐在犹太人家中的钢琴前拨弄琴键，莫扎特悦耳的乐章伴随着爆豆般的枪声犹如死神的歌声，导演熟练的运用音乐以一种看似荒诞的方式来讽刺纳粹的残暴与变态。</em></p>
+<p><img src="https://img-blog.csdnimg.cn/20201117121115462.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzgyNDEzOQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<hr>
+<h2 id="剧情部分"><a href="#剧情部分" class="headerlink" title="剧情部分"></a><strong>剧情部分</strong></h2><p><em>当辛德勒和妻子骑着马在山上目睹了城市中无辜的犹太民众正在被德国士兵大肆屠杀的野兽行为，当他在混乱的人群中看到那个穿着红衣服的小女孩慌张奔跑，他的内心顿悟了——在这乱世中，就算赚取再多的金钱也换不来人命;没有人性，再奢华再富有也终究只是一具行尸走肉·。影片用了很大篇幅交代辛德勒内心的转变，例如他开始利用自己积攒的人脉为工厂中的犹太工人谋取一线生机；在他的生日舞会上不顾他人的眼光亲吻了前来祝贺的犹太女士。</em></p>
+<p><img src="https://img-blog.csdnimg.cn/20201117121115445.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzgyNDEzOQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<h2 id="色彩部分"><a href="#色彩部分" class="headerlink" title="色彩部分"></a><strong>色彩部分</strong></h2><p><em>当电影即将结尾时，辛德勒看见纳粹士兵挖出那些在集中营被屠杀的人们的尸体，镜头给到身穿红色长裙女孩的身影躺在尸体堆中等待火花，小女孩的尸体早已腐烂，辛德勒的内心再次颤动。由于整部电影色彩为黑白，导演对小女孩的身影单独运用局部色相，使得画面具有冲击感。在黑白的尸体中，那一抹红显得异常刺眼，在这黑暗的时代，童真被无情淹没，希望被冷酷摧毁，更激起了观众对于人性的思考。</em></p>
+<p><img src="https://img-blog.csdnimg.cn/20201117121115397.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzgyNDEzOQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p><em>最后辛德勒终于明白了人性的意义，明白了名单意味着什么，该去做什么，他用尽自己的每一份力量，只为多救一人。这与电影开头那个唯利是图的军火商截然不同，辛德勒完成了人性的蜕变，这样的背景给了辛德勒自我救赎的机会，让他明白了生命的意义。后辛德勒终于明白了人性的意义，明白了名单意味着什么，该去做什么，他用尽自己的每一份力量，只为多救一人。这与电影开头那个唯利是图的军火商截然不同，辛德勒完成了人性的蜕变，这样的背景给了辛德勒自我救赎的机会，让他明白了生命的意义。</em></p>
+<p><em>最后辛德勒终于明白了人性的意义，明白了名单意味着什么，该去做什么，他用尽自己的每一份力量，只为多救一人。这与电影开头那个唯利是图的军火商截然不同，辛德勒完成了人性的蜕变，这样的背景给了辛德勒自我救赎的机会，让他明白了生命的意义。</em></p>
+<p><em>战争中虽然有人性曙光的闪耀，但更多的是黑暗与绝望。对于战争，以平民百姓的角度，无论属于哪一方，都没有真正的胜者。</em></p>
+<p><img src="https://img-blog.csdnimg.cn/20201117121115395.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzgyNDEzOQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p><strong>Today is history. Today will be remembered. Years from now the young will ask with wonder about this day. Today is history and you are part of it.</strong></p>
+<p><strong><em>身在和平年代无法体会战争年代的绝望，我们该庆幸自己出生在这个时代，愿世间没有战争。\</em></strong></p>
+]]></content>
+      <categories>
+        <category>影评</category>
+      </categories>
+      <tags>
+        <tag>影评</tag>
+        <tag>Hide</tag>
       </tags>
   </entry>
   <entry>
@@ -968,263 +1222,9 @@
         <category>Java Web</category>
       </categories>
       <tags>
+        <tag>Java</tag>
         <tag>Servlet</tag>
         <tag>Java Web</tag>
-        <tag>Java</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>三角判断</title>
-    <url>/2020/11/17/%E4%B8%89%E8%A7%92%E5%88%A4%E6%96%AD/</url>
-    <content><![CDATA[<h1 id="三角判断-基于C语言"><a href="#三角判断-基于C语言" class="headerlink" title="三角判断-基于C语言"></a>三角判断-基于C语言</h1><p><em>目的：此程序是为了判断输入的三角形三边，并判断三角形类型，包括等腰三角形、等边三角形、直角三角形、一般三角形及错值判定。</em></p>
-<a id="more"></a>
-
-<p>代码如下：</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;math.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">float</span> a, b, c;</span><br><span class="line">   </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;请输入三角形的三边:（用空格隔开，以回车结束）\n&quot;</span>);</span><br><span class="line">    scanf_s(<span class="string">&quot;%f%f%f&quot;</span>, &amp;a, &amp;b, &amp;c);</span><br><span class="line">    <span class="comment">//判断是否满足三角形条件：两边之和是否大于第三边；</span></span><br><span class="line">    <span class="keyword">if</span> (a == <span class="number">0</span> || b == <span class="number">0</span> || c == <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;输入边有空值0，错误！\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (a &lt; <span class="number">0</span> || b &lt; <span class="number">0</span> || c &lt; <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;输入边有负值，错误！\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (a + b &gt; c &amp;&amp; b + c &gt; a &amp;&amp; a + c &gt; a)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//判断三条边是否相等，三边相等即为等边三角形</span></span><br><span class="line">        <span class="keyword">if</span> (a == b &amp;&amp; a == c)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;等边三角形\n&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//判断三角形是否有两天边相等,两边相等即为等腰三角形</span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (a == b || a == c || b == c)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;等腰三角形\n&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//判断是否有两边的平方和大于第三边的平方，即为直角三角形</span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> ((a * a + b * b == c * c) || (a * a + c * c == b * b) || (b * b + c * c == a * a))</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;直角三角形\n&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//其他情况为一般三角形</span></span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;一般三角形\n&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//两边之和小于第三边，不能构成三角形</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;三边不能构成三角形\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    system(<span class="string">&quot;pause&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<hr>
-<p><strong>总结：最基本的C语言入门程序，对新手可以很好的了解各个运算符的作用以及if函数的运用。</strong></p>
-]]></content>
-      <categories>
-        <category>编程</category>
-        <category>C</category>
-      </categories>
-      <tags>
-        <tag>C语言</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>基于C语言的空格统计</title>
-    <url>/2020/11/17/%E5%9F%BA%E4%BA%8EC%E8%AF%AD%E8%A8%80%E7%9A%84%E7%A9%BA%E6%A0%BC%E7%BB%9F%E8%AE%A1/</url>
-    <content><![CDATA[<h1 id="空格统计小程序-基于C语言"><a href="#空格统计小程序-基于C语言" class="headerlink" title="空格统计小程序-基于C语言"></a>空格统计小程序-基于C语言</h1><p><em>首先，做这个程序的目的，是因为软件工程要求实例Jackson块图的实现，要求如下：</em></p>
-<p><em>1）设计程序统计每个记录中空格字符的个数，输出数据的格式是，每读入一个记录（字符串）之后，另起一行打印出这个字符串及其空格数；</em></p>
-<p><em>2）最后打印出文件中空格的总个数。</em></p>
-<a id="more"></a>
-
-
-
-<p><strong>下面列出代码，请参考，如需要求有差异，可自由修改代码以达成目标（此程序经vs测试通过）</strong></p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _CRT_SECURE_NO_WARNINGS     <span class="comment">//解决了在vs中使用fopen()函数报错的问题</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;windows.h&gt;    //调用windows.h头文件实现Sleep()函数，以得到期望的休眠，使得程序不会突兀</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX_FILED 128   <span class="comment">//根据估计文字不超过128字节，所以设定为128</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> buf[MAX_FILED];    <span class="comment">//创造数组用来记录文本</span></span><br><span class="line">    <span class="keyword">int</span> count = <span class="number">0</span>;          <span class="comment">//记录每段文本的空格数</span></span><br><span class="line">    <span class="keyword">int</span> wholecount = <span class="number">0</span>;     <span class="comment">//记录总空格数</span></span><br><span class="line">    <span class="keyword">int</span> len;                <span class="comment">//记录每行字符数</span></span><br><span class="line">    <span class="keyword">char</span> s1[] = <span class="string">&quot;Record 1：How many stages are there in the traditional software development model?&quot;</span>;</span><br><span class="line">    <span class="keyword">char</span> s2[] = <span class="string">&quot;Record 2：After entering the room,walk to the person sitting nearest to you and greet him/her with a “high five”.&quot;</span>;</span><br><span class="line">    <span class="keyword">char</span> s3[] = <span class="string">&quot;Record 3：What are encapsulated into an object?&quot;</span>;</span><br><span class="line">    <span class="keyword">char</span> s4[] = <span class="string">&quot;Record 4：What diagram is the following diagram? Simply describe the meaning of it.&quot;</span>;</span><br><span class="line"> </span><br><span class="line">    <span class="comment">//使用fopen()函数写入txt文件中的文本</span></span><br><span class="line">    FILE* fpWrite = fopen(<span class="string">&quot;Document.txt&quot;</span>, <span class="string">&quot;w&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span> (fpWrite == <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">fprintf</span>(fpWrite, <span class="string">&quot;%s\n&quot;</span>, s1);</span><br><span class="line">    <span class="built_in">fprintf</span>(fpWrite, <span class="string">&quot;%s\n&quot;</span>, s2);</span><br><span class="line">    <span class="built_in">fprintf</span>(fpWrite, <span class="string">&quot;%s\n&quot;</span>, s3);</span><br><span class="line">    <span class="built_in">fprintf</span>(fpWrite, <span class="string">&quot;%s\n&quot;</span>, s4);  </span><br><span class="line">    fclose(fpWrite);</span><br><span class="line">      </span><br><span class="line">    <span class="comment">//使用fopen()函数读取txt文件中的文本</span></span><br><span class="line">    FILE* Readtxt = fopen(<span class="string">&quot;Document.txt&quot;</span>, <span class="string">&quot;r&quot;</span>); <span class="comment">//&quot;r&quot; 以只读方式打开文件，该文件必须存在 | 此文件必须存在于程序根目录下否则无法运行</span></span><br><span class="line">    <span class="keyword">if</span> (Readtxt == <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;正在载入程序，统计中请稍等......\n\n&quot;</span>);</span><br><span class="line">    Sleep(<span class="number">5000</span>);    <span class="comment">//调用Sleep()函数休眠五秒</span></span><br><span class="line">       </span><br><span class="line">    <span class="keyword">while</span> (fgets(buf, MAX_FILED, Readtxt) != <span class="literal">NULL</span>)  <span class="comment">//fgets函数功能为从指定的流中读取数据，每次读取一行（配合fopen()使用是实现逐行读取）</span></span><br><span class="line">    &#123;</span><br><span class="line">        len = <span class="built_in">strlen</span>(buf);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= len; i++)</span><br><span class="line">            <span class="keyword">if</span> (buf[i] == <span class="number">32</span>)   <span class="comment">//判定空格，即空格ASCII码为32</span></span><br><span class="line">                count++;</span><br><span class="line">        wholecount += count;</span><br><span class="line">        buf[len - <span class="number">1</span>] = <span class="string">&#x27;\0&#x27;</span>;  <span class="comment">//通过判断空字符的结尾来确定换行</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%s\n&quot;</span>, buf);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;总字数是：%d\n空格字符数是：%d\n&quot;</span>, len - <span class="number">1</span>, count);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;正在计算下一段句子的空格数，请稍等......\n&quot;</span>);</span><br><span class="line">        Sleep(<span class="number">2000</span>);    <span class="comment">////调用Sleep()函数休眠两秒</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">        count = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;总的空格数为:%d\n&quot;</span>, wholecount);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;文本空格数已全部统计完成，请单击Enter退出程序，谢谢使用此程序^_^\n&quot;</span>);</span><br><span class="line">    fclose(Readtxt);</span><br><span class="line">    system(<span class="string">&quot;pause&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<hr>
-<p>此外还有Visio绘制的程序流程图</p>
-<p><img src="https://img-blog.csdnimg.cn/20201117142918848.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzgyNDEzOQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<hr>
-<p><strong>希望能在读写C语言读写方面对你有所启发和帮助！</strong></p>
-]]></content>
-      <categories>
-        <category>编程</category>
-        <category>C</category>
-      </categories>
-      <tags>
-        <tag>C语言</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>狩猎影评</title>
-    <url>/2020/11/17/%E7%8B%A9%E7%8C%8E%E5%BD%B1%E8%AF%84/</url>
-    <content><![CDATA[<h1 id="狩猎"><a href="#狩猎" class="headerlink" title="狩猎"></a>狩猎</h1><h3 id="秋天萧瑟的气氛，狩猎的季节，猎物却是一个老好人"><a href="#秋天萧瑟的气氛，狩猎的季节，猎物却是一个老好人" class="headerlink" title="-秋天萧瑟的气氛，狩猎的季节，猎物却是一个老好人"></a>-秋天萧瑟的气氛，狩猎的季节，猎物却是一个老好人</h3><p>-节选自知乎个人创作</p>
-<p><img src="https://img-blog.csdnimg.cn/2020111714310397.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzgyNDEzOQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<p><em>一部好的电影会让观众在观看时和观看后陷入深深的思考，不论思考的是什么，或是伦理道德，亦或是错综复杂的剧情和演员精湛的演技，也可以是勾起你深埋于心底的一段回忆。</em></p>
-<a id="more"></a>
-
-<p><img src="https://img-blog.csdnimg.cn/20201117121107735.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzgyNDEzOQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<p><em>《狩猎》就是这样一部影片，但是看过一遍后我不想再重温一遍，因为这部影片给我带来了深深的压抑感，这种压抑深入心中，使我无法对电影内涵做更深一步的思考和探索。</em></p>
-<p><img src="https://img-blog.csdnimg.cn/20201117121107789.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzgyNDEzOQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<p><em>看完《狩猎》，我不自觉的想到了韩国电影《熔炉》，同样的压抑感，同样的结局。你认为好人就该得到好报吗，因果循环吗？你错了，这两部电影都揭示出“坏人“的下场会比好人要好，吃亏的也总是心地善良的人。也许正是因为这两部电影共同的压抑感和带来的反思，让我把这两部电影串联在一起。</em></p>
-<p><img src="https://img-blog.csdnimg.cn/20201117121107780.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzgyNDEzOQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<p><em>《狩猎》的主要剧情梗概是这样的：男主卢卡斯是一家幼儿园的教师，倍受同事和孩子们的喜爱。但有一个叫卡拉的小女孩在玩游戏的过程中对卢卡斯示好却遭到拒绝。为了报复卢卡斯，卡拉将卢卡斯描述成一个暴露性器官的变态，让他背负了猥亵儿童的罪名，进而成为了小镇排挤的对象。卢卡斯的生活和在小镇的地位发生了巨大的改变，好友、女友、前妻都不在信任他，自己的宠爱的狗也因他而死，儿子被小镇的人侮辱。尽管卡拉告诉了同是卢卡斯朋友的父亲真相，卢卡斯的罪名也不成立，但周围的人已经不能像以前一样对待他，小镇的人们戴上了伪善的面纱，在结尾的一场狩猎中，有人在暗地里开枪差点把卢卡斯打死，电影戛然而止…</em></p>
-<p><em>这部影片的关键人物无疑是卡拉，没有她的谎言，也就没有之后发生的故事。谎言的背后一定有一个原因，也许是她对卢卡斯的爱慕，也许是她早熟的性格，但在我看来却是她家庭的教育和环境。从电影一开始对卡拉家庭的描述可以看出父母对她的管教是非常宽松的，以致于她自己乱跑在超市迷了路，她的父母都没有去寻找，只是认为她出去玩了。同时小镇相对封闭的环境却造就了居民之间相对开放的态度，从卢卡斯能随意的在卡拉家的壁橱中拿出杯子喝水和卡拉哥哥的朋友给卡拉看相片都能看出，这也给卡拉父亲有卢卡斯家的钥匙打下理论基础。所以如此典型的成长环境给了卡拉非常宽松的空间与自由，这与《熔炉》中封闭的学校环境相类似。</em></p>
-<p><em>从电影中我们可以看出，卡拉的父母在表达情感的时候都是非常直接的，相互表达爱意时会在卡拉面前接吻，出现矛盾时会大声争吵，这势必会对卡拉成长中的行为和内心产生巨大的影响。首先，卡拉吻卢卡斯的行为很可能是跟父母学的，孩子在成长的过程中总是不断的模仿学习，学习的最主要方式就是模仿。父母在孩子看到一些不属于这个年龄段的行为时应该做出引导，解释行为代表的意义。但是，小镇和家庭宽松的环境无法让卡拉得到父母及时的教育，才让卡拉做出不合适的举动。与此同时，父母在孩子面前的争吵也使得孩子的内心受到极大的影响，这也间接助使卡拉的报复心增长。在影片中，卡拉没有很好的管理好自己的感情，选错了给予感情的对象。但对于卡拉来说，真正对他好的也许只有卢卡斯一个人，她没有其他选择，才酿成了这种局面。</em></p>
-<p><em>这部电影看完带来的最直观的感受是一种无法发泄的负能量，一种深沉的压抑感，这也许是我对这部电影的另类喜爱吧，就像练琴时弹错了旋律老师就会打你，因为疼了，你才会真正记住。</em></p>
-<p><img src="https://img-blog.csdnimg.cn/20201117121107744.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzgyNDEzOQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<p>PS：强烈推荐男主角扮演者麦斯·米克尔森，丹麦男神，精湛的演艺把《狩猎》这部影片撑起，在困境中的绝望，那种无助的眼神真的是天生的演员才能做到。</p>
-]]></content>
-      <categories>
-        <category>影评</category>
-      </categories>
-      <tags>
-        <tag>影评</tag>
-        <tag>Hide</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>辛德勒的名单影评</title>
-    <url>/2020/11/17/%E8%BE%9B%E5%BE%B7%E5%8B%92%E7%9A%84%E5%90%8D%E5%8D%95%E5%BD%B1%E8%AF%84/</url>
-    <content><![CDATA[<h1 id="辛德勒的名单"><a href="#辛德勒的名单" class="headerlink" title="辛德勒的名单"></a>辛德勒的名单</h1><h3 id="暗黑中的一丝曙光"><a href="#暗黑中的一丝曙光" class="headerlink" title="暗黑中的一丝曙光"></a>暗黑中的一丝曙光</h3><p><img src="https://img-blog.csdnimg.cn/20201117121115471.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzgyNDEzOQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<p><strong>——Whoever saves one life ,saves the world entire .*</strong></p>
-<p><strong><em>（当你挽救了一条生命就等于挽救了全世界。）\</em></strong></p>
-<a id="more"></a>
-
-<hr>
-<p><em>Schindler’s List（辛德勒的名单）是根据澳大利亚小说家托马斯·肯尼利所著的《辛德勒的名单》改编而成，由导演史蒂文·斯皮尔伯格执导的一部电影。影片再现了德国企业家奥斯卡·辛德勒与其夫人埃米莉·辛德勒在第二次世界大战期间倾家荡产保护了1200余名犹太人面遭法西斯杀害的真实事件。</em></p>
-<p><strong><em>如果你尊重一个人，如果你尊重生命，在那个时候，你记住那些名字，并拯救他们。辛德勒的行为，是荒谬的世界中，人性的反弹。他无法超越这荒谬吗，但他为人类争取回了良知。如果没有这样的良知，我想人类面对自身，也会感到愧疚。\</em></strong></p>
-<p><img src="https://img-blog.csdnimg.cn/20201117121115486.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzgyNDEzOQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<p><em>这部电影用黑白画面给人以历史的沧桑感，营造出一种类似纪录片的氛围。整部电影的主旨是和平和救赎，它用清晰的条理给观众展现了一个名叫辛德勒的德国军火商由一开始的贪图一己私利到最后发自内心的想要拯救每个受法西斯迫害的犹太人这一转变过程。</em></p>
-<p><img src="https://img-blog.csdnimg.cn/20201117121115317.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzgyNDEzOQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<p><em>首先，整部电影最关键的是人性的救赎。那么，什么是人性？</em></p>
-<p><strong><em>从字面上看，人性应该是长期聚居的人们通过长时间的口耳传承达成的一种对社会行为的集体认知和行为指导。通俗易懂的说，就是我们的道德准则。所以人性并不是电影中遥不可及的大道理，惩恶扬善，助弱扶残，这些都是人性最直接的表现。同样的，人性并非是某些人独有的属性，而是每个人心中的潜意识。\</em></strong></p>
-<hr>
-<p><em>以下便是我对于电影关于人性的解读：</em></p>
-<h2 id="音乐部分"><a href="#音乐部分" class="headerlink" title="音乐部分"></a><strong>音乐部分</strong></h2><p><em>当法西斯举起屠刀残杀无辜的犹太民众时，他们无情冷酷的脸庞将法西斯独有的残暴疯狂展现的一览无遗，我忘不了被纳粹追杀躲藏的妇孺，忘不了纳粹士兵在发现幸存犹太人后一拥而上的扫射，此时画面切换到一个绅士般的纳粹军官坐在犹太人家中的钢琴前拨弄琴键，莫扎特悦耳的乐章伴随着爆豆般的枪声犹如死神的歌声，导演熟练的运用音乐以一种看似荒诞的方式来讽刺纳粹的残暴与变态。</em></p>
-<p><img src="https://img-blog.csdnimg.cn/20201117121115462.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzgyNDEzOQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<hr>
-<h2 id="剧情部分"><a href="#剧情部分" class="headerlink" title="剧情部分"></a><strong>剧情部分</strong></h2><p><em>当辛德勒和妻子骑着马在山上目睹了城市中无辜的犹太民众正在被德国士兵大肆屠杀的野兽行为，当他在混乱的人群中看到那个穿着红衣服的小女孩慌张奔跑，他的内心顿悟了——在这乱世中，就算赚取再多的金钱也换不来人命;没有人性，再奢华再富有也终究只是一具行尸走肉·。影片用了很大篇幅交代辛德勒内心的转变，例如他开始利用自己积攒的人脉为工厂中的犹太工人谋取一线生机；在他的生日舞会上不顾他人的眼光亲吻了前来祝贺的犹太女士。</em></p>
-<p><img src="https://img-blog.csdnimg.cn/20201117121115445.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzgyNDEzOQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="色彩部分"><a href="#色彩部分" class="headerlink" title="色彩部分"></a><strong>色彩部分</strong></h2><p><em>当电影即将结尾时，辛德勒看见纳粹士兵挖出那些在集中营被屠杀的人们的尸体，镜头给到身穿红色长裙女孩的身影躺在尸体堆中等待火花，小女孩的尸体早已腐烂，辛德勒的内心再次颤动。由于整部电影色彩为黑白，导演对小女孩的身影单独运用局部色相，使得画面具有冲击感。在黑白的尸体中，那一抹红显得异常刺眼，在这黑暗的时代，童真被无情淹没，希望被冷酷摧毁，更激起了观众对于人性的思考。</em></p>
-<p><img src="https://img-blog.csdnimg.cn/20201117121115397.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzgyNDEzOQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<p><em>最后辛德勒终于明白了人性的意义，明白了名单意味着什么，该去做什么，他用尽自己的每一份力量，只为多救一人。这与电影开头那个唯利是图的军火商截然不同，辛德勒完成了人性的蜕变，这样的背景给了辛德勒自我救赎的机会，让他明白了生命的意义。后辛德勒终于明白了人性的意义，明白了名单意味着什么，该去做什么，他用尽自己的每一份力量，只为多救一人。这与电影开头那个唯利是图的军火商截然不同，辛德勒完成了人性的蜕变，这样的背景给了辛德勒自我救赎的机会，让他明白了生命的意义。</em></p>
-<p><em>最后辛德勒终于明白了人性的意义，明白了名单意味着什么，该去做什么，他用尽自己的每一份力量，只为多救一人。这与电影开头那个唯利是图的军火商截然不同，辛德勒完成了人性的蜕变，这样的背景给了辛德勒自我救赎的机会，让他明白了生命的意义。</em></p>
-<p><em>战争中虽然有人性曙光的闪耀，但更多的是黑暗与绝望。对于战争，以平民百姓的角度，无论属于哪一方，都没有真正的胜者。</em></p>
-<p><img src="https://img-blog.csdnimg.cn/20201117121115395.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzgyNDEzOQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<p><strong>Today is history. Today will be remembered. Years from now the young will ask with wonder about this day. Today is history and you are part of it.</strong></p>
-<p><strong><em>身在和平年代无法体会战争年代的绝望，我们该庆幸自己出生在这个时代，愿世间没有战争。\</em></strong></p>
-]]></content>
-      <categories>
-        <category>影评</category>
-      </categories>
-      <tags>
-        <tag>影评</tag>
-        <tag>Hide</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>睡前故事-相遇</title>
-    <url>/2020/11/16/%E7%9D%A1%E5%89%8D%E6%95%85%E4%BA%8B-%E7%9B%B8%E9%81%87/</url>
-    <content><![CDATA[<h1 id="相遇"><a href="#相遇" class="headerlink" title="相遇"></a>相遇</h1><p>骑士生活在m王国，有一天m王国的国王Arthur在外征战时被俘，但因为敌国的君主看到了Arthur的乐观与不屈，决定放了他，但抛给他一个难题“女人真正想要的是什么？”，若回答出来则可以获得自由，给予了一年期限。</p>
-<p>于是Arthur开始向身边的人询问这个问题，母亲、妹妹、牧师……但没人能给出满意的答案。</p>
-<a id="more"></a>
-
-<p>有一位智者找到Arthur，并告诉他，城堡外的森林里有一位女巫，但性格刁蛮古怪，要求离谱。</p>
-<p>眼看期限将至，无可奈何的Arthur找到了女巫，女巫答应回答他的问题，但条件是要和骑士结婚。</p>
-<p>看着眼前丑陋不堪，散发着难闻气味的女巫，再看看跟自己多年挚友，威武高大的骑士。Arthur拒绝了，他不忍看到自己为了自由而牺牲兄弟。</p>
-<p>骑士知道这个消息后，毅然决然地对Arthur说：”我愿意娶她，为了您和国家。“</p>
-<p>于是婚礼被公诸于世，而Arthur也得到了问题的答案”女人真正想要的，是主宰自己的命运。”</p>
-<p>每个人都知道女巫说出的答案是真理，毫无疑问Arthur恢复了自由。</p>
-<p>婚礼上，女巫没有形象的行为举止令Arthur觉得恶心并忍不住哭泣，但骑士却一如既往的谦和。</p>
-<p>新婚之夜，骑士不顾别人的阻拦毅然决然地走进新房，准备面对一切，然而一个从未见过面的绝世美女却躺在了他的床上，女巫说：“我在一天的时间里，一半是丑陋的女巫，一半是倾城的美女，骑士，你想我白天变成美女还是晚上变成美女？”</p>
-<p>骑士回答道：“既然你说女人真正想要的是主宰自己的命运，那么就由你自己决定吧！”</p>
-<p>女巫终于热泪盈眶，“我选择白天夜晚都是美丽的女人，因为我爱你！”</p>
-]]></content>
-      <categories>
-        <category>睡前故事</category>
-      </categories>
-      <tags>
-        <tag>Hide</tag>
-        <tag>睡前故事</tag>
-        <tag>骑士与女巫</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>睡前故事-记忆森林</title>
-    <url>/2020/11/16/%E7%9D%A1%E5%89%8D%E6%95%85%E4%BA%8B-%E8%AE%B0%E5%BF%86%E6%A3%AE%E6%9E%97/</url>
-    <content><![CDATA[<h1 id="记忆森林"><a href="#记忆森林" class="headerlink" title="记忆森林"></a>记忆森林</h1><p>自从上次击败巨龙以后，一起探险的女巫和骑士一直牵着手从未放开过。</p>
-<p>经过几天跋涉，他们走进了一片森林中，这个森林中的大树都如参天般，从他们的视角只能看到一片绿色的灌木和草坪，颜色万千、大小不一的花朵。</p>
-<a id="more"></a>
-
-<p>但他们进入森林后，从天上看去，仿佛森林像一个移动的迷宫，一棵棵树如同一道道墙在不断移动，刚才的进口已经被封上。</p>
-<p>骑士在进来时，在第一颗树上绑上了红色的丝带，但此时此刻，那条红色的丝带却出现在了眼前，骑士警觉地回头说：“女巫，小心，这片森林有问题。”女巫用魔法棒在巫师帽里召唤出一只信鸽，信鸽飞出大树包围的范围，提供给女巫的是移动迷宫的奇异景象。女巫将见到的情景告诉骑士，并用魔法生成了一个红色的细绳在两个人的手腕连着。</p>
-<p>这时奇异的事情发生了，一只矮矮的小精灵，头上长着兔子耳朵，出现在了两人面前，并说道：“这个森林是森林之神留下的记忆森林，只有正直、善良和懂得爱的人才能离开。你们必须经过考验才能离开，考验为期三天，如果你们还记得彼此，那么考验通过。假如失败，你们将失去一切记忆，并永远留在这个森林。”说完，便离开了两人的视野。</p>
-<p>天暗下来了，两人熟练的搭起了帐篷，骑士钉好地钉，女巫将帐篷展开。女巫用魔法升起了篝火，因为森林的遮挡看不到星星，这一晚两个人都在帐篷里，骑士警戒着，女巫则进入了梦乡。梦里，女巫梦到了之前的一切经历，童年、少年和青年遇到骑士后的一点一滴。</p>
-<!-- more -->
-
-<p>第二天，天蒙蒙亮，女巫醒了，轻声嘀咕“我是谁？我在哪？”。</p>
-<p>旁边的骑士彻夜未眠，一直守护着女巫，他想抱过去，但随之而来的是一声清脆的巴掌声。“流氓！你干什么？”骑士一脸懵逼地看向女巫，“是我呀，骑士。陪你一起冒险的骑士。”</p>
-<p>“骑士？那我是谁？”“你是女巫，我们一起探险一年多了。天，可能是森林的考验。”</p>
-<p>“什么考验？”“我们得互相记得曾经的事才能离开这片森林。”</p>
-<p>“饿了吧，这是留下的干粮，你吃了吧”说完，骑士拿出了包好的干粮。</p>
-<p>“不吃，万一你在里面下毒怎么办…”骑士无奈地掰下一小块吃了一口。</p>
-<p>“走吧，得出去找找办法，让你恢复记忆。”骑士走在前面，女巫跟在后面，向森林的深处进发。</p>
-<p>走了一段时间，他们终于走入了森林的中心地区，整个森林围绕着一个湖，湖中心有一个小树包裹着的小岛。一时之间，他们无法进入湖心岛，而且湖中还有鳄鱼的存在，冒出的头已经说明了它们危险的存在。骑士只能把帐篷扎在湖的旁边，他坚信湖心岛一定有解决的线索或者方法。骑士开始砍伐一些树枝，制作船只。女巫直直地看着眼前这个男人，却什么也想不到，但心里却有一种特殊的感觉。</p>
-<p>骑士造船直到下午才完成，他自己一个人乘着小船，慢慢地划桨向湖心岛进发，他叮嘱了女巫留意他的情况，稍有不对立刻用系在船上的绳子把他拉回来。一开始，湖面安静，一切顺利，但进行到旅程的三分之一时，几只鳄鱼朝着小船游来，骑士拔出长剑，准备迎战。鳄鱼下一刻突然地跃出水面，直扑骑士而去，但骑士用剑挑飞扑来的鳄鱼，不想伤及动物的他只能被动的对付着鳄鱼。但更糟糕的是，在旅程的三分之二时，水面形成了一个漩涡，说明水下有强大的吸力在把所有东西往里拉，鳄鱼也不见了，但小船却无法前进，被牢牢的吸住，一点一点的朝着漩涡中心移动，骑士赶忙叫女巫拉绳子，自己借小船踏了一步，抓住绳子回到了岸边。</p>
-<p>天色逐渐变黑，篝火再次升起，这次骑士识相的没有进帐篷，女巫一个人在帐篷脑袋空空的，想想起什么却又想不起来，骑士则一如既往的像一块石头一样，守护着女巫。</p>
-<p>又过了一晚，第三天，两人都是整晚没有休息，骑士在守护，女巫在努力回忆着什么。</p>
-<p>第三天清晨，鸟鸣声响彻森林，女巫仿佛之间记起了一些魔法，其中就包括飞行法术。走出帐篷，对骑士说：“我能送你过去，我记起飞行法术了。”骑士放心的将后背交给女巫，但女巫施法后却自己飞了起来直奔湖心岛而去，内心强烈渴求找回记忆，和对骑士莫名的感觉让她想自己去找寻答案。“诶，别走！”骑士望着渐渐飞远的女巫只能重新想办法渡湖。</p>
-<p>女巫进入湖心岛，看到整座岛屿都围绕着一颗古树，这棵古树的年纪怕是有女巫的几十倍大。古树上结着许多果实，红的、绿的、蓝的，各式各样，奇妙的是每个果实上都如同屏幕一般播放着女巫的一段记忆。小时戴着比自己还高的巫师帽跟着妈妈学习魔法、长大自己一个人在外面闯荡帮助人们、和骑士一起战胜巨龙……这些记忆存在于一个个果实上。树的周围有一层绿色的结界保护，女巫尝试着用手碰了一下，刺骨的剧痛使女巫发出叫声并连忙将手收回。骑士听到女巫的叫声，放下手中的树枝，直接跳下了湖，朝对面游去。</p>
-<p>骑士一边用长剑击退朝他游来的鳄鱼，一边用尽全力抵抗着漩涡的吸力。女巫正在尝试用自己的身躯越过结界，但难忍的剧痛让她一次次后退，又一次次前进，发出低沉的叫声。骑士已经担心到了极点，拼了全力终于抵达了对岸。这一次，女巫积攒了全部的力气，朝着结界冲了过去，骑士赶忙在身后追着，但被结界撞了回来。女巫过去了，拖着在这些年的冒险中收到的疼痛总和还要多的痛。</p>
-<p>女巫摘下一颗果实，吃了下去，一段儿时的记忆立马浮现在脑海之中，紧接着的是一段段快乐的回忆，快乐让她嘴角带着笑。紧接着是骑士曾经死去的回忆，这些痛苦的记忆，吃下去后，女巫不停的哭泣落泪，抑制不了心中的悲伤。骑士硬扛着结界的痛苦，迈过去了半个身子，女巫不断地吃下了果实，酸甜苦辣的回忆不断冲击着脑海。等到女巫吃下最后一个果子，骑士才进入了结界内，女巫的脸绯红着，最后的果子是关于骑士的回忆，曾经的点点滴滴，牵着的手、落日下的拥抱和誓死的保护。女巫抱住了冲来的骑士，他们完成了最后的考验，恢复记忆。</p>
-<p>森林之神从树中走出，缓缓的向着两人靠近。“恭喜你们，两个好孩子，你们是近十年来通过的唯一一对恋人。互相的爱让骑士能击退鳄鱼、逃出漩涡并进入结界，让女巫能进入结界、吃下记忆果实。孩子们，我祝福你们长长久久，爱能让你们突破任何艰难险阻。这是森林的出口，再见了，孩子们。”说罢，指向两人身后的丛林，丛林仿佛收到了召唤，分裂出一道缝隙。</p>
-<p>骑士和女巫牵着手，向森林之神点头，并向出口走去，踏出一步，便回到了来时的石路上。</p>
-<p>这次的经历让两人更加爱并信任彼此，考验的收获是手腕的红绳更加牢固了。</p>
-]]></content>
-      <categories>
-        <category>睡前故事</category>
-      </categories>
-      <tags>
-        <tag>Hide</tag>
-        <tag>睡前故事</tag>
-        <tag>骑士与女巫</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>睡前故事-骑士与恶龙</title>
-    <url>/2020/11/16/%E7%9D%A1%E5%89%8D%E6%95%85%E4%BA%8B-%E9%AA%91%E5%A3%AB%E4%B8%8E%E6%81%B6%E9%BE%99/</url>
-    <content><![CDATA[<h1 id="骑士与恶龙"><a href="#骑士与恶龙" class="headerlink" title="骑士与恶龙"></a>骑士与恶龙</h1><p>今天是骑士与女巫在外冒险的第397天了，他们并着肩走在一望无垠的大草原上，微风拂面，已入正暑的气温略显炎热，落下的夕阳犹如一个火球一般映照着大地。</p>
-<p>一路上，这对默契的伙伴有说有笑，但远处却有一只巨大的瞳孔正在盯着他们…</p>
-<p>走到河边，太阳已经落下，两人熟练的扎好帐篷、升起篝火。远处低沉的狼嚎声在广阔的草原显得额外响亮，但下一瞬却又突然中止，似乎在预示着什么。</p>
-<p>两个人躺在草地上，抬头看着星星，诉说着这一路走来的经历-生与死的战斗、默契的配合和每天看星星的习惯…自从上次打败年以后，这对搭档已经经历了许多有趣但又危险的冒险。</p>
-<p>正当两个人各自回帐篷，准备休息时，一声巨大的气流共振声传来，一双巨大的瞳孔在空中盯着地上的两人，下一刻便直接俯冲向两人。</p>
-<a id="more"></a>
-
-<p>两人敏捷的躲过这一击，通过篝火的映照看到了一只巨大的黑色巨龙，骑士赶忙拔出剑鞘内的长剑，举起盾站在女巫面前，女巫则举起魔法棒护在骑士身后，多次的战斗让他们锻炼出了非常难得的默契。</p>
-<p>巨龙悬停在空中，双方就这么僵持着，巨龙开口，发出低沉又巨大的声音：“今天你们只能走一个人，另一个将永远的留在这里。”</p>
-<p>“还没试过你怎么知道只能走一个人…”骑士回应。</p>
-<p>巨龙再一次冲向骑士，女巫举起魔法棒，念着咒语，瞬间一道屏障展开在两人面前，但巨龙的撞击令这一道隐形的屏障碎裂，虽然延缓了一下巨龙的速度，但巨大的龙爪伴随着空气撕裂的低鸣拍打而来，骑士用长剑用力劈向巨爪，一瞬间巨大的冲击将两边都震开一段距离，骑士看着手中颤抖的长剑，虎口已经渗出鲜血。</p>
-<p>“看来今天不好对付了。如果一会形势还是这么差，我掩护你先走。”骑士对着女巫讲。</p>
-<p>“不！要走一起走，要死留下来一起死。”女巫不满的说道。</p>
-<p>骑士再次咬牙，握紧手中的长剑，巨龙再次直直地冲向骑士，女巫用魔法砸出一个火球。龙爪丝毫没有减速直接撞向火球，虽然被烫伤但速度不减地砸向骑士，骑士左手用盾挡下巨爪，并用右手的长剑回击，砍下了数块鳞片，但自己被震飞出去。</p>
-<p>几次迂回，女巫耗尽了法力，对战两方都背负了各自的信仰，巨龙只为了自己嗜血的本性，骑士为了他身后的女孩，现在双方都遍体鳞伤，巨龙翅膀和身体都布满了长剑划开的口子，骑士也浑身带有血渍。巨龙沉重的喘息，心脏像汽车引擎跳动着，黄色的巨瞳虽然浑浊但仍然发出巨大的威压。</p>
-<p>骑士知道这是一场只有一个人站着的战斗，他想起了去世的导师留下的剑谱，最后一条禁忌之术是用自己的血来填充长剑的杀意，但副作用却会迷失自己。但此时已经无法思考，只能使用禁忌之术，划开自己的手腕，鲜血一滴滴的滴到长剑上，长剑逐渐变成红色，骑士的瞳孔也逐渐变红，在最后一刻说：“女巫，如果我战死了，你赶紧逃离这里，如果我赢了，杀了我。”</p>
-<p>女巫失去了法力，只能在一旁看着这个场景，内心也在纠结着如何拯救骑士。</p>
-<p>随着仪式的完成，骑士仿佛蜕变成了血色覆盖的杀神。骑士挥出一击，血色的剑刃和巨龙的翅膀撞击，下一瞬巨龙的翅膀像蛋糕一样被切成两半，但龙爪也在骑士身上留下了三道血痕。</p>
-<p>再次经历几次交手，巨龙已经走到了生命的尽头，骑士也在死撑着目前的状态，巨龙深知自己生命受到巨大的威胁，拼出生命的全部力量，从口中吐出龙之炎息，骑士将头举过头顶，用尽全力劈下，在龙炎中劈出了一道缺口，直取巨龙的头颅而去，随着最后一声哀鸣，巨龙倒下了。</p>
-<p>骑士也用剑抵着大地，单膝跪下，“我赢了，女巫，杀了我吧，我不知道什么时候会失控。我一直都很爱你，很爱很爱你，不能陪你到老了，对不起…”</p>
-<p>女巫红着眼眶，“我不可能做这样的事，我们会一直走下去直到终老。”</p>
-<p>说完，骑士背后长出了一对黑色的翅膀，“屠龙者，最后终将变成恶龙。”典故所记载的却是事实，这是巨龙的诅咒。下一刻，骑士抓住了女巫的脖子，龙的嗜血此时控制了骑士，但又松开了，内心仅存的对女巫的爱和人性暂时抑制了龙性，骑士举起长剑，“我知道你下不了手，这是我最后能救你的方法了，对不起。”</p>
-<p>骑士将长剑刺入了自己的心脏，嘴角带着笑，缓慢的倒下了。</p>
-<p>“骑士，不！”女巫嘶吼着。一滴滴泪水滴落在骑士的伤口上，悄无声息的变化发生在骑士身上，伤口正在痊愈，肤色也从雪白逐渐恢复血色。</p>
-<p>女巫没有想到的是，在她离开自己的母亲也是她的女巫导师时，母亲没有告诉她女巫带有最真挚爱的眼泪是能治愈一切的物品，但一生只能生效一次。</p>
-<p>骑士缓慢的睁开了眼睛，看着女巫哭泣，“我还没死呢…”</p>
-<p>女巫不敢相信眼前的一切，紧紧的抱住骑士，骑士抚摸着女巫的头，也许这就是天意吧，骑士不明所以的恢复了。</p>
-<p>这一天好漫长，两人相互抱着，第二天的朝阳升起…</p>
-]]></content>
-      <categories>
-        <category>睡前故事</category>
-      </categories>
-      <tags>
-        <tag>Hide</tag>
-        <tag>睡前故事</tag>
-        <tag>骑士与女巫</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Servlet</title>
-    <url>/2020/11/16/Servlet/</url>
-    <content><![CDATA[<p><strong><em>Welcome to my Blog! This is my first article. The following are my study notes for learning Servlet.</em></strong></p>
-<h1 id="Reasonable-use-of-SQL-statements"><a href="#Reasonable-use-of-SQL-statements" class="headerlink" title="Reasonable use of SQL statements"></a>Reasonable use of SQL statements</h1><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">String sql = <span class="string">&quot;insert into T_BOOK(BID,BNAME,BAUTHER,BTYPE,BPRICE,BAMOUNT,BPUBDATE)&quot;</span>;</span><br><span class="line">sql=sql+<span class="string">&quot; values(&#x27;&quot;</span>+BID+<span class="string">&quot;&#x27;,&#x27;&quot;</span>+BNAME+<span class="string">&quot;&#x27;,&#x27;&quot;</span>+BAUTHER+<span class="string">&quot;&#x27;,&#x27;&quot;</span>+BTYPE+<span class="string">&quot;&#x27;,&#x27;&quot;</span>+BPRICE+<span class="string">&quot;&#x27;,&quot;</span>+BAMOUNT+<span class="string">&quot;,&#x27;&quot;</span>+BPUBDATE+<span class="string">&quot;&#x27;)&quot;</span>;</span><br><span class="line"></span><br><span class="line">String sql = <span class="string">&quot;update T_BOOK set BAMOUNT = &quot;</span>+BAMOUNT+<span class="string">&quot; where BID = &#x27;&quot;</span>+BID+<span class="string">&quot;&#x27;&quot;</span>;</span><br><span class="line"></span><br><span class="line">String sql = <span class="string">&quot;select * from T_BOOK where BNAME like &#x27;%&quot;</span>+input+<span class="string">&quot;%&#x27;&quot;</span>;</span><br><span class="line"></span><br><span class="line">String sql = <span class="string">&quot;select * from T_BOOK where BPRICE between &quot;</span>+Low+<span class="string">&quot; and &quot;</span>+High;</span><br></pre></td></tr></table></figure>
-
-<p><em>Proficiency in the SQL language is a prerequisite for implementing various operations through the servlet link to the database.</em></p>
-<p><em>Mastering the most basic insert, update and conditional search statements can achieve most database operations.</em></p>
-<hr>
-<h1 id="Connect-to-the-database-via-JDBC"><a href="#Connect-to-the-database-via-JDBC" class="headerlink" title="Connect to the database via JDBC"></a>Connect to the database via JDBC</h1><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Class.forName(<span class="string">&quot;com.microsoft.sqlserver.jdbc.SQLServerDriver&quot;</span>).newInstance();</span><br><span class="line">			String url=<span class="string">&quot;jdbc:sqlserver://localhost:1433;databaseName=?&quot;</span>;</span><br><span class="line">			String user=<span class="string">&quot;user&quot;</span>;</span><br><span class="line">			String password=<span class="string">&quot;password&quot;</span>;</span><br><span class="line">			conn=DriverManager.getConnection(url, user, password);</span><br></pre></td></tr></table></figure>
-
-<p><em>The project adopting MVC mode is to use JDBC technology to connect to the database.</em></p>
-<p><em>Please add sqljdbc.jar in the lib folder of WEB-INF to ensure that JDBC can be successfully called.</em></p>
-<hr>
-<h1 id="Use-of-Servlet-annotations"><a href="#Use-of-Servlet-annotations" class="headerlink" title="Use of Servlet annotations"></a>Use of Servlet annotations</h1><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@WebServlet(&quot;/Classname&quot;)</span></span><br></pre></td></tr></table></figure>
-
-<p><em>Using Servlet annotations can eliminate extra comments in web.xml, making the program more concise and portable.</em></p>
-<hr>
-<p><strong>Thank you for reading, I hope these tips can help you learn Servlet better.</strong></p>
-]]></content>
-      <categories>
-        <category>编程</category>
-        <category>Java Web</category>
-      </categories>
-      <tags>
-        <tag>Servlet</tag>
-        <tag>Java Web</tag>
-        <tag>Java</tag>
       </tags>
   </entry>
 </search>

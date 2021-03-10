@@ -1,9 +1,728 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Java后端面试笔记</title>
-    <url>/2021/03/09/Java%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<h1 id="Java后端面试笔记"><a href="#Java后端面试笔记" class="headerlink" title="Java后端面试笔记"></a>Java后端面试笔记</h1><h2 id="JVM相关"><a href="#JVM相关" class="headerlink" title="JVM相关"></a>JVM相关</h2><h3 id="1-修改Java字节码"><a href="#1-修改Java字节码" class="headerlink" title="1.修改Java字节码"></a>1.修改Java字节码</h3><p>在OpenJDK里有一个<code>AsmTools</code>项目，用来生成正确的或者不正确的java <code>.class</code>文件，主要用来测试和验证。</p>
+    <title>Java后端面试笔记-框架</title>
+    <url>/2021/03/10/Java%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0-%E6%A1%86%E6%9E%B6/</url>
+    <content><![CDATA[<h1 id="框架相关"><a href="#框架相关" class="headerlink" title="框架相关"></a>框架相关</h1><h2 id="1-SpringBoot-自动装配原理"><a href="#1-SpringBoot-自动装配原理" class="headerlink" title="1.SpringBoot 自动装配原理"></a>1.SpringBoot 自动装配原理</h2><h3 id="什么是-SpringBoot-自动装配？"><a href="#什么是-SpringBoot-自动装配？" class="headerlink" title="什么是 SpringBoot 自动装配？"></a>什么是 SpringBoot 自动装配？</h3><p>我们现在提到自动装配的时候，一般会和 Spring Boot 联系在一起。但是，实际上 Spring Framework 早就实现了这个功能。Spring Boot 只是在其基础上，通过 SPI 的方式，做了进一步优化。</p>
+<blockquote>
+<p>SpringBoot 定义了一套接口规范，这套规范规定：SpringBoot 在启动时会扫描外部引用 jar 包中的<code>META-INF/spring.factories</code>文件，将文件中配置的类型信息加载到 Spring 容器（此处涉及到 JVM 类加载机制与 Spring 的容器知识），并执行类中定义的各种操作。对于外部 jar 来说，只需要按照 SpringBoot 定义的标准，就能将自己的功能装置进 SpringBoot。</p>
+</blockquote>
+<p>没有 Spring Boot 的情况下，如果我们需要引入第三方依赖，需要手动配置，非常麻烦。但是，Spring Boot 中，我们直接引入一个 starter 即可。比如你想要在项目中使用 redis 的话，直接在项目中引入对应的 starter 即可。</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-data-redis<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>引入 starter 之后，我们通过少量注解和一些简单的配置就能使用第三方组件提供的功能了。</p>
+<p>在我看来，自动装配可以简单理解为：<strong>通过注解或者一些简单的配置就能在 Spring Boot 的帮助下实现某块功能。</strong></p>
+<a id="more"></a>
+
+<h3 id="SpringBoot-是如何实现自动装配的？如何实现按需加载？"><a href="#SpringBoot-是如何实现自动装配的？如何实现按需加载？" class="headerlink" title="SpringBoot 是如何实现自动装配的？如何实现按需加载？"></a>SpringBoot 是如何实现自动装配的？如何实现按需加载？</h3><p>我们先看一下 SpringBoot 的核心注解 <code>SpringBootApplication</code> 。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Target(&#123;ElementType.TYPE&#125;)</span></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span></span><br><span class="line"><span class="meta">@Documented</span></span><br><span class="line"><span class="meta">@Inherited</span></span><br><span class="line">&lt;<span class="number">1.</span>&gt;<span class="meta">@SpringBootConfiguration</span></span><br><span class="line">&lt;<span class="number">2.</span>&gt;<span class="meta">@ComponentScan</span></span><br><span class="line">&lt;<span class="number">3.</span>&gt;<span class="meta">@EnableAutoConfiguration</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> SpringBootApplication &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Target(&#123;ElementType.TYPE&#125;)</span></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span></span><br><span class="line"><span class="meta">@Documented</span></span><br><span class="line"><span class="meta">@Configuration</span> <span class="comment">//实际上它也是一个配置类</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> SpringBootConfiguration &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>大概可以把 <code>@SpringBootApplication</code>看作是 <code>@Configuration</code>、<code>@EnableAutoConfiguration</code>、<code>@ComponentScan</code> 注解的集合。根据 SpringBoot 官网，这三个注解的作用分别是：</p>
+<ul>
+<li><code>@EnableAutoConfiguration</code>：启用 SpringBoot 的自动配置机制</li>
+<li><code>@Configuration</code>：允许在上下文中注册额外的 bean 或导入其他配置类</li>
+<li><code>@ComponentScan</code>： 扫描被<code>@Component</code> (<code>@Service</code>,<code>@Controller</code>)注解的 bean，注解默认会扫描启动类所在的包下所有的类 ，可以自定义不扫描某些 bean。如下图所示，容器中将排除<code>TypeExcludeFilter</code>和<code>AutoConfigurationExcludeFilter</code>。</li>
+</ul>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210310151024.png"></p>
+<p><code>EnableAutoConfiguration</code> 是实现自动装配的重要注解，我们以这个注解入手。</p>
+<h3 id="EnableAutoConfiguration-实现自动装配的核心注解"><a href="#EnableAutoConfiguration-实现自动装配的核心注解" class="headerlink" title="@EnableAutoConfiguration:实现自动装配的核心注解"></a>@EnableAutoConfiguration:实现自动装配的核心注解</h3><p><code>EnableAutoConfiguration</code> 只是一个简单地注解，自动装配核心功能的实现实际是通过 <code>AutoConfigurationImportSelector</code>类。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Target(&#123;ElementType.TYPE&#125;)</span></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span></span><br><span class="line"><span class="meta">@Documented</span></span><br><span class="line"><span class="meta">@Inherited</span></span><br><span class="line"><span class="meta">@AutoConfigurationPackage</span> <span class="comment">//作用：将main包下的所欲组件注册到容器中</span></span><br><span class="line"><span class="meta">@Import(&#123;AutoConfigurationImportSelector.class&#125;)</span> <span class="comment">//加载自动装配类 xxxAutoconfiguration</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> EnableAutoConfiguration &#123;</span><br><span class="line">    String ENABLED_OVERRIDE_PROPERTY = <span class="string">&quot;spring.boot.enableautoconfiguration&quot;</span>;</span><br><span class="line"></span><br><span class="line">    Class&lt;?&gt;[] exclude() <span class="keyword">default</span> &#123;&#125;;</span><br><span class="line"></span><br><span class="line">    String[] excludeName() <span class="keyword">default</span> &#123;&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们现在重点分析下<code>AutoConfigurationImportSelector</code> 类到底做了什么？</p>
+<h3 id="AutoConfigurationImportSelector-加载自动装配类"><a href="#AutoConfigurationImportSelector-加载自动装配类" class="headerlink" title="AutoConfigurationImportSelector:加载自动装配类"></a>AutoConfigurationImportSelector:加载自动装配类</h3><p><code>AutoConfigurationImportSelector</code>类的继承体系如下：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AutoConfigurationImportSelector</span> <span class="keyword">implements</span> <span class="title">DeferredImportSelector</span>, <span class="title">BeanClassLoaderAware</span>, <span class="title">ResourceLoaderAware</span>, <span class="title">BeanFactoryAware</span>, <span class="title">EnvironmentAware</span>, <span class="title">Ordered</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">DeferredImportSelector</span> <span class="keyword">extends</span> <span class="title">ImportSelector</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">ImportSelector</span> </span>&#123;</span><br><span class="line">    String[] selectImports(AnnotationMetadata var1);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以看出，<code>AutoConfigurationImportSelector</code> 类实现了 <code>ImportSelector</code>接口，也就实现了这个接口中的 <code>selectImports</code>方法，该方法主要用于<strong>获取所有符合条件的类的全限定类名，这些类需要被加载到 IoC 容器中</strong>。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String[] NO_IMPORTS = <span class="keyword">new</span> String[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> String[] selectImports(AnnotationMetadata annotationMetadata) &#123;</span><br><span class="line">        <span class="comment">// &lt;1&gt;.判断自动装配开关是否打开</span></span><br><span class="line">        <span class="keyword">if</span> (!<span class="keyword">this</span>.isEnabled(annotationMetadata)) &#123;</span><br><span class="line">            <span class="keyword">return</span> NO_IMPORTS;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          <span class="comment">//&lt;2&gt;.获取所有需要装配的bean</span></span><br><span class="line">            AutoConfigurationMetadata autoConfigurationMetadata = AutoConfigurationMetadataLoader.loadMetadata(<span class="keyword">this</span>.beanClassLoader);</span><br><span class="line">            AutoConfigurationImportSelector.AutoConfigurationEntry autoConfigurationEntry = <span class="keyword">this</span>.getAutoConfigurationEntry(autoConfigurationMetadata, annotationMetadata);</span><br><span class="line">            <span class="keyword">return</span> StringUtils.toStringArray(autoConfigurationEntry.getConfigurations());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里我们需要重点关注一下<code>getAutoConfigurationEntry()</code>方法，这个方法主要负责加载自动配置类的。</p>
+<p>该方法调用链如下：</p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210310151300.png"></p>
+<p>现在我们结合<code>getAutoConfigurationEntry()</code>的源码来详细分析一下：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> AutoConfigurationEntry EMPTY_ENTRY = <span class="keyword">new</span> AutoConfigurationEntry();</span><br><span class="line"></span><br><span class="line"><span class="function">AutoConfigurationEntry <span class="title">getAutoConfigurationEntry</span><span class="params">(AutoConfigurationMetadata autoConfigurationMetadata, AnnotationMetadata annotationMetadata)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//&lt;1&gt;.</span></span><br><span class="line">        <span class="keyword">if</span> (!<span class="keyword">this</span>.isEnabled(annotationMetadata)) &#123;</span><br><span class="line">            <span class="keyword">return</span> EMPTY_ENTRY;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">//&lt;2&gt;.</span></span><br><span class="line">            AnnotationAttributes attributes = <span class="keyword">this</span>.getAttributes(annotationMetadata);</span><br><span class="line">            <span class="comment">//&lt;3&gt;.</span></span><br><span class="line">            List&lt;String&gt; configurations = <span class="keyword">this</span>.getCandidateConfigurations(annotationMetadata, attributes);</span><br><span class="line">            <span class="comment">//&lt;4&gt;.</span></span><br><span class="line">            configurations = <span class="keyword">this</span>.removeDuplicates(configurations);</span><br><span class="line">            Set&lt;String&gt; exclusions = <span class="keyword">this</span>.getExclusions(annotationMetadata, attributes);</span><br><span class="line">            <span class="keyword">this</span>.checkExcludedClasses(configurations, exclusions);</span><br><span class="line">            configurations.removeAll(exclusions);</span><br><span class="line">            configurations = <span class="keyword">this</span>.filter(configurations, autoConfigurationMetadata);</span><br><span class="line">            <span class="keyword">this</span>.fireAutoConfigurationImportEvents(configurations, exclusions);</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> AutoConfigurationImportSelector.AutoConfigurationEntry(configurations, exclusions);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>第 1 步</strong>:</p>
+<p>判断自动装配开关是否打开。默认<code>spring.boot.enableautoconfiguration=true</code>，可在 <code>application.properties</code> 或 <code>application.yml</code> 中设置</p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210310151411.png"></p>
+<p><strong>第 2 步</strong> ：</p>
+<p>用于获取<code>EnableAutoConfiguration</code>注解中的 <code>exclude</code> 和 <code>excludeName</code></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210310151439.png"></p>
+<p><strong>第 3 步</strong></p>
+<p>获取需要自动装配的所有配置类，读取<code>META-INF/spring.factories</code></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">spring-boot/spring-boot-project/spring-boot-autoconfigure/src/main/resources/META-INF/spring.factories</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210310151533.png"></p>
+<p>从下图可以看到这个文件的配置内容都被我们读取到了。<code>XXXAutoConfiguration</code>的作用就是按需加载组件。</p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210310151540.png"></p>
+<p>不光是这个依赖下的<code>META-INF/spring.factories</code>被读取到，所有 Spring Boot Starter 下的<code>META-INF/spring.factories</code>都会被读取到。</p>
+<p>所以，你可以清楚滴看到， druid 数据库连接池的 Spring Boot Starter 就创建了<code>META-INF/spring.factories</code>文件。</p>
+<p>如果，我们自己要创建一个 Spring Boot Starter，这一步是必不可少的。</p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210310151708.png"></p>
+<p><strong>第 4 步</strong> ：</p>
+<p>到这里可能面试官会问你:“<code>spring.factories</code>中这么多配置，每次启动都要全部加载么？”。</p>
+<p>很明显，这是不现实的。我们 debug 到后面你会发现，<code>configurations</code> 的值变小了。</p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210310151550.png"></p>
+<p>因为，这一步有经历了一遍筛选，<code>@ConditionalOnXXX</code> 中的所有条件都满足，该类才会生效。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="comment">// 检查相关的类：RabbitTemplate 和 Channel是否存在</span></span><br><span class="line"><span class="comment">// 存在才会加载</span></span><br><span class="line"><span class="meta">@ConditionalOnClass(&#123; RabbitTemplate.class, Channel.class &#125;)</span></span><br><span class="line"><span class="meta">@EnableConfigurationProperties(RabbitProperties.class)</span></span><br><span class="line"><span class="meta">@Import(RabbitAnnotationDrivenConfiguration.class)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RabbitAutoConfiguration</span> </span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> Spring Boot 提供的条件注解</p>
+<ul>
+<li><code>@ConditionalOnBean</code>：当容器里有指定 Bean 的条件下</li>
+<li><code>@ConditionalOnMissingBean</code>：当容器里没有指定 Bean 的情况下</li>
+<li><code>@ConditionalOnSingleCandidate</code>：当指定 Bean 在容器中只有一个，或者虽然有多个但是指定首选 Bean</li>
+<li><code>@ConditionalOnClass</code>：当类路径下有指定类的条件下</li>
+<li><code>@ConditionalOnMissingClass</code>：当类路径下没有指定类的条件下</li>
+<li><code>@ConditionalOnProperty</code>：指定的属性是否有指定的值</li>
+<li><code>@ConditionalOnResource</code>：类路径是否有指定的值</li>
+<li><code>@ConditionalOnExpression</code>：基于 SpEL 表达式作为判断条件</li>
+<li><code>@ConditionalOnJava</code>：基于 Java 版本作为判断条件</li>
+<li><code>@ConditionalOnJndi</code>：在 JNDI 存在的条件下差在指定的位置</li>
+<li><code>@ConditionalOnNotWebApplication</code>：当前项目不是 Web 项目的条件下</li>
+<li><code>@ConditionalOnWebApplication</code>：当前项目是 Web 项目的条件下</li>
+</ul>
+<h3 id="如何实现一个-Starter？"><a href="#如何实现一个-Starter？" class="headerlink" title="如何实现一个 Starter？"></a>如何实现一个 Starter？</h3><p>撸一个 starter，实现自定义线程池</p>
+<p>第一步，创建<code>threadpool-spring-boot-starter</code>工程</p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210310151933.png"></p>
+<p>第二步，引入 Spring Boot 相关依赖</p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210310151955.png"></p>
+<p>第三步，创建<code>ThreadPoolAutoConfiguration</code></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210310152017.png"></p>
+<p>第四步，在<code>threadpool-spring-boot-starter</code>工程的 resources 包下创建<code>META-INF/spring.factories</code>文件</p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210310152042.png"></p>
+<p>最后新建工程引入<code>threadpool-spring-boot-starter</code></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210310152103.png"></p>
+<p>测试通过</p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210310152130.png"></p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>Spring Boot 通过<code>@EnableAutoConfiguration</code>开启自动装配，通过 SpringFactoriesLoader 最终加载<code>META-INF/spring.factories</code>中的自动配置类实现自动装配，自动配置类其实就是通过<code>@Conditional</code>按需加载的配置类，想要其生效必须引入<code>spring-boot-starter-xxx</code>包实现起步依赖</p>
+<h2 id="2-SpringBoot-的启动流程"><a href="#2-SpringBoot-的启动流程" class="headerlink" title="2.SpringBoot 的启动流程"></a>2.SpringBoot 的启动流程</h2><h3 id="流程图"><a href="#流程图" class="headerlink" title="流程图"></a>流程图</h3><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210310190123.png"></p>
+<h3 id="源码及过程解析"><a href="#源码及过程解析" class="headerlink" title="源码及过程解析"></a>源码及过程解析</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> ConfigurableApplicationContext <span class="title">run</span><span class="params">(String... args)</span> </span>&#123;</span><br><span class="line">	<span class="comment">// 1.初始化stopWatcch(计数器),调用其start方法开始计时</span></span><br><span class="line">	StopWatch stopWatch = <span class="keyword">new</span> StopWatch();</span><br><span class="line">	stopWatch.start();</span><br><span class="line">	ConfigurableApplicationContext context = <span class="keyword">null</span>;</span><br><span class="line">	FailureAnalyzers analyzers = <span class="keyword">null</span>;</span><br><span class="line">	<span class="comment">// 2.设置系统属性java.awt.headless,这里设置为true,表示运行在服务器端，在没有显示器和鼠标键盘的模式下工作，模拟输入输出设备功能</span></span><br><span class="line">	configureHeadlessProperty();</span><br><span class="line">	<span class="comment">// 3.调用springApplicationRunListeners#starting</span></span><br><span class="line">	SpringApplicationRunListeners listeners = getRunListeners(args);</span><br><span class="line">	listeners.starting();</span><br><span class="line">	<span class="keyword">try</span> &#123;</span><br><span class="line">		<span class="comment">// 4.创建一个defaultApplicationArguments对象，他持有args参数（main函数中传入），调用prepareEnvironment方法</span></span><br><span class="line">		ApplicationArguments applicationArguments = <span class="keyword">new</span> DefaultApplicationArguments(args);</span><br><span class="line">		ConfigurableEnvironment environment = prepareEnvironment(listeners, applicationArguments);</span><br><span class="line">		<span class="comment">// 5.打印banner</span></span><br><span class="line">		Banner printedBanner = printBanner(environment);</span><br><span class="line">		<span class="comment">// 6.创建springboot上下文</span></span><br><span class="line">		context = createApplicationContext();</span><br><span class="line">		<span class="comment">// 7.初始化FailureAnalyzers</span></span><br><span class="line">		analyzers = <span class="keyword">new</span> FailureAnalyzers(context);</span><br><span class="line">		<span class="comment">// 8.调用prepareContext</span></span><br><span class="line">		prepareContext(context, environment, listeners, applicationArguments, printedBanner);</span><br><span class="line">		<span class="comment">// 9.调用AbstractApplicationContext#refresh</span></span><br><span class="line">		refreshContext(context);</span><br><span class="line">		<span class="comment">// 10.在容器完成刷新后，依次调用注册的Runners</span></span><br><span class="line">		afterRefresh(context, applicationArguments);</span><br><span class="line">		<span class="comment">// 11.调用SpringApplicationRunListeners#finished</span></span><br><span class="line">		listeners.finished(context, <span class="keyword">null</span>);</span><br><span class="line">		<span class="comment">// 12.停止计时</span></span><br><span class="line">		stopWatch.stop();</span><br><span class="line">		<span class="keyword">if</span> (<span class="keyword">this</span>.logStartupInfo) &#123;</span><br><span class="line">			<span class="keyword">new</span> StartupInfoLogger(<span class="keyword">this</span>.mainApplicationClass).logStarted(getApplicationLog(), stopWatch);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> context;</span><br><span class="line">	&#125; <span class="keyword">catch</span> (Throwable ex) &#123;</span><br><span class="line">		<span class="comment">// 13.初始化过程中出现异常时调用handelRunFailure进行处理，抛出IllegalStateException</span></span><br><span class="line">		handleRunFailure(context, listeners, analyzers, ex);</span><br><span class="line">		<span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(ex);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如上代码就是SpringBoot的启动流程了，其中注释也非常详细，主要步骤也已经标注，现将主要步骤总结如下：</p>
+<ol>
+<li>从<code>spring.factories</code>配置文件中<strong>加载<code>EventPublishingRunListener</code>对象</strong>，该对象拥有<code>SimpleApplicationEventMulticaster</code>属性，即在SpringBoot启动过程的不同阶段用来发射内置的生命周期事件;</li>
+<li><strong>准备环境变量</strong>，包括系统变量，环境变量，命令行参数，默认变量，<code>servlet</code>相关配置变量，随机值以及配置文件（比如<code>application.properties</code>）等;</li>
+<li>控制台<strong>打印SpringBoot的<code>bannner</code>标志</strong>；</li>
+<li><strong>根据不同类型环境创建不同类型的<code>applicationcontext</code>容器</strong>，因为这里是<code>servlet</code>环境，所以创建的是<code>AnnotationConfigServletWebServerApplicationContext</code>容器对象；</li>
+<li>从<code>spring.factories</code>配置文件中<strong>加载<code>FailureAnalyzers</code>对象</strong>,用来报告SpringBoot启动过程中的异常；</li>
+<li><strong>为刚创建的容器对象做一些初始化工作</strong>，准备一些容器属性值等，对<code>ApplicationContext</code>应用一些相关的后置处理和调用各个<code>ApplicationContextInitializer</code>的初始化方法来执行一些初始化逻辑等；</li>
+<li><strong>刷新容器</strong>，这一步至关重要。比如调用<code>bean factory</code>的后置处理器，注册<code>BeanPostProcessor</code>后置处理器，初始化事件广播器且广播事件，初始化剩下的单例<code>bean</code>和SpringBoot创建内嵌的<code>Tomcat</code>服务器等等重要且复杂的逻辑都在这里实现，主要步骤可见代码的注释，关于这里的逻辑会在以后的spring源码分析专题详细分析；</li>
+<li><strong>执行刷新容器后的后置处理逻辑</strong>，注意这里为空方法；</li>
+<li><strong>调用<code>ApplicationRunner</code>和<code>CommandLineRunner</code>的run方法</strong>，我们实现这两个接口可以在spring容器启动后需要的一些东西比如加载一些业务数据等;</li>
+<li><strong>报告启动异常</strong>，即若启动过程中抛出异常，此时用<code>FailureAnalyzers</code>来报告异常;</li>
+<li>最终<strong>返回容器对象</strong>，这里调用方法没有声明对象来接收。</li>
+</ol>
+<p>当然在SpringBoot启动过程中，每个不同的启动阶段会分别发射不同的内置生命周期事件，比如在准备<code>environment</code>前会发射<code>ApplicationStartingEvent</code>事件，在<code>environment</code>准备好后会发射<code>ApplicationEnvironmentPreparedEvent</code>事件，在刷新容器前会发射<code>ApplicationPreparedEvent</code>事件等，总之SpringBoot总共内置了7个生命周期事件，除了标志SpringBoot的不同启动阶段外，同时一些监听器也会监听相应的生命周期事件从而执行一些启动初始化逻辑。</p>
+<h2 id="3-Spring-IOC-amp-AOP"><a href="#3-Spring-IOC-amp-AOP" class="headerlink" title="3.Spring IOC &amp; AOP"></a>3.Spring IOC &amp; AOP</h2><h3 id="IoC"><a href="#IoC" class="headerlink" title="IoC"></a>IoC</h3><p>IoC（Inverse of Control:控制反转）是一种<strong>设计思想</strong>，就是 <strong>将原本在程序中手动创建对象的控制权，交由Spring框架来管理。</strong>  IoC 在其他语言中也有应用，并非 Spring 特有。 <strong>IoC 容器是 Spring 用来实现 IoC 的载体，  IoC 容器实际上就是个Map（key，value）,Map 中存放的是各种对象。</strong></p>
+<p>将对象之间的相互依赖关系交给 IoC 容器来管理，并由 IoC 容器完成对象的注入。这样可以很大程度上简化应用的开发，把应用从复杂的依赖关系中解放出来。  <strong>IoC 容器就像是一个工厂一样，当我们需要创建一个对象的时候，只需要配置好配置文件/注解即可，完全不用考虑对象是如何被创建出来的。</strong> 在实际项目中一个 Service 类可能有几百甚至上千个类作为它的底层，假如我们需要实例化这个 Service，你可能要每次都要搞清这个 Service 所有底层类的构造函数，这可能会把人逼疯。如果利用 IoC 的话，你只需要配置好，然后在需要的地方引用就行了，这大大增加了项目的可维护性且降低了开发难度。</p>
+<p>Spring 时代我们一般通过 XML 文件来配置 Bean，后来开发人员觉得 XML 文件来配置不太好，于是 SpringBoot 注解配置就慢慢开始流行起来。</p>
+<p><strong>Spring IoC的初始化过程：</strong> </p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210310202931.png"></p>
+<h3 id="依赖注入-DI"><a href="#依赖注入-DI" class="headerlink" title="依赖注入(DI)"></a>依赖注入(DI)</h3><p><strong>DI（Dependency Injection）</strong>，Spring IoC 不是一种技术，而是一种思想，通过这种思想，能够指导我们设计出松耦合的程序代码。而Spring IoC这个思想的作用体现在两个方面，一是如何将Bean装配到容器中去以及如何从容器中获取Bean，二是如何解决Bean之间的依赖关系，换句话说，就是如果由IoC容器来管理依赖关系，当一个Bean需要依赖另外一个Bean时，IoC容器如何实现这样的依赖关系。</p>
+<p>解决Spring中Bean之间的依赖的实现方式，在Spring的概念中就被称之为<strong>依赖注入（Dependency Injection，DI）</strong>。普遍认为的Spring依赖注入的实现方式有三种：构造方法注入、setter方法注入、注解注入。但，就我而言，我认为应该划分为两种形式——基于XML注入和基于注解注入，然后再细分为下面的形式：</p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1218435-20200805195048562-1750995069.png"></p>
+<hr>
+<h3 id="AOP"><a href="#AOP" class="headerlink" title="AOP"></a>AOP</h3><p>AOP( Aspect-Oriented Programming : 面向切面编程 ) 能够将那些与业务无关，<strong>却为业务模块所共同调用的逻辑或责任（例如事务处理、日志管理、权限控制等）封装起来</strong>，便于<strong>减少系统的重复代码</strong>，<strong>降低模块间的耦合度</strong>，并<strong>有利于未来的可拓展性和可维护性</strong>。</p>
+<p><strong>Spring AOP就是基于动态代理的</strong>，如果要代理的对象，实现了某个接口，那么Spring AOP会使用<strong>JDK Proxy</strong>，去创建代理对象，而对于没有实现接口的对象，就无法使用 JDK Proxy 去进行代理了，这时候Spring AOP会使用<strong>Cglib</strong> ，这时候Spring AOP会使用 <strong>Cglib</strong> 生成一个被代理对象的子类来作为代理，如下图所示：</p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/SpringAOPProcess.jpg" alt="SpringAOPProcess"></p>
+<p>当然你也可以使用 AspectJ ,Spring AOP 已经集成了AspectJ  ，AspectJ  应该算的上是 Java 生态系统中最完整的 AOP 框架了。</p>
+<p>使用 AOP 之后我们可以把一些通用功能抽象出来，在需要用到的地方直接使用即可，这样大大简化了代码量。我们需要增加新功能时也方便，这样也提高了系统扩展性。日志功能、事务管理等等场景都用到了 AOP 。</p>
+<h2 id="4-Spring-框架中的设计模式"><a href="#4-Spring-框架中的设计模式" class="headerlink" title="4.Spring 框架中的设计模式"></a>4.Spring 框架中的设计模式</h2><ul>
+<li><strong>工厂设计模式</strong> : Spring使用工厂模式通过 <code>BeanFactory</code>、<code>ApplicationContext</code> 创建 bean 对象。</li>
+<li><strong>代理设计模式</strong> : Spring AOP 功能的实现。</li>
+<li><strong>单例设计模式</strong> : Spring 中的 Bean 默认都是单例的。</li>
+<li><strong>模板方法模式</strong> : Spring 中 <code>jdbcTemplate</code>、<code>hibernateTemplate</code> 等以 Template 结尾的对数据库操作的类，它们就使用到了模板模式。</li>
+<li><strong>包装器设计模式</strong> : 我们的项目需要连接多个数据库，而且不同的客户在每次访问中根据需要会去访问不同的数据库。这种模式让我们可以根据客户的需求能够动态切换不同的数据源。</li>
+<li><strong>观察者模式:</strong> Spring 事件驱动模型就是观察者模式很经典的一个应用。</li>
+<li><strong>适配器模式</strong> :Spring AOP 的增强或通知(Advice)使用到了适配器模式、spring MVC 中也是用到了适配器模式适配<code>Controller</code>。</li>
+<li>……</li>
+</ul>
+]]></content>
+      <categories>
+        <category>面试</category>
+        <category>Java</category>
+        <category>笔记</category>
+      </categories>
+      <tags>
+        <tag>笔记</tag>
+        <tag>Java</tag>
+        <tag>面试</tag>
+        <tag>框架</tag>
+        <tag>SpringBoot</tag>
+        <tag>Spring</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Java后端面试笔记-Java8新特性</title>
+    <url>/2021/03/10/Java%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0-Java8%E6%96%B0%E7%89%B9%E6%80%A7/</url>
+    <content><![CDATA[<h1 id="Java8新特性"><a href="#Java8新特性" class="headerlink" title="Java8新特性"></a>Java8新特性</h1><h3 id="接口的默认方法-Default-Methods-for-Interfaces"><a href="#接口的默认方法-Default-Methods-for-Interfaces" class="headerlink" title="接口的默认方法(Default Methods for Interfaces)"></a>接口的默认方法(Default Methods for Interfaces)</h3><p>Java 8使我们能够通过使用 <code>default</code> 关键字向接口添加非抽象方法实现。 此功能也称为<a href="http://stackoverflow.com/a/24102730">虚拟扩展方法</a>。</p>
+<p>第一个例子：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">Formula</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">double</span> <span class="title">calculate</span><span class="params">(<span class="keyword">int</span> a)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">default</span> <span class="keyword">double</span> <span class="title">sqrt</span><span class="params">(<span class="keyword">int</span> a)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> Math.sqrt(a);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Formula 接口中除了抽象方法计算接口公式还定义了默认方法 <code>sqrt</code>。 实现该接口的类只需要实现抽象方法 <code>calculate</code>。 默认方法<code>sqrt</code> 可以直接使用。当然你也可以直接通过接口创建对象，然后实现接口中的默认方法就可以了，我们通过代码演示一下这种方式。</p>
+<a id="more"></a>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 通过匿名内部类方式访问接口</span></span><br><span class="line">    Formula formula = <span class="keyword">new</span> Formula() &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">calculate</span><span class="params">(<span class="keyword">int</span> a)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> sqrt(a * <span class="number">100</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    System.out.println(formula.calculate(<span class="number">100</span>));     <span class="comment">// 100.0</span></span><br><span class="line">    System.out.println(formula.sqrt(<span class="number">16</span>));           <span class="comment">// 4.0</span></span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> formula 是作为匿名对象实现的。该代码非常容易理解，6行代码实现了计算 <code>sqrt(a * 100)</code>。在下一节中，我们将会看到在 Java 8 中实现单个方法对象有一种更好更方便的方法。</p>
+<p><strong>译者注：</strong> 不管是抽象类还是接口，都可以通过匿名内部类的方式访问。不能通过抽象类或者接口直接创建对象。对于上面通过匿名内部类方式访问接口，我们可以这样理解：一个内部类实现了接口里的抽象方法并且返回一个内部类对象，之后我们让接口的引用来指向这个对象。</p>
+<h3 id="Lambda表达式-Lambda-expressions"><a href="#Lambda表达式-Lambda-expressions" class="headerlink" title="Lambda表达式(Lambda expressions)"></a>Lambda表达式(Lambda expressions)</h3><p>首先看看在老版本的Java中是如何排列字符串的：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">List&lt;String&gt; names = Arrays.asList(<span class="string">&quot;peter&quot;</span>, <span class="string">&quot;anna&quot;</span>, <span class="string">&quot;mike&quot;</span>, <span class="string">&quot;xenia&quot;</span>);</span><br><span class="line"></span><br><span class="line">Collections.sort(names, <span class="keyword">new</span> Comparator&lt;String&gt;() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(String a, String b)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> b.compareTo(a);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>只需要给静态方法<code> Collections.sort</code> 传入一个 List 对象以及一个比较器来按指定顺序排列。通常做法都是创建一个匿名的比较器对象然后将其传递给 <code>sort</code> 方法。</p>
+<p>在Java 8 中你就没必要使用这种传统的匿名对象的方式了，Java 8提供了更简洁的语法，lambda表达式：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Collections.sort(names, (String a, String b) -&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> b.compareTo(a);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>可以看出，代码变得更段且更具有可读性，但是实际上还可以写得更短：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Collections.sort(names, (String a, String b) -&gt; b.compareTo(a));</span><br></pre></td></tr></table></figure>
+
+<p>对于函数体只有一行代码的，你可以去掉大括号{}以及return关键字，但是你还可以写得更短点：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">names.sort((a, b) -&gt; b.compareTo(a));</span><br></pre></td></tr></table></figure>
+
+<p>List 类本身就有一个 <code>sort</code> 方法。并且Java编译器可以自动推导出参数类型，所以你可以不用再写一次类型。接下来我们看看lambda表达式还有什么其他用法。</p>
+<h3 id="函数式接口-Functional-Interfaces"><a href="#函数式接口-Functional-Interfaces" class="headerlink" title="函数式接口(Functional Interfaces)"></a>函数式接口(Functional Interfaces)</h3><p><strong>译者注：</strong> 原文对这部分解释不太清楚，故做了修改！</p>
+<p>Java 语言设计者们投入了大量精力来思考如何使现有的函数友好地支持Lambda。最终采取的方法是：增加函数式接口的概念。<strong>“函数式接口”是指仅仅只包含一个抽象方法,但是可以有多个非抽象方法(也就是上面提到的默认方法)的接口。</strong> 像这样的接口，可以被隐式转换为lambda表达式。<code>java.lang.Runnable</code> 与 <code>java.util.concurrent.Callable</code> 是函数式接口最典型的两个例子。Java 8增加了一种特殊的注解<code>@FunctionalInterface</code>,但是这个注解通常不是必须的(某些情况建议使用)，只要接口只包含一个抽象方法，虚拟机会自动判断该接口为函数式接口。一般建议在接口上使用<code>@FunctionalInterface</code> 注解进行声明，这样的话，编译器如果发现你标注了这个注解的接口有多于一个抽象方法的时候会报错的，如下图所示</p>
+<p><img src="https://my-blog-to-use.oss-cn-beijing.aliyuncs.com/2019-2/@FunctionalInterface.png" alt="@FunctionalInterface 注解"></p>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@FunctionalInterface</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Converter</span>&lt;<span class="title">F</span>, <span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">  <span class="function">T <span class="title">convert</span><span class="params">(F from)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// TODO 将数字字符串转换为整数类型</span></span><br><span class="line">Converter&lt;String, Integer&gt; converter = (from) -&gt; Integer.valueOf(from);</span><br><span class="line">Integer converted = converter.convert(<span class="string">&quot;123&quot;</span>);</span><br><span class="line">System.out.println(converted.getClass()); <span class="comment">//class java.lang.Integer</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>译者注：</strong> 大部分函数式接口都不用我们自己写，Java8都给我们实现好了，这些接口都在java.util.function包里。</p>
+<h3 id="方法和构造函数引用-Method-and-Constructor-References"><a href="#方法和构造函数引用-Method-and-Constructor-References" class="headerlink" title="方法和构造函数引用(Method and Constructor References)"></a>方法和构造函数引用(Method and Constructor References)</h3><p>前一节中的代码还可以通过静态方法引用来表示：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Converter&lt;String, Integer&gt; converter = Integer::valueOf;</span><br><span class="line">Integer converted = converter.convert(<span class="string">&quot;123&quot;</span>);</span><br><span class="line">System.out.println(converted.getClass());   <span class="comment">//class java.lang.Integer</span></span><br></pre></td></tr></table></figure>
+
+<p>Java 8允许您通过<code>::</code>关键字传递方法或构造函数的引用。 上面的示例显示了如何引用静态方法。 但我们也可以引用对象方法：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Something</span> </span>&#123;</span><br><span class="line">    <span class="function">String <span class="title">startsWith</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> String.valueOf(s.charAt(<span class="number">0</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Something something = <span class="keyword">new</span> Something();</span><br><span class="line">Converter&lt;String, String&gt; converter = something::startsWith;</span><br><span class="line">String converted = converter.convert(<span class="string">&quot;Java&quot;</span>);</span><br><span class="line">System.out.println(converted);    <span class="comment">// &quot;J&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>接下来看看构造函数是如何使用<code>::</code>关键字来引用的，首先我们定义一个包含多个构造函数的简单类：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    String firstName;</span><br><span class="line">    String lastName;</span><br><span class="line"></span><br><span class="line">    Person() &#123;&#125;</span><br><span class="line"></span><br><span class="line">    Person(String firstName, String lastName) &#123;</span><br><span class="line">        <span class="keyword">this</span>.firstName = firstName;</span><br><span class="line">        <span class="keyword">this</span>.lastName = lastName;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>接下来我们指定一个用来创建Person对象的对象工厂接口：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">PersonFactory</span>&lt;<span class="title">P</span> <span class="keyword">extends</span> <span class="title">Person</span>&gt; </span>&#123;</span><br><span class="line">    <span class="function">P <span class="title">create</span><span class="params">(String firstName, String lastName)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里我们使用构造函数引用来将他们关联起来，而不是手动实现一个完整的工厂：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">PersonFactory&lt;Person&gt; personFactory = Person::<span class="keyword">new</span>;</span><br><span class="line">Person person = personFactory.create(<span class="string">&quot;Peter&quot;</span>, <span class="string">&quot;Parker&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>我们只需要使用 <code>Person::new</code> 来获取Person类构造函数的引用，Java编译器会自动根据<code>PersonFactory.create</code>方法的参数类型来选择合适的构造函数。</p>
+<h3 id="Lamda-表达式作用域-Lambda-Scopes"><a href="#Lamda-表达式作用域-Lambda-Scopes" class="headerlink" title="Lamda 表达式作用域(Lambda Scopes)"></a>Lamda 表达式作用域(Lambda Scopes)</h3><h4 id="访问局部变量"><a href="#访问局部变量" class="headerlink" title="访问局部变量"></a>访问局部变量</h4><p>我们可以直接在 lambda 表达式中访问外部的局部变量：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">final</span> <span class="keyword">int</span> num = <span class="number">1</span>;</span><br><span class="line">Converter&lt;Integer, String&gt; stringConverter =</span><br><span class="line">        (from) -&gt; String.valueOf(from + num);</span><br><span class="line"></span><br><span class="line">stringConverter.convert(<span class="number">2</span>);     <span class="comment">// 3</span></span><br></pre></td></tr></table></figure>
+
+<p>但是和匿名对象不同的是，这里的变量num可以不用声明为final，该代码同样正确：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> num = <span class="number">1</span>;</span><br><span class="line">Converter&lt;Integer, String&gt; stringConverter =</span><br><span class="line">        (from) -&gt; String.valueOf(from + num);</span><br><span class="line"></span><br><span class="line">stringConverter.convert(<span class="number">2</span>);     <span class="comment">// 3</span></span><br></pre></td></tr></table></figure>
+
+<p>不过这里的 num 必须不可被后面的代码修改（即隐性的具有final的语义），例如下面的就无法编译：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> num = <span class="number">1</span>;</span><br><span class="line">Converter&lt;Integer, String&gt; stringConverter =</span><br><span class="line">        (from) -&gt; String.valueOf(from + num);</span><br><span class="line">num = <span class="number">3</span>;<span class="comment">//在lambda表达式中试图修改num同样是不允许的。</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="访问字段和静态变量"><a href="#访问字段和静态变量" class="headerlink" title="访问字段和静态变量"></a>访问字段和静态变量</h4><p>与局部变量相比，我们对lambda表达式中的实例字段和静态变量都有读写访问权限。 该行为和匿名对象是一致的。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Lambda4</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> outerStaticNum;</span><br><span class="line">    <span class="keyword">int</span> outerNum;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">testScopes</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Converter&lt;Integer, String&gt; stringConverter1 = (from) -&gt; &#123;</span><br><span class="line">            outerNum = <span class="number">23</span>;</span><br><span class="line">            <span class="keyword">return</span> String.valueOf(from);</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">        Converter&lt;Integer, String&gt; stringConverter2 = (from) -&gt; &#123;</span><br><span class="line">            outerStaticNum = <span class="number">72</span>;</span><br><span class="line">            <span class="keyword">return</span> String.valueOf(from);</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="访问默认接口方法"><a href="#访问默认接口方法" class="headerlink" title="访问默认接口方法"></a>访问默认接口方法</h4><p>还记得第一节中的 formula 示例吗？ <code>Formula</code> 接口定义了一个默认方法<code>sqrt</code>，可以从包含匿名对象的每个 formula 实例访问该方法。 这不适用于lambda表达式。</p>
+<p>无法从 lambda 表达式中访问默认方法,故以下代码无法编译：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Formula formula = (a) -&gt; sqrt(a * <span class="number">100</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="内置函数式接口-Built-in-Functional-Interfaces"><a href="#内置函数式接口-Built-in-Functional-Interfaces" class="headerlink" title="内置函数式接口(Built-in Functional Interfaces)"></a>内置函数式接口(Built-in Functional Interfaces)</h3><p>JDK 1.8 API包含许多内置函数式接口。 其中一些借口在老版本的 Java 中是比较常见的比如： <code>Comparator</code> 或<code>Runnable</code>，这些接口都增加了<code>@FunctionalInterface</code>注解以便能用在 lambda 表达式上。</p>
+<p>但是 Java 8 API 同样还提供了很多全新的函数式接口来让你的编程工作更加方便，有一些接口是来自 <a href="https://code.google.com/p/guava-libraries/">Google Guava</a> 库里的，即便你对这些很熟悉了，还是有必要看看这些是如何扩展到lambda上使用的。</p>
+<h4 id="Predicate"><a href="#Predicate" class="headerlink" title="Predicate"></a>Predicate</h4><p>Predicate 接口是只有一个参数的返回布尔类型值的 <strong>断言型</strong> 接口。该接口包含多种默认方法来将 Predicate 组合成其他复杂的逻辑（比如：与，或，非）：</p>
+<p><strong>译者注：</strong> Predicate 接口源码如下</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> java.util.function;</span><br><span class="line"><span class="keyword">import</span> java.util.Objects;</span><br><span class="line"></span><br><span class="line"><span class="meta">@FunctionalInterface</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Predicate</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 该方法是接受一个传入类型,返回一个布尔值.此方法应用于判断.</span></span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">test</span><span class="params">(T t)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//and方法与关系型运算符&quot;&amp;&amp;&quot;相似，两边都成立才返回true</span></span><br><span class="line">    <span class="function"><span class="keyword">default</span> Predicate&lt;T&gt; <span class="title">and</span><span class="params">(Predicate&lt;? <span class="keyword">super</span> T&gt; other)</span> </span>&#123;</span><br><span class="line">        Objects.requireNonNull(other);</span><br><span class="line">        <span class="keyword">return</span> (t) -&gt; test(t) &amp;&amp; other.test(t);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 与关系运算符&quot;!&quot;相似，对判断进行取反</span></span><br><span class="line">    <span class="function"><span class="keyword">default</span> Predicate&lt;T&gt; <span class="title">negate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> (t) -&gt; !test(t);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//or方法与关系型运算符&quot;||&quot;相似，两边只要有一个成立就返回true</span></span><br><span class="line">    <span class="function"><span class="keyword">default</span> Predicate&lt;T&gt; <span class="title">or</span><span class="params">(Predicate&lt;? <span class="keyword">super</span> T&gt; other)</span> </span>&#123;</span><br><span class="line">        Objects.requireNonNull(other);</span><br><span class="line">        <span class="keyword">return</span> (t) -&gt; test(t) || other.test(t);</span><br><span class="line">    &#125;</span><br><span class="line">   <span class="comment">// 该方法接收一个Object对象,返回一个Predicate类型.此方法用于判断第一个test的方法与第二个test方法相同(equal).</span></span><br><span class="line">    <span class="keyword">static</span> &lt;T&gt; <span class="function">Predicate&lt;T&gt; <span class="title">isEqual</span><span class="params">(Object targetRef)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> (<span class="keyword">null</span> == targetRef)</span><br><span class="line">                ? Objects::isNull</span><br><span class="line">                : object -&gt; targetRef.equals(object);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Predicate&lt;String&gt; predicate = (s) -&gt; s.length() &gt; <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">predicate.test(<span class="string">&quot;foo&quot;</span>);              <span class="comment">// true</span></span><br><span class="line">predicate.negate().test(<span class="string">&quot;foo&quot;</span>);     <span class="comment">// false</span></span><br><span class="line"></span><br><span class="line">Predicate&lt;Boolean&gt; nonNull = Objects::nonNull;</span><br><span class="line">Predicate&lt;Boolean&gt; isNull = Objects::isNull;</span><br><span class="line"></span><br><span class="line">Predicate&lt;String&gt; isEmpty = String::isEmpty;</span><br><span class="line">Predicate&lt;String&gt; isNotEmpty = isEmpty.negate();</span><br></pre></td></tr></table></figure>
+
+<h4 id="Function"><a href="#Function" class="headerlink" title="Function"></a>Function</h4><p>Function 接口接受一个参数并生成结果。默认方法可用于将多个函数链接在一起（compose, andThen）：</p>
+<p><strong>译者注：</strong> Function  接口源码如下</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> java.util.function;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> java.util.Objects;</span><br><span class="line"> </span><br><span class="line"><span class="meta">@FunctionalInterface</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Function</span>&lt;<span class="title">T</span>, <span class="title">R</span>&gt; </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//将Function对象应用到输入的参数上，然后返回计算结果。</span></span><br><span class="line">    <span class="function">R <span class="title">apply</span><span class="params">(T t)</span></span>;</span><br><span class="line">    <span class="comment">//将两个Function整合，并返回一个能够执行两个Function对象功能的Function对象。</span></span><br><span class="line">    <span class="keyword">default</span> &lt;V&gt; <span class="function">Function&lt;V, R&gt; <span class="title">compose</span><span class="params">(Function&lt;? <span class="keyword">super</span> V, ? extends T&gt; before)</span> </span>&#123;</span><br><span class="line">        Objects.requireNonNull(before);</span><br><span class="line">        <span class="keyword">return</span> (V v) -&gt; apply(before.apply(v));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// </span></span><br><span class="line">    <span class="keyword">default</span> &lt;V&gt; <span class="function">Function&lt;T, V&gt; <span class="title">andThen</span><span class="params">(Function&lt;? <span class="keyword">super</span> R, ? extends V&gt; after)</span> </span>&#123;</span><br><span class="line">        Objects.requireNonNull(after);</span><br><span class="line">        <span class="keyword">return</span> (T t) -&gt; after.apply(apply(t));</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">static</span> &lt;T&gt; <span class="function">Function&lt;T, T&gt; <span class="title">identity</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> t -&gt; t;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Function&lt;String, Integer&gt; toInteger = Integer::valueOf;</span><br><span class="line">Function&lt;String, String&gt; backToString = toInteger.andThen(String::valueOf);</span><br><span class="line">backToString.apply(<span class="string">&quot;123&quot;</span>);     <span class="comment">// &quot;123&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="Supplier"><a href="#Supplier" class="headerlink" title="Supplier"></a>Supplier</h4><p>Supplier 接口产生给定泛型类型的结果。 与 Function 接口不同，Supplier 接口不接受参数。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Supplier&lt;Person&gt; personSupplier = Person::<span class="keyword">new</span>;</span><br><span class="line">personSupplier.get();   <span class="comment">// new Person</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="Consumer"><a href="#Consumer" class="headerlink" title="Consumer"></a>Consumer</h4><p>Consumer 接口表示要对单个输入参数执行的操作。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Consumer&lt;Person&gt; greeter = (p) -&gt; System.out.println(<span class="string">&quot;Hello, &quot;</span> + p.firstName);</span><br><span class="line">greeter.accept(<span class="keyword">new</span> Person(<span class="string">&quot;Luke&quot;</span>, <span class="string">&quot;Skywalker&quot;</span>));</span><br></pre></td></tr></table></figure>
+
+<h4 id="Comparator"><a href="#Comparator" class="headerlink" title="Comparator"></a>Comparator</h4><p>Comparator 是老Java中的经典接口， Java 8在此之上添加了多种默认方法：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Comparator&lt;Person&gt; comparator = (p1, p2) -&gt; p1.firstName.compareTo(p2.firstName);</span><br><span class="line"></span><br><span class="line">Person p1 = <span class="keyword">new</span> Person(<span class="string">&quot;John&quot;</span>, <span class="string">&quot;Doe&quot;</span>);</span><br><span class="line">Person p2 = <span class="keyword">new</span> Person(<span class="string">&quot;Alice&quot;</span>, <span class="string">&quot;Wonderland&quot;</span>);</span><br><span class="line"></span><br><span class="line">comparator.compare(p1, p2);             <span class="comment">// &gt; 0</span></span><br><span class="line">comparator.reversed().compare(p1, p2);  <span class="comment">// &lt; 0</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Optional"><a href="#Optional" class="headerlink" title="Optional"></a>Optional</h2><p>Optional不是函数式接口，而是用于防止 NullPointerException 的漂亮工具。这是下一节的一个重要概念，让我们快速了解一下Optional的工作原理。</p>
+<p>Optional 是一个简单的容器，其值可能是null或者不是null。在Java 8之前一般某个函数应该返回非空对象但是有时却什么也没有返回，而在Java 8中，你应该返回 Optional 而不是 null。</p>
+<p>译者注：示例中每个方法的作用已经添加。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//of（）：为非null的值创建一个Optional</span></span><br><span class="line">Optional&lt;String&gt; optional = Optional.of(<span class="string">&quot;bam&quot;</span>);</span><br><span class="line"><span class="comment">// isPresent（）： 如果值存在返回true，否则返回false</span></span><br><span class="line">optional.isPresent();           <span class="comment">// true</span></span><br><span class="line"><span class="comment">//get()：如果Optional有值则将其返回，否则抛出NoSuchElementException</span></span><br><span class="line">optional.get();                 <span class="comment">// &quot;bam&quot;</span></span><br><span class="line"><span class="comment">//orElse（）：如果有值则将其返回，否则返回指定的其它值</span></span><br><span class="line">optional.orElse(<span class="string">&quot;fallback&quot;</span>);    <span class="comment">// &quot;bam&quot;</span></span><br><span class="line"><span class="comment">//ifPresent（）：如果Optional实例有值则为其调用consumer，否则不做处理</span></span><br><span class="line">optional.ifPresent((s) -&gt; System.out.println(s.charAt(<span class="number">0</span>)));     <span class="comment">// &quot;b&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>推荐阅读：<a href="https://blog.kaaass.net/archives/764">[Java8]如何正确使用Optional</a></p>
+<h2 id="Streams-流"><a href="#Streams-流" class="headerlink" title="Streams(流)"></a>Streams(流)</h2><p><code>java.util.Stream</code> 表示能应用在一组元素上一次执行的操作序列。Stream 操作分为中间操作或者最终操作两种，最终操作返回一特定类型的计算结果，而中间操作返回Stream本身，这样你就可以将多个操作依次串起来。Stream 的创建需要指定一个数据源，比如<code> java.util.Collection</code> 的子类，List 或者 Set， Map 不支持。Stream 的操作可以串行执行或者并行执行。</p>
+<p>首先看看Stream是怎么用，首先创建实例代码的用到的数据List：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">List&lt;String&gt; stringList = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">stringList.add(<span class="string">&quot;ddd2&quot;</span>);</span><br><span class="line">stringList.add(<span class="string">&quot;aaa2&quot;</span>);</span><br><span class="line">stringList.add(<span class="string">&quot;bbb1&quot;</span>);</span><br><span class="line">stringList.add(<span class="string">&quot;aaa1&quot;</span>);</span><br><span class="line">stringList.add(<span class="string">&quot;bbb3&quot;</span>);</span><br><span class="line">stringList.add(<span class="string">&quot;ccc&quot;</span>);</span><br><span class="line">stringList.add(<span class="string">&quot;bbb2&quot;</span>);</span><br><span class="line">stringList.add(<span class="string">&quot;ddd1&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>Java 8扩展了集合类，可以通过 Collection.stream() 或者 Collection.parallelStream() 来创建一个Stream。下面几节将详细解释常用的Stream操作：</p>
+<h3 id="Filter-过滤"><a href="#Filter-过滤" class="headerlink" title="Filter(过滤)"></a>Filter(过滤)</h3><p>过滤通过一个predicate接口来过滤并只保留符合条件的元素，该操作属于<strong>中间操作</strong>，所以我们可以在过滤后的结果来应用其他Stream操作（比如forEach）。forEach需要一个函数来对过滤后的元素依次执行。forEach是一个最终操作，所以我们不能在forEach之后来执行其他Stream操作。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 测试 Filter(过滤)</span></span><br><span class="line">stringList</span><br><span class="line">        .stream()</span><br><span class="line">        .filter((s) -&gt; s.startsWith(<span class="string">&quot;a&quot;</span>))</span><br><span class="line">        .forEach(System.out::println);<span class="comment">//aaa2 aaa1</span></span><br></pre></td></tr></table></figure>
+
+<p>forEach 是为 Lambda 而设计的，保持了最紧凑的风格。而且 Lambda 表达式本身是可以重用的，非常方便。</p>
+<h3 id="Sorted-排序"><a href="#Sorted-排序" class="headerlink" title="Sorted(排序)"></a>Sorted(排序)</h3><p>排序是一个 <strong>中间操作</strong>，返回的是排序好后的 Stream。<strong>如果你不指定一个自定义的 Comparator 则会使用默认排序。</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 测试 Sort (排序)</span></span><br><span class="line">stringList</span><br><span class="line">        .stream()</span><br><span class="line">        .sorted()</span><br><span class="line">        .filter((s) -&gt; s.startsWith(<span class="string">&quot;a&quot;</span>))</span><br><span class="line">        .forEach(System.out::println);<span class="comment">// aaa1 aaa2</span></span><br></pre></td></tr></table></figure>
+
+<p>需要注意的是，排序只创建了一个排列好后的Stream，而不会影响原有的数据源，排序之后原数据stringCollection是不会被修改的：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">System.out.println(stringList);<span class="comment">// ddd2, aaa2, bbb1, aaa1, bbb3, ccc, bbb2, ddd1</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Map-映射"><a href="#Map-映射" class="headerlink" title="Map(映射)"></a>Map(映射)</h3><p>中间操作 map 会将元素根据指定的 Function 接口来依次将元素转成另外的对象。</p>
+<p>下面的示例展示了将字符串转换为大写字符串。你也可以通过map来将对象转换成其他类型，map返回的Stream类型是根据你map传递进去的函数的返回值决定的。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 测试 Map 操作</span></span><br><span class="line">stringList</span><br><span class="line">        .stream()</span><br><span class="line">        .map(String::toUpperCase)</span><br><span class="line">        .sorted((a, b) -&gt; b.compareTo(a))</span><br><span class="line">        .forEach(System.out::println);<span class="comment">// &quot;DDD2&quot;, &quot;DDD1&quot;, &quot;CCC&quot;, &quot;BBB3&quot;, &quot;BBB2&quot;, &quot;AAA2&quot;, &quot;AAA1&quot;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Match-匹配"><a href="#Match-匹配" class="headerlink" title="Match(匹配)"></a>Match(匹配)</h3><p>Stream提供了多种匹配操作，允许检测指定的Predicate是否匹配整个Stream。所有的匹配操作都是 <strong>最终操作</strong> ，并返回一个 boolean 类型的值。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 测试 Match (匹配)操作</span></span><br><span class="line"><span class="keyword">boolean</span> anyStartsWithA =</span><br><span class="line">        stringList</span><br><span class="line">                .stream()</span><br><span class="line">                .anyMatch((s) -&gt; s.startsWith(<span class="string">&quot;a&quot;</span>));</span><br><span class="line">System.out.println(anyStartsWithA);      <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">boolean</span> allStartsWithA =</span><br><span class="line">        stringList</span><br><span class="line">                .stream()</span><br><span class="line">                .allMatch((s) -&gt; s.startsWith(<span class="string">&quot;a&quot;</span>));</span><br><span class="line"></span><br><span class="line">System.out.println(allStartsWithA);      <span class="comment">// false</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">boolean</span> noneStartsWithZ =</span><br><span class="line">        stringList</span><br><span class="line">                .stream()</span><br><span class="line">                .noneMatch((s) -&gt; s.startsWith(<span class="string">&quot;z&quot;</span>));</span><br><span class="line"></span><br><span class="line">System.out.println(noneStartsWithZ);      <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Count-计数"><a href="#Count-计数" class="headerlink" title="Count(计数)"></a>Count(计数)</h3><p>计数是一个 <strong>最终操作</strong>，返回Stream中元素的个数，<strong>返回值类型是 long</strong>。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//测试 Count (计数)操作</span></span><br><span class="line">  <span class="keyword">long</span> startsWithB =</span><br><span class="line">          stringList</span><br><span class="line">                  .stream()</span><br><span class="line">                  .filter((s) -&gt; s.startsWith(<span class="string">&quot;b&quot;</span>))</span><br><span class="line">                  .count();</span><br><span class="line">  System.out.println(startsWithB);    <span class="comment">// 3</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Reduce-规约"><a href="#Reduce-规约" class="headerlink" title="Reduce(规约)"></a>Reduce(规约)</h3><p>这是一个 <strong>最终操作</strong> ，允许通过指定的函数来讲stream中的多个元素规约为一个元素，规约后的结果是通过Optional 接口表示的：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//测试 Reduce (规约)操作</span></span><br><span class="line">Optional&lt;String&gt; reduced =</span><br><span class="line">        stringList</span><br><span class="line">                .stream()</span><br><span class="line">                .sorted()</span><br><span class="line">                .reduce((s1, s2) -&gt; s1 + <span class="string">&quot;#&quot;</span> + s2);</span><br><span class="line"></span><br><span class="line">reduced.ifPresent(System.out::println);<span class="comment">//aaa1#aaa2#bbb1#bbb2#bbb3#ccc#ddd1#ddd2</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>译者注：</strong> 这个方法的主要作用是把 Stream 元素组合起来。它提供一个起始值（种子），然后依照运算规则（BinaryOperator），和前面 Stream 的第一个、第二个、第 n 个元素组合。从这个意义上说，字符串拼接、数值的 sum、min、max、average 都是特殊的 reduce。例如 Stream 的 sum 就相当于<code>Integer sum = integers.reduce(0, (a, b) -&gt; a+b);</code>也有没有起始值的情况，这时会把 Stream 的前面两个元素组合起来，返回的是 Optional。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 字符串连接，concat = &quot;ABCD&quot;</span></span><br><span class="line">String concat = Stream.of(<span class="string">&quot;A&quot;</span>, <span class="string">&quot;B&quot;</span>, <span class="string">&quot;C&quot;</span>, <span class="string">&quot;D&quot;</span>).reduce(<span class="string">&quot;&quot;</span>, String::concat); </span><br><span class="line"><span class="comment">// 求最小值，minValue = -3.0</span></span><br><span class="line"><span class="keyword">double</span> minValue = Stream.of(-<span class="number">1.5</span>, <span class="number">1.0</span>, -<span class="number">3.0</span>, -<span class="number">2.0</span>).reduce(Double.MAX_VALUE, Double::min); </span><br><span class="line"><span class="comment">// 求和，sumValue = 10, 有起始值</span></span><br><span class="line"><span class="keyword">int</span> sumValue = Stream.of(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>).reduce(<span class="number">0</span>, Integer::sum);</span><br><span class="line"><span class="comment">// 求和，sumValue = 10, 无起始值</span></span><br><span class="line">sumValue = Stream.of(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>).reduce(Integer::sum).get();</span><br><span class="line"><span class="comment">// 过滤，字符串连接，concat = &quot;ace&quot;</span></span><br><span class="line">concat = Stream.of(<span class="string">&quot;a&quot;</span>, <span class="string">&quot;B&quot;</span>, <span class="string">&quot;c&quot;</span>, <span class="string">&quot;D&quot;</span>, <span class="string">&quot;e&quot;</span>, <span class="string">&quot;F&quot;</span>).</span><br><span class="line"> filter(x -&gt; x.compareTo(<span class="string">&quot;Z&quot;</span>) &gt; <span class="number">0</span>).</span><br><span class="line"> reduce(<span class="string">&quot;&quot;</span>, String::concat);</span><br></pre></td></tr></table></figure>
+
+<p>上面代码例如第一个示例的 reduce()，第一个参数（空白字符）即为起始值，第二个参数（String::concat）为 BinaryOperator。这类有起始值的 reduce() 都返回具体的对象。而对于第四个示例没有起始值的 reduce()，由于可能没有足够的元素，返回的是 Optional，请留意这个区别。更多内容查看： <a href="https://www.ibm.com/developerworks/cn/java/j-lo-java8streamapi/index.html">IBM：Java 8 中的 Streams API 详解</a> </p>
+<h2 id="Parallel-Streams-并行流"><a href="#Parallel-Streams-并行流" class="headerlink" title="Parallel Streams(并行流)"></a>Parallel Streams(并行流)</h2><p>前面提到过Stream有串行和并行两种，串行Stream上的操作是在一个线程中依次完成，而并行Stream则是在多个线程上同时执行。</p>
+<p>下面的例子展示了是如何通过并行Stream来提升性能：</p>
+<p>首先我们创建一个没有重复元素的大表：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> max = <span class="number">1000000</span>;</span><br><span class="line">List&lt;String&gt; values = <span class="keyword">new</span> ArrayList&lt;&gt;(max);</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; max; i++) &#123;</span><br><span class="line">    UUID uuid = UUID.randomUUID();</span><br><span class="line">    values.add(uuid.toString());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们分别用串行和并行两种方式对其进行排序，最后看看所用时间的对比。</p>
+<h3 id="Sequential-Sort-串行排序"><a href="#Sequential-Sort-串行排序" class="headerlink" title="Sequential Sort(串行排序)"></a>Sequential Sort(串行排序)</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//串行排序</span></span><br><span class="line"><span class="keyword">long</span> t0 = System.nanoTime();</span><br><span class="line"><span class="keyword">long</span> count = values.stream().sorted().count();</span><br><span class="line">System.out.println(count);</span><br><span class="line"></span><br><span class="line"><span class="keyword">long</span> t1 = System.nanoTime();</span><br><span class="line"></span><br><span class="line"><span class="keyword">long</span> millis = TimeUnit.NANOSECONDS.toMillis(t1 - t0);</span><br><span class="line">System.out.println(String.format(<span class="string">&quot;sequential sort took: %d ms&quot;</span>, millis));</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line"><span class="number">1000000</span></span><br><span class="line">sequential sort took: <span class="number">709</span> ms<span class="comment">//串行排序所用的时间</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Parallel-Sort-并行排序"><a href="#Parallel-Sort-并行排序" class="headerlink" title="Parallel Sort(并行排序)"></a>Parallel Sort(并行排序)</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//并行排序</span></span><br><span class="line"><span class="keyword">long</span> t0 = System.nanoTime();</span><br><span class="line"></span><br><span class="line"><span class="keyword">long</span> count = values.parallelStream().sorted().count();</span><br><span class="line">System.out.println(count);</span><br><span class="line"></span><br><span class="line"><span class="keyword">long</span> t1 = System.nanoTime();</span><br><span class="line"></span><br><span class="line"><span class="keyword">long</span> millis = TimeUnit.NANOSECONDS.toMillis(t1 - t0);</span><br><span class="line">System.out.println(String.format(<span class="string">&quot;parallel sort took: %d ms&quot;</span>, millis));</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="number">1000000</span></span><br><span class="line">parallel sort took: <span class="number">475</span> ms<span class="comment">//串行排序所用的时间</span></span><br></pre></td></tr></table></figure>
+
+<p>上面两个代码几乎是一样的，但是并行版的快了 50% 左右，唯一需要做的改动就是将 <code>stream()</code> 改为<code>parallelStream()</code>。</p>
+<h2 id="Maps"><a href="#Maps" class="headerlink" title="Maps"></a>Maps</h2><p>前面提到过，Map 类型不支持 streams，不过Map提供了一些新的有用的方法来处理一些日常任务。Map接口本身没有可用的 <code>stream（）</code>方法，但是你可以在键，值上创建专门的流或者通过 <code>map.keySet().stream()</code>,<code>map.values().stream()</code>和<code>map.entrySet().stream()</code>。</p>
+<p>此外,Maps 支持各种新的和有用的方法来执行常见任务。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Map&lt;Integer, String&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">    map.putIfAbsent(i, <span class="string">&quot;val&quot;</span> + i);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">map.forEach((id, val) -&gt; System.out.println(val));<span class="comment">//val0 val1 val2 val3 val4 val5 val6 val7 val8 val9</span></span><br></pre></td></tr></table></figure>
+
+<p><code>putIfAbsent</code> 阻止我们在null检查时写入额外的代码;<code>forEach</code>接受一个 consumer 来对 map 中的每个元素操作。</p>
+<p>此示例显示如何使用函数在 map 上计算代码：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">map.computeIfPresent(<span class="number">3</span>, (num, val) -&gt; val + num);</span><br><span class="line">map.get(<span class="number">3</span>);             <span class="comment">// val33</span></span><br><span class="line"></span><br><span class="line">map.computeIfPresent(<span class="number">9</span>, (num, val) -&gt; <span class="keyword">null</span>);</span><br><span class="line">map.containsKey(<span class="number">9</span>);     <span class="comment">// false</span></span><br><span class="line"></span><br><span class="line">map.computeIfAbsent(<span class="number">23</span>, num -&gt; <span class="string">&quot;val&quot;</span> + num);</span><br><span class="line">map.containsKey(<span class="number">23</span>);    <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line">map.computeIfAbsent(<span class="number">3</span>, num -&gt; <span class="string">&quot;bam&quot;</span>);</span><br><span class="line">map.get(<span class="number">3</span>);             <span class="comment">// val33</span></span><br></pre></td></tr></table></figure>
+
+<p>接下来展示如何在Map里删除一个键值全都匹配的项：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">map.remove(<span class="number">3</span>, <span class="string">&quot;val3&quot;</span>);</span><br><span class="line">map.get(<span class="number">3</span>);             <span class="comment">// val33</span></span><br><span class="line">map.remove(<span class="number">3</span>, <span class="string">&quot;val33&quot;</span>);</span><br><span class="line">map.get(<span class="number">3</span>);             <span class="comment">// null</span></span><br></pre></td></tr></table></figure>
+
+<p>另外一个有用的方法：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">map.getOrDefault(<span class="number">42</span>, <span class="string">&quot;not found&quot;</span>);  <span class="comment">// not found</span></span><br></pre></td></tr></table></figure>
+
+<p>对Map的元素做合并也变得很容易了：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">map.merge(<span class="number">9</span>, <span class="string">&quot;val9&quot;</span>, (value, newValue) -&gt; value.concat(newValue));</span><br><span class="line">map.get(<span class="number">9</span>);             <span class="comment">// val9</span></span><br><span class="line">map.merge(<span class="number">9</span>, <span class="string">&quot;concat&quot;</span>, (value, newValue) -&gt; value.concat(newValue));</span><br><span class="line">map.get(<span class="number">9</span>);             <span class="comment">// val9concat</span></span><br></pre></td></tr></table></figure>
+
+<p>Merge 做的事情是如果键名不存在则插入，否则则对原键对应的值做合并操作并重新插入到map中。</p>
+<h2 id="Date-API-日期相关API"><a href="#Date-API-日期相关API" class="headerlink" title="Date API(日期相关API)"></a>Date API(日期相关API)</h2><p>Java 8在 <code>java.time</code> 包下包含一个全新的日期和时间API。新的Date API与Joda-Time库相似，但它们不一样。以下示例涵盖了此新 API 的最重要部分。译者对这部分内容参考相关书籍做了大部分修改。</p>
+<p><strong>译者注(总结)：</strong></p>
+<ul>
+<li><p>Clock 类提供了访问当前日期和时间的方法，Clock 是时区敏感的，可以用来取代 <code>System.currentTimeMillis()</code> 来获取当前的微秒数。某一个特定的时间点也可以使用 <code>Instant</code> 类来表示，<code>Instant</code> 类也可以用来创建旧版本的<code>java.util.Date</code> 对象。</p>
+</li>
+<li><p>在新API中时区使用 ZoneId 来表示。时区可以很方便的使用静态方法of来获取到。 抽象类<code>ZoneId</code>（在<code>java.time</code>包中）表示一个区域标识符。 它有一个名为<code>getAvailableZoneIds</code>的静态方法，它返回所有区域标识符。</p>
+</li>
+<li><p>jdk1.8中新增了 LocalDate 与 LocalDateTime等类来解决日期处理方法，同时引入了一个新的类DateTimeFormatter 来解决日期格式化问题。可以使用Instant代替 Date，LocalDateTime代替 Calendar，DateTimeFormatter 代替 SimpleDateFormat。</p>
+</li>
+</ul>
+<h3 id="Clock"><a href="#Clock" class="headerlink" title="Clock"></a>Clock</h3><p>Clock 类提供了访问当前日期和时间的方法，Clock 是时区敏感的，可以用来取代 <code>System.currentTimeMillis()</code> 来获取当前的微秒数。某一个特定的时间点也可以使用 <code>Instant</code> 类来表示，<code>Instant</code> 类也可以用来创建旧版本的<code>java.util.Date</code> 对象。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Clock clock = Clock.systemDefaultZone();</span><br><span class="line"><span class="keyword">long</span> millis = clock.millis();</span><br><span class="line">System.out.println(millis);<span class="comment">//1552379579043</span></span><br><span class="line">Instant instant = clock.instant();</span><br><span class="line">System.out.println(instant);</span><br><span class="line">Date legacyDate = Date.from(instant); <span class="comment">//2019-03-12T08:46:42.588Z</span></span><br><span class="line">System.out.println(legacyDate);<span class="comment">//Tue Mar 12 16:32:59 CST 2019</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Timezones-时区"><a href="#Timezones-时区" class="headerlink" title="Timezones(时区)"></a>Timezones(时区)</h3><p>在新API中时区使用 ZoneId 来表示。时区可以很方便的使用静态方法of来获取到。 抽象类<code>ZoneId</code>（在<code>java.time</code>包中）表示一个区域标识符。 它有一个名为<code>getAvailableZoneIds</code>的静态方法，它返回所有区域标识符。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//输出所有区域标识符</span></span><br><span class="line">System.out.println(ZoneId.getAvailableZoneIds());</span><br><span class="line"></span><br><span class="line">ZoneId zone1 = ZoneId.of(<span class="string">&quot;Europe/Berlin&quot;</span>);</span><br><span class="line">ZoneId zone2 = ZoneId.of(<span class="string">&quot;Brazil/East&quot;</span>);</span><br><span class="line">System.out.println(zone1.getRules());<span class="comment">// ZoneRules[currentStandardOffset=+01:00]</span></span><br><span class="line">System.out.println(zone2.getRules());<span class="comment">// ZoneRules[currentStandardOffset=-03:00]</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="LocalTime-本地时间"><a href="#LocalTime-本地时间" class="headerlink" title="LocalTime(本地时间)"></a>LocalTime(本地时间)</h3><p>LocalTime 定义了一个没有时区信息的时间，例如 晚上10点或者 17:30:15。下面的例子使用前面代码创建的时区创建了两个本地时间。之后比较时间并以小时和分钟为单位计算两个时间的时间差：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">LocalTime now1 = LocalTime.now(zone1);</span><br><span class="line">LocalTime now2 = LocalTime.now(zone2);</span><br><span class="line">System.out.println(now1.isBefore(now2));  <span class="comment">// false</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">long</span> hoursBetween = ChronoUnit.HOURS.between(now1, now2);</span><br><span class="line"><span class="keyword">long</span> minutesBetween = ChronoUnit.MINUTES.between(now1, now2);</span><br><span class="line"></span><br><span class="line">System.out.println(hoursBetween);       <span class="comment">// -3</span></span><br><span class="line">System.out.println(minutesBetween);     <span class="comment">// -239</span></span><br></pre></td></tr></table></figure>
+
+<p>LocalTime 提供了多种工厂方法来简化对象的创建，包括解析时间字符串.</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">LocalTime late = LocalTime.of(<span class="number">23</span>, <span class="number">59</span>, <span class="number">59</span>);</span><br><span class="line">System.out.println(late);       <span class="comment">// 23:59:59</span></span><br><span class="line">DateTimeFormatter germanFormatter =</span><br><span class="line">    DateTimeFormatter</span><br><span class="line">        .ofLocalizedTime(FormatStyle.SHORT)</span><br><span class="line">        .withLocale(Locale.GERMAN);</span><br><span class="line"></span><br><span class="line">LocalTime leetTime = LocalTime.parse(<span class="string">&quot;13:37&quot;</span>, germanFormatter);</span><br><span class="line">System.out.println(leetTime);   <span class="comment">// 13:37</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="LocalDate-本地日期"><a href="#LocalDate-本地日期" class="headerlink" title="LocalDate(本地日期)"></a>LocalDate(本地日期)</h3><p>LocalDate 表示了一个确切的日期，比如 2014-03-11。该对象值是不可变的，用起来和LocalTime基本一致。下面的例子展示了如何给Date对象加减天/月/年。另外要注意的是这些对象是不可变的，操作返回的总是一个新实例。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">LocalDate today = LocalDate.now();<span class="comment">//获取现在的日期</span></span><br><span class="line">System.out.println(<span class="string">&quot;今天的日期: &quot;</span>+today);<span class="comment">//2019-03-12</span></span><br><span class="line">LocalDate tomorrow = today.plus(<span class="number">1</span>, ChronoUnit.DAYS);</span><br><span class="line">System.out.println(<span class="string">&quot;明天的日期: &quot;</span>+tomorrow);<span class="comment">//2019-03-13</span></span><br><span class="line">LocalDate yesterday = tomorrow.minusDays(<span class="number">2</span>);</span><br><span class="line">System.out.println(<span class="string">&quot;昨天的日期: &quot;</span>+yesterday);<span class="comment">//2019-03-11</span></span><br><span class="line">LocalDate independenceDay = LocalDate.of(<span class="number">2019</span>, Month.MARCH, <span class="number">12</span>);</span><br><span class="line">DayOfWeek dayOfWeek = independenceDay.getDayOfWeek();</span><br><span class="line">System.out.println(<span class="string">&quot;今天是周几:&quot;</span>+dayOfWeek);<span class="comment">//TUESDAY</span></span><br></pre></td></tr></table></figure>
+
+<p>从字符串解析一个 LocalDate 类型和解析 LocalTime 一样简单,下面是使用  <code>DateTimeFormatter</code> 解析字符串的例子：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">String str1 = <span class="string">&quot;2014==04==12 01时06分09秒&quot;</span>;</span><br><span class="line">    <span class="comment">// 根据需要解析的日期、时间字符串定义解析所用的格式器</span></span><br><span class="line">    DateTimeFormatter fomatter1 = DateTimeFormatter</span><br><span class="line">            .ofPattern(<span class="string">&quot;yyyy==MM==dd HH时mm分ss秒&quot;</span>);</span><br><span class="line"></span><br><span class="line">    LocalDateTime dt1 = LocalDateTime.parse(str1, fomatter1);</span><br><span class="line">    System.out.println(dt1); <span class="comment">// 输出 2014-04-12T01:06:09</span></span><br><span class="line"></span><br><span class="line">    String str2 = <span class="string">&quot;2014$$$四月$$$13 20小时&quot;</span>;</span><br><span class="line">    DateTimeFormatter fomatter2 = DateTimeFormatter</span><br><span class="line">            .ofPattern(<span class="string">&quot;yyy$$$MMM$$$dd HH小时&quot;</span>);</span><br><span class="line">    LocalDateTime dt2 = LocalDateTime.parse(str2, fomatter2);</span><br><span class="line">    System.out.println(dt2); <span class="comment">// 输出 2014-04-13T20:00</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>再来看一个使用 <code>DateTimeFormatter</code> 格式化日期的示例</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">LocalDateTime rightNow=LocalDateTime.now();</span><br><span class="line">String date=DateTimeFormatter.ISO_LOCAL_DATE_TIME.format(rightNow);</span><br><span class="line">System.out.println(date);<span class="comment">//2019-03-12T16:26:48.29</span></span><br><span class="line">DateTimeFormatter formatter=DateTimeFormatter.ofPattern(<span class="string">&quot;YYYY-MM-dd HH:mm:ss&quot;</span>);</span><br><span class="line">System.out.println(formatter.format(rightNow));<span class="comment">//2019-03-12 16:26:48</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="LocalDateTime-本地日期时间"><a href="#LocalDateTime-本地日期时间" class="headerlink" title="LocalDateTime(本地日期时间)"></a>LocalDateTime(本地日期时间)</h3><p>LocalDateTime 同时表示了时间和日期，相当于前两节内容合并到一个对象上了。LocalDateTime 和 LocalTime还有 LocalDate 一样，都是不可变的。LocalDateTime 提供了一些能访问具体字段的方法。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">LocalDateTime sylvester = LocalDateTime.of(<span class="number">2014</span>, Month.DECEMBER, <span class="number">31</span>, <span class="number">23</span>, <span class="number">59</span>, <span class="number">59</span>);</span><br><span class="line"></span><br><span class="line">DayOfWeek dayOfWeek = sylvester.getDayOfWeek();</span><br><span class="line">System.out.println(dayOfWeek);      <span class="comment">// WEDNESDAY</span></span><br><span class="line"></span><br><span class="line">Month month = sylvester.getMonth();</span><br><span class="line">System.out.println(month);          <span class="comment">// DECEMBER</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">long</span> minuteOfDay = sylvester.getLong(ChronoField.MINUTE_OF_DAY);</span><br><span class="line">System.out.println(minuteOfDay);    <span class="comment">// 1439</span></span><br></pre></td></tr></table></figure>
+
+<p>只要附加上时区信息，就可以将其转换为一个时间点Instant对象，Instant时间点对象可以很容易的转换为老式的<code>java.util.Date</code>。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Instant instant = sylvester</span><br><span class="line">        .atZone(ZoneId.systemDefault())</span><br><span class="line">        .toInstant();</span><br><span class="line"></span><br><span class="line">Date legacyDate = Date.from(instant);</span><br><span class="line">System.out.println(legacyDate);     <span class="comment">// Wed Dec 31 23:59:59 CET 2014</span></span><br></pre></td></tr></table></figure>
+
+<p>格式化LocalDateTime和格式化时间和日期一样的，除了使用预定义好的格式外，我们也可以自己定义格式：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">DateTimeFormatter formatter =</span><br><span class="line">    DateTimeFormatter</span><br><span class="line">        .ofPattern(<span class="string">&quot;MMM dd, yyyy - HH:mm&quot;</span>);</span><br><span class="line">LocalDateTime parsed = LocalDateTime.parse(<span class="string">&quot;Nov 03, 2014 - 07:13&quot;</span>, formatter);</span><br><span class="line">String string = formatter.format(parsed);</span><br><span class="line">System.out.println(string);     <span class="comment">// Nov 03, 2014 - 07:13</span></span><br></pre></td></tr></table></figure>
+
+<p>和java.text.NumberFormat不一样的是新版的DateTimeFormatter是不可变的，所以它是线程安全的。<br>关于时间日期格式的详细信息在<a href="https://docs.oracle.com/javase/8/docs/api/java/time/format/DateTimeFormatter.html">这里</a>。</p>
+<h2 id="Annotations-注解"><a href="#Annotations-注解" class="headerlink" title="Annotations(注解)"></a>Annotations(注解)</h2><p>在Java 8中支持多重注解了，先看个例子来理解一下是什么意思。<br>首先定义一个包装类Hints注解用来放置一组具体的Hint注解：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@interface</span> Hints &#123;</span><br><span class="line">    Hint[] value();</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">@Repeatable(Hints.class)</span></span><br><span class="line"><span class="meta">@interface</span> Hint &#123;</span><br><span class="line">    <span class="function">String <span class="title">value</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Java 8允许我们把同一个类型的注解使用多次，只需要给该注解标注一下<code>@Repeatable</code>即可。</p>
+<p>例 1: 使用包装类当容器来存多个注解（老方法）</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Hints(&#123;@Hint(&quot;hint1&quot;), @Hint(&quot;hint2&quot;)&#125;)</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>例 2：使用多重注解（新方法）</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Hint(&quot;hint1&quot;)</span></span><br><span class="line"><span class="meta">@Hint(&quot;hint2&quot;)</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>第二个例子里java编译器会隐性的帮你定义好@Hints注解，了解这一点有助于你用反射来获取这些信息：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Hint hint = Person.class.getAnnotation(Hint.class);</span><br><span class="line">System.out.println(hint);                   <span class="comment">// null</span></span><br><span class="line">Hints hints1 = Person.class.getAnnotation(Hints.class);</span><br><span class="line">System.out.println(hints1.value().length);  <span class="comment">// 2</span></span><br><span class="line"></span><br><span class="line">Hint[] hints2 = Person.class.getAnnotationsByType(Hint.class);</span><br><span class="line">System.out.println(hints2.length);          <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
+
+<p>即便我们没有在 <code>Person</code>类上定义 <code>@Hints</code>注解，我们还是可以通过 <code>getAnnotation(Hints.class) </code>来获取 <code>@Hints</code>注解，更加方便的方法是使用 <code>getAnnotationsByType</code> 可以直接获取到所有的<code>@Hint</code>注解。<br>另外Java 8的注解还增加到两种新的target上了：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Target(&#123;ElementType.TYPE_PARAMETER, ElementType.TYPE_USE&#125;)</span></span><br><span class="line"><span class="meta">@interface</span> MyAnnotation &#123;&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>面试</category>
+        <category>Java</category>
+        <category>笔记</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Java后端面试笔记-SQL</title>
+    <url>/2021/03/10/Java%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0-SQL/</url>
+    <content><![CDATA[<h1 id="SQL相关"><a href="#SQL相关" class="headerlink" title="SQL相关"></a>SQL相关</h1><h2 id="1-什么是索引？-MySQL中的索引"><a href="#1-什么是索引？-MySQL中的索引" class="headerlink" title="1.什么是索引？ MySQL中的索引"></a>1.什么是索引？ MySQL中的索引</h2><p><strong>索引是一种用于快速查询和检索数据的数据结构。常见的索引结构有: B 树， B+树和 Hash。</strong></p>
+<p>索引的作用就相当于目录的作用。打个比方: 我们在查字典的时候，如果没有目录，那我们就只能一页一页的去找我们需要查的那个字，速度很慢。如果有目录了，我们只需要先去目录里查找字的位置，然后直接翻到那一页就行了。</p>
+<p>MySQL索引使用的数据结构主要有<strong>BTree索引</strong> 和 <strong>哈希索引</strong> 。对于哈希索引来说，底层的数据结构就是哈希表，因此在绝大多数需求为单条记录查询的时候，可以选择哈希索引，查询性能最快；其余大部分场景，建议选择BTree索引。</p>
+<p>MySQL的BTree索引使用的是B树中的B+Tree，但对于主要的两种存储引擎的实现方式是不同的。</p>
+<ul>
+<li><p><strong>MyISAM:</strong> B+Tree叶节点的data域存放的是数据记录的地址。在索引检索的时候，首先按照B+Tree搜索算法搜索索引，如果指定的Key存在，则取出其 data 域的值，然后以 data 域的值为地址读取相应的数据记录。这被称为“非聚簇索引”。</p>
+</li>
+<li><p><strong>InnoDB:</strong> 其数据文件本身就是索引文件。相比MyISAM，索引文件和数据文件是分离的，其表数据文件本身就是按B+Tree组织的一个索引结构，树的叶节点data域保存了完整的数据记录。这个索引的key是数据表的主键，因此InnoDB表数据文件本身就是主索引。这被称为“聚簇索引（或聚集索引）”。而其余的索引都作为辅助索引，辅助索引的data域存储相应记录主键的值而不是地址，这也是和MyISAM不同的地方。<strong>在根据主索引搜索时，直接找到key所在的节点即可取出数据；在根据辅助索引查找时，则需要先取出主键的值，再走一遍主索引。</strong> <strong>因此，在设计表的时候，不建议使用过长的字段作为主键，也不建议使用非单调的字段作为主键，这样会造成主索引频繁分裂。</strong> </p>
+<a id="more"></a>
+
+</li>
+</ul>
+<h2 id="2-索引的优缺点"><a href="#2-索引的优缺点" class="headerlink" title="2.索引的优缺点"></a>2.索引的优缺点</h2><h3 id="索引的优点"><a href="#索引的优点" class="headerlink" title="索引的优点"></a>索引的优点</h3><p><strong>可以大大加快 数据的检索速度（大大减少的检索的数据量）, 这也是创建索引的最主要的原因。毕竟大部分系统的读请求总是大于写请求的。</strong> 另外，通过创建唯一性索引，可以保证数据库表中每一行数据的唯一性。</p>
+<h3 id="索引的缺点"><a href="#索引的缺点" class="headerlink" title="索引的缺点"></a>索引的缺点</h3><ol>
+<li><strong>创建索引和维护索引需要耗费许多时间</strong>：当对表中的数据进行增删改的时候，如果数据有索引，那么索引也需要动态的修改，会降低 SQL 执行效率。</li>
+<li><strong>占用物理存储空间</strong> ：索引需要使用物理文件存储，也会耗费一定空间。</li>
+</ol>
+<h2 id="3-索引创建的原则"><a href="#3-索引创建的原则" class="headerlink" title="3.索引创建的原则"></a>3.索引创建的原则</h2><h3 id="单列索引"><a href="#单列索引" class="headerlink" title="单列索引"></a>单列索引</h3><p>单列索引即由一列属性组成的索引。</p>
+<h3 id="联合索引-多列索引"><a href="#联合索引-多列索引" class="headerlink" title="联合索引(多列索引)"></a>联合索引(多列索引)</h3><p>联合索引即由多列属性组成索引。</p>
+<h3 id="最左前缀原则"><a href="#最左前缀原则" class="headerlink" title="最左前缀原则"></a>最左前缀原则</h3><p>假设创建的联合索引由三个字段组成:</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">ALTER TABLE table ADD INDEX index_name (num,name,age)</span><br></pre></td></tr></table></figure>
+
+<p>那么当查询的条件有为:num / (num AND name) / (num AND name AND age)时，索引才生效。所以在创建联合索引时，尽量把查询最频繁的那个字段作为最左(第一个)字段。查询的时候也尽量以这个字段为第一条件。</p>
+<h2 id="4-聚集索引与非聚集索引"><a href="#4-聚集索引与非聚集索引" class="headerlink" title="4.聚集索引与非聚集索引"></a>4.聚集索引与非聚集索引</h2><h3 id="聚集索引"><a href="#聚集索引" class="headerlink" title="聚集索引"></a>聚集索引</h3><p><strong>聚集索引即索引结构和数据一起存放的索引。主键索引属于聚集索引。</strong></p>
+<p>在 Mysql 中，InnoDB 引擎的表的 <code>.ibd</code>文件就包含了该表的索引和数据，对于 InnoDB 引擎表来说，该表的索引(B+树)的每个非叶子节点存储索引，叶子节点存储索引和索引对应的数据。</p>
+<h4 id="聚集索引的优点"><a href="#聚集索引的优点" class="headerlink" title="聚集索引的优点"></a>聚集索引的优点</h4><p>聚集索引的查询速度非常的快，因为整个 B+树本身就是一颗多叉平衡树，叶子节点也都是有序的，定位到索引的节点，就相当于定位到了数据。</p>
+<h4 id="聚集索引的缺点"><a href="#聚集索引的缺点" class="headerlink" title="聚集索引的缺点"></a>聚集索引的缺点</h4><ol>
+<li><strong>依赖于有序的数据</strong> ：因为 B+树是多路平衡树，如果索引的数据不是有序的，那么就需要在插入时排序，如果数据是整型还好，否则类似于字符串或 UUID 这种又长又难比较的数据，插入或查找的速度肯定比较慢。</li>
+<li><strong>更新代价大</strong> ： 如果对索引列的数据被修改时，那么对应的索引也将会被修改，<br>而且况聚集索引的叶子节点还存放着数据，修改代价肯定是较大的，<br>所以对于主键索引来说，主键一般都是不可被修改的。</li>
+</ol>
+<h3 id="非聚集索引"><a href="#非聚集索引" class="headerlink" title="非聚集索引"></a>非聚集索引</h3><p><strong>非聚集索引即索引结构和数据分开存放的索引。</strong></p>
+<p><strong>二级索引属于非聚集索引。</strong></p>
+<blockquote>
+<p>MYISAM 引擎的表的.MYI 文件包含了表的索引，<br>该表的索引(B+树)的每个叶子非叶子节点存储索引，<br>叶子节点存储索引和索引对应数据的指针，指向.MYD 文件的数据。</p>
+<p><strong>非聚集索引的叶子节点并不一定存放数据的指针，<br>因为二级索引的叶子节点就存放的是主键，根据主键再回表查数据。</strong></p>
+</blockquote>
+<h4 id="非聚集索引的优点"><a href="#非聚集索引的优点" class="headerlink" title="非聚集索引的优点"></a>非聚集索引的优点</h4><p><strong>更新代价比聚集索引要小</strong> 。非聚集索引的更新代价就没有聚集索引那么大了，非聚集索引的叶子节点是不存放数据的</p>
+<h4 id="非聚集索引的缺点"><a href="#非聚集索引的缺点" class="headerlink" title="非聚集索引的缺点"></a>非聚集索引的缺点</h4><ol>
+<li>跟聚集索引一样，非聚集索引也依赖于有序的数据</li>
+<li><strong>可能会二次查询(回表)</strong> :这应该是非聚集索引最大的缺点了。 当查到索引对应的指针或主键后，可能还需要根据指针或主键再到数据文件或表中查询。</li>
+</ol>
+<h2 id="5-覆盖索引"><a href="#5-覆盖索引" class="headerlink" title="5.覆盖索引"></a>5.覆盖索引</h2><p>如果一个索引包含（或者说覆盖）所有需要查询的字段的值，我们就称之为“覆盖索引”。我们知道在 InnoDB 存储引擎中，如果不是主键索引，叶子节点存储的是主键+列值。最终还是要“回表”，也就是要通过主键再查找一次。这样就会比较慢覆盖索引就是把要查询出的列和索引是对应的，不做回表操作！</p>
+<p><strong>覆盖索引即需要查询的字段正好是索引的字段，那么直接根据该索引，就可以查到数据了，而无需回表查询。</strong></p>
+<blockquote>
+<p>如主键索引，如果一条 SQL 需要查询主键，那么正好根据主键索引就可以查到主键。</p>
+<p>再如普通索引，如果一条 SQL 需要查询 name，name 字段正好有索引，<br>那么直接根据这个索引就可以查到数据，也无需回表。</p>
+</blockquote>
+<h2 id="6-事务的含义与特性-ACID"><a href="#6-事务的含义与特性-ACID" class="headerlink" title="6.事务的含义与特性(ACID)"></a>6.事务的含义与特性(ACID)</h2><p>事务是逻辑上的一组操作，要么都执行，要么都不执行。</p>
+<p>事务最经典也经常被拿出来说例子就是转账了。假如小明要给小红转账1000元，这个转账会涉及到两个关键操作就是：将小明的余额减少1000元，将小红的余额增加1000元。万一在这两个操作之间突然出现错误比如银行系统崩溃，导致小明余额减少而小红的余额没有增加，这样就不对了。事务就是保证这两个关键操作要么都成功，要么都要失败。</p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210310193336.png"></p>
+<ol>
+<li> <strong>原子性：</strong> 事务是最小的执行单位，不允许分割。事务的原子性确保动作要么全部完成，要么完全不起作用；</li>
+<li> <strong>一致性：</strong> 执行事务前后，数据保持一致，例如转账业务中，无论事务是否成功，转账者和收款人的总额应该是不变的；</li>
+<li> <strong>隔离性：</strong> 并发访问数据库时，一个用户的事务不被其他事务所干扰，各并发事务之间数据库是独立的；</li>
+<li> <strong>持久性：</strong> 一个事务被提交之后。它对数据库中数据的改变是持久的，即使数据库发生故障也不应该对其有任何影响。</li>
+</ol>
+<h2 id="7-并发事务带来的问题"><a href="#7-并发事务带来的问题" class="headerlink" title="7.并发事务带来的问题"></a>7.并发事务带来的问题</h2><p>在典型的应用程序中，多个事务并发运行，经常会操作相同的数据来完成各自的任务（多个用户对统一数据进行操作）。并发虽然是必须的，但可能会导致以下的问题。</p>
+<ul>
+<li><strong>脏读（Dirty read）:</strong> 当一个事务正在访问数据并且对数据进行了修改，而这种修改还没有提交到数据库中，这时另外一个事务也访问了这个数据，然后使用了这个数据。因为这个数据是还没有提交的数据，那么另外一个事务读到的这个数据是“脏数据”，依据“脏数据”所做的操作可能是不正确的。</li>
+<li><strong>丢失修改（Lost to modify）:</strong> 指在一个事务读取一个数据时，另外一个事务也访问了该数据，那么在第一个事务中修改了这个数据后，第二个事务也修改了这个数据。这样第一个事务内的修改结果就被丢失，因此称为丢失修改。    例如：事务1读取某表中的数据A=20，事务2也读取A=20，事务1修改A=A-1，事务2也修改A=A-1，最终结果A=19，事务1的修改被丢失。</li>
+<li><strong>不可重复读（Unrepeatableread）:</strong> 指在一个事务内多次读同一数据。在这个事务还没有结束时，另一个事务也访问该数据。那么，在第一个事务中的两次读数据之间，由于第二个事务的修改导致第一个事务两次读取的数据可能不太一样。这就发生了在一个事务内两次读到的数据是不一样的情况，因此称为不可重复读。</li>
+<li><strong>幻读（Phantom read）:</strong> 幻读与不可重复读类似。它发生在一个事务（T1）读取了几行数据，接着另一个并发事务（T2）插入了一些数据时。在随后的查询中，第一个事务（T1）就会发现多了一些原本不存在的记录，就好像发生了幻觉一样，所以称为幻读。</li>
+</ul>
+<p><strong>不可重复度和幻读区别：</strong></p>
+<p>不可重复读的重点是修改，幻读的重点在于新增或者删除。</p>
+<p>例1（同样的条件, 你读取过的数据, 再次读取出来发现值不一样了）：事务1中的A先生读取自己的工资为1000的操作还没完成，事务2中的B先生就修改了A的工资为2000，导致A再读自己的工资时工资变为  2000；这就是不可重复读。</p>
+<p> 例2（同样的条件, 第1次和第2次读出来的记录数不一样 ）：假某工资单表中工资大于3000的有4人，事务1读取了所有工资大于3000的人，共查到4条记录，这时事务2又插入了一条工资大于3000的记录，事务1再次读取时查到的记录就变为了5条，这样就导致了幻读。</p>
+<h2 id="8-事务隔离级别"><a href="#8-事务隔离级别" class="headerlink" title="8.事务隔离级别"></a>8.事务隔离级别</h2><p><strong>SQL 标准定义了四个隔离级别：</strong></p>
+<ul>
+<li><strong>READ-UNCOMMITTED(读取未提交)：</strong> 最低的隔离级别，允许读取尚未提交的数据变更，<strong>可能会导致脏读、幻读或不可重复读</strong>。</li>
+<li><strong>READ-COMMITTED(读取已提交)：</strong> 允许读取并发事务已经提交的数据，<strong>可以阻止脏读，但是幻读或不可重复读仍有可能发生</strong>。</li>
+<li><strong>REPEATABLE-READ(可重复读)：</strong>  对同一字段的多次读取结果都是一致的，除非数据是被本身事务自己所修改，<strong>可以阻止脏读和不可重复读，但幻读仍有可能发生</strong>。</li>
+<li><strong>SERIALIZABLE(可串行化)：</strong> 最高的隔离级别，完全服从ACID的隔离级别。所有的事务依次逐个执行，这样事务之间就完全不可能产生干扰，也就是说，<strong>该级别可以防止脏读、不可重复读以及幻读</strong>。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">隔离级别</th>
+<th align="center">脏读</th>
+<th align="center">不可重复读</th>
+<th align="center">幻影读</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">READ-UNCOMMITTED</td>
+<td align="center">√</td>
+<td align="center">√</td>
+<td align="center">√</td>
+</tr>
+<tr>
+<td align="center">READ-COMMITTED</td>
+<td align="center">×</td>
+<td align="center">√</td>
+<td align="center">√</td>
+</tr>
+<tr>
+<td align="center">REPEATABLE-READ</td>
+<td align="center">×</td>
+<td align="center">×</td>
+<td align="center">√</td>
+</tr>
+<tr>
+<td align="center">SERIALIZABLE</td>
+<td align="center">×</td>
+<td align="center">×</td>
+<td align="center">×</td>
+</tr>
+</tbody></table>
+<p>MySQL InnoDB 存储引擎的默认支持的隔离级别是 <strong>REPEATABLE-READ（可重读）</strong></p>
+<p>这里需要注意的是：与 SQL 标准不同的地方在于InnoDB 存储引擎在 <strong>REPEATABLE-READ（可重读）</strong> 事务隔离级别下，允许应用使用 Next-Key Lock 锁算法来避免幻读的产生。这与其他数据库系统(如 SQL Server)是不同的。所以说虽然 InnoDB 存储引擎的默认支持的隔离级别是 <strong>REPEATABLE-READ（可重读）</strong> ，但是可以通过应用加锁读（例如 <code>select * from table for update</code> 语句）来保证不会产生幻读，而这个加锁度使用到的机制就是 Next-Key Lock 锁算法。从而达到了 SQL 标准的 <strong>SERIALIZABLE(可串行化)</strong> 隔离级别。</p>
+<p>因为隔离级别越低，事务请求的锁越少，所以大部分数据库系统的隔离级别都是<strong>READ-COMMITTED(读取提交内容):**，但是你要知道的是InnoDB 存储引擎默认使用 **REPEATABLE-READ（可重读）</strong> 并不会有任何性能损失。</p>
+<p>InnoDB 存储引擎在 <strong>分布式事务</strong> 的情况下一般会用到<strong>SERIALIZABLE(可串行化)</strong> 隔离级别。</p>
+<h2 id="9-Redis简单介绍"><a href="#9-Redis简单介绍" class="headerlink" title="9.Redis简单介绍"></a>9.Redis简单介绍</h2><p>简单来说 <strong>Redis 就是一个使用 C 语言开发的数据库</strong>，不过与传统数据库不同的是 <strong>Redis 的数据是存在内存中的</strong> ，也就是它是内存数据库，所以读写速度非常快，因此 Redis 被广泛应用于缓存方向。</p>
+<p>另外，<strong>Redis 除了做缓存之外，Redis 也经常用来做分布式锁，甚至是消息队列。</strong></p>
+<p><strong>Redis 提供了多种数据类型来支持不同的业务场景。Redis 还支持事务 、持久化、Lua 脚本、多种集群方案。</strong></p>
+<p><strong>采用Redis或缓存是因为“高性能”和“高并发”</strong></p>
+<h2 id="10-Redis-和-Memcached-的区别和共同点"><a href="#10-Redis-和-Memcached-的区别和共同点" class="headerlink" title="10.Redis 和 Memcached 的区别和共同点"></a>10.Redis 和 Memcached 的区别和共同点</h2><p><strong>共同点</strong> ：</p>
+<ol>
+<li>都是基于内存的数据库，一般都用来当做缓存使用。</li>
+<li>都有过期策略。</li>
+<li>两者的性能都非常高。</li>
+</ol>
+<p><strong>区别</strong> ：</p>
+<ol>
+<li><strong>Redis 支持更丰富的数据类型（支持更复杂的应用场景）</strong>。Redis 不仅仅支持简单的 k/v 类型的数据，同时还提供 list，set，zset，hash 等数据结构的存储。Memcached 只支持最简单的 k/v 数据类型。</li>
+<li><strong>Redis 支持数据的持久化，可以将内存中的数据保持在磁盘中，重启的时候可以再次加载进行使用,而 Memcached 把数据全部存在内存之中。</strong></li>
+<li><strong>Redis 有灾难恢复机制。</strong> 因为可以把缓存中的数据持久化到磁盘上。</li>
+<li><strong>Redis 在服务器内存使用完之后，可以将不用的数据放到磁盘上。但是，Memcached 在服务器内存使用完之后，就会直接报异常。</strong></li>
+<li><strong>Memcached 没有原生的集群模式，需要依靠客户端来实现往集群中分片写入数据；但是 Redis 目前是原生支持 cluster 模式的.</strong></li>
+<li><strong>Memcached 是多线程，非阻塞 IO 复用的网络模型；Redis 使用单线程的多路 IO 复用模型。</strong> （Redis 6.0 引入了多线程 IO ）</li>
+<li><strong>Redis 支持发布订阅模型、Lua 脚本、事务等功能，而 Memcached 不支持。并且，Redis 支持更多的编程语言。</strong></li>
+<li><strong>Memcached过期数据的删除策略只用了惰性删除，而 Redis 同时使用了惰性删除与定期删除。</strong></li>
+</ol>
+<h2 id="11-Redis常见数据结构"><a href="#11-Redis常见数据结构" class="headerlink" title="11.Redis常见数据结构"></a>11.Redis常见数据结构</h2><h3 id="11-1-string"><a href="#11-1-string" class="headerlink" title="11.1. string"></a>11.1. string</h3><ol>
+<li><strong>介绍</strong> ：string 数据结构是简单的 key-value 类型。虽然 Redis 是用 C 语言写的，但是 Redis 并没有使用 C 的字符串表示，而是自己构建了一种 <strong>简单动态字符串</strong>（simple dynamic string，<strong>SDS</strong>）。相比于 C 的原生字符串，Redis 的 SDS 不光可以保存文本数据还可以保存二进制数据，并且获取字符串长度复杂度为 O(1)（C 字符串为 O(N)）,除此之外,Redis 的 SDS API 是安全的，不会造成缓冲区溢出。</li>
+<li><strong>常用命令:</strong> <code>set,get,strlen,exists,dect,incr,setex</code> 等等。</li>
+<li><strong>应用场景</strong> ：一般常用在需要计数的场景，比如用户的访问次数、热点文章的点赞转发数量等等。</li>
+</ol>
+<p>下面我们简单看看它的使用！</p>
+<p><strong>普通字符串的基本操作：</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">127.0.0.1:6379&gt; <span class="built_in">set</span> key value <span class="comment">#设置 key-value 类型的值</span></span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; get key <span class="comment"># 根据 key 获得对应的 value</span></span><br><span class="line"><span class="string">&quot;value&quot;</span></span><br><span class="line">127.0.0.1:6379&gt; exists key  <span class="comment"># 判断某个 key 是否存在</span></span><br><span class="line">(<span class="built_in">integer</span>) 1</span><br><span class="line">127.0.0.1:6379&gt; strlen key <span class="comment"># 返回 key 所储存的字符串值的长度。</span></span><br><span class="line">(<span class="built_in">integer</span>) 5</span><br><span class="line">127.0.0.1:6379&gt; del key <span class="comment"># 删除某个 key 对应的值</span></span><br><span class="line">(<span class="built_in">integer</span>) 1</span><br><span class="line">127.0.0.1:6379&gt; get key</span><br><span class="line">(nil)</span><br></pre></td></tr></table></figure>
+
+<p><strong>批量设置</strong> :</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">127.0.0.1:6379&gt; mset key1 value1 key2 value2 <span class="comment"># 批量设置 key-value 类型的值</span></span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; mget key1 key2 <span class="comment"># 批量获取多个 key 对应的 value</span></span><br><span class="line">1) <span class="string">&quot;value1&quot;</span></span><br><span class="line">2) <span class="string">&quot;value2&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>计数器（字符串的内容为整数的时候可以使用）：</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">127.0.0.1:6379&gt; <span class="built_in">set</span> number 1</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; incr number <span class="comment"># 将 key 中储存的数字值增一</span></span><br><span class="line">(<span class="built_in">integer</span>) 2</span><br><span class="line">127.0.0.1:6379&gt; get number</span><br><span class="line"><span class="string">&quot;2&quot;</span></span><br><span class="line">127.0.0.1:6379&gt; decr number <span class="comment"># 将 key 中储存的数字值减一</span></span><br><span class="line">(<span class="built_in">integer</span>) 1</span><br><span class="line">127.0.0.1:6379&gt; get number</span><br><span class="line"><span class="string">&quot;1&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>过期</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">127.0.0.1:6379&gt; expire key  60 <span class="comment"># 数据在 60s 后过期</span></span><br><span class="line">(<span class="built_in">integer</span>) 1</span><br><span class="line">127.0.0.1:6379&gt; setex key 60 value <span class="comment"># 数据在 60s 后过期 (setex:[set] + [ex]pire)</span></span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; ttl key <span class="comment"># 查看数据还有多久过期</span></span><br><span class="line">(<span class="built_in">integer</span>) 56</span><br></pre></td></tr></table></figure>
+
+<h3 id="11-2-list"><a href="#11-2-list" class="headerlink" title="11.2. list"></a>11.2. list</h3><ol>
+<li><strong>介绍</strong> ：<strong>list</strong> 即是 <strong>链表</strong>。链表是一种非常常见的数据结构，特点是易于数据元素的插入和删除并且且可以灵活调整链表长度，但是链表的随机访问困难。许多高级编程语言都内置了链表的实现比如 Java 中的 <strong>LinkedList</strong>，但是 C 语言并没有实现链表，所以 Redis 实现了自己的链表数据结构。Redis 的 list 的实现为一个 <strong>双向链表</strong>，即可以支持反向查找和遍历，更方便操作，不过带来了部分额外的内存开销。</li>
+<li><strong>常用命令:</strong> <code>rpush,lpop,lpush,rpop,lrange、llen</code> 等。</li>
+<li><strong>应用场景:</strong> 发布与订阅或者说消息队列、慢查询。</li>
+</ol>
+<p>下面我们简单看看它的使用！</p>
+<p><strong>通过 <code>rpush/lpop</code> 实现队列：</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">127.0.0.1:6379&gt; rpush myList value1 <span class="comment"># 向 list 的头部（右边）添加元素</span></span><br><span class="line">(<span class="built_in">integer</span>) 1</span><br><span class="line">127.0.0.1:6379&gt; rpush myList value2 value3 <span class="comment"># 向list的头部（最右边）添加多个元素</span></span><br><span class="line">(<span class="built_in">integer</span>) 3</span><br><span class="line">127.0.0.1:6379&gt; lpop myList <span class="comment"># 将 list的尾部(最左边)元素取出</span></span><br><span class="line"><span class="string">&quot;value1&quot;</span></span><br><span class="line">127.0.0.1:6379&gt; lrange myList 0 1 <span class="comment"># 查看对应下标的list列表， 0 为 start,1为 end</span></span><br><span class="line">1) <span class="string">&quot;value2&quot;</span></span><br><span class="line">2) <span class="string">&quot;value3&quot;</span></span><br><span class="line">127.0.0.1:6379&gt; lrange myList 0 -1 <span class="comment"># 查看列表中的所有元素，-1表示倒数第一</span></span><br><span class="line">1) <span class="string">&quot;value2&quot;</span></span><br><span class="line">2) <span class="string">&quot;value3&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>通过 <code>rpush/rpop</code> 实现栈：</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">127.0.0.1:6379&gt; rpush myList2 value1 value2 value3</span><br><span class="line">(<span class="built_in">integer</span>) 3</span><br><span class="line">127.0.0.1:6379&gt; rpop myList2 <span class="comment"># 将 list的头部(最右边)元素取出</span></span><br><span class="line"><span class="string">&quot;value3&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>我专门花了一个图方便小伙伴们来理解：</p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/redis-list.png" alt="redis list"></p>
+<p><strong>通过 <code>lrange</code> 查看对应下标范围的列表元素：</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">127.0.0.1:6379&gt; rpush myList value1 value2 value3</span><br><span class="line">(<span class="built_in">integer</span>) 3</span><br><span class="line">127.0.0.1:6379&gt; lrange myList 0 1 <span class="comment"># 查看对应下标的list列表， 0 为 start,1为 end</span></span><br><span class="line">1) <span class="string">&quot;value1&quot;</span></span><br><span class="line">2) <span class="string">&quot;value2&quot;</span></span><br><span class="line">127.0.0.1:6379&gt; lrange myList 0 -1 <span class="comment"># 查看列表中的所有元素，-1表示倒数第一</span></span><br><span class="line">1) <span class="string">&quot;value1&quot;</span></span><br><span class="line">2) <span class="string">&quot;value2&quot;</span></span><br><span class="line">3) <span class="string">&quot;value3&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>通过 <code>lrange</code> 命令，你可以基于 list 实现分页查询，性能非常高！</p>
+<p><strong>通过 <code>llen</code> 查看链表长度：</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">127.0.0.1:6379&gt; llen myList</span><br><span class="line">(<span class="built_in">integer</span>) 3</span><br></pre></td></tr></table></figure>
+
+<h3 id="11-3-hash"><a href="#11-3-hash" class="headerlink" title="11.3. hash"></a>11.3. hash</h3><ol>
+<li><strong>介绍</strong> ：hash 类似于 JDK1.8 前的 HashMap，内部实现也差不多(数组 + 链表)。不过，Redis 的 hash 做了更多优化。另外，hash 是一个 string 类型的 field 和 value 的映射表，<strong>特别适合用于存储对象</strong>，后续操作的时候，你可以直接仅仅修改这个对象中的某个字段的值。 比如我们可以 hash 数据结构来存储用户信息，商品信息等等。</li>
+<li><strong>常用命令：</strong> <code>hset,hmset,hexists,hget,hgetall,hkeys,hvals</code> 等。</li>
+<li><strong>应用场景:</strong> 系统中对象数据的存储。</li>
+</ol>
+<p>下面我们简单看看它的使用！</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">127.0.0.1:6379&gt; hset userInfoKey name <span class="string">&quot;guide&quot;</span> description <span class="string">&quot;dev&quot;</span> age <span class="string">&quot;24&quot;</span></span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; hexists userInfoKey name <span class="comment"># 查看 key 对应的 value中指定的字段是否存在。</span></span><br><span class="line">(<span class="built_in">integer</span>) 1</span><br><span class="line">127.0.0.1:6379&gt; hget userInfoKey name <span class="comment"># 获取存储在哈希表中指定字段的值。</span></span><br><span class="line"><span class="string">&quot;guide&quot;</span></span><br><span class="line">127.0.0.1:6379&gt; hget userInfoKey age</span><br><span class="line"><span class="string">&quot;24&quot;</span></span><br><span class="line">127.0.0.1:6379&gt; hgetall userInfoKey <span class="comment"># 获取在哈希表中指定 key 的所有字段和值</span></span><br><span class="line">1) <span class="string">&quot;name&quot;</span></span><br><span class="line">2) <span class="string">&quot;guide&quot;</span></span><br><span class="line">3) <span class="string">&quot;description&quot;</span></span><br><span class="line">4) <span class="string">&quot;dev&quot;</span></span><br><span class="line">5) <span class="string">&quot;age&quot;</span></span><br><span class="line">6) <span class="string">&quot;24&quot;</span></span><br><span class="line">127.0.0.1:6379&gt; hkeys userInfoKey <span class="comment"># 获取 key 列表</span></span><br><span class="line">1) <span class="string">&quot;name&quot;</span></span><br><span class="line">2) <span class="string">&quot;description&quot;</span></span><br><span class="line">3) <span class="string">&quot;age&quot;</span></span><br><span class="line">127.0.0.1:6379&gt; hvals userInfoKey <span class="comment"># 获取 value 列表</span></span><br><span class="line">1) <span class="string">&quot;guide&quot;</span></span><br><span class="line">2) <span class="string">&quot;dev&quot;</span></span><br><span class="line">3) <span class="string">&quot;24&quot;</span></span><br><span class="line">127.0.0.1:6379&gt; hset userInfoKey name <span class="string">&quot;GuideGeGe&quot;</span> <span class="comment"># 修改某个字段对应的值</span></span><br><span class="line">127.0.0.1:6379&gt; hget userInfoKey name</span><br><span class="line"><span class="string">&quot;GuideGeGe&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="11-4-set"><a href="#11-4-set" class="headerlink" title="11.4. set"></a>11.4. set</h3><ol>
+<li><strong>介绍 ：</strong> set 类似于 Java 中的 <code>HashSet</code> 。Redis 中的 set 类型是一种无序集合，集合中的元素没有先后顺序。当你需要存储一个列表数据，又不希望出现重复数据时，set 是一个很好的选择，并且 set 提供了判断某个成员是否在一个 set 集合内的重要接口，这个也是 list 所不能提供的。可以基于 set 轻易实现交集、并集、差集的操作。比如：你可以将一个用户所有的关注人存在一个集合中，将其所有粉丝存在一个集合。Redis 可以非常方便的实现如共同关注、共同粉丝、共同喜好等功能。这个过程也就是求交集的过程。</li>
+<li><strong>常用命令：</strong> <code>sadd,spop,smembers,sismember,scard,sinterstore,sunion</code> 等。</li>
+<li><strong>应用场景:</strong> 需要存放的数据不能重复以及需要获取多个数据源交集和并集等场景</li>
+</ol>
+<p>下面我们简单看看它的使用！</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">127.0.0.1:6379&gt; sadd mySet value1 value2 <span class="comment"># 添加元素进去</span></span><br><span class="line">(<span class="built_in">integer</span>) 2</span><br><span class="line">127.0.0.1:6379&gt; sadd mySet value1 <span class="comment"># 不允许有重复元素</span></span><br><span class="line">(<span class="built_in">integer</span>) 0</span><br><span class="line">127.0.0.1:6379&gt; smembers mySet <span class="comment"># 查看 set 中所有的元素</span></span><br><span class="line">1) <span class="string">&quot;value1&quot;</span></span><br><span class="line">2) <span class="string">&quot;value2&quot;</span></span><br><span class="line">127.0.0.1:6379&gt; scard mySet <span class="comment"># 查看 set 的长度</span></span><br><span class="line">(<span class="built_in">integer</span>) 2</span><br><span class="line">127.0.0.1:6379&gt; sismember mySet value1 <span class="comment"># 检查某个元素是否存在set 中，只能接收单个元素</span></span><br><span class="line">(<span class="built_in">integer</span>) 1</span><br><span class="line">127.0.0.1:6379&gt; sadd mySet2 value2 value3</span><br><span class="line">(<span class="built_in">integer</span>) 2</span><br><span class="line">127.0.0.1:6379&gt; sinterstore mySet3 mySet mySet2 <span class="comment"># 获取 mySet 和 mySet2 的交集并存放在 mySet3 中</span></span><br><span class="line">(<span class="built_in">integer</span>) 1</span><br><span class="line">127.0.0.1:6379&gt; smembers mySet3</span><br><span class="line">1) <span class="string">&quot;value2&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="11-5-sorted-set"><a href="#11-5-sorted-set" class="headerlink" title="11.5. sorted set"></a>11.5. sorted set</h3><ol>
+<li><strong>介绍：</strong> 和 set 相比，sorted set 增加了一个权重参数 score，使得集合中的元素能够按 score 进行有序排列，还可以通过 score 的范围来获取元素的列表。有点像是 Java 中 HashMap 和 TreeSet 的结合体。</li>
+<li><strong>常用命令：</strong> <code>zadd,zcard,zscore,zrange,zrevrange,zrem</code> 等。</li>
+<li><strong>应用场景：</strong> 需要对数据根据某个权重进行排序的场景。比如在直播系统中，实时排行信息包含直播间在线用户列表，各种礼物排行榜，弹幕消息（可以理解为按消息维度的消息排行榜）等信息。</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">127.0.0.1:6379&gt; zadd myZset 3.0 value1 <span class="comment"># 添加元素到 sorted set 中 3.0 为权重</span></span><br><span class="line">(<span class="built_in">integer</span>) 1</span><br><span class="line">127.0.0.1:6379&gt; zadd myZset 2.0 value2 1.0 value3 <span class="comment"># 一次添加多个元素</span></span><br><span class="line">(<span class="built_in">integer</span>) 2</span><br><span class="line">127.0.0.1:6379&gt; zcard myZset <span class="comment"># 查看 sorted set 中的元素数量</span></span><br><span class="line">(<span class="built_in">integer</span>) 3</span><br><span class="line">127.0.0.1:6379&gt; zscore myZset value1 <span class="comment"># 查看某个 value 的权重</span></span><br><span class="line"><span class="string">&quot;3&quot;</span></span><br><span class="line">127.0.0.1:6379&gt; zrange  myZset 0 -1 <span class="comment"># 顺序输出某个范围区间的元素，0 -1 表示输出所有元素</span></span><br><span class="line">1) <span class="string">&quot;value3&quot;</span></span><br><span class="line">2) <span class="string">&quot;value2&quot;</span></span><br><span class="line">3) <span class="string">&quot;value1&quot;</span></span><br><span class="line">127.0.0.1:6379&gt; zrange  myZset 0 1 <span class="comment"># 顺序输出某个范围区间的元素，0 为 start  1 为 stop</span></span><br><span class="line">1) <span class="string">&quot;value3&quot;</span></span><br><span class="line">2) <span class="string">&quot;value2&quot;</span></span><br><span class="line">127.0.0.1:6379&gt; zrevrange  myZset 0 1 <span class="comment"># 逆序输出某个范围区间的元素，0 为 start  1 为 stop</span></span><br><span class="line">1) <span class="string">&quot;value1&quot;</span></span><br><span class="line">2) <span class="string">&quot;value2&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="12-Redis-内存淘汰机制"><a href="#12-Redis-内存淘汰机制" class="headerlink" title="12. Redis 内存淘汰机制"></a>12. Redis 内存淘汰机制</h2><blockquote>
+<p>相关问题：MySQL 里有 2000w 数据，Redis 中只存 20w 的数据，如何保证 Redis 中的数据都是热点数据?</p>
+</blockquote>
+<p>Redis 提供 6 种数据淘汰策略：</p>
+<ol>
+<li><strong>volatile-lru（least recently used）</strong>：从已设置过期时间的数据集（server.db[i].expires）中挑选最近最少使用的数据淘汰</li>
+<li><strong>volatile-ttl</strong>：从已设置过期时间的数据集（server.db[i].expires）中挑选将要过期的数据淘汰</li>
+<li><strong>volatile-random</strong>：从已设置过期时间的数据集（server.db[i].expires）中任意选择数据淘汰</li>
+<li><strong>allkeys-lru（least recently used）</strong>：当内存不足以容纳新写入数据时，在键空间中，移除最近最少使用的 key（这个是最常用的）</li>
+<li><strong>allkeys-random</strong>：从数据集（server.db[i].dict）中任意选择数据淘汰</li>
+<li><strong>no-eviction</strong>：禁止驱逐数据，也就是说当内存不足以容纳新写入数据时，新写入操作会报错。这个应该没人使用吧！</li>
+</ol>
+<p>4.0 版本后增加以下两种：</p>
+<ol start="7">
+<li><strong>volatile-lfu（least frequently used）</strong>：从已设置过期时间的数据集(server.db[i].expires)中挑选最不经常使用的数据淘汰</li>
+<li><strong>allkeys-lfu（least frequently used）</strong>：当内存不足以容纳新写入数据时，在键空间中，移除最不经常使用的 key</li>
+</ol>
+<h2 id="13-缓存穿透"><a href="#13-缓存穿透" class="headerlink" title="13.缓存穿透"></a>13.缓存穿透</h2><h3 id="13-1-什么是缓存穿透？"><a href="#13-1-什么是缓存穿透？" class="headerlink" title="13.1. 什么是缓存穿透？"></a>13.1. 什么是缓存穿透？</h3><p>缓存穿透说简单点就是大量请求的 key 根本不存在于缓存中，导致请求直接到了数据库上，根本没有经过缓存这一层。举个例子：某个黑客故意制造我们缓存中不存在的 key 发起大量请求，导致大量请求落到数据库。</p>
+<h3 id="13-2-缓存穿透情况的处理流程是怎样的？"><a href="#13-2-缓存穿透情况的处理流程是怎样的？" class="headerlink" title="13.2. 缓存穿透情况的处理流程是怎样的？"></a>13.2. 缓存穿透情况的处理流程是怎样的？</h3><p>如下图所示，用户的请求最终都要跑到数据库中查询一遍。</p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F%E6%83%85%E5%86%B5.png" alt="缓存穿透情况"></p>
+<h3 id="13-3-有哪些解决办法？"><a href="#13-3-有哪些解决办法？" class="headerlink" title="13.3. 有哪些解决办法？"></a>13.3. 有哪些解决办法？</h3><p>最基本的就是首先做好参数校验，一些不合法的参数请求直接抛出异常信息返回给客户端。比如查询的数据库 id 不能小于 0、传入的邮箱格式不对的时候直接返回错误消息给客户端等等。</p>
+<p><strong>1）缓存无效 key</strong></p>
+<p>如果缓存和数据库都查不到某个 key 的数据就写一个到 Redis 中去并设置过期时间，具体命令如下： <code>SET key value EX 10086</code> 。这种方式可以解决请求的 key 变化不频繁的情况，如果黑客恶意攻击，每次构建不同的请求 key，会导致 Redis 中缓存大量无效的 key 。很明显，这种方案并不能从根本上解决此问题。如果非要用这种方式来解决穿透问题的话，尽量将无效的 key 的过期时间设置短一点比如 1 分钟。</p>
+<p>另外，这里多说一嘴，一般情况下我们是这样设计 key 的： <code>表名:列名:主键名:主键值</code> 。</p>
+<p>如果用 Java 代码展示的话，差不多是下面这样的：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Object <span class="title">getObjectInclNullById</span><span class="params">(Integer id)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 从缓存中获取数据</span></span><br><span class="line">    Object cacheValue = cache.get(id);</span><br><span class="line">    <span class="comment">// 缓存为空</span></span><br><span class="line">    <span class="keyword">if</span> (cacheValue == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="comment">// 从数据库中获取</span></span><br><span class="line">        Object storageValue = storage.get(key);</span><br><span class="line">        <span class="comment">// 缓存空对象</span></span><br><span class="line">        cache.set(key, storageValue);</span><br><span class="line">        <span class="comment">// 如果存储数据为空，需要设置一个过期时间(300秒)</span></span><br><span class="line">        <span class="keyword">if</span> (storageValue == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="comment">// 必须设置过期时间，否则有被攻击的风险</span></span><br><span class="line">            cache.expire(key, <span class="number">60</span> * <span class="number">5</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> storageValue;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> cacheValue;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>2）布隆过滤器</strong></p>
+<p>布隆过滤器是一个非常神奇的数据结构，通过它我们可以非常方便地判断一个给定数据是否存在于海量数据中。我们需要的就是判断 key 是否合法，有没有感觉布隆过滤器就是我们想要找的那个“人”。</p>
+<p>具体是这样做的：把所有可能存在的请求的值都存放在布隆过滤器中，当用户请求过来，先判断用户发来的请求的值是否存在于布隆过滤器中。不存在的话，直接返回请求参数错误信息给客户端，存在的话才会走下面的流程。</p>
+<p>加入布隆过滤器之后的缓存处理流程图如下。</p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/%E5%8A%A0%E5%85%A5%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8%E5%90%8E%E7%9A%84%E7%BC%93%E5%AD%98%E5%A4%84%E7%90%86%E6%B5%81%E7%A8%8B.png" alt="image"></p>
+<p>但是，需要注意的是布隆过滤器可能会存在误判的情况。总结来说就是： <strong>布隆过滤器说某个元素存在，小概率会误判。布隆过滤器说某个元素不在，那么这个元素一定不在。</strong></p>
+<p><em>为什么会出现误判的情况呢? 我们还要从布隆过滤器的原理来说！</em></p>
+<p>我们先来看一下，<strong>当一个元素加入布隆过滤器中的时候，会进行哪些操作：</strong></p>
+<ol>
+<li>使用布隆过滤器中的哈希函数对元素值进行计算，得到哈希值（有几个哈希函数得到几个哈希值）。</li>
+<li>根据得到的哈希值，在位数组中把对应下标的值置为 1。</li>
+</ol>
+<p>我们再来看一下，<strong>当我们需要判断一个元素是否存在于布隆过滤器的时候，会进行哪些操作：</strong></p>
+<ol>
+<li>对给定元素再次进行相同的哈希计算；</li>
+<li>得到值之后判断位数组中的每个元素是否都为 1，如果值都为 1，那么说明这个值在布隆过滤器中，如果存在一个值不为 1，说明该元素不在布隆过滤器中。</li>
+</ol>
+<p>然后，一定会出现这样一种情况：<strong>不同的字符串可能哈希出来的位置相同。</strong> （可以适当增加位数组大小或者调整我们的哈希函数来降低概率）</p>
+<h2 id="14-缓存雪崩"><a href="#14-缓存雪崩" class="headerlink" title="14. 缓存雪崩"></a>14. 缓存雪崩</h2><h3 id="14-1-什么是缓存雪崩？"><a href="#14-1-什么是缓存雪崩？" class="headerlink" title="14.1. 什么是缓存雪崩？"></a>14.1. 什么是缓存雪崩？</h3><p>实际上，缓存雪崩描述的就是这样一个简单的场景：<strong>缓存在同一时间大面积的失效，后面的请求都直接落到了数据库上，造成数据库短时间内承受大量请求。</strong> 这就好比雪崩一样，摧枯拉朽之势，数据库的压力可想而知，可能直接就被这么多请求弄宕机了。</p>
+<p>举个例子：系统的缓存模块出了问题比如宕机导致不可用。造成系统的所有访问，都要走数据库。</p>
+<p>还有一种缓存雪崩的场景是：<strong>有一些被大量访问数据（热点缓存）在某一时刻大面积失效，导致对应的请求直接落到了数据库上。</strong> 这样的情况，有下面几种解决办法：</p>
+<p>举个例子 ：秒杀开始 12 个小时之前，我们统一存放了一批商品到 Redis 中，设置的缓存过期时间也是 12 个小时，那么秒杀开始的时候，这些秒杀的商品的访问直接就失效了。导致的情况就是，相应的请求直接就落到了数据库上，就像雪崩一样可怕。</p>
+<h3 id="14-2-有哪些解决办法？"><a href="#14-2-有哪些解决办法？" class="headerlink" title="14.2. 有哪些解决办法？"></a>14.2. 有哪些解决办法？</h3><p><strong>针对 Redis 服务不可用的情况：</strong></p>
+<ol>
+<li>采用 Redis 集群，避免单机出现问题整个缓存服务都没办法使用。</li>
+<li>限流，避免同时处理大量的请求。</li>
+</ol>
+<p><strong>针对热点缓存失效的情况：</strong></p>
+<ol>
+<li>设置不同的失效时间比如随机设置缓存的失效时间。</li>
+<li>缓存永不失效。</li>
+</ol>
+<h2 id="15-MySQL的内连接和外连接"><a href="#15-MySQL的内连接和外连接" class="headerlink" title="15.MySQL的内连接和外连接"></a>15.MySQL的内连接和外连接</h2><blockquote>
+<p>内连接</p>
+</blockquote>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/986203-20170328114511029-1891784394.png" alt="img"></p>
+<blockquote>
+<p>左外连接</p>
+</blockquote>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/986203-20170328114619748-1184886553.png" alt="img"></p>
+<blockquote>
+<p>右外连接</p>
+</blockquote>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/986203-20170328114729811-38208863.png" alt="img"></p>
+<blockquote>
+<p>全连接（全外连接）</p>
+</blockquote>
+<p><strong>MySQL目前不支持此方式</strong></p>
+]]></content>
+      <categories>
+        <category>面试</category>
+        <category>SQL</category>
+        <category>笔记</category>
+      </categories>
+      <tags>
+        <tag>笔记</tag>
+        <tag>Java</tag>
+        <tag>面试</tag>
+        <tag>SQL</tag>
+        <tag>MySQL</tag>
+        <tag>Redis</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Java后端面试笔记-I/O</title>
+    <url>/2021/03/10/Java%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0-I-O/</url>
+    <content><![CDATA[<h1 id="I-O相关"><a href="#I-O相关" class="headerlink" title="I/O相关"></a>I/O相关</h1><h2 id="1-常见的I-O模型有哪些？Java中BIO、NIO、AIO的区别？"><a href="#1-常见的I-O模型有哪些？Java中BIO、NIO、AIO的区别？" class="headerlink" title="1.常见的I/O模型有哪些？Java中BIO、NIO、AIO的区别？"></a>1.常见的I/O模型有哪些？Java中BIO、NIO、AIO的区别？</h2><h3 id="BIO-Blocking-I-O"><a href="#BIO-Blocking-I-O" class="headerlink" title="BIO (Blocking I/O)"></a>BIO (Blocking I/O)</h3><p><strong>BIO 属于同步阻塞 IO 模型</strong> 。</p>
+<p>同步阻塞 IO 模型中，应用程序发起 read 调用后，会一直阻塞，直到在内核把数据拷贝到用户空间。</p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210310124137.png"></p>
+<p>在客户端连接数量不高的情况下，是没问题的。但是，当面对十万甚至百万级连接的时候，传统的 BIO 模型是无能为力的。因此，我们需要一种更高效的 I/O 处理模型来应对更高的并发量。</p>
+<a id="more"></a>
+
+<h3 id="NIO-Non-blocking-New-I-O"><a href="#NIO-Non-blocking-New-I-O" class="headerlink" title="NIO (Non-blocking/New I/O)"></a>NIO (Non-blocking/New I/O)</h3><p>Java 中的 NIO 于 Java 1.4 中引入，对应 <code>java.nio</code> 包，提供了 <code>Channel</code> , <code>Selector</code>，<code>Buffer</code> 等抽象。NIO 中的 N 可以理解为 Non-blocking，不单纯是 New。它支持面向缓冲的，基于通道的 I/O 操作方法。 对于高负载、高并发的（网络）应用，应使用 NIO 。</p>
+<p>Java 中的 NIO 可以看作是 <strong>I/O 多路复用模型</strong>。也有很多人认为，Java 中的 NIO 属于同步非阻塞 IO 模型。</p>
+<p>跟着我的思路往下看看，相信你会得到答案！</p>
+<p>我们先来看看 <strong>同步非阻塞 IO 模型</strong>。</p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210310124333.png"></p>
+<p>同步非阻塞 IO 模型中，应用程序会一直发起 read 调用，等待数据从内核空间拷贝到用户空间的这段时间里，线程依然是阻塞的，直到在内核把数据拷贝到用户空间。</p>
+<p>相比于同步阻塞 IO 模型，同步非阻塞 IO 模型确实有了很大改进。通过轮询操作，避免了一直阻塞。</p>
+<p>但是，这种 IO 模型同样存在问题：<strong>应用程序不断进行 I/O 系统调用轮询数据是否已经准备好的过程是十分消耗 CPU 资源的。</strong></p>
+<p>这个时候，<strong>I/O 多路复用模型</strong> 就上场了。</p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210310124406.png"></p>
+<p>IO 多路复用模型中，线程首先发起 select 调用，询问内核数据是否准备就绪，等内核把数据准备好了，用户线程再发起 read 调用。read 调用的过程（数据从内核空间-&gt;用户空间）还是阻塞的。</p>
+<blockquote>
+<p>目前支持 IO 多路复用的系统调用，有 select，epoll 等等。select 系统调用，是目前几乎在所有的操作系统上都有支持</p>
+<ul>
+<li><strong>select 调用</strong> ：内核提供的系统调用，它支持一次查询多个系统调用的可用状态。几乎所有的操作系统都支持。</li>
+<li><strong>epoll 调用</strong> ：linux 2.6 内核，属于 select 调用的增强版本，优化了 IO 的执行效率。</li>
+</ul>
+</blockquote>
+<p><strong>IO 多路复用模型，通过减少无效的系统调用，减少了对 CPU 资源的消耗。</strong></p>
+<p>Java 中的 NIO ，有一个非常重要的<strong>选择器 ( Selector )</strong> 的概念，也可以被称为 <strong>多路复用器</strong>。通过它，只需要一个线程便可以管理多个客户端连接。当客户端数据到了之后，才会为其服务。</p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210310124438.png"></p>
+<h3 id="AIO-Asynchronous-I-O"><a href="#AIO-Asynchronous-I-O" class="headerlink" title="AIO (Asynchronous I/O)"></a>AIO (Asynchronous I/O)</h3><p>AIO 也就是 NIO 2。Java 7 中引入了 NIO 的改进版 NIO 2,它是异步 IO 模型。</p>
+<p>异步 IO 是基于事件和回调机制实现的，也就是应用操作之后会直接返回，不会堵塞在那里，当后台处理完成，操作系统会通知相应的线程进行后续的操作。</p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210310124459.png"></p>
+<p>目前来说 AIO 的应用还不是很广泛。Netty 之前也尝试使用过 AIO，不过又放弃了。这是因为，Netty 使用了 AIO 之后，在 Linux 系统上的性能并没有多少提升。</p>
+<p>最后，来一张图，简单总结一下 Java 中的 BIO、NIO、AIO。</p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210310124518.png"></p>
+]]></content>
+      <categories>
+        <category>面试</category>
+        <category>Java</category>
+        <category>笔记</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Java后端面试笔记-JVM</title>
+    <url>/2021/03/09/Java%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0-JVM/</url>
+    <content><![CDATA[<h1 id="JVM相关"><a href="#JVM相关" class="headerlink" title="JVM相关"></a>JVM相关</h1><h2 id="1-修改Java字节码"><a href="#1-修改Java字节码" class="headerlink" title="1.修改Java字节码"></a>1.修改Java字节码</h2><p>在OpenJDK里有一个<code>AsmTools</code>项目，用来生成正确的或者不正确的java <code>.class</code>文件，主要用来测试和验证。</p>
 <p><code>AsmTools</code>引入了两种表示<code>.class</code>文件的语法：</p>
 <ul>
 <li><p>JASM</p>
@@ -17,12 +736,12 @@
 <p>在这里主要使用<code>JASM</code>语法。</p>
 <a id="more"></a>
 
-<h4 id="生成asmtools-jar"><a href="#生成asmtools-jar" class="headerlink" title="生成asmtools.jar"></a>生成asmtools.jar</h4><p>如果你的机器没有安装 <code>Mercurial</code>，请先安装(Mericurial 类似 Git 和 SVN，是一个分布式版本控制系统，使用 Python 编写，OpenJDK 就托管在 Mercurial 平台上)</p>
+<h3 id="生成asmtools-jar"><a href="#生成asmtools-jar" class="headerlink" title="生成asmtools.jar"></a>生成asmtools.jar</h3><p>如果你的机器没有安装 <code>Mercurial</code>，请先安装(Mericurial 类似 Git 和 SVN，是一个分布式版本控制系统，使用 Python 编写，OpenJDK 就托管在 Mercurial 平台上)</p>
 <p>然后执行以下命令：</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">// Clone代码</span><br><span class="line">hg clone ://hg.openjdk.java.net/code-tools/asmtools</span><br><span class="line"></span><br><span class="line">// 编译</span><br><span class="line">cd asmtools/build</span><br><span class="line">ant</span><br></pre></td></tr></table></figure>
 
 <p>即可得到asmtools.jar文件。</p>
-<h4 id="准备一个Example"><a href="#准备一个Example" class="headerlink" title="准备一个Example"></a>准备一个Example</h4><p>Foo.java</p>
+<h3 id="准备一个Example"><a href="#准备一个Example" class="headerlink" title="准备一个Example"></a>准备一个Example</h3><p>Foo.java</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Foo</span> </span>&#123;</span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">boolean</span> flag = <span class="keyword">true</span>;</span><br><span class="line">  <span class="keyword">if</span> (flag) System.out.println(<span class="string">&quot;Hello, Java!&quot;</span>);</span><br><span class="line">  <span class="keyword">if</span> (flag == <span class="keyword">true</span>) System.out.println(<span class="string">&quot;Hello, JVM!&quot;</span>);</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p><code>javac Foo.java</code>命令生成Foo.class文件，使用JD-GUI打开内容如下：</p>
@@ -31,7 +750,7 @@
 <p><code>java Foo</code>命令运行Foo.class文件输出结果：</p>
 <figure class="highlight autohotkey"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Hello,</span> Java!</span><br><span class="line"><span class="built_in">Hello,</span> JVM!</span><br></pre></td></tr></table></figure>
 
-<h4 id="由class文件生成jasm文件"><a href="#由class文件生成jasm文件" class="headerlink" title="由class文件生成jasm文件"></a>由class文件生成jasm文件</h4><p>如下命令将class文件中的内容转换成对应的jasm语法：</p>
+<h3 id="由class文件生成jasm文件"><a href="#由class文件生成jasm文件" class="headerlink" title="由class文件生成jasm文件"></a>由class文件生成jasm文件</h3><p>如下命令将class文件中的内容转换成对应的jasm语法：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">java -jar asmtools.jar jdis Foo.class</span><br></pre></td></tr></table></figure>
 
 <p>上面输出的内容会直接打印在终端，当然你也可以把它输入到文件中：</p>
@@ -41,7 +760,7 @@
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">super</span> <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Foo</span></span></span><br><span class="line">    version 52:0</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> Method <span class="string">&quot;&lt;init&gt;&quot;</span>:<span class="string">&quot;()V&quot;</span></span><br><span class="line">    stack <span class="number">1</span> locals <span class="number">1</span></span><br><span class="line">&#123;</span><br><span class="line">        aload_0;</span><br><span class="line">        invokespecial   Method java/lang/Object.<span class="string">&quot;&lt;init&gt;&quot;</span>:<span class="string">&quot;()V&quot;</span>;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> Method main:<span class="string">&quot;([Ljava/lang/String;)V&quot;</span></span><br><span class="line">    stack <span class="number">2</span> locals <span class="number">2</span></span><br><span class="line">&#123;</span><br><span class="line">        iconst_1;</span><br><span class="line">        istore_1;</span><br><span class="line">        iload_1;</span><br><span class="line">        ifeq    L14;</span><br><span class="line">        getstatic   Field java/lang/System.out:<span class="string">&quot;Ljava/io/PrintStream;&quot;</span>;</span><br><span class="line">        ldc String <span class="string">&quot;Hello, Java!&quot;</span>;</span><br><span class="line">        invokevirtual   Method java/io/PrintStream.println:<span class="string">&quot;(Ljava/lang/String;)V&quot;</span>;</span><br><span class="line">    L14:    stack_frame_type append;</span><br><span class="line">        locals_map <span class="keyword">int</span>;</span><br><span class="line">        iload_1;</span><br><span class="line">        iconst_1;</span><br><span class="line">        if_icmpne   L27;</span><br><span class="line">        getstatic   Field java/lang/System.out:<span class="string">&quot;Ljava/io/PrintStream;&quot;</span>;</span><br><span class="line">        ldc String <span class="string">&quot;Hello, JVM!&quot;</span>;</span><br><span class="line">        invokevirtual   Method java/io/PrintStream.println:<span class="string">&quot;(Ljava/lang/String;)V&quot;</span>;</span><br><span class="line">    L27:    stack_frame_type same;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#125; <span class="comment">// end Class Foo</span></span><br></pre></td></tr></table></figure>
 
 <p>为了将 Foo.class 中的 <code>int i = 1;</code> 修改成 <code>int i = 2;</code>，我们需要替换 Foo.jasm 文件中的 <code>iconst_1</code> 为 <code>iconst_2</code>。</p>
-<h4 id="由jasm文件生成class文件"><a href="#由jasm文件生成class文件" class="headerlink" title="由jasm文件生成class文件"></a>由jasm文件生成class文件</h4><p>执行如下命令：</p>
+<h3 id="由jasm文件生成class文件"><a href="#由jasm文件生成class文件" class="headerlink" title="由jasm文件生成class文件"></a>由jasm文件生成class文件</h3><p>执行如下命令：</p>
 <figure class="highlight mipsasm"><table><tr><td class="code"><pre><span class="line"><span class="keyword">java </span>-<span class="keyword">jar </span>asmtools.<span class="keyword">jar </span><span class="keyword">jasm </span>Foo.<span class="keyword">jasm</span></span><br></pre></td></tr></table></figure>
 
 <p>这时再用 JD-GUI 打开 Foo.class 文件，内容如下：</p>
@@ -51,7 +770,7 @@
 <p><code>java Foo</code> 输出内容如下：</p>
 <figure class="highlight autohotkey"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Hello,</span> Java!</span><br></pre></td></tr></table></figure>
 
-<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>其实就两个命令：</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>其实就两个命令：</p>
 <ul>
 <li>由 class 文件生成 jasm 文件：<code>java -jar asmtools.jar jdis Foo.class &gt; Foo.jasm</code></li>
 <li>由 jasm 文件生成 class 文件：<code>java -jar asmtools.jar jasm Foo.jasm</code></li>
@@ -66,6 +785,7 @@
         <tag>笔记</tag>
         <tag>Java</tag>
         <tag>面试</tag>
+        <tag>JVM</tag>
       </tags>
   </entry>
   <entry>
@@ -142,8 +862,8 @@
         <category>睡前故事</category>
       </categories>
       <tags>
-        <tag>睡前故事</tag>
         <tag>Hide</tag>
+        <tag>睡前故事</tag>
       </tags>
   </entry>
   <entry>
@@ -213,8 +933,8 @@
         <category>睡前故事</category>
       </categories>
       <tags>
-        <tag>睡前故事</tag>
         <tag>Hide</tag>
+        <tag>睡前故事</tag>
       </tags>
   </entry>
   <entry>
@@ -383,8 +1103,8 @@
         <category>睡前故事</category>
       </categories>
       <tags>
-        <tag>睡前故事</tag>
         <tag>Hide</tag>
+        <tag>睡前故事</tag>
       </tags>
   </entry>
   <entry>
@@ -443,8 +1163,8 @@
         <category>睡前故事</category>
       </categories>
       <tags>
-        <tag>睡前故事</tag>
         <tag>Hide</tag>
+        <tag>睡前故事</tag>
       </tags>
   </entry>
   <entry>
@@ -789,8 +1509,8 @@
         <category>睡前故事</category>
       </categories>
       <tags>
-        <tag>睡前故事</tag>
         <tag>Hide</tag>
+        <tag>睡前故事</tag>
       </tags>
   </entry>
   <entry>
@@ -1110,8 +1830,8 @@
         <category>睡前故事</category>
       </categories>
       <tags>
-        <tag>睡前故事</tag>
         <tag>Hide</tag>
+        <tag>睡前故事</tag>
         <tag>骑士与女巫</tag>
       </tags>
   </entry>
@@ -1151,8 +1871,8 @@
         <category>睡前故事</category>
       </categories>
       <tags>
-        <tag>睡前故事</tag>
         <tag>Hide</tag>
+        <tag>睡前故事</tag>
         <tag>骑士与女巫</tag>
       </tags>
   </entry>
@@ -1192,8 +1912,8 @@
         <category>睡前故事</category>
       </categories>
       <tags>
-        <tag>睡前故事</tag>
         <tag>Hide</tag>
+        <tag>睡前故事</tag>
         <tag>骑士与女巫</tag>
       </tags>
   </entry>

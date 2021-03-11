@@ -135,6 +135,103 @@
       </tags>
   </entry>
   <entry>
+    <title>Java后端面试笔记-线程</title>
+    <url>/2021/03/11/Java%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0-%E7%BA%BF%E7%A8%8B/</url>
+    <content><![CDATA[<h2 id="1-进程与线程"><a href="#1-进程与线程" class="headerlink" title="1.进程与线程"></a>1.进程与线程</h2><blockquote>
+<p><strong>进程</strong></p>
+</blockquote>
+<p>进程是程序的一次执行过程，是系统运行程序的基本单位，因此进程是动态的。系统运行一个程序即是一个进程从创建，运行到消亡的过程。</p>
+<p>在 Java 中，当我们启动 main 函数时其实就是启动了一个 JVM 的进程，而 main 函数所在的线程就是这个进程中的一个线程，也称主线程。</p>
+<blockquote>
+<p><strong>线程</strong></p>
+</blockquote>
+<p>线程与进程相似，但线程是一个比进程更小的执行单位。一个进程在其执行的过程中可以产生多个线程。与进程不同的是同类的多个线程共享进程的<strong>堆</strong>和<strong>方法区</strong>资源，但每个线程有自己的<strong>程序计数器</strong>、<strong>虚拟机栈</strong>和<strong>本地方法栈</strong>，所以系统在产生一个线程，或是在各个线程之间作切换工作时，负担要比进程小得多，也正因为如此，线程也被称为轻量级进程。</p>
+<div align="center">  
+<img src="https://my-blog-to-use.oss-cn-beijing.aliyuncs.com/2019-3/JVM运行时数据区域.png" width="600px"/>
+</div>
+从上图可以看出：一个进程中可以有多个线程，多个线程共享进程的**堆**和**方法区 (JDK1.8 之后的元空间)**资源，但是每个线程有自己的**程序计数器**、**虚拟机栈** 和 **本地方法栈**。
+
+<a id="more"></a>
+
+<p><strong>总结：</strong> 线程 是 进程 划分成的更小的运行单位。线程和进程最大的不同在于基本上各进程是独立的，而各线程则不一定，因为同一进程中的线程极有可能会相互影响。线程执行开销小，但不利于资源的管理和保护；而进程则反之。</p>
+<blockquote>
+<p>线程的基本状态</p>
+</blockquote>
+<p>Java 线程在运行的生命周期中的指定时刻只可能处于下面 6 种不同状态的其中一个状态（图源《Java 并发编程艺术》4.1.4 节）。</p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210311103608.png"></p>
+<p>线程在生命周期中并不是固定处于某一个状态而是随着代码的执行在不同状态之间切换。Java 线程状态变迁如下图所示（图源《Java 并发编程艺术》4.1.4 节）：</p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210311103632.png"></p>
+<p>由上图可以看出：</p>
+<p>线程创建之后它将处于 <strong>NEW（新建）</strong> 状态，调用 <code>start()</code> 方法后开始运行，线程这时候处于 <strong>READY（可运行）</strong> 状态。可运行状态的线程获得了 CPU 时间片（timeslice）后就处于 <strong>RUNNING（运行）</strong> 状态。</p>
+<blockquote>
+<p>操作系统隐藏 Java 虚拟机（JVM）中的 READY 和 RUNNING 状态，它只能看到 RUNNABLE 状态（图源：<a href="https://howtodoinjava.com/">HowToDoInJava</a>：<a href="https://howtodoinjava.com/java/multi-threading/java-thread-life-cycle-and-thread-states/">Java Thread Life Cycle and Thread States</a>），所以 Java 系统一般将这两个状态统称为 <strong>RUNNABLE（运行中）</strong> 状态 。</p>
+</blockquote>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210311103637.png"></p>
+<p>当线程执行 <code>wait()</code>方法之后，线程进入 <strong>WAITING（等待）</strong> 状态。进入等待状态的线程需要依靠其他线程的通知才能够返回到运行状态，而 <strong>TIME_WAITING(超时等待)</strong> 状态相当于在等待状态的基础上增加了超时限制，比如通过 <code>sleep（long millis）</code>方法或 <code>wait（long millis）</code>方法可以将 Java 线程置于 TIMED WAITING 状态。当超时时间到达后 Java 线程将会返回到 RUNNABLE 状态。当线程调用同步方法时，在没有获取到锁的情况下，线程将会进入到 <strong>BLOCKED（阻塞）</strong> 状态。线程在执行 Runnable 的<code>run()</code>方法之后将会进入到 <strong>TERMINATED（终止）</strong> 状态。</p>
+<h2 id="2-上下文切换"><a href="#2-上下文切换" class="headerlink" title="2.上下文切换"></a>2.上下文切换</h2><p>多线程编程中一般线程的个数都大于 CPU 核心的个数，而一个 CPU 核心在任意时刻只能被一个线程使用，为了让这些线程都能得到有效执行，CPU 采取的策略是为每个线程分配时间片并轮转的形式。当一个线程的时间片用完的时候就会重新处于就绪状态让给其他线程使用，这个过程就属于一次上下文切换。</p>
+<p>概括来说就是：当前任务在执行完 CPU 时间片切换到另一个任务之前会先保存自己的状态，以便下次再切换回这个任务时，可以再加载这个任务的状态。<strong>任务从保存到再加载的过程就是一次上下文切换</strong>。</p>
+<p>上下文切换通常是计算密集型的。也就是说，它需要相当可观的处理器时间，在每秒几十上百次的切换中，每次切换都需要纳秒量级的时间。所以，上下文切换对系统来说意味着消耗大量的 CPU 时间，事实上，可能是操作系统中时间消耗最大的操作。</p>
+<p>Linux 相比与其他操作系统（包括其他类 Unix 系统）有很多的优点，其中有一项就是，其上下文切换和模式切换的时间消耗非常少。</p>
+<h2 id="3-并发与并行"><a href="#3-并发与并行" class="headerlink" title="3.并发与并行"></a>3.并发与并行</h2><ul>
+<li><strong>并发：</strong> 同一时间段，多个任务都在执行 (单位时间内不一定同时执行)；</li>
+<li><strong>并行：</strong> 单位时间内，多个任务同时执行。</li>
+</ul>
+<h2 id="4-线程死锁和避免策略"><a href="#4-线程死锁和避免策略" class="headerlink" title="4.线程死锁和避免策略"></a>4.线程死锁和避免策略</h2><h3 id="4-1线程死锁"><a href="#4-1线程死锁" class="headerlink" title="4.1线程死锁"></a>4.1线程死锁</h3><p>多个线程同时被阻塞，它们中的一个或者全部都在等待某个资源被释放。由于线程被无限期地阻塞，因此程序不可能正常终止。</p>
+<p>如下图所示，线程 A 持有资源 2，线程 B 持有资源 1，他们同时都想申请对方的资源，所以这两个线程就会互相等待而进入死锁状态。</p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210311100124.png"></p>
+<p>下面通过一个例子来说明线程死锁,代码模拟了上图的死锁的情况 (代码来源于《并发编程之美》)：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DeadLockDemo</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Object resource1 = <span class="keyword">new</span> Object();<span class="comment">//资源 1</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Object resource2 = <span class="keyword">new</span> Object();<span class="comment">//资源 2</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">new</span> Thread(() -&gt; &#123;</span><br><span class="line">            <span class="keyword">synchronized</span> (resource1) &#123;</span><br><span class="line">                System.out.println(Thread.currentThread() + <span class="string">&quot;get resource1&quot;</span>);</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">                &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">                System.out.println(Thread.currentThread() + <span class="string">&quot;waiting get resource2&quot;</span>);</span><br><span class="line">                <span class="keyword">synchronized</span> (resource2) &#123;</span><br><span class="line">                    System.out.println(Thread.currentThread() + <span class="string">&quot;get resource2&quot;</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;, <span class="string">&quot;线程 1&quot;</span>).start();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">new</span> Thread(() -&gt; &#123;</span><br><span class="line">            <span class="keyword">synchronized</span> (resource2) &#123;</span><br><span class="line">                System.out.println(Thread.currentThread() + <span class="string">&quot;get resource2&quot;</span>);</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">                &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">                System.out.println(Thread.currentThread() + <span class="string">&quot;waiting get resource1&quot;</span>);</span><br><span class="line">                <span class="keyword">synchronized</span> (resource1) &#123;</span><br><span class="line">                    System.out.println(Thread.currentThread() + <span class="string">&quot;get resource1&quot;</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;, <span class="string">&quot;线程 2&quot;</span>).start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Output</p>
+<figure class="highlight apache"><table><tr><td class="code"><pre><span class="line"><span class="attribute">Thread</span>[线程 <span class="number">1</span>,<span class="number">5</span>,main]get resource<span class="number">1</span></span><br><span class="line"><span class="attribute">Thread</span>[线程 <span class="number">2</span>,<span class="number">5</span>,main]get resource<span class="number">2</span></span><br><span class="line"><span class="attribute">Thread</span>[线程 <span class="number">1</span>,<span class="number">5</span>,main]waiting get resource<span class="number">2</span></span><br><span class="line"><span class="attribute">Thread</span>[线程 <span class="number">2</span>,<span class="number">5</span>,main]waiting get resource<span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p>线程 A 通过 synchronized (resource1) 获得 resource1 的监视器锁，然后通过<code>Thread.sleep(1000);</code>让线程 A 休眠 1s 为的是让线程 B 得到执行然后获取到 resource2 的监视器锁。线程 A 和线程 B 休眠结束了都开始企图请求获取对方的资源，然后这两个线程就会陷入互相等待的状态，这也就产生了死锁。上面的例子符合产生死锁的四个必要条件。</p>
+<p>学过操作系统的朋友都知道产生死锁必须具备以下四个条件：</p>
+<ol>
+<li>互斥条件：该资源任意一个时刻只由一个线程占用。</li>
+<li>请求与保持条件：一个进程因请求资源而阻塞时，对已获得的资源保持不放。</li>
+<li>不剥夺条件:线程已获得的资源在末使用完之前不能被其他线程强行剥夺，只有自己使用完毕后才释放资源。</li>
+<li>循环等待条件:若干进程之间形成一种头尾相接的循环等待资源关系。</li>
+</ol>
+<h3 id="4-2避免策略"><a href="#4-2避免策略" class="headerlink" title="4.2避免策略"></a>4.2避免策略</h3><p>只要破坏产生死锁的四个条件中的其中一个。</p>
+<p><strong>破坏互斥条件</strong></p>
+<p>这个条件我们没有办法破坏，因为我们用锁本来就是想让他们互斥的（临界资源需要互斥访问）。</p>
+<p><strong>破坏请求与保持条件</strong></p>
+<p>一次性申请所有的资源。</p>
+<p><strong>破坏不剥夺条件</strong></p>
+<p>占用部分资源的线程进一步申请其他资源时，如果申请不到，可以主动释放它占有的资源。</p>
+<p><strong>破坏循环等待条件</strong></p>
+<p>靠按序申请资源来预防。按某一顺序申请资源，释放资源则反序释放。破坏循环等待条件。</p>
+<p>我们对线程 2 的代码修改成下面这样就不会产生死锁了。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">new</span> Thread(() -&gt; &#123;</span><br><span class="line">    <span class="keyword">synchronized</span> (resource1) &#123;</span><br><span class="line">        System.out.println(Thread.currentThread() + <span class="string">&quot;get resource1&quot;</span>);</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(Thread.currentThread() + <span class="string">&quot;waiting get resource2&quot;</span>);</span><br><span class="line">        <span class="keyword">synchronized</span> (resource2) &#123;</span><br><span class="line">            System.out.println(Thread.currentThread() + <span class="string">&quot;get resource2&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;, <span class="string">&quot;线程 2&quot;</span>).start();</span><br></pre></td></tr></table></figure>
+
+<p>Output</p>
+<figure class="highlight apache"><table><tr><td class="code"><pre><span class="line"><span class="attribute">Thread</span>[线程 <span class="number">1</span>,<span class="number">5</span>,main]get resource<span class="number">1</span></span><br><span class="line"><span class="attribute">Thread</span>[线程 <span class="number">1</span>,<span class="number">5</span>,main]waiting get resource<span class="number">2</span></span><br><span class="line"><span class="attribute">Thread</span>[线程 <span class="number">1</span>,<span class="number">5</span>,main]get resource<span class="number">2</span></span><br><span class="line"><span class="attribute">Thread</span>[线程 <span class="number">2</span>,<span class="number">5</span>,main]get resource<span class="number">1</span></span><br><span class="line"><span class="attribute">Thread</span>[线程 <span class="number">2</span>,<span class="number">5</span>,main]waiting get resource<span class="number">2</span></span><br><span class="line"><span class="attribute">Thread</span>[线程 <span class="number">2</span>,<span class="number">5</span>,main]get resource<span class="number">2</span></span><br><span class="line"></span><br><span class="line"><span class="attribute">Process</span> finished with exit code <span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<p>我们分析一下上面的代码为什么避免了死锁的发生?</p>
+<p>线程 1 首先获得到 resource1 的监视器锁,这时候线程 2 就获取不到了。然后线程 1 再去获取 resource2 的监视器锁，可以获取到。然后线程 1 释放了对 resource1、resource2 的监视器锁的占用，线程 2 获取到就可以执行了。这样就破坏了破坏循环等待条件，因此避免了死锁。</p>
+<h2 id="5-sleep-方法与wait-方法的区别与共同点"><a href="#5-sleep-方法与wait-方法的区别与共同点" class="headerlink" title="5.sleep()方法与wait()方法的区别与共同点"></a>5.sleep()方法与wait()方法的区别与共同点</h2><ul>
+<li>两者最主要的区别在于：<strong>sleep 方法没有释放锁，而 wait 方法释放了锁</strong> 。</li>
+<li>两者都可以暂停线程的执行。</li>
+<li>Wait 通常被用于线程间交互/通信，sleep 通常被用于暂停执行。</li>
+<li>wait() 方法被调用后，线程不会自动苏醒，需要别的线程调用同一个对象上的 notify() 或者 notifyAll() 方法。sleep() 方法执行完成后，线程会自动苏醒。或者可以使用 wait(long timeout)超时后线程会自动苏醒。</li>
+</ul>
+<h2 id="6-为什么调用-start-方法时会执行-run-方法，为什么我们不能直接调用-run-方法？"><a href="#6-为什么调用-start-方法时会执行-run-方法，为什么我们不能直接调用-run-方法？" class="headerlink" title="6.为什么调用 start() 方法时会执行 run() 方法，为什么我们不能直接调用 run() 方法？"></a>6.为什么调用 start() 方法时会执行 run() 方法，为什么我们不能直接调用 run() 方法？</h2><p>new 一个 Thread，线程进入了新建状态;调用 start() 方法，会启动一个线程并使线程进入了就绪状态，当分配到时间片后就可以开始运行了。 start() 会执行线程的相应准备工作，然后自动执行 run() 方法的内容，这是真正的多线程工作。 而直接执行 run() 方法，会把 run 方法当成一个 main 线程下的普通方法去执行，并不会在某个线程中执行它，所以这并不是多线程工作。</p>
+<p><strong>总结： 调用 start 方法方可启动线程并使线程进入就绪状态，而 run 方法只是 thread 的一个普通方法调用，还是在主线程里执行。</strong></p>
+]]></content>
+      <categories>
+        <category>面试</category>
+        <category>Java</category>
+        <category>笔记</category>
+      </categories>
+      <tags>
+        <tag>笔记</tag>
+        <tag>Java</tag>
+        <tag>面试</tag>
+        <tag>线程</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Java后端面试笔记-设计模式</title>
     <url>/2021/03/11/Java%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</url>
     <content><![CDATA[<h1 id="设计模式篇"><a href="#设计模式篇" class="headerlink" title="设计模式篇"></a>设计模式篇</h1><h2 id="1-代理模式"><a href="#1-代理模式" class="headerlink" title="1. 代理模式"></a>1. 代理模式</h2><p>代理模式是一种比较好理解的设计模式。简单来说就是 <strong>我们使用代理对象来代替对真实对象(real object)的访问，这样就可以在不修改原目标对象的前提下，提供额外的功能操作，扩展目标对象的功能。</strong></p>
@@ -313,103 +410,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Java后端面试笔记-线程</title>
-    <url>/2021/03/11/Java%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0-%E7%BA%BF%E7%A8%8B/</url>
-    <content><![CDATA[<h2 id="1-进程与线程"><a href="#1-进程与线程" class="headerlink" title="1.进程与线程"></a>1.进程与线程</h2><blockquote>
-<p><strong>进程</strong></p>
-</blockquote>
-<p>进程是程序的一次执行过程，是系统运行程序的基本单位，因此进程是动态的。系统运行一个程序即是一个进程从创建，运行到消亡的过程。</p>
-<p>在 Java 中，当我们启动 main 函数时其实就是启动了一个 JVM 的进程，而 main 函数所在的线程就是这个进程中的一个线程，也称主线程。</p>
-<blockquote>
-<p><strong>线程</strong></p>
-</blockquote>
-<p>线程与进程相似，但线程是一个比进程更小的执行单位。一个进程在其执行的过程中可以产生多个线程。与进程不同的是同类的多个线程共享进程的<strong>堆</strong>和<strong>方法区</strong>资源，但每个线程有自己的<strong>程序计数器</strong>、<strong>虚拟机栈</strong>和<strong>本地方法栈</strong>，所以系统在产生一个线程，或是在各个线程之间作切换工作时，负担要比进程小得多，也正因为如此，线程也被称为轻量级进程。</p>
-<div align="center">  
-<img src="https://my-blog-to-use.oss-cn-beijing.aliyuncs.com/2019-3/JVM运行时数据区域.png" width="600px"/>
-</div>
-从上图可以看出：一个进程中可以有多个线程，多个线程共享进程的**堆**和**方法区 (JDK1.8 之后的元空间)**资源，但是每个线程有自己的**程序计数器**、**虚拟机栈** 和 **本地方法栈**。
-
-<a id="more"></a>
-
-<p><strong>总结：</strong> 线程 是 进程 划分成的更小的运行单位。线程和进程最大的不同在于基本上各进程是独立的，而各线程则不一定，因为同一进程中的线程极有可能会相互影响。线程执行开销小，但不利于资源的管理和保护；而进程则反之。</p>
-<blockquote>
-<p>线程的基本状态</p>
-</blockquote>
-<p>Java 线程在运行的生命周期中的指定时刻只可能处于下面 6 种不同状态的其中一个状态（图源《Java 并发编程艺术》4.1.4 节）。</p>
-<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210311103608.png"></p>
-<p>线程在生命周期中并不是固定处于某一个状态而是随着代码的执行在不同状态之间切换。Java 线程状态变迁如下图所示（图源《Java 并发编程艺术》4.1.4 节）：</p>
-<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210311103632.png"></p>
-<p>由上图可以看出：</p>
-<p>线程创建之后它将处于 <strong>NEW（新建）</strong> 状态，调用 <code>start()</code> 方法后开始运行，线程这时候处于 <strong>READY（可运行）</strong> 状态。可运行状态的线程获得了 CPU 时间片（timeslice）后就处于 <strong>RUNNING（运行）</strong> 状态。</p>
-<blockquote>
-<p>操作系统隐藏 Java 虚拟机（JVM）中的 READY 和 RUNNING 状态，它只能看到 RUNNABLE 状态（图源：<a href="https://howtodoinjava.com/">HowToDoInJava</a>：<a href="https://howtodoinjava.com/java/multi-threading/java-thread-life-cycle-and-thread-states/">Java Thread Life Cycle and Thread States</a>），所以 Java 系统一般将这两个状态统称为 <strong>RUNNABLE（运行中）</strong> 状态 。</p>
-</blockquote>
-<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210311103637.png"></p>
-<p>当线程执行 <code>wait()</code>方法之后，线程进入 <strong>WAITING（等待）</strong> 状态。进入等待状态的线程需要依靠其他线程的通知才能够返回到运行状态，而 <strong>TIME_WAITING(超时等待)</strong> 状态相当于在等待状态的基础上增加了超时限制，比如通过 <code>sleep（long millis）</code>方法或 <code>wait（long millis）</code>方法可以将 Java 线程置于 TIMED WAITING 状态。当超时时间到达后 Java 线程将会返回到 RUNNABLE 状态。当线程调用同步方法时，在没有获取到锁的情况下，线程将会进入到 <strong>BLOCKED（阻塞）</strong> 状态。线程在执行 Runnable 的<code>run()</code>方法之后将会进入到 <strong>TERMINATED（终止）</strong> 状态。</p>
-<h2 id="2-上下文切换"><a href="#2-上下文切换" class="headerlink" title="2.上下文切换"></a>2.上下文切换</h2><p>多线程编程中一般线程的个数都大于 CPU 核心的个数，而一个 CPU 核心在任意时刻只能被一个线程使用，为了让这些线程都能得到有效执行，CPU 采取的策略是为每个线程分配时间片并轮转的形式。当一个线程的时间片用完的时候就会重新处于就绪状态让给其他线程使用，这个过程就属于一次上下文切换。</p>
-<p>概括来说就是：当前任务在执行完 CPU 时间片切换到另一个任务之前会先保存自己的状态，以便下次再切换回这个任务时，可以再加载这个任务的状态。<strong>任务从保存到再加载的过程就是一次上下文切换</strong>。</p>
-<p>上下文切换通常是计算密集型的。也就是说，它需要相当可观的处理器时间，在每秒几十上百次的切换中，每次切换都需要纳秒量级的时间。所以，上下文切换对系统来说意味着消耗大量的 CPU 时间，事实上，可能是操作系统中时间消耗最大的操作。</p>
-<p>Linux 相比与其他操作系统（包括其他类 Unix 系统）有很多的优点，其中有一项就是，其上下文切换和模式切换的时间消耗非常少。</p>
-<h2 id="3-并发与并行"><a href="#3-并发与并行" class="headerlink" title="3.并发与并行"></a>3.并发与并行</h2><ul>
-<li><strong>并发：</strong> 同一时间段，多个任务都在执行 (单位时间内不一定同时执行)；</li>
-<li><strong>并行：</strong> 单位时间内，多个任务同时执行。</li>
-</ul>
-<h2 id="4-线程死锁和避免策略"><a href="#4-线程死锁和避免策略" class="headerlink" title="4.线程死锁和避免策略"></a>4.线程死锁和避免策略</h2><h3 id="4-1线程死锁"><a href="#4-1线程死锁" class="headerlink" title="4.1线程死锁"></a>4.1线程死锁</h3><p>多个线程同时被阻塞，它们中的一个或者全部都在等待某个资源被释放。由于线程被无限期地阻塞，因此程序不可能正常终止。</p>
-<p>如下图所示，线程 A 持有资源 2，线程 B 持有资源 1，他们同时都想申请对方的资源，所以这两个线程就会互相等待而进入死锁状态。</p>
-<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210311100124.png"></p>
-<p>下面通过一个例子来说明线程死锁,代码模拟了上图的死锁的情况 (代码来源于《并发编程之美》)：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DeadLockDemo</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Object resource1 = <span class="keyword">new</span> Object();<span class="comment">//资源 1</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Object resource2 = <span class="keyword">new</span> Object();<span class="comment">//资源 2</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">new</span> Thread(() -&gt; &#123;</span><br><span class="line">            <span class="keyword">synchronized</span> (resource1) &#123;</span><br><span class="line">                System.out.println(Thread.currentThread() + <span class="string">&quot;get resource1&quot;</span>);</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">                &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">                System.out.println(Thread.currentThread() + <span class="string">&quot;waiting get resource2&quot;</span>);</span><br><span class="line">                <span class="keyword">synchronized</span> (resource2) &#123;</span><br><span class="line">                    System.out.println(Thread.currentThread() + <span class="string">&quot;get resource2&quot;</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;, <span class="string">&quot;线程 1&quot;</span>).start();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">new</span> Thread(() -&gt; &#123;</span><br><span class="line">            <span class="keyword">synchronized</span> (resource2) &#123;</span><br><span class="line">                System.out.println(Thread.currentThread() + <span class="string">&quot;get resource2&quot;</span>);</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">                &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">                System.out.println(Thread.currentThread() + <span class="string">&quot;waiting get resource1&quot;</span>);</span><br><span class="line">                <span class="keyword">synchronized</span> (resource1) &#123;</span><br><span class="line">                    System.out.println(Thread.currentThread() + <span class="string">&quot;get resource1&quot;</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;, <span class="string">&quot;线程 2&quot;</span>).start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Output</p>
-<figure class="highlight apache"><table><tr><td class="code"><pre><span class="line"><span class="attribute">Thread</span>[线程 <span class="number">1</span>,<span class="number">5</span>,main]get resource<span class="number">1</span></span><br><span class="line"><span class="attribute">Thread</span>[线程 <span class="number">2</span>,<span class="number">5</span>,main]get resource<span class="number">2</span></span><br><span class="line"><span class="attribute">Thread</span>[线程 <span class="number">1</span>,<span class="number">5</span>,main]waiting get resource<span class="number">2</span></span><br><span class="line"><span class="attribute">Thread</span>[线程 <span class="number">2</span>,<span class="number">5</span>,main]waiting get resource<span class="number">1</span></span><br></pre></td></tr></table></figure>
-
-<p>线程 A 通过 synchronized (resource1) 获得 resource1 的监视器锁，然后通过<code>Thread.sleep(1000);</code>让线程 A 休眠 1s 为的是让线程 B 得到执行然后获取到 resource2 的监视器锁。线程 A 和线程 B 休眠结束了都开始企图请求获取对方的资源，然后这两个线程就会陷入互相等待的状态，这也就产生了死锁。上面的例子符合产生死锁的四个必要条件。</p>
-<p>学过操作系统的朋友都知道产生死锁必须具备以下四个条件：</p>
-<ol>
-<li>互斥条件：该资源任意一个时刻只由一个线程占用。</li>
-<li>请求与保持条件：一个进程因请求资源而阻塞时，对已获得的资源保持不放。</li>
-<li>不剥夺条件:线程已获得的资源在末使用完之前不能被其他线程强行剥夺，只有自己使用完毕后才释放资源。</li>
-<li>循环等待条件:若干进程之间形成一种头尾相接的循环等待资源关系。</li>
-</ol>
-<h3 id="4-2避免策略"><a href="#4-2避免策略" class="headerlink" title="4.2避免策略"></a>4.2避免策略</h3><p>只要破坏产生死锁的四个条件中的其中一个。</p>
-<p><strong>破坏互斥条件</strong></p>
-<p>这个条件我们没有办法破坏，因为我们用锁本来就是想让他们互斥的（临界资源需要互斥访问）。</p>
-<p><strong>破坏请求与保持条件</strong></p>
-<p>一次性申请所有的资源。</p>
-<p><strong>破坏不剥夺条件</strong></p>
-<p>占用部分资源的线程进一步申请其他资源时，如果申请不到，可以主动释放它占有的资源。</p>
-<p><strong>破坏循环等待条件</strong></p>
-<p>靠按序申请资源来预防。按某一顺序申请资源，释放资源则反序释放。破坏循环等待条件。</p>
-<p>我们对线程 2 的代码修改成下面这样就不会产生死锁了。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">new</span> Thread(() -&gt; &#123;</span><br><span class="line">    <span class="keyword">synchronized</span> (resource1) &#123;</span><br><span class="line">        System.out.println(Thread.currentThread() + <span class="string">&quot;get resource1&quot;</span>);</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(Thread.currentThread() + <span class="string">&quot;waiting get resource2&quot;</span>);</span><br><span class="line">        <span class="keyword">synchronized</span> (resource2) &#123;</span><br><span class="line">            System.out.println(Thread.currentThread() + <span class="string">&quot;get resource2&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;, <span class="string">&quot;线程 2&quot;</span>).start();</span><br></pre></td></tr></table></figure>
-
-<p>Output</p>
-<figure class="highlight apache"><table><tr><td class="code"><pre><span class="line"><span class="attribute">Thread</span>[线程 <span class="number">1</span>,<span class="number">5</span>,main]get resource<span class="number">1</span></span><br><span class="line"><span class="attribute">Thread</span>[线程 <span class="number">1</span>,<span class="number">5</span>,main]waiting get resource<span class="number">2</span></span><br><span class="line"><span class="attribute">Thread</span>[线程 <span class="number">1</span>,<span class="number">5</span>,main]get resource<span class="number">2</span></span><br><span class="line"><span class="attribute">Thread</span>[线程 <span class="number">2</span>,<span class="number">5</span>,main]get resource<span class="number">1</span></span><br><span class="line"><span class="attribute">Thread</span>[线程 <span class="number">2</span>,<span class="number">5</span>,main]waiting get resource<span class="number">2</span></span><br><span class="line"><span class="attribute">Thread</span>[线程 <span class="number">2</span>,<span class="number">5</span>,main]get resource<span class="number">2</span></span><br><span class="line"></span><br><span class="line"><span class="attribute">Process</span> finished with exit code <span class="number">0</span></span><br></pre></td></tr></table></figure>
-
-<p>我们分析一下上面的代码为什么避免了死锁的发生?</p>
-<p>线程 1 首先获得到 resource1 的监视器锁,这时候线程 2 就获取不到了。然后线程 1 再去获取 resource2 的监视器锁，可以获取到。然后线程 1 释放了对 resource1、resource2 的监视器锁的占用，线程 2 获取到就可以执行了。这样就破坏了破坏循环等待条件，因此避免了死锁。</p>
-<h2 id="5-sleep-方法与wait-方法的区别与共同点"><a href="#5-sleep-方法与wait-方法的区别与共同点" class="headerlink" title="5.sleep()方法与wait()方法的区别与共同点"></a>5.sleep()方法与wait()方法的区别与共同点</h2><ul>
-<li>两者最主要的区别在于：<strong>sleep 方法没有释放锁，而 wait 方法释放了锁</strong> 。</li>
-<li>两者都可以暂停线程的执行。</li>
-<li>Wait 通常被用于线程间交互/通信，sleep 通常被用于暂停执行。</li>
-<li>wait() 方法被调用后，线程不会自动苏醒，需要别的线程调用同一个对象上的 notify() 或者 notifyAll() 方法。sleep() 方法执行完成后，线程会自动苏醒。或者可以使用 wait(long timeout)超时后线程会自动苏醒。</li>
-</ul>
-<h2 id="6-为什么调用-start-方法时会执行-run-方法，为什么我们不能直接调用-run-方法？"><a href="#6-为什么调用-start-方法时会执行-run-方法，为什么我们不能直接调用-run-方法？" class="headerlink" title="6.为什么调用 start() 方法时会执行 run() 方法，为什么我们不能直接调用 run() 方法？"></a>6.为什么调用 start() 方法时会执行 run() 方法，为什么我们不能直接调用 run() 方法？</h2><p>new 一个 Thread，线程进入了新建状态;调用 start() 方法，会启动一个线程并使线程进入了就绪状态，当分配到时间片后就可以开始运行了。 start() 会执行线程的相应准备工作，然后自动执行 run() 方法的内容，这是真正的多线程工作。 而直接执行 run() 方法，会把 run 方法当成一个 main 线程下的普通方法去执行，并不会在某个线程中执行它，所以这并不是多线程工作。</p>
-<p><strong>总结： 调用 start 方法方可启动线程并使线程进入就绪状态，而 run 方法只是 thread 的一个普通方法调用，还是在主线程里执行。</strong></p>
-]]></content>
-      <categories>
-        <category>面试</category>
-        <category>Java</category>
-        <category>笔记</category>
-      </categories>
-      <tags>
-        <tag>笔记</tag>
-        <tag>Java</tag>
-        <tag>面试</tag>
-        <tag>线程</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>SpringBoot-bug解决</title>
     <url>/2020/11/21/SpringBoot-bug%E8%A7%A3%E5%86%B3/</url>
     <content><![CDATA[<h1 id="SpringBoot-BUG解决"><a href="#SpringBoot-BUG解决" class="headerlink" title="SpringBoot-BUG解决"></a>SpringBoot-BUG解决</h1><h2 id="1-跨域配置失效（SpringBoot版本问题）"><a href="#1-跨域配置失效（SpringBoot版本问题）" class="headerlink" title="1.跨域配置失效（SpringBoot版本问题）"></a>1.跨域配置失效（SpringBoot版本问题）</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CrosConfig</span> <span class="keyword">implements</span> <span class="title">WebMvcConfigurer</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addCorsMappings</span><span class="params">(CorsRegistry registry)</span> </span>&#123;</span><br><span class="line">        registry.addMapping(<span class="string">&quot;/**&quot;</span>)</span><br><span class="line">                .allowedOrigins(<span class="string">&quot;*&quot;</span>)</span><br><span class="line">                .allowedMethods(<span class="string">&quot;GET&quot;</span>, <span class="string">&quot;HEAD&quot;</span>, <span class="string">&quot;POST&quot;</span>, <span class="string">&quot;PUT&quot;</span>, <span class="string">&quot;DELETE&quot;</span>, <span class="string">&quot;OPTIONS&quot;</span>)</span><br><span class="line">                .allowCredentials(<span class="keyword">true</span>)</span><br><span class="line">                .maxAge(<span class="number">3600</span>)</span><br><span class="line">                .allowedHeaders(<span class="string">&quot;*&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -433,6 +433,95 @@
         <tag>笔记</tag>
         <tag>Java Web</tag>
         <tag>Swagger</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>git clone加速问题解决方案</title>
+    <url>/2020/11/17/git-clone%E5%8A%A0%E9%80%9F%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</url>
+    <content><![CDATA[<h1 id="Git-Clone速度过慢解决方案"><a href="#Git-Clone速度过慢解决方案" class="headerlink" title="Git Clone速度过慢解决方案"></a>Git Clone速度过慢解决方案</h1><h1 id="1-方案一-使用gitclone-com加速"><a href="#1-方案一-使用gitclone-com加速" class="headerlink" title="1.方案一 使用gitclone.com加速"></a>1.方案一 使用gitclone.com加速</h1><p><strong><em>访问gitclone加速的官网<a href="https://gitclone.com,可以通过搜索栏搜索克隆项目/">https://gitclone.com，可以通过搜索栏搜索克隆项目</a></em></strong></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201117222630897.png"></p>
+<a id="more"></a>
+
+<p><strong>其也提供了三种自定义加速方法（省去在GitClone搜索相应文件）</strong></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">方法一（替换URL）</span><br><span class="line"></span><br><span class="line">git clone https://gitclone.com/github.com/tendermint/tendermint.git</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">方法二（设置git参数）</span><br><span class="line"></span><br><span class="line">git config --global url.&quot;https://gitclone.com/&quot;.insteadOf https://</span><br><span class="line">git clone https://github.com/tendermint/tendermint.git</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">方法三（使用cgit客户端）</span><br><span class="line"></span><br><span class="line">cgit clone https://github.com/tendermint/tendermint.git</span><br></pre></td></tr></table></figure>
+
+<p><strong>搜索图例：</strong></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201117223120221.png"></p>
+<h1 id="2-方案二-使用Gitee转载仓库"><a href="#2-方案二-使用Gitee转载仓库" class="headerlink" title="2.方案二 使用Gitee转载仓库"></a>2.方案二 使用Gitee转载仓库</h1><h2 id="1-登录gitee-com"><a href="#1-登录gitee-com" class="headerlink" title="1.登录gitee.com"></a>1.登录gitee.com</h2><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2020-11-17_23-27-48.png"></p>
+<h2 id="2-获取GitHub仓库URL"><a href="#2-获取GitHub仓库URL" class="headerlink" title="2.获取GitHub仓库URL"></a>2.获取GitHub仓库URL</h2><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2020-11-17_23-32-22.png"></p>
+<h2 id="3-填写URL"><a href="#3-填写URL" class="headerlink" title="3.填写URL"></a>3.填写URL</h2><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2020-11-17_23-34-39.png"></p>
+<h2 id="4-拉取仓库到Gitee完成"><a href="#4-拉取仓库到Gitee完成" class="headerlink" title="4.拉取仓库到Gitee完成"></a>4.拉取仓库到Gitee完成</h2><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2020-11-17_23-36-37.png"></p>
+<h2 id="5-git-clone仓库"><a href="#5-git-clone仓库" class="headerlink" title="5.git clone仓库"></a>5.git clone仓库</h2><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2020-11-17_23-38-41.png"></p>
+<hr>
+<p><strong>总的来说，两种方法中gitclone.com会出现时常不稳定的现象，不过大部分时间都能够以高速克隆仓库。不到必要时刻，不推荐使用gitee二次搬运仓库，因为流程较为繁琐</strong></p>
+]]></content>
+      <categories>
+        <category>教程</category>
+        <category>Git</category>
+      </categories>
+      <tags>
+        <tag>Git</tag>
+        <tag>教程</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>vue-搭建vue+element ui项目</title>
+    <url>/2020/11/21/vue-%E6%90%AD%E5%BB%BAvue+element-ui%E9%A1%B9%E7%9B%AE/</url>
+    <content><![CDATA[<h1 id="搭建Vue-Element-UI项目（通过Vue-UI）"><a href="#搭建Vue-Element-UI项目（通过Vue-UI）" class="headerlink" title="搭建Vue+Element-UI项目（通过Vue-UI）"></a>搭建Vue+Element-UI项目（通过Vue-UI）</h1><h2 id="1-启动命令行，进入Vue-UI"><a href="#1-启动命令行，进入Vue-UI" class="headerlink" title="1.启动命令行，进入Vue-UI"></a>1.启动命令行，进入Vue-UI</h2><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121094336554.png" alt="image-20201121094336554"></p>
+<p>输入<a href="http://localhost:8000，即可进入UI界面">http://localhost:8000，即可进入UI界面</a></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121094647023.png" alt="image-20201121094647023"></p>
+<a id="more"></a>
+
+<h2 id="2-进入Vue项目管理器，新建项目"><a href="#2-进入Vue项目管理器，新建项目" class="headerlink" title="2.进入Vue项目管理器，新建项目"></a>2.进入Vue项目管理器，新建项目</h2><p>进入Vue项目管理器，进行新建或删除项目等操作</p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121094734271.png" alt="image-20201121094734271"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121094904195.png" alt="image-20201121094904195"></p>
+<p>存在三种选项，管理现有项目、新建项目和导入项目，我们选择创建项目</p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121095201637.png" alt="image-20201121095201637"></p>
+<ul>
+<li>创建新项目Step1-详情</li>
+</ul>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121095418245.png" alt="image-20201121095418245"></p>
+<ul>
+<li>创建新项目Step2-预设</li>
+</ul>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121095637943.png" alt="image-20201121095637943"></p>
+<ul>
+<li>创建新项目Step3-功能选择</li>
+</ul>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121100002708.png" alt="image-20201121100002708"></p>
+<ul>
+<li>创建新项目Step4-配置</li>
+</ul>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121100134876.png" alt="image-20201121100134876"></p>
+<p>此时会询问是否创建为预设，可选择否或保留此预设，保留预设可免去重复配置</p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121100207810.png" alt="image-20201121100207810"></p>
+<h2 id="3-配置新项目"><a href="#3-配置新项目" class="headerlink" title="3.配置新项目"></a>3.配置新项目</h2><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121100350314.png" alt="image-20201121100350314"></p>
+<p>进入项目管理器下，插件选项，安装所需插件</p>
+<p>这里我们选择Element-ui与axios</p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121100526996.png" alt="image-20201121100526996"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121100551055.png" alt="image-20201121100551055"></p>
+<p>均点击安装即可</p>
+<p>安装完成，即完成项目搭建</p>
+<h2 id="4-进入VS-Code查看成果"><a href="#4-进入VS-Code查看成果" class="headerlink" title="4.进入VS Code查看成果"></a>4.进入VS Code查看成果</h2><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121101030358.png" alt="image-20201121101030358"></p>
+<p>开启NPM脚本-serve，开启热部署</p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121101123455.png" alt="image-20201121101123455"></p>
+<p>可进入相应端口，实时查看项目，编辑完项目后CTRL+S保存即可完成更新，NPM脚本会重新编译</p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121101327645.png" alt="image-20201121101327645"></p>
+<hr>
+<p><strong>至此，Vue+Element项目搭建完成，接下来就可以开始你的渐进式开发了！</strong></p>
+]]></content>
+      <categories>
+        <category>编程</category>
+        <category>Vue</category>
+        <category>Element UI</category>
+      </categories>
+      <tags>
+        <tag>Vue</tag>
+        <tag>Element UI</tag>
       </tags>
   </entry>
   <entry>
@@ -675,95 +764,6 @@
       </tags>
   </entry>
   <entry>
-    <title>git clone加速问题解决方案</title>
-    <url>/2020/11/17/git-clone%E5%8A%A0%E9%80%9F%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</url>
-    <content><![CDATA[<h1 id="Git-Clone速度过慢解决方案"><a href="#Git-Clone速度过慢解决方案" class="headerlink" title="Git Clone速度过慢解决方案"></a>Git Clone速度过慢解决方案</h1><h1 id="1-方案一-使用gitclone-com加速"><a href="#1-方案一-使用gitclone-com加速" class="headerlink" title="1.方案一 使用gitclone.com加速"></a>1.方案一 使用gitclone.com加速</h1><p><strong><em>访问gitclone加速的官网<a href="https://gitclone.com,可以通过搜索栏搜索克隆项目/">https://gitclone.com，可以通过搜索栏搜索克隆项目</a></em></strong></p>
-<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201117222630897.png"></p>
-<a id="more"></a>
-
-<p><strong>其也提供了三种自定义加速方法（省去在GitClone搜索相应文件）</strong></p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">方法一（替换URL）</span><br><span class="line"></span><br><span class="line">git clone https://gitclone.com/github.com/tendermint/tendermint.git</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">方法二（设置git参数）</span><br><span class="line"></span><br><span class="line">git config --global url.&quot;https://gitclone.com/&quot;.insteadOf https://</span><br><span class="line">git clone https://github.com/tendermint/tendermint.git</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">方法三（使用cgit客户端）</span><br><span class="line"></span><br><span class="line">cgit clone https://github.com/tendermint/tendermint.git</span><br></pre></td></tr></table></figure>
-
-<p><strong>搜索图例：</strong></p>
-<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201117223120221.png"></p>
-<h1 id="2-方案二-使用Gitee转载仓库"><a href="#2-方案二-使用Gitee转载仓库" class="headerlink" title="2.方案二 使用Gitee转载仓库"></a>2.方案二 使用Gitee转载仓库</h1><h2 id="1-登录gitee-com"><a href="#1-登录gitee-com" class="headerlink" title="1.登录gitee.com"></a>1.登录gitee.com</h2><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2020-11-17_23-27-48.png"></p>
-<h2 id="2-获取GitHub仓库URL"><a href="#2-获取GitHub仓库URL" class="headerlink" title="2.获取GitHub仓库URL"></a>2.获取GitHub仓库URL</h2><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2020-11-17_23-32-22.png"></p>
-<h2 id="3-填写URL"><a href="#3-填写URL" class="headerlink" title="3.填写URL"></a>3.填写URL</h2><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2020-11-17_23-34-39.png"></p>
-<h2 id="4-拉取仓库到Gitee完成"><a href="#4-拉取仓库到Gitee完成" class="headerlink" title="4.拉取仓库到Gitee完成"></a>4.拉取仓库到Gitee完成</h2><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2020-11-17_23-36-37.png"></p>
-<h2 id="5-git-clone仓库"><a href="#5-git-clone仓库" class="headerlink" title="5.git clone仓库"></a>5.git clone仓库</h2><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2020-11-17_23-38-41.png"></p>
-<hr>
-<p><strong>总的来说，两种方法中gitclone.com会出现时常不稳定的现象，不过大部分时间都能够以高速克隆仓库。不到必要时刻，不推荐使用gitee二次搬运仓库，因为流程较为繁琐</strong></p>
-]]></content>
-      <categories>
-        <category>教程</category>
-        <category>Git</category>
-      </categories>
-      <tags>
-        <tag>git</tag>
-        <tag>教程</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>vue-搭建vue+element ui项目</title>
-    <url>/2020/11/21/vue-%E6%90%AD%E5%BB%BAvue+element-ui%E9%A1%B9%E7%9B%AE/</url>
-    <content><![CDATA[<h1 id="搭建Vue-Element-UI项目（通过Vue-UI）"><a href="#搭建Vue-Element-UI项目（通过Vue-UI）" class="headerlink" title="搭建Vue+Element-UI项目（通过Vue-UI）"></a>搭建Vue+Element-UI项目（通过Vue-UI）</h1><h2 id="1-启动命令行，进入Vue-UI"><a href="#1-启动命令行，进入Vue-UI" class="headerlink" title="1.启动命令行，进入Vue-UI"></a>1.启动命令行，进入Vue-UI</h2><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121094336554.png" alt="image-20201121094336554"></p>
-<p>输入<a href="http://localhost:8000，即可进入UI界面">http://localhost:8000，即可进入UI界面</a></p>
-<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121094647023.png" alt="image-20201121094647023"></p>
-<a id="more"></a>
-
-<h2 id="2-进入Vue项目管理器，新建项目"><a href="#2-进入Vue项目管理器，新建项目" class="headerlink" title="2.进入Vue项目管理器，新建项目"></a>2.进入Vue项目管理器，新建项目</h2><p>进入Vue项目管理器，进行新建或删除项目等操作</p>
-<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121094734271.png" alt="image-20201121094734271"></p>
-<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121094904195.png" alt="image-20201121094904195"></p>
-<p>存在三种选项，管理现有项目、新建项目和导入项目，我们选择创建项目</p>
-<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121095201637.png" alt="image-20201121095201637"></p>
-<ul>
-<li>创建新项目Step1-详情</li>
-</ul>
-<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121095418245.png" alt="image-20201121095418245"></p>
-<ul>
-<li>创建新项目Step2-预设</li>
-</ul>
-<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121095637943.png" alt="image-20201121095637943"></p>
-<ul>
-<li>创建新项目Step3-功能选择</li>
-</ul>
-<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121100002708.png" alt="image-20201121100002708"></p>
-<ul>
-<li>创建新项目Step4-配置</li>
-</ul>
-<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121100134876.png" alt="image-20201121100134876"></p>
-<p>此时会询问是否创建为预设，可选择否或保留此预设，保留预设可免去重复配置</p>
-<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121100207810.png" alt="image-20201121100207810"></p>
-<h2 id="3-配置新项目"><a href="#3-配置新项目" class="headerlink" title="3.配置新项目"></a>3.配置新项目</h2><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121100350314.png" alt="image-20201121100350314"></p>
-<p>进入项目管理器下，插件选项，安装所需插件</p>
-<p>这里我们选择Element-ui与axios</p>
-<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121100526996.png" alt="image-20201121100526996"></p>
-<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121100551055.png" alt="image-20201121100551055"></p>
-<p>均点击安装即可</p>
-<p>安装完成，即完成项目搭建</p>
-<h2 id="4-进入VS-Code查看成果"><a href="#4-进入VS-Code查看成果" class="headerlink" title="4.进入VS Code查看成果"></a>4.进入VS Code查看成果</h2><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121101030358.png" alt="image-20201121101030358"></p>
-<p>开启NPM脚本-serve，开启热部署</p>
-<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121101123455.png" alt="image-20201121101123455"></p>
-<p>可进入相应端口，实时查看项目，编辑完项目后CTRL+S保存即可完成更新，NPM脚本会重新编译</p>
-<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121101327645.png" alt="image-20201121101327645"></p>
-<hr>
-<p><strong>至此，Vue+Element项目搭建完成，接下来就可以开始你的渐进式开发了！</strong></p>
-]]></content>
-      <categories>
-        <category>编程</category>
-        <category>Vue</category>
-        <category>Element UI</category>
-      </categories>
-      <tags>
-        <tag>Vue</tag>
-        <tag>Element UI</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>三角判断</title>
     <url>/2020/11/17/%E4%B8%89%E8%A7%92%E5%88%A4%E6%96%AD/</url>
     <content><![CDATA[<h1 id="三角判断-基于C语言"><a href="#三角判断-基于C语言" class="headerlink" title="三角判断-基于C语言"></a>三角判断-基于C语言</h1><p><em>目的：此程序是为了判断输入的三角形三边，并判断三角形类型，包括等腰三角形、等边三角形、直角三角形、一般三角形及错值判定。</em></p>
@@ -808,94 +808,6 @@
       </categories>
       <tags>
         <tag>C语言</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>狩猎影评</title>
-    <url>/2020/11/17/%E7%8B%A9%E7%8C%8E%E5%BD%B1%E8%AF%84/</url>
-    <content><![CDATA[<h1 id="狩猎"><a href="#狩猎" class="headerlink" title="狩猎"></a>狩猎</h1><h3 id="秋天萧瑟的气氛，狩猎的季节，猎物却是一个老好人"><a href="#秋天萧瑟的气氛，狩猎的季节，猎物却是一个老好人" class="headerlink" title="-秋天萧瑟的气氛，狩猎的季节，猎物却是一个老好人"></a>-秋天萧瑟的气氛，狩猎的季节，猎物却是一个老好人</h3><p>-节选自知乎个人创作</p>
-<p><img src="https://img-blog.csdnimg.cn/2020111714310397.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzgyNDEzOQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<p><em>一部好的电影会让观众在观看时和观看后陷入深深的思考，不论思考的是什么，或是伦理道德，亦或是错综复杂的剧情和演员精湛的演技，也可以是勾起你深埋于心底的一段回忆。</em></p>
-<a id="more"></a>
-
-<p><img src="https://img-blog.csdnimg.cn/20201117121107735.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzgyNDEzOQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<p><em>《狩猎》就是这样一部影片，但是看过一遍后我不想再重温一遍，因为这部影片给我带来了深深的压抑感，这种压抑深入心中，使我无法对电影内涵做更深一步的思考和探索。</em></p>
-<p><img src="https://img-blog.csdnimg.cn/20201117121107789.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzgyNDEzOQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<p><em>看完《狩猎》，我不自觉的想到了韩国电影《熔炉》，同样的压抑感，同样的结局。你认为好人就该得到好报吗，因果循环吗？你错了，这两部电影都揭示出“坏人“的下场会比好人要好，吃亏的也总是心地善良的人。也许正是因为这两部电影共同的压抑感和带来的反思，让我把这两部电影串联在一起。</em></p>
-<p><img src="https://img-blog.csdnimg.cn/20201117121107780.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzgyNDEzOQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<p><em>《狩猎》的主要剧情梗概是这样的：男主卢卡斯是一家幼儿园的教师，倍受同事和孩子们的喜爱。但有一个叫卡拉的小女孩在玩游戏的过程中对卢卡斯示好却遭到拒绝。为了报复卢卡斯，卡拉将卢卡斯描述成一个暴露性器官的变态，让他背负了猥亵儿童的罪名，进而成为了小镇排挤的对象。卢卡斯的生活和在小镇的地位发生了巨大的改变，好友、女友、前妻都不在信任他，自己的宠爱的狗也因他而死，儿子被小镇的人侮辱。尽管卡拉告诉了同是卢卡斯朋友的父亲真相，卢卡斯的罪名也不成立，但周围的人已经不能像以前一样对待他，小镇的人们戴上了伪善的面纱，在结尾的一场狩猎中，有人在暗地里开枪差点把卢卡斯打死，电影戛然而止…</em></p>
-<p><em>这部影片的关键人物无疑是卡拉，没有她的谎言，也就没有之后发生的故事。谎言的背后一定有一个原因，也许是她对卢卡斯的爱慕，也许是她早熟的性格，但在我看来却是她家庭的教育和环境。从电影一开始对卡拉家庭的描述可以看出父母对她的管教是非常宽松的，以致于她自己乱跑在超市迷了路，她的父母都没有去寻找，只是认为她出去玩了。同时小镇相对封闭的环境却造就了居民之间相对开放的态度，从卢卡斯能随意的在卡拉家的壁橱中拿出杯子喝水和卡拉哥哥的朋友给卡拉看相片都能看出，这也给卡拉父亲有卢卡斯家的钥匙打下理论基础。所以如此典型的成长环境给了卡拉非常宽松的空间与自由，这与《熔炉》中封闭的学校环境相类似。</em></p>
-<p><em>从电影中我们可以看出，卡拉的父母在表达情感的时候都是非常直接的，相互表达爱意时会在卡拉面前接吻，出现矛盾时会大声争吵，这势必会对卡拉成长中的行为和内心产生巨大的影响。首先，卡拉吻卢卡斯的行为很可能是跟父母学的，孩子在成长的过程中总是不断的模仿学习，学习的最主要方式就是模仿。父母在孩子看到一些不属于这个年龄段的行为时应该做出引导，解释行为代表的意义。但是，小镇和家庭宽松的环境无法让卡拉得到父母及时的教育，才让卡拉做出不合适的举动。与此同时，父母在孩子面前的争吵也使得孩子的内心受到极大的影响，这也间接助使卡拉的报复心增长。在影片中，卡拉没有很好的管理好自己的感情，选错了给予感情的对象。但对于卡拉来说，真正对他好的也许只有卢卡斯一个人，她没有其他选择，才酿成了这种局面。</em></p>
-<p><em>这部电影看完带来的最直观的感受是一种无法发泄的负能量，一种深沉的压抑感，这也许是我对这部电影的另类喜爱吧，就像练琴时弹错了旋律老师就会打你，因为疼了，你才会真正记住。</em></p>
-<p><img src="https://img-blog.csdnimg.cn/20201117121107744.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzgyNDEzOQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<p>PS：强烈推荐男主角扮演者麦斯·米克尔森，丹麦男神，精湛的演艺把《狩猎》这部影片撑起，在困境中的绝望，那种无助的眼神真的是天生的演员才能做到。</p>
-]]></content>
-      <categories>
-        <category>影评</category>
-      </categories>
-      <tags>
-        <tag>影评</tag>
-        <tag>里世界</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>睡前故事-喝酒</title>
-    <url>/2020/11/19/%E7%9D%A1%E5%89%8D%E6%95%85%E4%BA%8B-%E5%96%9D%E9%85%92/</url>
-    <content><![CDATA[<p>山上有一只小狐狸。</p>
-<p>她在山上修炼了一百年，终于化出了人形。</p>
-<p>一出关，她就迫不及待地跑下了山。</p>
-<p>“一百年啦，也不知道人间变成什么样了。”</p>
-<a id="more"></a>
-
-<hr>
-<p>没走多远，她就嗅到一股香气，她仔细闻了闻，是酒香！</p>
-<p>她擦了擦口水，摇身一变化成一个妙龄少女，又把尾巴往裙子里塞了塞。</p>
-<p>她寻着酒香来到了山下的小镇上，小镇里车水马龙，远处的集市人声鼎沸。</p>
-<p>她瞪着好奇宝宝一般的大眼睛，望着青石板的小路，络绎不绝的马车，以及，不远处的酒肆。</p>
-<p>她一路小跑着来到了酒肆，叫道：“小二，来一碗酒！”</p>
-<p>酒肆的小伙计瞅了瞅她，心里嘀咕道“大白天的一个人姑娘家出来喝酒，还真是少见。”想归想，他还是盛了一碗酒，送到小狐狸面前。</p>
-<p>“客官，请慢用。”</p>
-<p>小狐狸端起碗一饮而尽，这酒可真香啊！</p>
-<p>她喝了一碗又一碗，直到喝得酩酊大醉，才满意地摸了摸小肚子，出了门。</p>
-<p>自此，小狐狸天天下山喝酒，她的积蓄也越来越少。</p>
-<p>她仔细琢磨了一下，再这样喝下去，钱肯定不够花，不如把小石子变成铜钱付账。可是，小石子的法术只能维持一会儿，用不了多久就会变回去，这样不就把酒肆给坑了？人家做个小本生意也不容易，左思右想，小狐狸决定在小镇上用法术行医赚钱，赚到的钱再用来买酒喝，嗯，就这么办！</p>
-<hr>
-<p>第二天，小狐狸就变成少女的模样，扛着一个“再世华佗”的小旗子，下了山。</p>
-<p>她在小镇的集市上摆了个小摊子，生意就算是开张了。</p>
-<p>一开始，小镇上的百姓还不相她，觉得这么年轻的姑娘，哪里会什么医术。没过多久，李家爷爷多年的老寒腿被她轻轻松松治好了，她的小摊子前立马排起了长队。</p>
-<p>来找她看病的都是在医馆买不起药的穷人，小狐狸心软，不忍心收他们的钱。</p>
-<p>天色晚了，小狐狸打起自己的小包袱收摊回家，她的小包袱里装得满满的，有宋家奶奶塞的馍馍，还有刘家爷爷送的萝卜，只是一个铜板都没有。</p>
-<p>她挑着包袱路过酒肆，闻着酒香擦了擦口水，可她摸了摸自己的包袱，叹了口气，心想：“算了，起码今晚能吃顿饱饭。”</p>
-<p>这样想着，她慢慢走开了。</p>
-<p>这时，酒肆的小伙计追了出来。</p>
-<p>望着她的背影喊道：“唉，姑娘留步，我请你喝酒！”</p>
-<p>她的两个小耳朵立马树了起来，几乎飞一般地跑到小伙计面前，盯着他说：“你说什么？再说一遍！”</p>
-<p>小伙计擦了擦汗，说：“我……我请你喝酒。”</p>
-<p>“哈哈哈哈，原来这家酒馆就是你开的呀，看不出来啊，小掌柜！”</p>
-<p>小狐狸一边抱着酒坛子，一边拍着小伙计的肩膀说。</p>
-<p>小伙计腼腆地笑了笑，说：“你治好了那么多乡亲，都不要钱，请你喝点酒算什么！以后，你若是想喝酒，尽管来便是了。”</p>
-<p>她的脸上布满了红晕，打着酒嗝说：“嘿嘿嘿，你可真……真是个好人！”</p>
-<p>小伙计的脸红了红，讪讪地笑着，挠了挠头。</p>
-<hr>
-<p>夜深了，小狐狸喝得酩酊大醉，露出了原形，倒头便睡。</p>
-<p>小伙计叹了口气，把她背在了身上，往山上走去。</p>
-<p>风一吹，小狐狸毛绒绒的耳朵动了动，蹭的小伙计的脖子发痒，他说：“你醒啦。”</p>
-<p>小狐狸的声音有些发颤，说：“你……你是什么时候发现的？”</p>
-<p>他笑着说：“你每次来店里喝酒，喝醉了连尾巴都藏不住，你说呢？”</p>
-<p>小狐狸哼唧着用小爪子在他背上锤了几下，说：“你……你……”</p>
-<p>“好啦好啦，其实，小狐狸就挺可爱的。”</p>
-<p>小狐狸的脸红了，她用蚊子一般的声音说：“那你觉得，我变成人，和变回小狐狸，哪个好看？”</p>
-<p>小伙计笑了笑，毫不犹豫地回答：“都好看！”</p>
-<p>小狐狸的脸红得发烫，她把脸埋进了小伙计的背上，用小爪子捂着，没过多久，又睡着了。</p>
-<p>晚安</p>
-<p>早安</p>
-]]></content>
-      <categories>
-        <category>睡前故事</category>
-      </categories>
-      <tags>
-        <tag>里世界</tag>
-        <tag>睡前故事</tag>
       </tags>
   </entry>
   <entry>
@@ -965,8 +877,36 @@
         <category>睡前故事</category>
       </categories>
       <tags>
-        <tag>里世界</tag>
         <tag>睡前故事</tag>
+        <tag>里世界</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>狩猎影评</title>
+    <url>/2020/11/17/%E7%8B%A9%E7%8C%8E%E5%BD%B1%E8%AF%84/</url>
+    <content><![CDATA[<h1 id="狩猎"><a href="#狩猎" class="headerlink" title="狩猎"></a>狩猎</h1><h3 id="秋天萧瑟的气氛，狩猎的季节，猎物却是一个老好人"><a href="#秋天萧瑟的气氛，狩猎的季节，猎物却是一个老好人" class="headerlink" title="-秋天萧瑟的气氛，狩猎的季节，猎物却是一个老好人"></a>-秋天萧瑟的气氛，狩猎的季节，猎物却是一个老好人</h3><p>-节选自知乎个人创作</p>
+<p><img src="https://img-blog.csdnimg.cn/2020111714310397.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzgyNDEzOQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p><em>一部好的电影会让观众在观看时和观看后陷入深深的思考，不论思考的是什么，或是伦理道德，亦或是错综复杂的剧情和演员精湛的演技，也可以是勾起你深埋于心底的一段回忆。</em></p>
+<a id="more"></a>
+
+<p><img src="https://img-blog.csdnimg.cn/20201117121107735.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzgyNDEzOQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p><em>《狩猎》就是这样一部影片，但是看过一遍后我不想再重温一遍，因为这部影片给我带来了深深的压抑感，这种压抑深入心中，使我无法对电影内涵做更深一步的思考和探索。</em></p>
+<p><img src="https://img-blog.csdnimg.cn/20201117121107789.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzgyNDEzOQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p><em>看完《狩猎》，我不自觉的想到了韩国电影《熔炉》，同样的压抑感，同样的结局。你认为好人就该得到好报吗，因果循环吗？你错了，这两部电影都揭示出“坏人“的下场会比好人要好，吃亏的也总是心地善良的人。也许正是因为这两部电影共同的压抑感和带来的反思，让我把这两部电影串联在一起。</em></p>
+<p><img src="https://img-blog.csdnimg.cn/20201117121107780.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzgyNDEzOQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p><em>《狩猎》的主要剧情梗概是这样的：男主卢卡斯是一家幼儿园的教师，倍受同事和孩子们的喜爱。但有一个叫卡拉的小女孩在玩游戏的过程中对卢卡斯示好却遭到拒绝。为了报复卢卡斯，卡拉将卢卡斯描述成一个暴露性器官的变态，让他背负了猥亵儿童的罪名，进而成为了小镇排挤的对象。卢卡斯的生活和在小镇的地位发生了巨大的改变，好友、女友、前妻都不在信任他，自己的宠爱的狗也因他而死，儿子被小镇的人侮辱。尽管卡拉告诉了同是卢卡斯朋友的父亲真相，卢卡斯的罪名也不成立，但周围的人已经不能像以前一样对待他，小镇的人们戴上了伪善的面纱，在结尾的一场狩猎中，有人在暗地里开枪差点把卢卡斯打死，电影戛然而止…</em></p>
+<p><em>这部影片的关键人物无疑是卡拉，没有她的谎言，也就没有之后发生的故事。谎言的背后一定有一个原因，也许是她对卢卡斯的爱慕，也许是她早熟的性格，但在我看来却是她家庭的教育和环境。从电影一开始对卡拉家庭的描述可以看出父母对她的管教是非常宽松的，以致于她自己乱跑在超市迷了路，她的父母都没有去寻找，只是认为她出去玩了。同时小镇相对封闭的环境却造就了居民之间相对开放的态度，从卢卡斯能随意的在卡拉家的壁橱中拿出杯子喝水和卡拉哥哥的朋友给卡拉看相片都能看出，这也给卡拉父亲有卢卡斯家的钥匙打下理论基础。所以如此典型的成长环境给了卡拉非常宽松的空间与自由，这与《熔炉》中封闭的学校环境相类似。</em></p>
+<p><em>从电影中我们可以看出，卡拉的父母在表达情感的时候都是非常直接的，相互表达爱意时会在卡拉面前接吻，出现矛盾时会大声争吵，这势必会对卡拉成长中的行为和内心产生巨大的影响。首先，卡拉吻卢卡斯的行为很可能是跟父母学的，孩子在成长的过程中总是不断的模仿学习，学习的最主要方式就是模仿。父母在孩子看到一些不属于这个年龄段的行为时应该做出引导，解释行为代表的意义。但是，小镇和家庭宽松的环境无法让卡拉得到父母及时的教育，才让卡拉做出不合适的举动。与此同时，父母在孩子面前的争吵也使得孩子的内心受到极大的影响，这也间接助使卡拉的报复心增长。在影片中，卡拉没有很好的管理好自己的感情，选错了给予感情的对象。但对于卡拉来说，真正对他好的也许只有卢卡斯一个人，她没有其他选择，才酿成了这种局面。</em></p>
+<p><em>这部电影看完带来的最直观的感受是一种无法发泄的负能量，一种深沉的压抑感，这也许是我对这部电影的另类喜爱吧，就像练琴时弹错了旋律老师就会打你，因为疼了，你才会真正记住。</em></p>
+<p><img src="https://img-blog.csdnimg.cn/20201117121107744.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzgyNDEzOQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p>PS：强烈推荐男主角扮演者麦斯·米克尔森，丹麦男神，精湛的演艺把《狩猎》这部影片撑起，在困境中的绝望，那种无助的眼神真的是天生的演员才能做到。</p>
+]]></content>
+      <categories>
+        <category>影评</category>
+      </categories>
+      <tags>
+        <tag>里世界</tag>
+        <tag>影评</tag>
       </tags>
   </entry>
   <entry>
@@ -1053,8 +993,146 @@
         <category>睡前故事</category>
       </categories>
       <tags>
-        <tag>里世界</tag>
         <tag>睡前故事</tag>
+        <tag>里世界</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>睡前故事-喝酒</title>
+    <url>/2020/11/19/%E7%9D%A1%E5%89%8D%E6%95%85%E4%BA%8B-%E5%96%9D%E9%85%92/</url>
+    <content><![CDATA[<p>山上有一只小狐狸。</p>
+<p>她在山上修炼了一百年，终于化出了人形。</p>
+<p>一出关，她就迫不及待地跑下了山。</p>
+<p>“一百年啦，也不知道人间变成什么样了。”</p>
+<a id="more"></a>
+
+<hr>
+<p>没走多远，她就嗅到一股香气，她仔细闻了闻，是酒香！</p>
+<p>她擦了擦口水，摇身一变化成一个妙龄少女，又把尾巴往裙子里塞了塞。</p>
+<p>她寻着酒香来到了山下的小镇上，小镇里车水马龙，远处的集市人声鼎沸。</p>
+<p>她瞪着好奇宝宝一般的大眼睛，望着青石板的小路，络绎不绝的马车，以及，不远处的酒肆。</p>
+<p>她一路小跑着来到了酒肆，叫道：“小二，来一碗酒！”</p>
+<p>酒肆的小伙计瞅了瞅她，心里嘀咕道“大白天的一个人姑娘家出来喝酒，还真是少见。”想归想，他还是盛了一碗酒，送到小狐狸面前。</p>
+<p>“客官，请慢用。”</p>
+<p>小狐狸端起碗一饮而尽，这酒可真香啊！</p>
+<p>她喝了一碗又一碗，直到喝得酩酊大醉，才满意地摸了摸小肚子，出了门。</p>
+<p>自此，小狐狸天天下山喝酒，她的积蓄也越来越少。</p>
+<p>她仔细琢磨了一下，再这样喝下去，钱肯定不够花，不如把小石子变成铜钱付账。可是，小石子的法术只能维持一会儿，用不了多久就会变回去，这样不就把酒肆给坑了？人家做个小本生意也不容易，左思右想，小狐狸决定在小镇上用法术行医赚钱，赚到的钱再用来买酒喝，嗯，就这么办！</p>
+<hr>
+<p>第二天，小狐狸就变成少女的模样，扛着一个“再世华佗”的小旗子，下了山。</p>
+<p>她在小镇的集市上摆了个小摊子，生意就算是开张了。</p>
+<p>一开始，小镇上的百姓还不相她，觉得这么年轻的姑娘，哪里会什么医术。没过多久，李家爷爷多年的老寒腿被她轻轻松松治好了，她的小摊子前立马排起了长队。</p>
+<p>来找她看病的都是在医馆买不起药的穷人，小狐狸心软，不忍心收他们的钱。</p>
+<p>天色晚了，小狐狸打起自己的小包袱收摊回家，她的小包袱里装得满满的，有宋家奶奶塞的馍馍，还有刘家爷爷送的萝卜，只是一个铜板都没有。</p>
+<p>她挑着包袱路过酒肆，闻着酒香擦了擦口水，可她摸了摸自己的包袱，叹了口气，心想：“算了，起码今晚能吃顿饱饭。”</p>
+<p>这样想着，她慢慢走开了。</p>
+<p>这时，酒肆的小伙计追了出来。</p>
+<p>望着她的背影喊道：“唉，姑娘留步，我请你喝酒！”</p>
+<p>她的两个小耳朵立马树了起来，几乎飞一般地跑到小伙计面前，盯着他说：“你说什么？再说一遍！”</p>
+<p>小伙计擦了擦汗，说：“我……我请你喝酒。”</p>
+<p>“哈哈哈哈，原来这家酒馆就是你开的呀，看不出来啊，小掌柜！”</p>
+<p>小狐狸一边抱着酒坛子，一边拍着小伙计的肩膀说。</p>
+<p>小伙计腼腆地笑了笑，说：“你治好了那么多乡亲，都不要钱，请你喝点酒算什么！以后，你若是想喝酒，尽管来便是了。”</p>
+<p>她的脸上布满了红晕，打着酒嗝说：“嘿嘿嘿，你可真……真是个好人！”</p>
+<p>小伙计的脸红了红，讪讪地笑着，挠了挠头。</p>
+<hr>
+<p>夜深了，小狐狸喝得酩酊大醉，露出了原形，倒头便睡。</p>
+<p>小伙计叹了口气，把她背在了身上，往山上走去。</p>
+<p>风一吹，小狐狸毛绒绒的耳朵动了动，蹭的小伙计的脖子发痒，他说：“你醒啦。”</p>
+<p>小狐狸的声音有些发颤，说：“你……你是什么时候发现的？”</p>
+<p>他笑着说：“你每次来店里喝酒，喝醉了连尾巴都藏不住，你说呢？”</p>
+<p>小狐狸哼唧着用小爪子在他背上锤了几下，说：“你……你……”</p>
+<p>“好啦好啦，其实，小狐狸就挺可爱的。”</p>
+<p>小狐狸的脸红了，她用蚊子一般的声音说：“那你觉得，我变成人，和变回小狐狸，哪个好看？”</p>
+<p>小伙计笑了笑，毫不犹豫地回答：“都好看！”</p>
+<p>小狐狸的脸红得发烫，她把脸埋进了小伙计的背上，用小爪子捂着，没过多久，又睡着了。</p>
+<p>晚安</p>
+<p>早安</p>
+]]></content>
+      <categories>
+        <category>睡前故事</category>
+      </categories>
+      <tags>
+        <tag>睡前故事</tag>
+        <tag>里世界</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>睡前故事-白雪为嫁</title>
+    <url>/2020/11/23/%E7%9D%A1%E5%89%8D%E6%95%85%E4%BA%8B-%E7%99%BD%E9%9B%AA%E4%B8%BA%E5%AB%81/</url>
+    <content><![CDATA[<p>风暴戾地撞着窗，这个冬天格外冰冷。</p>
+<p>“你听话呀。”母亲的声音疲惫而心疼，“他家条件差得很，还有两个兄弟没成家。你跟过去吃没得吃、穿没得穿，只有受苦啊！”</p>
+<p>她和母亲并排躺在床上，抿着嘴唇并不出声，唯有泪珠成串滚落，很快浸湿枕巾。</p>
+<p>母亲侧着身，用右手柔柔帮她擦着泪，也有些哽咽：“妈妈都是为你好，你醒点事，好么？他平日里就会打架闹事，不是个有出息的人。”</p>
+<p>她吸了一下鼻子，眼睛执拗地闭着，无声哭泣。</p>
+<p>“明天去把孩子拿掉就好了。”母亲的声音在耳边继续着，她有她的苦心与疼爱，“时间久了你就不难过了，妈妈给你找个好婆家，保证比他强，过日子总归是要吃饱穿暖。”</p>
+<p>她抬了抬右手，没能抬动。</p>
+<p>母亲警觉地握紧了她的手。</p>
+<p>她的右手和母亲的左手紧紧绑在一起，布条还打了死结。</p>
+<p>“你们三兄妹里，妈妈最疼你，哪里能看着你吃苦。”母亲见止不住她的泪，自己的眼泪也落了下来，“你这个苕伢子……”</p>
+<p>母亲哭了一阵，帮她掖好被子，终于结束了劝慰，“很晚了，好好睡一觉，天亮妈妈就带你去医院。”</p>
+<a id="more"></a>
+
+<hr>
+<p>时间，怎么这么难熬呢？</p>
+<p>眼泪，好像流干了。</p>
+<p>眼睛涩涩的，她一动不动，静静听着旁边的呼吸声。</p>
+<p>呼吸很平稳，应是已睡熟了。但她仍不敢动，她知道机会只有一次。</p>
+<p>她很累，东躲西藏，最终还是被家人抓回来，已经身心俱疲。但她一点睡意也没有，她在心里默默地算着时间。</p>
+<p>这会儿应该是凌晨了，外面的房间很久没有动静，父亲应该也睡了。</p>
+<p>她试探着侧转身体，面对母亲。母亲闭着眼睛，毫无反应。</p>
+<p>母亲也很累了，这阵子她一定也很难过吧？她那么疼爱儿女。</p>
+<p>可是，对不起妈妈，这次我不能听话。她在黑夜里看着母亲隐约的脸，心里默默说道。</p>
+<p>沉默不是顺从，是在等这唯一的机会。</p>
+<p>她小心翼翼地去解绑着手的布条，死结很难解，她只能一点一点的艰难挪动。</p>
+<p>她心里很着急，但她强迫自己的动作更轻柔一些。</p>
+<p>结慢慢、慢慢松开，母亲突然嘟囔了一句什么！</p>
+<p>她全身都僵硬了！一动不敢动，假装自己熟睡着。但心脏跳动得如此剧烈，几乎提到了嗓子眼。</p>
+<p>但母亲接下来并没有其他动作，那句话也听不清楚，只是一句梦呓。</p>
+<p>她平复着心跳，缓慢地将布条解开。</p>
+<p>一只手压着被子，不让寒意透进来，身体小心翼翼往床下挪。</p>
+<p>终于，双脚落地。</p>
+<p>地面冰凉刺骨，但她已经顾不得那么多。</p>
+<p>时间紧迫！机会过了明天就不再有！</p>
+<p>她甚至来不及去穿一双鞋子，去拿一件外套。</p>
+<p>她踮着赤脚，做贼一般地挪出房间。</p>
+<p>从父亲的床边蹑手蹑脚走过，掩耳盗铃般地不敢看他一眼。</p>
+<p>来到堂屋，她轻轻抬起门栓，将大门缓缓拉开。</p>
+<p>嘶~！</p>
+<p>外面的寒风猛地灌了进来，将她整个人都浇凉。</p>
+<p>但她却精神一振，把门拉开到仅容一人进出的空间，就赶紧侧身钻了出去。</p>
+<p>她缓缓合上大门，仅着睡衣，赤足投入了漫天风雪中。</p>
+<hr>
+<p>这夜可真冷呵！</p>
+<p>她冻得牙齿打颤，全身上下没一处不冷。</p>
+<p>尤其踩在雪上的赤足，已经麻木得似乎没有了感觉。</p>
+<p>但她只管捂着她的小腹，一脚深一脚浅地往前迈。</p>
+<p>这是孩子。</p>
+<p>这是我的孩子。</p>
+<p>这是我和他的孩子！</p>
+<p>她开始跑，用劲跑，使出全身力气的跑。</p>
+<p>跑在这条那么熟悉的路上！跑在去他家的路上！</p>
+<p>不到两公里的距离，她乌黑的头发上已经披满白雪。</p>
+<p>她全身都快冻僵了，但总有一股子力气不知从哪里涌出来。</p>
+<p>她终于站到了他家门前。</p>
+<p>她敲门，用力敲门，大声喊他的名字。</p>
+<p>房间里响起重物坠地的声音，继而是急促的脚步声，男人猛地撞出来，拉开房门！</p>
+<p>他看到了怎样的一幅情景？</p>
+<p>门外立着的，是面色苍白、瑟瑟发抖却灼灼与他对视的女子。</p>
+<p>她的皮肤如雪，十里八乡没有哪个女子有这般白净。</p>
+<p>她紧抿着已冻得乌青的唇，就那么俏生生立在雪中！</p>
+<p>眼泪一下子就涌了出来，这是他以为将永远失去的她！</p>
+<p>他一把将她从雪地里抱起，牢牢抱进怀里。</p>
+<p>白茫茫的雪夜啊，风刀割不开的恋人。</p>
+<p>这一夜。</p>
+<p>有多少人见证了漫天风雪，就有多少人看到了白色婚纱。</p>
+]]></content>
+      <categories>
+        <category>睡前故事</category>
+      </categories>
+      <tags>
+        <tag>睡前故事</tag>
+        <tag>里世界</tag>
       </tags>
   </entry>
   <entry>
@@ -1160,86 +1238,35 @@
         <category>睡前故事</category>
       </categories>
       <tags>
-        <tag>里世界</tag>
         <tag>睡前故事</tag>
+        <tag>里世界</tag>
       </tags>
   </entry>
   <entry>
-    <title>睡前故事-白雪为嫁</title>
-    <url>/2020/11/23/%E7%9D%A1%E5%89%8D%E6%95%85%E4%BA%8B-%E7%99%BD%E9%9B%AA%E4%B8%BA%E5%AB%81/</url>
-    <content><![CDATA[<p>风暴戾地撞着窗，这个冬天格外冰冷。</p>
-<p>“你听话呀。”母亲的声音疲惫而心疼，“他家条件差得很，还有两个兄弟没成家。你跟过去吃没得吃、穿没得穿，只有受苦啊！”</p>
-<p>她和母亲并排躺在床上，抿着嘴唇并不出声，唯有泪珠成串滚落，很快浸湿枕巾。</p>
-<p>母亲侧着身，用右手柔柔帮她擦着泪，也有些哽咽：“妈妈都是为你好，你醒点事，好么？他平日里就会打架闹事，不是个有出息的人。”</p>
-<p>她吸了一下鼻子，眼睛执拗地闭着，无声哭泣。</p>
-<p>“明天去把孩子拿掉就好了。”母亲的声音在耳边继续着，她有她的苦心与疼爱，“时间久了你就不难过了，妈妈给你找个好婆家，保证比他强，过日子总归是要吃饱穿暖。”</p>
-<p>她抬了抬右手，没能抬动。</p>
-<p>母亲警觉地握紧了她的手。</p>
-<p>她的右手和母亲的左手紧紧绑在一起，布条还打了死结。</p>
-<p>“你们三兄妹里，妈妈最疼你，哪里能看着你吃苦。”母亲见止不住她的泪，自己的眼泪也落了下来，“你这个苕伢子……”</p>
-<p>母亲哭了一阵，帮她掖好被子，终于结束了劝慰，“很晚了，好好睡一觉，天亮妈妈就带你去医院。”</p>
+    <title>睡前故事-相遇</title>
+    <url>/2020/11/16/%E7%9D%A1%E5%89%8D%E6%95%85%E4%BA%8B-%E7%9B%B8%E9%81%87/</url>
+    <content><![CDATA[<h1 id="相遇"><a href="#相遇" class="headerlink" title="相遇"></a>相遇</h1><p>骑士生活在m王国，有一天m王国的国王Arthur在外征战时被俘，但因为敌国的君主看到了Arthur的乐观与不屈，决定放了他，但抛给他一个难题“女人真正想要的是什么？”，若回答出来则可以获得自由，给予了一年期限。</p>
+<p>于是Arthur开始向身边的人询问这个问题，母亲、妹妹、牧师……但没人能给出满意的答案。</p>
 <a id="more"></a>
 
-<hr>
-<p>时间，怎么这么难熬呢？</p>
-<p>眼泪，好像流干了。</p>
-<p>眼睛涩涩的，她一动不动，静静听着旁边的呼吸声。</p>
-<p>呼吸很平稳，应是已睡熟了。但她仍不敢动，她知道机会只有一次。</p>
-<p>她很累，东躲西藏，最终还是被家人抓回来，已经身心俱疲。但她一点睡意也没有，她在心里默默地算着时间。</p>
-<p>这会儿应该是凌晨了，外面的房间很久没有动静，父亲应该也睡了。</p>
-<p>她试探着侧转身体，面对母亲。母亲闭着眼睛，毫无反应。</p>
-<p>母亲也很累了，这阵子她一定也很难过吧？她那么疼爱儿女。</p>
-<p>可是，对不起妈妈，这次我不能听话。她在黑夜里看着母亲隐约的脸，心里默默说道。</p>
-<p>沉默不是顺从，是在等这唯一的机会。</p>
-<p>她小心翼翼地去解绑着手的布条，死结很难解，她只能一点一点的艰难挪动。</p>
-<p>她心里很着急，但她强迫自己的动作更轻柔一些。</p>
-<p>结慢慢、慢慢松开，母亲突然嘟囔了一句什么！</p>
-<p>她全身都僵硬了！一动不敢动，假装自己熟睡着。但心脏跳动得如此剧烈，几乎提到了嗓子眼。</p>
-<p>但母亲接下来并没有其他动作，那句话也听不清楚，只是一句梦呓。</p>
-<p>她平复着心跳，缓慢地将布条解开。</p>
-<p>一只手压着被子，不让寒意透进来，身体小心翼翼往床下挪。</p>
-<p>终于，双脚落地。</p>
-<p>地面冰凉刺骨，但她已经顾不得那么多。</p>
-<p>时间紧迫！机会过了明天就不再有！</p>
-<p>她甚至来不及去穿一双鞋子，去拿一件外套。</p>
-<p>她踮着赤脚，做贼一般地挪出房间。</p>
-<p>从父亲的床边蹑手蹑脚走过，掩耳盗铃般地不敢看他一眼。</p>
-<p>来到堂屋，她轻轻抬起门栓，将大门缓缓拉开。</p>
-<p>嘶~！</p>
-<p>外面的寒风猛地灌了进来，将她整个人都浇凉。</p>
-<p>但她却精神一振，把门拉开到仅容一人进出的空间，就赶紧侧身钻了出去。</p>
-<p>她缓缓合上大门，仅着睡衣，赤足投入了漫天风雪中。</p>
-<hr>
-<p>这夜可真冷呵！</p>
-<p>她冻得牙齿打颤，全身上下没一处不冷。</p>
-<p>尤其踩在雪上的赤足，已经麻木得似乎没有了感觉。</p>
-<p>但她只管捂着她的小腹，一脚深一脚浅地往前迈。</p>
-<p>这是孩子。</p>
-<p>这是我的孩子。</p>
-<p>这是我和他的孩子！</p>
-<p>她开始跑，用劲跑，使出全身力气的跑。</p>
-<p>跑在这条那么熟悉的路上！跑在去他家的路上！</p>
-<p>不到两公里的距离，她乌黑的头发上已经披满白雪。</p>
-<p>她全身都快冻僵了，但总有一股子力气不知从哪里涌出来。</p>
-<p>她终于站到了他家门前。</p>
-<p>她敲门，用力敲门，大声喊他的名字。</p>
-<p>房间里响起重物坠地的声音，继而是急促的脚步声，男人猛地撞出来，拉开房门！</p>
-<p>他看到了怎样的一幅情景？</p>
-<p>门外立着的，是面色苍白、瑟瑟发抖却灼灼与他对视的女子。</p>
-<p>她的皮肤如雪，十里八乡没有哪个女子有这般白净。</p>
-<p>她紧抿着已冻得乌青的唇，就那么俏生生立在雪中！</p>
-<p>眼泪一下子就涌了出来，这是他以为将永远失去的她！</p>
-<p>他一把将她从雪地里抱起，牢牢抱进怀里。</p>
-<p>白茫茫的雪夜啊，风刀割不开的恋人。</p>
-<p>这一夜。</p>
-<p>有多少人见证了漫天风雪，就有多少人看到了白色婚纱。</p>
+<p>有一位智者找到Arthur，并告诉他，城堡外的森林里有一位女巫，但性格刁蛮古怪，要求离谱。</p>
+<p>眼看期限将至，无可奈何的Arthur找到了女巫，女巫答应回答他的问题，但条件是要和骑士结婚。</p>
+<p>看着眼前丑陋不堪，散发着难闻气味的女巫，再看看跟自己多年挚友，威武高大的骑士。Arthur拒绝了，他不忍看到自己为了自由而牺牲兄弟。</p>
+<p>骑士知道这个消息后，毅然决然地对Arthur说：”我愿意娶她，为了您和国家。“</p>
+<p>于是婚礼被公诸于世，而Arthur也得到了问题的答案”女人真正想要的，是主宰自己的命运。”</p>
+<p>每个人都知道女巫说出的答案是真理，毫无疑问Arthur恢复了自由。</p>
+<p>婚礼上，女巫没有形象的行为举止令Arthur觉得恶心并忍不住哭泣，但骑士却一如既往的谦和。</p>
+<p>新婚之夜，骑士不顾别人的阻拦毅然决然地走进新房，准备面对一切，然而一个从未见过面的绝世美女却躺在了他的床上，女巫说：“我在一天的时间里，一半是丑陋的女巫，一半是倾城的美女，骑士，你想我白天变成美女还是晚上变成美女？”</p>
+<p>骑士回答道：“既然你说女人真正想要的是主宰自己的命运，那么就由你自己决定吧！”</p>
+<p>女巫终于热泪盈眶，“我选择白天夜晚都是美丽的女人，因为我爱你！”</p>
 ]]></content>
       <categories>
         <category>睡前故事</category>
       </categories>
       <tags>
-        <tag>里世界</tag>
         <tag>睡前故事</tag>
+        <tag>里世界</tag>
+        <tag>骑士与女巫</tag>
       </tags>
   </entry>
   <entry>
@@ -1278,35 +1305,8 @@
         <category>睡前故事</category>
       </categories>
       <tags>
-        <tag>里世界</tag>
         <tag>睡前故事</tag>
-        <tag>骑士与女巫</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>睡前故事-相遇</title>
-    <url>/2020/11/16/%E7%9D%A1%E5%89%8D%E6%95%85%E4%BA%8B-%E7%9B%B8%E9%81%87/</url>
-    <content><![CDATA[<h1 id="相遇"><a href="#相遇" class="headerlink" title="相遇"></a>相遇</h1><p>骑士生活在m王国，有一天m王国的国王Arthur在外征战时被俘，但因为敌国的君主看到了Arthur的乐观与不屈，决定放了他，但抛给他一个难题“女人真正想要的是什么？”，若回答出来则可以获得自由，给予了一年期限。</p>
-<p>于是Arthur开始向身边的人询问这个问题，母亲、妹妹、牧师……但没人能给出满意的答案。</p>
-<a id="more"></a>
-
-<p>有一位智者找到Arthur，并告诉他，城堡外的森林里有一位女巫，但性格刁蛮古怪，要求离谱。</p>
-<p>眼看期限将至，无可奈何的Arthur找到了女巫，女巫答应回答他的问题，但条件是要和骑士结婚。</p>
-<p>看着眼前丑陋不堪，散发着难闻气味的女巫，再看看跟自己多年挚友，威武高大的骑士。Arthur拒绝了，他不忍看到自己为了自由而牺牲兄弟。</p>
-<p>骑士知道这个消息后，毅然决然地对Arthur说：”我愿意娶她，为了您和国家。“</p>
-<p>于是婚礼被公诸于世，而Arthur也得到了问题的答案”女人真正想要的，是主宰自己的命运。”</p>
-<p>每个人都知道女巫说出的答案是真理，毫无疑问Arthur恢复了自由。</p>
-<p>婚礼上，女巫没有形象的行为举止令Arthur觉得恶心并忍不住哭泣，但骑士却一如既往的谦和。</p>
-<p>新婚之夜，骑士不顾别人的阻拦毅然决然地走进新房，准备面对一切，然而一个从未见过面的绝世美女却躺在了他的床上，女巫说：“我在一天的时间里，一半是丑陋的女巫，一半是倾城的美女，骑士，你想我白天变成美女还是晚上变成美女？”</p>
-<p>骑士回答道：“既然你说女人真正想要的是主宰自己的命运，那么就由你自己决定吧！”</p>
-<p>女巫终于热泪盈眶，“我选择白天夜晚都是美丽的女人，因为我爱你！”</p>
-]]></content>
-      <categories>
-        <category>睡前故事</category>
-      </categories>
-      <tags>
         <tag>里世界</tag>
-        <tag>睡前故事</tag>
         <tag>骑士与女巫</tag>
       </tags>
   </entry>
@@ -1346,8 +1346,8 @@
         <category>睡前故事</category>
       </categories>
       <tags>
-        <tag>里世界</tag>
         <tag>睡前故事</tag>
+        <tag>里世界</tag>
         <tag>骑士与女巫</tag>
       </tags>
   </entry>
@@ -1387,8 +1387,8 @@
         <category>影评</category>
       </categories>
       <tags>
-        <tag>影评</tag>
         <tag>里世界</tag>
+        <tag>影评</tag>
       </tags>
   </entry>
   <entry>
@@ -1629,6 +1629,157 @@
       </categories>
   </entry>
   <entry>
+    <title>Java后端面试笔记-框架</title>
+    <url>/2021/03/10/Java%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0-%E6%A1%86%E6%9E%B6/</url>
+    <content><![CDATA[<h1 id="框架相关"><a href="#框架相关" class="headerlink" title="框架相关"></a>框架相关</h1><h2 id="1-SpringBoot-自动装配原理"><a href="#1-SpringBoot-自动装配原理" class="headerlink" title="1.SpringBoot 自动装配原理"></a>1.SpringBoot 自动装配原理</h2><h3 id="什么是-SpringBoot-自动装配？"><a href="#什么是-SpringBoot-自动装配？" class="headerlink" title="什么是 SpringBoot 自动装配？"></a>什么是 SpringBoot 自动装配？</h3><p>我们现在提到自动装配的时候，一般会和 Spring Boot 联系在一起。但是，实际上 Spring Framework 早就实现了这个功能。Spring Boot 只是在其基础上，通过 SPI 的方式，做了进一步优化。</p>
+<blockquote>
+<p>SpringBoot 定义了一套接口规范，这套规范规定：SpringBoot 在启动时会扫描外部引用 jar 包中的<code>META-INF/spring.factories</code>文件，将文件中配置的类型信息加载到 Spring 容器（此处涉及到 JVM 类加载机制与 Spring 的容器知识），并执行类中定义的各种操作。对于外部 jar 来说，只需要按照 SpringBoot 定义的标准，就能将自己的功能装置进 SpringBoot。</p>
+</blockquote>
+<p>没有 Spring Boot 的情况下，如果我们需要引入第三方依赖，需要手动配置，非常麻烦。但是，Spring Boot 中，我们直接引入一个 starter 即可。比如你想要在项目中使用 redis 的话，直接在项目中引入对应的 starter 即可。</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-data-redis<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>引入 starter 之后，我们通过少量注解和一些简单的配置就能使用第三方组件提供的功能了。</p>
+<p>在我看来，自动装配可以简单理解为：<strong>通过注解或者一些简单的配置就能在 Spring Boot 的帮助下实现某块功能。</strong></p>
+<a id="more"></a>
+
+<h3 id="SpringBoot-是如何实现自动装配的？如何实现按需加载？"><a href="#SpringBoot-是如何实现自动装配的？如何实现按需加载？" class="headerlink" title="SpringBoot 是如何实现自动装配的？如何实现按需加载？"></a>SpringBoot 是如何实现自动装配的？如何实现按需加载？</h3><p>我们先看一下 SpringBoot 的核心注解 <code>SpringBootApplication</code> 。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Target(&#123;ElementType.TYPE&#125;)</span></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span></span><br><span class="line"><span class="meta">@Documented</span></span><br><span class="line"><span class="meta">@Inherited</span></span><br><span class="line">&lt;<span class="number">1.</span>&gt;<span class="meta">@SpringBootConfiguration</span></span><br><span class="line">&lt;<span class="number">2.</span>&gt;<span class="meta">@ComponentScan</span></span><br><span class="line">&lt;<span class="number">3.</span>&gt;<span class="meta">@EnableAutoConfiguration</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> SpringBootApplication &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Target(&#123;ElementType.TYPE&#125;)</span></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span></span><br><span class="line"><span class="meta">@Documented</span></span><br><span class="line"><span class="meta">@Configuration</span> <span class="comment">//实际上它也是一个配置类</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> SpringBootConfiguration &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>大概可以把 <code>@SpringBootApplication</code>看作是 <code>@Configuration</code>、<code>@EnableAutoConfiguration</code>、<code>@ComponentScan</code> 注解的集合。根据 SpringBoot 官网，这三个注解的作用分别是：</p>
+<ul>
+<li><code>@EnableAutoConfiguration</code>：启用 SpringBoot 的自动配置机制</li>
+<li><code>@Configuration</code>：允许在上下文中注册额外的 bean 或导入其他配置类</li>
+<li><code>@ComponentScan</code>： 扫描被<code>@Component</code> (<code>@Service</code>,<code>@Controller</code>)注解的 bean，注解默认会扫描启动类所在的包下所有的类 ，可以自定义不扫描某些 bean。如下图所示，容器中将排除<code>TypeExcludeFilter</code>和<code>AutoConfigurationExcludeFilter</code>。</li>
+</ul>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210310151024.png"></p>
+<p><code>EnableAutoConfiguration</code> 是实现自动装配的重要注解，我们以这个注解入手。</p>
+<h3 id="EnableAutoConfiguration-实现自动装配的核心注解"><a href="#EnableAutoConfiguration-实现自动装配的核心注解" class="headerlink" title="@EnableAutoConfiguration:实现自动装配的核心注解"></a>@EnableAutoConfiguration:实现自动装配的核心注解</h3><p><code>EnableAutoConfiguration</code> 只是一个简单地注解，自动装配核心功能的实现实际是通过 <code>AutoConfigurationImportSelector</code>类。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Target(&#123;ElementType.TYPE&#125;)</span></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span></span><br><span class="line"><span class="meta">@Documented</span></span><br><span class="line"><span class="meta">@Inherited</span></span><br><span class="line"><span class="meta">@AutoConfigurationPackage</span> <span class="comment">//作用：将main包下的所欲组件注册到容器中</span></span><br><span class="line"><span class="meta">@Import(&#123;AutoConfigurationImportSelector.class&#125;)</span> <span class="comment">//加载自动装配类 xxxAutoconfiguration</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> EnableAutoConfiguration &#123;</span><br><span class="line">    String ENABLED_OVERRIDE_PROPERTY = <span class="string">&quot;spring.boot.enableautoconfiguration&quot;</span>;</span><br><span class="line"></span><br><span class="line">    Class&lt;?&gt;[] exclude() <span class="keyword">default</span> &#123;&#125;;</span><br><span class="line"></span><br><span class="line">    String[] excludeName() <span class="keyword">default</span> &#123;&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们现在重点分析下<code>AutoConfigurationImportSelector</code> 类到底做了什么？</p>
+<h3 id="AutoConfigurationImportSelector-加载自动装配类"><a href="#AutoConfigurationImportSelector-加载自动装配类" class="headerlink" title="AutoConfigurationImportSelector:加载自动装配类"></a>AutoConfigurationImportSelector:加载自动装配类</h3><p><code>AutoConfigurationImportSelector</code>类的继承体系如下：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AutoConfigurationImportSelector</span> <span class="keyword">implements</span> <span class="title">DeferredImportSelector</span>, <span class="title">BeanClassLoaderAware</span>, <span class="title">ResourceLoaderAware</span>, <span class="title">BeanFactoryAware</span>, <span class="title">EnvironmentAware</span>, <span class="title">Ordered</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">DeferredImportSelector</span> <span class="keyword">extends</span> <span class="title">ImportSelector</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">ImportSelector</span> </span>&#123;</span><br><span class="line">    String[] selectImports(AnnotationMetadata var1);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以看出，<code>AutoConfigurationImportSelector</code> 类实现了 <code>ImportSelector</code>接口，也就实现了这个接口中的 <code>selectImports</code>方法，该方法主要用于<strong>获取所有符合条件的类的全限定类名，这些类需要被加载到 IoC 容器中</strong>。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String[] NO_IMPORTS = <span class="keyword">new</span> String[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> String[] selectImports(AnnotationMetadata annotationMetadata) &#123;</span><br><span class="line">        <span class="comment">// &lt;1&gt;.判断自动装配开关是否打开</span></span><br><span class="line">        <span class="keyword">if</span> (!<span class="keyword">this</span>.isEnabled(annotationMetadata)) &#123;</span><br><span class="line">            <span class="keyword">return</span> NO_IMPORTS;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          <span class="comment">//&lt;2&gt;.获取所有需要装配的bean</span></span><br><span class="line">            AutoConfigurationMetadata autoConfigurationMetadata = AutoConfigurationMetadataLoader.loadMetadata(<span class="keyword">this</span>.beanClassLoader);</span><br><span class="line">            AutoConfigurationImportSelector.AutoConfigurationEntry autoConfigurationEntry = <span class="keyword">this</span>.getAutoConfigurationEntry(autoConfigurationMetadata, annotationMetadata);</span><br><span class="line">            <span class="keyword">return</span> StringUtils.toStringArray(autoConfigurationEntry.getConfigurations());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里我们需要重点关注一下<code>getAutoConfigurationEntry()</code>方法，这个方法主要负责加载自动配置类的。</p>
+<p>该方法调用链如下：</p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210310151300.png"></p>
+<p>现在我们结合<code>getAutoConfigurationEntry()</code>的源码来详细分析一下：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> AutoConfigurationEntry EMPTY_ENTRY = <span class="keyword">new</span> AutoConfigurationEntry();</span><br><span class="line"></span><br><span class="line"><span class="function">AutoConfigurationEntry <span class="title">getAutoConfigurationEntry</span><span class="params">(AutoConfigurationMetadata autoConfigurationMetadata, AnnotationMetadata annotationMetadata)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//&lt;1&gt;.</span></span><br><span class="line">        <span class="keyword">if</span> (!<span class="keyword">this</span>.isEnabled(annotationMetadata)) &#123;</span><br><span class="line">            <span class="keyword">return</span> EMPTY_ENTRY;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">//&lt;2&gt;.</span></span><br><span class="line">            AnnotationAttributes attributes = <span class="keyword">this</span>.getAttributes(annotationMetadata);</span><br><span class="line">            <span class="comment">//&lt;3&gt;.</span></span><br><span class="line">            List&lt;String&gt; configurations = <span class="keyword">this</span>.getCandidateConfigurations(annotationMetadata, attributes);</span><br><span class="line">            <span class="comment">//&lt;4&gt;.</span></span><br><span class="line">            configurations = <span class="keyword">this</span>.removeDuplicates(configurations);</span><br><span class="line">            Set&lt;String&gt; exclusions = <span class="keyword">this</span>.getExclusions(annotationMetadata, attributes);</span><br><span class="line">            <span class="keyword">this</span>.checkExcludedClasses(configurations, exclusions);</span><br><span class="line">            configurations.removeAll(exclusions);</span><br><span class="line">            configurations = <span class="keyword">this</span>.filter(configurations, autoConfigurationMetadata);</span><br><span class="line">            <span class="keyword">this</span>.fireAutoConfigurationImportEvents(configurations, exclusions);</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> AutoConfigurationImportSelector.AutoConfigurationEntry(configurations, exclusions);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>第 1 步</strong>:</p>
+<p>判断自动装配开关是否打开。默认<code>spring.boot.enableautoconfiguration=true</code>，可在 <code>application.properties</code> 或 <code>application.yml</code> 中设置</p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210310151411.png"></p>
+<p><strong>第 2 步</strong> ：</p>
+<p>用于获取<code>EnableAutoConfiguration</code>注解中的 <code>exclude</code> 和 <code>excludeName</code></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210310151439.png"></p>
+<p><strong>第 3 步</strong></p>
+<p>获取需要自动装配的所有配置类，读取<code>META-INF/spring.factories</code></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">spring-boot/spring-boot-project/spring-boot-autoconfigure/src/main/resources/META-INF/spring.factories</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210310151533.png"></p>
+<p>从下图可以看到这个文件的配置内容都被我们读取到了。<code>XXXAutoConfiguration</code>的作用就是按需加载组件。</p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210310151540.png"></p>
+<p>不光是这个依赖下的<code>META-INF/spring.factories</code>被读取到，所有 Spring Boot Starter 下的<code>META-INF/spring.factories</code>都会被读取到。</p>
+<p>所以，你可以清楚滴看到， druid 数据库连接池的 Spring Boot Starter 就创建了<code>META-INF/spring.factories</code>文件。</p>
+<p>如果，我们自己要创建一个 Spring Boot Starter，这一步是必不可少的。</p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210310151708.png"></p>
+<p><strong>第 4 步</strong> ：</p>
+<p>到这里可能面试官会问你:“<code>spring.factories</code>中这么多配置，每次启动都要全部加载么？”。</p>
+<p>很明显，这是不现实的。我们 debug 到后面你会发现，<code>configurations</code> 的值变小了。</p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210310151550.png"></p>
+<p>因为，这一步有经历了一遍筛选，<code>@ConditionalOnXXX</code> 中的所有条件都满足，该类才会生效。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="comment">// 检查相关的类：RabbitTemplate 和 Channel是否存在</span></span><br><span class="line"><span class="comment">// 存在才会加载</span></span><br><span class="line"><span class="meta">@ConditionalOnClass(&#123; RabbitTemplate.class, Channel.class &#125;)</span></span><br><span class="line"><span class="meta">@EnableConfigurationProperties(RabbitProperties.class)</span></span><br><span class="line"><span class="meta">@Import(RabbitAnnotationDrivenConfiguration.class)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RabbitAutoConfiguration</span> </span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> Spring Boot 提供的条件注解</p>
+<ul>
+<li><code>@ConditionalOnBean</code>：当容器里有指定 Bean 的条件下</li>
+<li><code>@ConditionalOnMissingBean</code>：当容器里没有指定 Bean 的情况下</li>
+<li><code>@ConditionalOnSingleCandidate</code>：当指定 Bean 在容器中只有一个，或者虽然有多个但是指定首选 Bean</li>
+<li><code>@ConditionalOnClass</code>：当类路径下有指定类的条件下</li>
+<li><code>@ConditionalOnMissingClass</code>：当类路径下没有指定类的条件下</li>
+<li><code>@ConditionalOnProperty</code>：指定的属性是否有指定的值</li>
+<li><code>@ConditionalOnResource</code>：类路径是否有指定的值</li>
+<li><code>@ConditionalOnExpression</code>：基于 SpEL 表达式作为判断条件</li>
+<li><code>@ConditionalOnJava</code>：基于 Java 版本作为判断条件</li>
+<li><code>@ConditionalOnJndi</code>：在 JNDI 存在的条件下差在指定的位置</li>
+<li><code>@ConditionalOnNotWebApplication</code>：当前项目不是 Web 项目的条件下</li>
+<li><code>@ConditionalOnWebApplication</code>：当前项目是 Web 项目的条件下</li>
+</ul>
+<h3 id="如何实现一个-Starter？"><a href="#如何实现一个-Starter？" class="headerlink" title="如何实现一个 Starter？"></a>如何实现一个 Starter？</h3><p>撸一个 starter，实现自定义线程池</p>
+<p>第一步，创建<code>threadpool-spring-boot-starter</code>工程</p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210310151933.png"></p>
+<p>第二步，引入 Spring Boot 相关依赖</p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210310151955.png"></p>
+<p>第三步，创建<code>ThreadPoolAutoConfiguration</code></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210310152017.png"></p>
+<p>第四步，在<code>threadpool-spring-boot-starter</code>工程的 resources 包下创建<code>META-INF/spring.factories</code>文件</p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210310152042.png"></p>
+<p>最后新建工程引入<code>threadpool-spring-boot-starter</code></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210310152103.png"></p>
+<p>测试通过</p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210310152130.png"></p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>Spring Boot 通过<code>@EnableAutoConfiguration</code>开启自动装配，通过 SpringFactoriesLoader 最终加载<code>META-INF/spring.factories</code>中的自动配置类实现自动装配，自动配置类其实就是通过<code>@Conditional</code>按需加载的配置类，想要其生效必须引入<code>spring-boot-starter-xxx</code>包实现起步依赖</p>
+<h2 id="2-SpringBoot-的启动流程"><a href="#2-SpringBoot-的启动流程" class="headerlink" title="2.SpringBoot 的启动流程"></a>2.SpringBoot 的启动流程</h2><h3 id="流程图"><a href="#流程图" class="headerlink" title="流程图"></a>流程图</h3><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210310190123.png"></p>
+<h3 id="源码及过程解析"><a href="#源码及过程解析" class="headerlink" title="源码及过程解析"></a>源码及过程解析</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> ConfigurableApplicationContext <span class="title">run</span><span class="params">(String... args)</span> </span>&#123;</span><br><span class="line">	<span class="comment">// 1.初始化stopWatcch(计数器),调用其start方法开始计时</span></span><br><span class="line">	StopWatch stopWatch = <span class="keyword">new</span> StopWatch();</span><br><span class="line">	stopWatch.start();</span><br><span class="line">	ConfigurableApplicationContext context = <span class="keyword">null</span>;</span><br><span class="line">	FailureAnalyzers analyzers = <span class="keyword">null</span>;</span><br><span class="line">	<span class="comment">// 2.设置系统属性java.awt.headless,这里设置为true,表示运行在服务器端，在没有显示器和鼠标键盘的模式下工作，模拟输入输出设备功能</span></span><br><span class="line">	configureHeadlessProperty();</span><br><span class="line">	<span class="comment">// 3.调用springApplicationRunListeners#starting</span></span><br><span class="line">	SpringApplicationRunListeners listeners = getRunListeners(args);</span><br><span class="line">	listeners.starting();</span><br><span class="line">	<span class="keyword">try</span> &#123;</span><br><span class="line">		<span class="comment">// 4.创建一个defaultApplicationArguments对象，他持有args参数（main函数中传入），调用prepareEnvironment方法</span></span><br><span class="line">		ApplicationArguments applicationArguments = <span class="keyword">new</span> DefaultApplicationArguments(args);</span><br><span class="line">		ConfigurableEnvironment environment = prepareEnvironment(listeners, applicationArguments);</span><br><span class="line">		<span class="comment">// 5.打印banner</span></span><br><span class="line">		Banner printedBanner = printBanner(environment);</span><br><span class="line">		<span class="comment">// 6.创建springboot上下文</span></span><br><span class="line">		context = createApplicationContext();</span><br><span class="line">		<span class="comment">// 7.初始化FailureAnalyzers</span></span><br><span class="line">		analyzers = <span class="keyword">new</span> FailureAnalyzers(context);</span><br><span class="line">		<span class="comment">// 8.调用prepareContext</span></span><br><span class="line">		prepareContext(context, environment, listeners, applicationArguments, printedBanner);</span><br><span class="line">		<span class="comment">// 9.调用AbstractApplicationContext#refresh</span></span><br><span class="line">		refreshContext(context);</span><br><span class="line">		<span class="comment">// 10.在容器完成刷新后，依次调用注册的Runners</span></span><br><span class="line">		afterRefresh(context, applicationArguments);</span><br><span class="line">		<span class="comment">// 11.调用SpringApplicationRunListeners#finished</span></span><br><span class="line">		listeners.finished(context, <span class="keyword">null</span>);</span><br><span class="line">		<span class="comment">// 12.停止计时</span></span><br><span class="line">		stopWatch.stop();</span><br><span class="line">		<span class="keyword">if</span> (<span class="keyword">this</span>.logStartupInfo) &#123;</span><br><span class="line">			<span class="keyword">new</span> StartupInfoLogger(<span class="keyword">this</span>.mainApplicationClass).logStarted(getApplicationLog(), stopWatch);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> context;</span><br><span class="line">	&#125; <span class="keyword">catch</span> (Throwable ex) &#123;</span><br><span class="line">		<span class="comment">// 13.初始化过程中出现异常时调用handelRunFailure进行处理，抛出IllegalStateException</span></span><br><span class="line">		handleRunFailure(context, listeners, analyzers, ex);</span><br><span class="line">		<span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(ex);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如上代码就是SpringBoot的启动流程了，其中注释也非常详细，主要步骤也已经标注，现将主要步骤总结如下：</p>
+<ol>
+<li>从<code>spring.factories</code>配置文件中<strong>加载<code>EventPublishingRunListener</code>对象</strong>，该对象拥有<code>SimpleApplicationEventMulticaster</code>属性，即在SpringBoot启动过程的不同阶段用来发射内置的生命周期事件;</li>
+<li><strong>准备环境变量</strong>，包括系统变量，环境变量，命令行参数，默认变量，<code>servlet</code>相关配置变量，随机值以及配置文件（比如<code>application.properties</code>）等;</li>
+<li>控制台<strong>打印SpringBoot的<code>bannner</code>标志</strong>；</li>
+<li><strong>根据不同类型环境创建不同类型的<code>applicationcontext</code>容器</strong>，因为这里是<code>servlet</code>环境，所以创建的是<code>AnnotationConfigServletWebServerApplicationContext</code>容器对象；</li>
+<li>从<code>spring.factories</code>配置文件中<strong>加载<code>FailureAnalyzers</code>对象</strong>,用来报告SpringBoot启动过程中的异常；</li>
+<li><strong>为刚创建的容器对象做一些初始化工作</strong>，准备一些容器属性值等，对<code>ApplicationContext</code>应用一些相关的后置处理和调用各个<code>ApplicationContextInitializer</code>的初始化方法来执行一些初始化逻辑等；</li>
+<li><strong>刷新容器</strong>，这一步至关重要。比如调用<code>bean factory</code>的后置处理器，注册<code>BeanPostProcessor</code>后置处理器，初始化事件广播器且广播事件，初始化剩下的单例<code>bean</code>和SpringBoot创建内嵌的<code>Tomcat</code>服务器等等重要且复杂的逻辑都在这里实现，主要步骤可见代码的注释，关于这里的逻辑会在以后的spring源码分析专题详细分析；</li>
+<li><strong>执行刷新容器后的后置处理逻辑</strong>，注意这里为空方法；</li>
+<li><strong>调用<code>ApplicationRunner</code>和<code>CommandLineRunner</code>的run方法</strong>，我们实现这两个接口可以在spring容器启动后需要的一些东西比如加载一些业务数据等;</li>
+<li><strong>报告启动异常</strong>，即若启动过程中抛出异常，此时用<code>FailureAnalyzers</code>来报告异常;</li>
+<li>最终<strong>返回容器对象</strong>，这里调用方法没有声明对象来接收。</li>
+</ol>
+<p>当然在SpringBoot启动过程中，每个不同的启动阶段会分别发射不同的内置生命周期事件，比如在准备<code>environment</code>前会发射<code>ApplicationStartingEvent</code>事件，在<code>environment</code>准备好后会发射<code>ApplicationEnvironmentPreparedEvent</code>事件，在刷新容器前会发射<code>ApplicationPreparedEvent</code>事件等，总之SpringBoot总共内置了7个生命周期事件，除了标志SpringBoot的不同启动阶段外，同时一些监听器也会监听相应的生命周期事件从而执行一些启动初始化逻辑。</p>
+<h2 id="3-Spring-IOC-amp-AOP"><a href="#3-Spring-IOC-amp-AOP" class="headerlink" title="3.Spring IOC &amp; AOP"></a>3.Spring IOC &amp; AOP</h2><h3 id="IoC"><a href="#IoC" class="headerlink" title="IoC"></a>IoC</h3><p>IoC（Inverse of Control:控制反转）是一种<strong>设计思想</strong>，就是 <strong>将原本在程序中手动创建对象的控制权，交由Spring框架来管理。</strong>  IoC 在其他语言中也有应用，并非 Spring 特有。 <strong>IoC 容器是 Spring 用来实现 IoC 的载体，  IoC 容器实际上就是个Map（key，value）,Map 中存放的是各种对象。</strong></p>
+<p>将对象之间的相互依赖关系交给 IoC 容器来管理，并由 IoC 容器完成对象的注入。这样可以很大程度上简化应用的开发，把应用从复杂的依赖关系中解放出来。  <strong>IoC 容器就像是一个工厂一样，当我们需要创建一个对象的时候，只需要配置好配置文件/注解即可，完全不用考虑对象是如何被创建出来的。</strong> 在实际项目中一个 Service 类可能有几百甚至上千个类作为它的底层，假如我们需要实例化这个 Service，你可能要每次都要搞清这个 Service 所有底层类的构造函数，这可能会把人逼疯。如果利用 IoC 的话，你只需要配置好，然后在需要的地方引用就行了，这大大增加了项目的可维护性且降低了开发难度。</p>
+<p>Spring 时代我们一般通过 XML 文件来配置 Bean，后来开发人员觉得 XML 文件来配置不太好，于是 SpringBoot 注解配置就慢慢开始流行起来。</p>
+<p><strong>Spring IoC的初始化过程：</strong> </p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210310202931.png"></p>
+<h3 id="依赖注入-DI"><a href="#依赖注入-DI" class="headerlink" title="依赖注入(DI)"></a>依赖注入(DI)</h3><p><strong>DI（Dependency Injection）</strong>，Spring IoC 不是一种技术，而是一种思想，通过这种思想，能够指导我们设计出松耦合的程序代码。而Spring IoC这个思想的作用体现在两个方面，一是如何将Bean装配到容器中去以及如何从容器中获取Bean，二是如何解决Bean之间的依赖关系，换句话说，就是如果由IoC容器来管理依赖关系，当一个Bean需要依赖另外一个Bean时，IoC容器如何实现这样的依赖关系。</p>
+<p>解决Spring中Bean之间的依赖的实现方式，在Spring的概念中就被称之为<strong>依赖注入（Dependency Injection，DI）</strong>。普遍认为的Spring依赖注入的实现方式有三种：构造方法注入、setter方法注入、注解注入。但，就我而言，我认为应该划分为两种形式——基于XML注入和基于注解注入，然后再细分为下面的形式：</p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1218435-20200805195048562-1750995069.png"></p>
+<hr>
+<h3 id="AOP"><a href="#AOP" class="headerlink" title="AOP"></a>AOP</h3><p>AOP( Aspect-Oriented Programming : 面向切面编程 ) 能够将那些与业务无关，<strong>却为业务模块所共同调用的逻辑或责任（例如事务处理、日志管理、权限控制等）封装起来</strong>，便于<strong>减少系统的重复代码</strong>，<strong>降低模块间的耦合度</strong>，并<strong>有利于未来的可拓展性和可维护性</strong>。</p>
+<p><strong>Spring AOP就是基于动态代理的</strong>，如果要代理的对象，实现了某个接口，那么Spring AOP会使用<strong>JDK Proxy</strong>，去创建代理对象，而对于没有实现接口的对象，就无法使用 JDK Proxy 去进行代理了，这时候Spring AOP会使用<strong>Cglib</strong> ，这时候Spring AOP会使用 <strong>Cglib</strong> 生成一个被代理对象的子类来作为代理，如下图所示：</p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/SpringAOPProcess.jpg" alt="SpringAOPProcess"></p>
+<p>当然你也可以使用 AspectJ ,Spring AOP 已经集成了AspectJ  ，AspectJ  应该算的上是 Java 生态系统中最完整的 AOP 框架了。</p>
+<p>使用 AOP 之后我们可以把一些通用功能抽象出来，在需要用到的地方直接使用即可，这样大大简化了代码量。我们需要增加新功能时也方便，这样也提高了系统扩展性。日志功能、事务管理等等场景都用到了 AOP 。</p>
+<h2 id="4-Spring-框架中的设计模式"><a href="#4-Spring-框架中的设计模式" class="headerlink" title="4.Spring 框架中的设计模式"></a>4.Spring 框架中的设计模式</h2><ul>
+<li><strong>工厂设计模式</strong> : Spring使用工厂模式通过 <code>BeanFactory</code>、<code>ApplicationContext</code> 创建 bean 对象。</li>
+<li><strong>代理设计模式</strong> : Spring AOP 功能的实现。</li>
+<li><strong>单例设计模式</strong> : Spring 中的 Bean 默认都是单例的。</li>
+<li><strong>模板方法模式</strong> : Spring 中 <code>jdbcTemplate</code>、<code>hibernateTemplate</code> 等以 Template 结尾的对数据库操作的类，它们就使用到了模板模式。</li>
+<li><strong>包装器设计模式</strong> : 我们的项目需要连接多个数据库，而且不同的客户在每次访问中根据需要会去访问不同的数据库。这种模式让我们可以根据客户的需求能够动态切换不同的数据源。</li>
+<li><strong>观察者模式:</strong> Spring 事件驱动模型就是观察者模式很经典的一个应用。</li>
+<li><strong>适配器模式</strong> :Spring AOP 的增强或通知(Advice)使用到了适配器模式、spring MVC 中也是用到了适配器模式适配<code>Controller</code>。</li>
+<li>……</li>
+</ul>
+]]></content>
+      <categories>
+        <category>面试</category>
+        <category>Java</category>
+        <category>笔记</category>
+      </categories>
+      <tags>
+        <tag>笔记</tag>
+        <tag>Java</tag>
+        <tag>面试</tag>
+        <tag>框架</tag>
+        <tag>SpringBoot</tag>
+        <tag>Spring</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Java后端面试笔记-Java基础</title>
     <url>/2021/03/11/Java%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0-Java%E5%9F%BA%E7%A1%80/</url>
     <content><![CDATA[<h1 id="基础篇"><a href="#基础篇" class="headerlink" title="基础篇"></a>基础篇</h1><h2 id="1-与-equals"><a href="#1-与-equals" class="headerlink" title="1.==与 equals"></a>1.==与 equals</h2><p><strong>==</strong> : 它的作用是判断两个对象的地址是不是相等。即，判断两个对象是不是同一个对象。(基本数据类型==比较的是值==，引用数据类型==比较的是内存地址==)</p>
@@ -1822,157 +1973,6 @@
         <tag>Java</tag>
         <tag>面试</tag>
         <tag>Java基础</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Java后端面试笔记-框架</title>
-    <url>/2021/03/10/Java%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0-%E6%A1%86%E6%9E%B6/</url>
-    <content><![CDATA[<h1 id="框架相关"><a href="#框架相关" class="headerlink" title="框架相关"></a>框架相关</h1><h2 id="1-SpringBoot-自动装配原理"><a href="#1-SpringBoot-自动装配原理" class="headerlink" title="1.SpringBoot 自动装配原理"></a>1.SpringBoot 自动装配原理</h2><h3 id="什么是-SpringBoot-自动装配？"><a href="#什么是-SpringBoot-自动装配？" class="headerlink" title="什么是 SpringBoot 自动装配？"></a>什么是 SpringBoot 自动装配？</h3><p>我们现在提到自动装配的时候，一般会和 Spring Boot 联系在一起。但是，实际上 Spring Framework 早就实现了这个功能。Spring Boot 只是在其基础上，通过 SPI 的方式，做了进一步优化。</p>
-<blockquote>
-<p>SpringBoot 定义了一套接口规范，这套规范规定：SpringBoot 在启动时会扫描外部引用 jar 包中的<code>META-INF/spring.factories</code>文件，将文件中配置的类型信息加载到 Spring 容器（此处涉及到 JVM 类加载机制与 Spring 的容器知识），并执行类中定义的各种操作。对于外部 jar 来说，只需要按照 SpringBoot 定义的标准，就能将自己的功能装置进 SpringBoot。</p>
-</blockquote>
-<p>没有 Spring Boot 的情况下，如果我们需要引入第三方依赖，需要手动配置，非常麻烦。但是，Spring Boot 中，我们直接引入一个 starter 即可。比如你想要在项目中使用 redis 的话，直接在项目中引入对应的 starter 即可。</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-data-redis<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>引入 starter 之后，我们通过少量注解和一些简单的配置就能使用第三方组件提供的功能了。</p>
-<p>在我看来，自动装配可以简单理解为：<strong>通过注解或者一些简单的配置就能在 Spring Boot 的帮助下实现某块功能。</strong></p>
-<a id="more"></a>
-
-<h3 id="SpringBoot-是如何实现自动装配的？如何实现按需加载？"><a href="#SpringBoot-是如何实现自动装配的？如何实现按需加载？" class="headerlink" title="SpringBoot 是如何实现自动装配的？如何实现按需加载？"></a>SpringBoot 是如何实现自动装配的？如何实现按需加载？</h3><p>我们先看一下 SpringBoot 的核心注解 <code>SpringBootApplication</code> 。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Target(&#123;ElementType.TYPE&#125;)</span></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span></span><br><span class="line"><span class="meta">@Documented</span></span><br><span class="line"><span class="meta">@Inherited</span></span><br><span class="line">&lt;<span class="number">1.</span>&gt;<span class="meta">@SpringBootConfiguration</span></span><br><span class="line">&lt;<span class="number">2.</span>&gt;<span class="meta">@ComponentScan</span></span><br><span class="line">&lt;<span class="number">3.</span>&gt;<span class="meta">@EnableAutoConfiguration</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> SpringBootApplication &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Target(&#123;ElementType.TYPE&#125;)</span></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span></span><br><span class="line"><span class="meta">@Documented</span></span><br><span class="line"><span class="meta">@Configuration</span> <span class="comment">//实际上它也是一个配置类</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> SpringBootConfiguration &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>大概可以把 <code>@SpringBootApplication</code>看作是 <code>@Configuration</code>、<code>@EnableAutoConfiguration</code>、<code>@ComponentScan</code> 注解的集合。根据 SpringBoot 官网，这三个注解的作用分别是：</p>
-<ul>
-<li><code>@EnableAutoConfiguration</code>：启用 SpringBoot 的自动配置机制</li>
-<li><code>@Configuration</code>：允许在上下文中注册额外的 bean 或导入其他配置类</li>
-<li><code>@ComponentScan</code>： 扫描被<code>@Component</code> (<code>@Service</code>,<code>@Controller</code>)注解的 bean，注解默认会扫描启动类所在的包下所有的类 ，可以自定义不扫描某些 bean。如下图所示，容器中将排除<code>TypeExcludeFilter</code>和<code>AutoConfigurationExcludeFilter</code>。</li>
-</ul>
-<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210310151024.png"></p>
-<p><code>EnableAutoConfiguration</code> 是实现自动装配的重要注解，我们以这个注解入手。</p>
-<h3 id="EnableAutoConfiguration-实现自动装配的核心注解"><a href="#EnableAutoConfiguration-实现自动装配的核心注解" class="headerlink" title="@EnableAutoConfiguration:实现自动装配的核心注解"></a>@EnableAutoConfiguration:实现自动装配的核心注解</h3><p><code>EnableAutoConfiguration</code> 只是一个简单地注解，自动装配核心功能的实现实际是通过 <code>AutoConfigurationImportSelector</code>类。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Target(&#123;ElementType.TYPE&#125;)</span></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span></span><br><span class="line"><span class="meta">@Documented</span></span><br><span class="line"><span class="meta">@Inherited</span></span><br><span class="line"><span class="meta">@AutoConfigurationPackage</span> <span class="comment">//作用：将main包下的所欲组件注册到容器中</span></span><br><span class="line"><span class="meta">@Import(&#123;AutoConfigurationImportSelector.class&#125;)</span> <span class="comment">//加载自动装配类 xxxAutoconfiguration</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> EnableAutoConfiguration &#123;</span><br><span class="line">    String ENABLED_OVERRIDE_PROPERTY = <span class="string">&quot;spring.boot.enableautoconfiguration&quot;</span>;</span><br><span class="line"></span><br><span class="line">    Class&lt;?&gt;[] exclude() <span class="keyword">default</span> &#123;&#125;;</span><br><span class="line"></span><br><span class="line">    String[] excludeName() <span class="keyword">default</span> &#123;&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>我们现在重点分析下<code>AutoConfigurationImportSelector</code> 类到底做了什么？</p>
-<h3 id="AutoConfigurationImportSelector-加载自动装配类"><a href="#AutoConfigurationImportSelector-加载自动装配类" class="headerlink" title="AutoConfigurationImportSelector:加载自动装配类"></a>AutoConfigurationImportSelector:加载自动装配类</h3><p><code>AutoConfigurationImportSelector</code>类的继承体系如下：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AutoConfigurationImportSelector</span> <span class="keyword">implements</span> <span class="title">DeferredImportSelector</span>, <span class="title">BeanClassLoaderAware</span>, <span class="title">ResourceLoaderAware</span>, <span class="title">BeanFactoryAware</span>, <span class="title">EnvironmentAware</span>, <span class="title">Ordered</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">DeferredImportSelector</span> <span class="keyword">extends</span> <span class="title">ImportSelector</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">ImportSelector</span> </span>&#123;</span><br><span class="line">    String[] selectImports(AnnotationMetadata var1);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>可以看出，<code>AutoConfigurationImportSelector</code> 类实现了 <code>ImportSelector</code>接口，也就实现了这个接口中的 <code>selectImports</code>方法，该方法主要用于<strong>获取所有符合条件的类的全限定类名，这些类需要被加载到 IoC 容器中</strong>。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String[] NO_IMPORTS = <span class="keyword">new</span> String[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> String[] selectImports(AnnotationMetadata annotationMetadata) &#123;</span><br><span class="line">        <span class="comment">// &lt;1&gt;.判断自动装配开关是否打开</span></span><br><span class="line">        <span class="keyword">if</span> (!<span class="keyword">this</span>.isEnabled(annotationMetadata)) &#123;</span><br><span class="line">            <span class="keyword">return</span> NO_IMPORTS;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          <span class="comment">//&lt;2&gt;.获取所有需要装配的bean</span></span><br><span class="line">            AutoConfigurationMetadata autoConfigurationMetadata = AutoConfigurationMetadataLoader.loadMetadata(<span class="keyword">this</span>.beanClassLoader);</span><br><span class="line">            AutoConfigurationImportSelector.AutoConfigurationEntry autoConfigurationEntry = <span class="keyword">this</span>.getAutoConfigurationEntry(autoConfigurationMetadata, annotationMetadata);</span><br><span class="line">            <span class="keyword">return</span> StringUtils.toStringArray(autoConfigurationEntry.getConfigurations());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<p>这里我们需要重点关注一下<code>getAutoConfigurationEntry()</code>方法，这个方法主要负责加载自动配置类的。</p>
-<p>该方法调用链如下：</p>
-<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210310151300.png"></p>
-<p>现在我们结合<code>getAutoConfigurationEntry()</code>的源码来详细分析一下：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> AutoConfigurationEntry EMPTY_ENTRY = <span class="keyword">new</span> AutoConfigurationEntry();</span><br><span class="line"></span><br><span class="line"><span class="function">AutoConfigurationEntry <span class="title">getAutoConfigurationEntry</span><span class="params">(AutoConfigurationMetadata autoConfigurationMetadata, AnnotationMetadata annotationMetadata)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//&lt;1&gt;.</span></span><br><span class="line">        <span class="keyword">if</span> (!<span class="keyword">this</span>.isEnabled(annotationMetadata)) &#123;</span><br><span class="line">            <span class="keyword">return</span> EMPTY_ENTRY;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">//&lt;2&gt;.</span></span><br><span class="line">            AnnotationAttributes attributes = <span class="keyword">this</span>.getAttributes(annotationMetadata);</span><br><span class="line">            <span class="comment">//&lt;3&gt;.</span></span><br><span class="line">            List&lt;String&gt; configurations = <span class="keyword">this</span>.getCandidateConfigurations(annotationMetadata, attributes);</span><br><span class="line">            <span class="comment">//&lt;4&gt;.</span></span><br><span class="line">            configurations = <span class="keyword">this</span>.removeDuplicates(configurations);</span><br><span class="line">            Set&lt;String&gt; exclusions = <span class="keyword">this</span>.getExclusions(annotationMetadata, attributes);</span><br><span class="line">            <span class="keyword">this</span>.checkExcludedClasses(configurations, exclusions);</span><br><span class="line">            configurations.removeAll(exclusions);</span><br><span class="line">            configurations = <span class="keyword">this</span>.filter(configurations, autoConfigurationMetadata);</span><br><span class="line">            <span class="keyword">this</span>.fireAutoConfigurationImportEvents(configurations, exclusions);</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> AutoConfigurationImportSelector.AutoConfigurationEntry(configurations, exclusions);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>第 1 步</strong>:</p>
-<p>判断自动装配开关是否打开。默认<code>spring.boot.enableautoconfiguration=true</code>，可在 <code>application.properties</code> 或 <code>application.yml</code> 中设置</p>
-<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210310151411.png"></p>
-<p><strong>第 2 步</strong> ：</p>
-<p>用于获取<code>EnableAutoConfiguration</code>注解中的 <code>exclude</code> 和 <code>excludeName</code></p>
-<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210310151439.png"></p>
-<p><strong>第 3 步</strong></p>
-<p>获取需要自动装配的所有配置类，读取<code>META-INF/spring.factories</code></p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">spring-boot/spring-boot-project/spring-boot-autoconfigure/src/main/resources/META-INF/spring.factories</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210310151533.png"></p>
-<p>从下图可以看到这个文件的配置内容都被我们读取到了。<code>XXXAutoConfiguration</code>的作用就是按需加载组件。</p>
-<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210310151540.png"></p>
-<p>不光是这个依赖下的<code>META-INF/spring.factories</code>被读取到，所有 Spring Boot Starter 下的<code>META-INF/spring.factories</code>都会被读取到。</p>
-<p>所以，你可以清楚滴看到， druid 数据库连接池的 Spring Boot Starter 就创建了<code>META-INF/spring.factories</code>文件。</p>
-<p>如果，我们自己要创建一个 Spring Boot Starter，这一步是必不可少的。</p>
-<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210310151708.png"></p>
-<p><strong>第 4 步</strong> ：</p>
-<p>到这里可能面试官会问你:“<code>spring.factories</code>中这么多配置，每次启动都要全部加载么？”。</p>
-<p>很明显，这是不现实的。我们 debug 到后面你会发现，<code>configurations</code> 的值变小了。</p>
-<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210310151550.png"></p>
-<p>因为，这一步有经历了一遍筛选，<code>@ConditionalOnXXX</code> 中的所有条件都满足，该类才会生效。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="comment">// 检查相关的类：RabbitTemplate 和 Channel是否存在</span></span><br><span class="line"><span class="comment">// 存在才会加载</span></span><br><span class="line"><span class="meta">@ConditionalOnClass(&#123; RabbitTemplate.class, Channel.class &#125;)</span></span><br><span class="line"><span class="meta">@EnableConfigurationProperties(RabbitProperties.class)</span></span><br><span class="line"><span class="meta">@Import(RabbitAnnotationDrivenConfiguration.class)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RabbitAutoConfiguration</span> </span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> Spring Boot 提供的条件注解</p>
-<ul>
-<li><code>@ConditionalOnBean</code>：当容器里有指定 Bean 的条件下</li>
-<li><code>@ConditionalOnMissingBean</code>：当容器里没有指定 Bean 的情况下</li>
-<li><code>@ConditionalOnSingleCandidate</code>：当指定 Bean 在容器中只有一个，或者虽然有多个但是指定首选 Bean</li>
-<li><code>@ConditionalOnClass</code>：当类路径下有指定类的条件下</li>
-<li><code>@ConditionalOnMissingClass</code>：当类路径下没有指定类的条件下</li>
-<li><code>@ConditionalOnProperty</code>：指定的属性是否有指定的值</li>
-<li><code>@ConditionalOnResource</code>：类路径是否有指定的值</li>
-<li><code>@ConditionalOnExpression</code>：基于 SpEL 表达式作为判断条件</li>
-<li><code>@ConditionalOnJava</code>：基于 Java 版本作为判断条件</li>
-<li><code>@ConditionalOnJndi</code>：在 JNDI 存在的条件下差在指定的位置</li>
-<li><code>@ConditionalOnNotWebApplication</code>：当前项目不是 Web 项目的条件下</li>
-<li><code>@ConditionalOnWebApplication</code>：当前项目是 Web 项目的条件下</li>
-</ul>
-<h3 id="如何实现一个-Starter？"><a href="#如何实现一个-Starter？" class="headerlink" title="如何实现一个 Starter？"></a>如何实现一个 Starter？</h3><p>撸一个 starter，实现自定义线程池</p>
-<p>第一步，创建<code>threadpool-spring-boot-starter</code>工程</p>
-<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210310151933.png"></p>
-<p>第二步，引入 Spring Boot 相关依赖</p>
-<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210310151955.png"></p>
-<p>第三步，创建<code>ThreadPoolAutoConfiguration</code></p>
-<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210310152017.png"></p>
-<p>第四步，在<code>threadpool-spring-boot-starter</code>工程的 resources 包下创建<code>META-INF/spring.factories</code>文件</p>
-<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210310152042.png"></p>
-<p>最后新建工程引入<code>threadpool-spring-boot-starter</code></p>
-<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210310152103.png"></p>
-<p>测试通过</p>
-<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210310152130.png"></p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>Spring Boot 通过<code>@EnableAutoConfiguration</code>开启自动装配，通过 SpringFactoriesLoader 最终加载<code>META-INF/spring.factories</code>中的自动配置类实现自动装配，自动配置类其实就是通过<code>@Conditional</code>按需加载的配置类，想要其生效必须引入<code>spring-boot-starter-xxx</code>包实现起步依赖</p>
-<h2 id="2-SpringBoot-的启动流程"><a href="#2-SpringBoot-的启动流程" class="headerlink" title="2.SpringBoot 的启动流程"></a>2.SpringBoot 的启动流程</h2><h3 id="流程图"><a href="#流程图" class="headerlink" title="流程图"></a>流程图</h3><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210310190123.png"></p>
-<h3 id="源码及过程解析"><a href="#源码及过程解析" class="headerlink" title="源码及过程解析"></a>源码及过程解析</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> ConfigurableApplicationContext <span class="title">run</span><span class="params">(String... args)</span> </span>&#123;</span><br><span class="line">	<span class="comment">// 1.初始化stopWatcch(计数器),调用其start方法开始计时</span></span><br><span class="line">	StopWatch stopWatch = <span class="keyword">new</span> StopWatch();</span><br><span class="line">	stopWatch.start();</span><br><span class="line">	ConfigurableApplicationContext context = <span class="keyword">null</span>;</span><br><span class="line">	FailureAnalyzers analyzers = <span class="keyword">null</span>;</span><br><span class="line">	<span class="comment">// 2.设置系统属性java.awt.headless,这里设置为true,表示运行在服务器端，在没有显示器和鼠标键盘的模式下工作，模拟输入输出设备功能</span></span><br><span class="line">	configureHeadlessProperty();</span><br><span class="line">	<span class="comment">// 3.调用springApplicationRunListeners#starting</span></span><br><span class="line">	SpringApplicationRunListeners listeners = getRunListeners(args);</span><br><span class="line">	listeners.starting();</span><br><span class="line">	<span class="keyword">try</span> &#123;</span><br><span class="line">		<span class="comment">// 4.创建一个defaultApplicationArguments对象，他持有args参数（main函数中传入），调用prepareEnvironment方法</span></span><br><span class="line">		ApplicationArguments applicationArguments = <span class="keyword">new</span> DefaultApplicationArguments(args);</span><br><span class="line">		ConfigurableEnvironment environment = prepareEnvironment(listeners, applicationArguments);</span><br><span class="line">		<span class="comment">// 5.打印banner</span></span><br><span class="line">		Banner printedBanner = printBanner(environment);</span><br><span class="line">		<span class="comment">// 6.创建springboot上下文</span></span><br><span class="line">		context = createApplicationContext();</span><br><span class="line">		<span class="comment">// 7.初始化FailureAnalyzers</span></span><br><span class="line">		analyzers = <span class="keyword">new</span> FailureAnalyzers(context);</span><br><span class="line">		<span class="comment">// 8.调用prepareContext</span></span><br><span class="line">		prepareContext(context, environment, listeners, applicationArguments, printedBanner);</span><br><span class="line">		<span class="comment">// 9.调用AbstractApplicationContext#refresh</span></span><br><span class="line">		refreshContext(context);</span><br><span class="line">		<span class="comment">// 10.在容器完成刷新后，依次调用注册的Runners</span></span><br><span class="line">		afterRefresh(context, applicationArguments);</span><br><span class="line">		<span class="comment">// 11.调用SpringApplicationRunListeners#finished</span></span><br><span class="line">		listeners.finished(context, <span class="keyword">null</span>);</span><br><span class="line">		<span class="comment">// 12.停止计时</span></span><br><span class="line">		stopWatch.stop();</span><br><span class="line">		<span class="keyword">if</span> (<span class="keyword">this</span>.logStartupInfo) &#123;</span><br><span class="line">			<span class="keyword">new</span> StartupInfoLogger(<span class="keyword">this</span>.mainApplicationClass).logStarted(getApplicationLog(), stopWatch);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> context;</span><br><span class="line">	&#125; <span class="keyword">catch</span> (Throwable ex) &#123;</span><br><span class="line">		<span class="comment">// 13.初始化过程中出现异常时调用handelRunFailure进行处理，抛出IllegalStateException</span></span><br><span class="line">		handleRunFailure(context, listeners, analyzers, ex);</span><br><span class="line">		<span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(ex);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>如上代码就是SpringBoot的启动流程了，其中注释也非常详细，主要步骤也已经标注，现将主要步骤总结如下：</p>
-<ol>
-<li>从<code>spring.factories</code>配置文件中<strong>加载<code>EventPublishingRunListener</code>对象</strong>，该对象拥有<code>SimpleApplicationEventMulticaster</code>属性，即在SpringBoot启动过程的不同阶段用来发射内置的生命周期事件;</li>
-<li><strong>准备环境变量</strong>，包括系统变量，环境变量，命令行参数，默认变量，<code>servlet</code>相关配置变量，随机值以及配置文件（比如<code>application.properties</code>）等;</li>
-<li>控制台<strong>打印SpringBoot的<code>bannner</code>标志</strong>；</li>
-<li><strong>根据不同类型环境创建不同类型的<code>applicationcontext</code>容器</strong>，因为这里是<code>servlet</code>环境，所以创建的是<code>AnnotationConfigServletWebServerApplicationContext</code>容器对象；</li>
-<li>从<code>spring.factories</code>配置文件中<strong>加载<code>FailureAnalyzers</code>对象</strong>,用来报告SpringBoot启动过程中的异常；</li>
-<li><strong>为刚创建的容器对象做一些初始化工作</strong>，准备一些容器属性值等，对<code>ApplicationContext</code>应用一些相关的后置处理和调用各个<code>ApplicationContextInitializer</code>的初始化方法来执行一些初始化逻辑等；</li>
-<li><strong>刷新容器</strong>，这一步至关重要。比如调用<code>bean factory</code>的后置处理器，注册<code>BeanPostProcessor</code>后置处理器，初始化事件广播器且广播事件，初始化剩下的单例<code>bean</code>和SpringBoot创建内嵌的<code>Tomcat</code>服务器等等重要且复杂的逻辑都在这里实现，主要步骤可见代码的注释，关于这里的逻辑会在以后的spring源码分析专题详细分析；</li>
-<li><strong>执行刷新容器后的后置处理逻辑</strong>，注意这里为空方法；</li>
-<li><strong>调用<code>ApplicationRunner</code>和<code>CommandLineRunner</code>的run方法</strong>，我们实现这两个接口可以在spring容器启动后需要的一些东西比如加载一些业务数据等;</li>
-<li><strong>报告启动异常</strong>，即若启动过程中抛出异常，此时用<code>FailureAnalyzers</code>来报告异常;</li>
-<li>最终<strong>返回容器对象</strong>，这里调用方法没有声明对象来接收。</li>
-</ol>
-<p>当然在SpringBoot启动过程中，每个不同的启动阶段会分别发射不同的内置生命周期事件，比如在准备<code>environment</code>前会发射<code>ApplicationStartingEvent</code>事件，在<code>environment</code>准备好后会发射<code>ApplicationEnvironmentPreparedEvent</code>事件，在刷新容器前会发射<code>ApplicationPreparedEvent</code>事件等，总之SpringBoot总共内置了7个生命周期事件，除了标志SpringBoot的不同启动阶段外，同时一些监听器也会监听相应的生命周期事件从而执行一些启动初始化逻辑。</p>
-<h2 id="3-Spring-IOC-amp-AOP"><a href="#3-Spring-IOC-amp-AOP" class="headerlink" title="3.Spring IOC &amp; AOP"></a>3.Spring IOC &amp; AOP</h2><h3 id="IoC"><a href="#IoC" class="headerlink" title="IoC"></a>IoC</h3><p>IoC（Inverse of Control:控制反转）是一种<strong>设计思想</strong>，就是 <strong>将原本在程序中手动创建对象的控制权，交由Spring框架来管理。</strong>  IoC 在其他语言中也有应用，并非 Spring 特有。 <strong>IoC 容器是 Spring 用来实现 IoC 的载体，  IoC 容器实际上就是个Map（key，value）,Map 中存放的是各种对象。</strong></p>
-<p>将对象之间的相互依赖关系交给 IoC 容器来管理，并由 IoC 容器完成对象的注入。这样可以很大程度上简化应用的开发，把应用从复杂的依赖关系中解放出来。  <strong>IoC 容器就像是一个工厂一样，当我们需要创建一个对象的时候，只需要配置好配置文件/注解即可，完全不用考虑对象是如何被创建出来的。</strong> 在实际项目中一个 Service 类可能有几百甚至上千个类作为它的底层，假如我们需要实例化这个 Service，你可能要每次都要搞清这个 Service 所有底层类的构造函数，这可能会把人逼疯。如果利用 IoC 的话，你只需要配置好，然后在需要的地方引用就行了，这大大增加了项目的可维护性且降低了开发难度。</p>
-<p>Spring 时代我们一般通过 XML 文件来配置 Bean，后来开发人员觉得 XML 文件来配置不太好，于是 SpringBoot 注解配置就慢慢开始流行起来。</p>
-<p><strong>Spring IoC的初始化过程：</strong> </p>
-<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210310202931.png"></p>
-<h3 id="依赖注入-DI"><a href="#依赖注入-DI" class="headerlink" title="依赖注入(DI)"></a>依赖注入(DI)</h3><p><strong>DI（Dependency Injection）</strong>，Spring IoC 不是一种技术，而是一种思想，通过这种思想，能够指导我们设计出松耦合的程序代码。而Spring IoC这个思想的作用体现在两个方面，一是如何将Bean装配到容器中去以及如何从容器中获取Bean，二是如何解决Bean之间的依赖关系，换句话说，就是如果由IoC容器来管理依赖关系，当一个Bean需要依赖另外一个Bean时，IoC容器如何实现这样的依赖关系。</p>
-<p>解决Spring中Bean之间的依赖的实现方式，在Spring的概念中就被称之为<strong>依赖注入（Dependency Injection，DI）</strong>。普遍认为的Spring依赖注入的实现方式有三种：构造方法注入、setter方法注入、注解注入。但，就我而言，我认为应该划分为两种形式——基于XML注入和基于注解注入，然后再细分为下面的形式：</p>
-<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1218435-20200805195048562-1750995069.png"></p>
-<hr>
-<h3 id="AOP"><a href="#AOP" class="headerlink" title="AOP"></a>AOP</h3><p>AOP( Aspect-Oriented Programming : 面向切面编程 ) 能够将那些与业务无关，<strong>却为业务模块所共同调用的逻辑或责任（例如事务处理、日志管理、权限控制等）封装起来</strong>，便于<strong>减少系统的重复代码</strong>，<strong>降低模块间的耦合度</strong>，并<strong>有利于未来的可拓展性和可维护性</strong>。</p>
-<p><strong>Spring AOP就是基于动态代理的</strong>，如果要代理的对象，实现了某个接口，那么Spring AOP会使用<strong>JDK Proxy</strong>，去创建代理对象，而对于没有实现接口的对象，就无法使用 JDK Proxy 去进行代理了，这时候Spring AOP会使用<strong>Cglib</strong> ，这时候Spring AOP会使用 <strong>Cglib</strong> 生成一个被代理对象的子类来作为代理，如下图所示：</p>
-<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/SpringAOPProcess.jpg" alt="SpringAOPProcess"></p>
-<p>当然你也可以使用 AspectJ ,Spring AOP 已经集成了AspectJ  ，AspectJ  应该算的上是 Java 生态系统中最完整的 AOP 框架了。</p>
-<p>使用 AOP 之后我们可以把一些通用功能抽象出来，在需要用到的地方直接使用即可，这样大大简化了代码量。我们需要增加新功能时也方便，这样也提高了系统扩展性。日志功能、事务管理等等场景都用到了 AOP 。</p>
-<h2 id="4-Spring-框架中的设计模式"><a href="#4-Spring-框架中的设计模式" class="headerlink" title="4.Spring 框架中的设计模式"></a>4.Spring 框架中的设计模式</h2><ul>
-<li><strong>工厂设计模式</strong> : Spring使用工厂模式通过 <code>BeanFactory</code>、<code>ApplicationContext</code> 创建 bean 对象。</li>
-<li><strong>代理设计模式</strong> : Spring AOP 功能的实现。</li>
-<li><strong>单例设计模式</strong> : Spring 中的 Bean 默认都是单例的。</li>
-<li><strong>模板方法模式</strong> : Spring 中 <code>jdbcTemplate</code>、<code>hibernateTemplate</code> 等以 Template 结尾的对数据库操作的类，它们就使用到了模板模式。</li>
-<li><strong>包装器设计模式</strong> : 我们的项目需要连接多个数据库，而且不同的客户在每次访问中根据需要会去访问不同的数据库。这种模式让我们可以根据客户的需求能够动态切换不同的数据源。</li>
-<li><strong>观察者模式:</strong> Spring 事件驱动模型就是观察者模式很经典的一个应用。</li>
-<li><strong>适配器模式</strong> :Spring AOP 的增强或通知(Advice)使用到了适配器模式、spring MVC 中也是用到了适配器模式适配<code>Controller</code>。</li>
-<li>……</li>
-</ul>
-]]></content>
-      <categories>
-        <category>面试</category>
-        <category>Java</category>
-        <category>笔记</category>
-      </categories>
-      <tags>
-        <tag>笔记</tag>
-        <tag>Java</tag>
-        <tag>面试</tag>
-        <tag>框架</tag>
-        <tag>SpringBoot</tag>
-        <tag>Spring</tag>
       </tags>
   </entry>
   <entry>

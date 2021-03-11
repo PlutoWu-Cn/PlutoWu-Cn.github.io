@@ -349,9 +349,9 @@
     <category term="睡前故事" scheme="http://plutowu.top/categories/%E7%9D%A1%E5%89%8D%E6%95%85%E4%BA%8B/"/>
     
     
-    <category term="里世界" scheme="http://plutowu.top/tags/%E9%87%8C%E4%B8%96%E7%95%8C/"/>
-    
     <category term="睡前故事" scheme="http://plutowu.top/tags/%E7%9D%A1%E5%89%8D%E6%95%85%E4%BA%8B/"/>
+    
+    <category term="里世界" scheme="http://plutowu.top/tags/%E9%87%8C%E4%B8%96%E7%95%8C/"/>
     
   </entry>
   
@@ -373,9 +373,9 @@
     <category term="睡前故事" scheme="http://plutowu.top/categories/%E7%9D%A1%E5%89%8D%E6%95%85%E4%BA%8B/"/>
     
     
-    <category term="里世界" scheme="http://plutowu.top/tags/%E9%87%8C%E4%B8%96%E7%95%8C/"/>
-    
     <category term="睡前故事" scheme="http://plutowu.top/tags/%E7%9D%A1%E5%89%8D%E6%95%85%E4%BA%8B/"/>
+    
+    <category term="里世界" scheme="http://plutowu.top/tags/%E9%87%8C%E4%B8%96%E7%95%8C/"/>
     
   </entry>
   
@@ -457,9 +457,9 @@
     <category term="睡前故事" scheme="http://plutowu.top/categories/%E7%9D%A1%E5%89%8D%E6%95%85%E4%BA%8B/"/>
     
     
-    <category term="里世界" scheme="http://plutowu.top/tags/%E9%87%8C%E4%B8%96%E7%95%8C/"/>
-    
     <category term="睡前故事" scheme="http://plutowu.top/tags/%E7%9D%A1%E5%89%8D%E6%95%85%E4%BA%8B/"/>
+    
+    <category term="里世界" scheme="http://plutowu.top/tags/%E9%87%8C%E4%B8%96%E7%95%8C/"/>
     
   </entry>
   
@@ -483,9 +483,9 @@
     <category term="睡前故事" scheme="http://plutowu.top/categories/%E7%9D%A1%E5%89%8D%E6%95%85%E4%BA%8B/"/>
     
     
-    <category term="里世界" scheme="http://plutowu.top/tags/%E9%87%8C%E4%B8%96%E7%95%8C/"/>
-    
     <category term="睡前故事" scheme="http://plutowu.top/tags/%E7%9D%A1%E5%89%8D%E6%95%85%E4%BA%8B/"/>
+    
+    <category term="里世界" scheme="http://plutowu.top/tags/%E9%87%8C%E4%B8%96%E7%95%8C/"/>
     
   </entry>
   
@@ -549,9 +549,9 @@
     <category term="睡前故事" scheme="http://plutowu.top/categories/%E7%9D%A1%E5%89%8D%E6%95%85%E4%BA%8B/"/>
     
     
-    <category term="里世界" scheme="http://plutowu.top/tags/%E9%87%8C%E4%B8%96%E7%95%8C/"/>
-    
     <category term="睡前故事" scheme="http://plutowu.top/tags/%E7%9D%A1%E5%89%8D%E6%95%85%E4%BA%8B/"/>
+    
+    <category term="里世界" scheme="http://plutowu.top/tags/%E9%87%8C%E4%B8%96%E7%95%8C/"/>
     
   </entry>
   
@@ -560,7 +560,7 @@
     <link href="http://plutowu.top/2020/11/17/git-clone%E5%8A%A0%E9%80%9F%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/"/>
     <id>http://plutowu.top/2020/11/17/git-clone%E5%8A%A0%E9%80%9F%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</id>
     <published>2020-11-17T14:23:46.000Z</published>
-    <updated>2021-03-09T15:24:48.573Z</updated>
+    <updated>2021-03-11T04:09:05.164Z</updated>
     
     <content type="html"><![CDATA[<h1 id="Git-Clone速度过慢解决方案"><a href="#Git-Clone速度过慢解决方案" class="headerlink" title="Git Clone速度过慢解决方案"></a>Git Clone速度过慢解决方案</h1><h1 id="1-方案一-使用gitclone-com加速"><a href="#1-方案一-使用gitclone-com加速" class="headerlink" title="1.方案一 使用gitclone.com加速"></a>1.方案一 使用gitclone.com加速</h1><p><strong><em>访问gitclone加速的官网<a href="https://gitclone.com,可以通过搜索栏搜索克隆项目/">https://gitclone.com，可以通过搜索栏搜索克隆项目</a></em></strong></p><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201117222630897.png"></p><a id="more"></a><p><strong>其也提供了三种自定义加速方法（省去在GitClone搜索相应文件）</strong></p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">方法一（替换URL）</span><br><span class="line"></span><br><span class="line">git clone https://gitclone.com/github.com/tendermint/tendermint.git</span><br></pre></td></tr></table></figure><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">方法二（设置git参数）</span><br><span class="line"></span><br><span class="line">git config --global url.&quot;https://gitclone.com/&quot;.insteadOf https://</span><br><span class="line">git clone https://github.com/tendermint/tendermint.git</span><br></pre></td></tr></table></figure><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">方法三（使用cgit客户端）</span><br><span class="line"></span><br><span class="line">cgit clone https://github.com/tendermint/tendermint.git</span><br></pre></td></tr></table></figure><p><strong>搜索图例：</strong></p><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201117223120221.png"></p><h1 id="2-方案二-使用Gitee转载仓库"><a href="#2-方案二-使用Gitee转载仓库" class="headerlink" title="2.方案二 使用Gitee转载仓库"></a>2.方案二 使用Gitee转载仓库</h1><h2 id="1-登录gitee-com"><a href="#1-登录gitee-com" class="headerlink" title="1.登录gitee.com"></a>1.登录gitee.com</h2><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2020-11-17_23-27-48.png"></p><h2 id="2-获取GitHub仓库URL"><a href="#2-获取GitHub仓库URL" class="headerlink" title="2.获取GitHub仓库URL"></a>2.获取GitHub仓库URL</h2><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2020-11-17_23-32-22.png"></p><h2 id="3-填写URL"><a href="#3-填写URL" class="headerlink" title="3.填写URL"></a>3.填写URL</h2><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2020-11-17_23-34-39.png"></p><h2 id="4-拉取仓库到Gitee完成"><a href="#4-拉取仓库到Gitee完成" class="headerlink" title="4.拉取仓库到Gitee完成"></a>4.拉取仓库到Gitee完成</h2><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2020-11-17_23-36-37.png"></p><h2 id="5-git-clone仓库"><a href="#5-git-clone仓库" class="headerlink" title="5.git clone仓库"></a>5.git clone仓库</h2><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2020-11-17_23-38-41.png"></p><hr><p><strong>总的来说，两种方法中gitclone.com会出现时常不稳定的现象，不过大部分时间都能够以高速克隆仓库。不到必要时刻，不推荐使用gitee二次搬运仓库，因为流程较为繁琐</strong></p>]]></content>
     
@@ -575,7 +575,7 @@
     <category term="Git" scheme="http://plutowu.top/categories/%E6%95%99%E7%A8%8B/Git/"/>
     
     
-    <category term="git" scheme="http://plutowu.top/tags/git/"/>
+    <category term="Git" scheme="http://plutowu.top/tags/Git/"/>
     
     <category term="教程" scheme="http://plutowu.top/tags/%E6%95%99%E7%A8%8B/"/>
     

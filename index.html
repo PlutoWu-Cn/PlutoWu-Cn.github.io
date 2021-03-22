@@ -37,7 +37,7 @@
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : true,
+    isHome : false,
     isPost : false,
     lang   : 'zh-CN'
   };
@@ -176,123 +176,6 @@
 
           <div class="content index posts-expand">
             
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://plutowu.top/2021/03/10/Java%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0-%E6%A1%86%E6%9E%B6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/1.jpg">
-      <meta itemprop="name" content="Shiyuan Wu">
-      <meta itemprop="description" content="Designed to share happiness and learning">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="PlutoWu的个人博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/03/10/Java%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0-%E6%A1%86%E6%9E%B6/" class="post-title-link" itemprop="url">Java后端面试笔记-框架</a>
-        </h2>
-
-        <div class="post-meta">
-        
-        
-		<i class="fa fa-thumb-tack"></i>
-		<font color="RED">置顶</font>
-		<span class="post-meta-divider">|</span>
-		
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-03-10 22:24:50" itemprop="dateCreated datePublished" datetime="2021-03-10T22:24:50+08:00">2021-03-10</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-03-22 10:28:24" itemprop="dateModified" datetime="2021-03-22T10:28:24+08:00">2021-03-22</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%9D%A2%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">面试</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%9D%A2%E8%AF%95/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%9D%A2%E8%AF%95/Java/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>32k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>29 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="框架相关"><a href="#框架相关" class="headerlink" title="框架相关"></a>框架相关</h1><h2 id="1-SpringBoot-自动装配原理"><a href="#1-SpringBoot-自动装配原理" class="headerlink" title="1.SpringBoot 自动装配原理"></a>1.SpringBoot 自动装配原理</h2><h3 id="什么是-SpringBoot-自动装配？"><a href="#什么是-SpringBoot-自动装配？" class="headerlink" title="什么是 SpringBoot 自动装配？"></a>什么是 SpringBoot 自动装配？</h3><p>我们现在提到自动装配的时候，一般会和 Spring Boot 联系在一起。但是，实际上 Spring Framework 早就实现了这个功能。Spring Boot 只是在其基础上，通过 SPI 的方式，做了进一步优化。</p>
-<blockquote>
-<p>SpringBoot 定义了一套接口规范，这套规范规定：SpringBoot 在启动时会扫描外部引用 jar 包中的<code>META-INF/spring.factories</code>文件，将文件中配置的类型信息加载到 Spring 容器（此处涉及到 JVM 类加载机制与 Spring 的容器知识），并执行类中定义的各种操作。对于外部 jar 来说，只需要按照 SpringBoot 定义的标准，就能将自己的功能装置进 SpringBoot。</p>
-</blockquote>
-<p>没有 Spring Boot 的情况下，如果我们需要引入第三方依赖，需要手动配置，非常麻烦。但是，Spring Boot 中，我们直接引入一个 starter 即可。比如你想要在项目中使用 redis 的话，直接在项目中引入对应的 starter 即可。</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-data-redis<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>引入 starter 之后，我们通过少量注解和一些简单的配置就能使用第三方组件提供的功能了。</p>
-<p>在我看来，自动装配可以简单理解为：<strong>通过注解或者一些简单的配置就能在 Spring Boot 的帮助下实现某块功能。</strong></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/03/10/Java%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0-%E6%A1%86%E6%9E%B6/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
       
   
   
@@ -945,6 +828,123 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://plutowu.top/2021/03/10/Java%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0-%E6%A1%86%E6%9E%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/1.jpg">
+      <meta itemprop="name" content="Shiyuan Wu">
+      <meta itemprop="description" content="Designed to share happiness and learning">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PlutoWu的个人博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/03/10/Java%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0-%E6%A1%86%E6%9E%B6/" class="post-title-link" itemprop="url">Java后端面试笔记-框架</a>
+        </h2>
+
+        <div class="post-meta">
+        
+        
+		<i class="fa fa-thumb-tack"></i>
+		<font color="RED">置顶</font>
+		<span class="post-meta-divider">|</span>
+		
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-03-10 22:24:50" itemprop="dateCreated datePublished" datetime="2021-03-10T22:24:50+08:00">2021-03-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-03-22 10:28:24" itemprop="dateModified" datetime="2021-03-22T10:28:24+08:00">2021-03-22</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%9D%A2%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">面试</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%9D%A2%E8%AF%95/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%9D%A2%E8%AF%95/Java/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>32k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>29 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="框架相关"><a href="#框架相关" class="headerlink" title="框架相关"></a>框架相关</h1><h2 id="1-SpringBoot-自动装配原理"><a href="#1-SpringBoot-自动装配原理" class="headerlink" title="1.SpringBoot 自动装配原理"></a>1.SpringBoot 自动装配原理</h2><h3 id="什么是-SpringBoot-自动装配？"><a href="#什么是-SpringBoot-自动装配？" class="headerlink" title="什么是 SpringBoot 自动装配？"></a>什么是 SpringBoot 自动装配？</h3><p>我们现在提到自动装配的时候，一般会和 Spring Boot 联系在一起。但是，实际上 Spring Framework 早就实现了这个功能。Spring Boot 只是在其基础上，通过 SPI 的方式，做了进一步优化。</p>
+<blockquote>
+<p>SpringBoot 定义了一套接口规范，这套规范规定：SpringBoot 在启动时会扫描外部引用 jar 包中的<code>META-INF/spring.factories</code>文件，将文件中配置的类型信息加载到 Spring 容器（此处涉及到 JVM 类加载机制与 Spring 的容器知识），并执行类中定义的各种操作。对于外部 jar 来说，只需要按照 SpringBoot 定义的标准，就能将自己的功能装置进 SpringBoot。</p>
+</blockquote>
+<p>没有 Spring Boot 的情况下，如果我们需要引入第三方依赖，需要手动配置，非常麻烦。但是，Spring Boot 中，我们直接引入一个 starter 即可。比如你想要在项目中使用 redis 的话，直接在项目中引入对应的 starter 即可。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-data-redis<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>引入 starter 之后，我们通过少量注解和一些简单的配置就能使用第三方组件提供的功能了。</p>
+<p>在我看来，自动装配可以简单理解为：<strong>通过注解或者一些简单的配置就能在 Spring Boot 的帮助下实现某块功能。</strong></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/03/10/Java%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0-%E6%A1%86%E6%9E%B6/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://plutowu.top/2021/03/10/Java%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0-I-O/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1169,7 +1169,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://plutowu.top/2020/11/23/%E7%9D%A1%E5%89%8D%E6%95%85%E4%BA%8B-%E7%99%BD%E9%9B%AA%E4%B8%BA%E5%AB%81/">
+    <link itemprop="mainEntityOfPage" href="http://plutowu.top/2020/11/21/SpringBoot-bug%E8%A7%A3%E5%86%B3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/1.jpg">
@@ -1183,7 +1183,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/11/23/%E7%9D%A1%E5%89%8D%E6%95%85%E4%BA%8B-%E7%99%BD%E9%9B%AA%E4%B8%BA%E5%AB%81/" class="post-title-link" itemprop="url">睡前故事-白雪为嫁</a>
+            <a href="/2020/11/21/SpringBoot-bug%E8%A7%A3%E5%86%B3/" class="post-title-link" itemprop="url">SpringBoot-bug解决</a>
         </h2>
 
         <div class="post-meta">
@@ -1195,14 +1195,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-11-23 23:23:59" itemprop="dateCreated datePublished" datetime="2020-11-23T23:23:59+08:00">2020-11-23</time>
+              <time title="创建时间：2020-11-21 15:51:14" itemprop="dateCreated datePublished" datetime="2020-11-21T15:51:14+08:00">2020-11-21</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-03-11 10:55:00" itemprop="dateModified" datetime="2021-03-11T10:55:00+08:00">2021-03-11</time>
+                <time title="修改时间：2021-03-09 23:27:33" itemprop="dateModified" datetime="2021-03-09T23:27:33+08:00">2021-03-09</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1210,7 +1210,11 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%9D%A1%E5%89%8D%E6%95%85%E4%BA%8B/" itemprop="url" rel="index"><span itemprop="name">睡前故事</span></a>
+                  <a href="/categories/%E7%BC%96%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">编程</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BC%96%E7%A8%8B/Java-Web/" itemprop="url" rel="index"><span itemprop="name">Java Web</span></a>
                 </span>
             </span>
 
@@ -1220,7 +1224,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.5k</span>
+              <span>978</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -1239,20 +1243,12 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>风暴戾地撞着窗，这个冬天格外冰冷。</p>
-<p>“你听话呀。”母亲的声音疲惫而心疼，“他家条件差得很，还有两个兄弟没成家。你跟过去吃没得吃、穿没得穿，只有受苦啊！”</p>
-<p>她和母亲并排躺在床上，抿着嘴唇并不出声，唯有泪珠成串滚落，很快浸湿枕巾。</p>
-<p>母亲侧着身，用右手柔柔帮她擦着泪，也有些哽咽：“妈妈都是为你好，你醒点事，好么？他平日里就会打架闹事，不是个有出息的人。”</p>
-<p>她吸了一下鼻子，眼睛执拗地闭着，无声哭泣。</p>
-<p>“明天去把孩子拿掉就好了。”母亲的声音在耳边继续着，她有她的苦心与疼爱，“时间久了你就不难过了，妈妈给你找个好婆家，保证比他强，过日子总归是要吃饱穿暖。”</p>
-<p>她抬了抬右手，没能抬动。</p>
-<p>母亲警觉地握紧了她的手。</p>
-<p>她的右手和母亲的左手紧紧绑在一起，布条还打了死结。</p>
-<p>“你们三兄妹里，妈妈最疼你，哪里能看着你吃苦。”母亲见止不住她的泪，自己的眼泪也落了下来，“你这个苕伢子……”</p>
-<p>母亲哭了一阵，帮她掖好被子，终于结束了劝慰，“很晚了，好好睡一觉，天亮妈妈就带你去医院。”</p>
+          <h1 id="SpringBoot-BUG解决"><a href="#SpringBoot-BUG解决" class="headerlink" title="SpringBoot-BUG解决"></a>SpringBoot-BUG解决</h1><h2 id="1-跨域配置失效（SpringBoot版本问题）"><a href="#1-跨域配置失效（SpringBoot版本问题）" class="headerlink" title="1.跨域配置失效（SpringBoot版本问题）"></a>1.跨域配置失效（SpringBoot版本问题）</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CrosConfig</span> <span class="keyword">implements</span> <span class="title">WebMvcConfigurer</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addCorsMappings</span><span class="params">(CorsRegistry registry)</span> </span>&#123;</span><br><span class="line">        registry.addMapping(<span class="string">&quot;/**&quot;</span>)</span><br><span class="line">                .allowedOrigins(<span class="string">&quot;*&quot;</span>)</span><br><span class="line">                .allowedMethods(<span class="string">&quot;GET&quot;</span>, <span class="string">&quot;HEAD&quot;</span>, <span class="string">&quot;POST&quot;</span>, <span class="string">&quot;PUT&quot;</span>, <span class="string">&quot;DELETE&quot;</span>, <span class="string">&quot;OPTIONS&quot;</span>)</span><br><span class="line">                .allowCredentials(<span class="keyword">true</span>)</span><br><span class="line">                .maxAge(<span class="number">3600</span>)</span><br><span class="line">                .allowedHeaders(<span class="string">&quot;*&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>采用SpringBoot 2.4.0版本下，配置跨域，报错</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/11/23/%E7%9D%A1%E5%89%8D%E6%95%85%E4%BA%8B-%E7%99%BD%E9%9B%AA%E4%B8%BA%E5%AB%81/#more" rel="contents">
+              <a class="btn" href="/2020/11/21/SpringBoot-bug%E8%A7%A3%E5%86%B3/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1275,7 +1271,7 @@
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 

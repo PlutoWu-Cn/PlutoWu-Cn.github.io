@@ -439,9 +439,9 @@
     
     <category term="笔记" scheme="http://plutowu.top/tags/%E7%AC%94%E8%AE%B0/"/>
     
-    <category term="Swagger" scheme="http://plutowu.top/tags/Swagger/"/>
-    
     <category term="Java Web" scheme="http://plutowu.top/tags/Java-Web/"/>
+    
+    <category term="Swagger" scheme="http://plutowu.top/tags/Swagger/"/>
     
   </entry>
   
@@ -560,9 +560,9 @@
     
     <category term="笔记" scheme="http://plutowu.top/tags/%E7%AC%94%E8%AE%B0/"/>
     
-    <category term="Swagger" scheme="http://plutowu.top/tags/Swagger/"/>
-    
     <category term="Java Web" scheme="http://plutowu.top/tags/Java-Web/"/>
+    
+    <category term="Swagger" scheme="http://plutowu.top/tags/Swagger/"/>
     
   </entry>
   
@@ -712,9 +712,9 @@
     
     <category term="Java" scheme="http://plutowu.top/tags/Java/"/>
     
-    <category term="Java Web" scheme="http://plutowu.top/tags/Java-Web/"/>
-    
     <category term="Servlet" scheme="http://plutowu.top/tags/Servlet/"/>
+    
+    <category term="Java Web" scheme="http://plutowu.top/tags/Java-Web/"/>
     
   </entry>
   

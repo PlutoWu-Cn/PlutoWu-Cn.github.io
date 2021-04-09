@@ -510,16 +510,12 @@
 </ul>
 ]]></content>
       <categories>
-        <category>面试</category>
-        <category>Java</category>
-        <category>笔记</category>
+        <category>面试笔记</category>
       </categories>
       <tags>
-        <tag>笔记</tag>
-        <tag>Java</tag>
         <tag>面试</tag>
-        <tag>框架</tag>
         <tag>SpringBoot</tag>
+        <tag>框架</tag>
         <tag>Spring</tag>
       </tags>
   </entry>
@@ -641,7 +637,6 @@
 <p>至此，测试完毕，token 能正常的执行其功能，搭建的简易测试成功。</p>
 ]]></content>
       <categories>
-        <category>JWT</category>
         <category>笔记</category>
       </categories>
       <tags>
@@ -954,7 +949,6 @@
 
 ]]></content>
       <categories>
-        <category>MQ</category>
         <category>笔记</category>
       </categories>
       <tags>
@@ -1151,12 +1145,9 @@
 <p>事实上，还有时间复杂度更优的算法，是由计算机科学家 Manacher 发明的。</p>
 ]]></content>
       <categories>
-        <category>面试</category>
-        <category>Java</category>
-        <category>笔记</category>
+        <category>面试笔记</category>
       </categories>
       <tags>
-        <tag>笔记</tag>
         <tag>Java</tag>
         <tag>面试</tag>
         <tag>算法</tag>
@@ -1299,12 +1290,9 @@
 </ol>
 ]]></content>
       <categories>
-        <category>面试</category>
-        <category>Java</category>
-        <category>笔记</category>
+        <category>面试笔记</category>
       </categories>
       <tags>
-        <tag>笔记</tag>
         <tag>Java</tag>
         <tag>面试</tag>
         <tag>设计模式</tag>
@@ -1393,12 +1381,9 @@
 <p><strong>总结： 调用 start 方法方可启动线程并使线程进入就绪状态，而 run 方法只是 thread 的一个普通方法调用，还是在主线程里执行。</strong></p>
 ]]></content>
       <categories>
-        <category>面试</category>
-        <category>Java</category>
-        <category>笔记</category>
+        <category>面试笔记</category>
       </categories>
       <tags>
-        <tag>笔记</tag>
         <tag>Java</tag>
         <tag>面试</tag>
         <tag>线程</tag>
@@ -1589,12 +1574,9 @@
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">try</span> (BufferedInputStream bin = <span class="keyword">new</span> BufferedInputStream(<span class="keyword">new</span> FileInputStream(<span class="keyword">new</span> File(<span class="string">&quot;test.txt&quot;</span>)));</span><br><span class="line">             BufferedOutputStream bout = <span class="keyword">new</span> BufferedOutputStream(<span class="keyword">new</span> FileOutputStream(<span class="keyword">new</span> File(<span class="string">&quot;out.txt&quot;</span>)))) &#123;</span><br><span class="line">            <span class="keyword">int</span> b;</span><br><span class="line">            <span class="keyword">while</span> ((b = bin.read()) != -<span class="number">1</span>) &#123;</span><br><span class="line">                bout.write(b);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
-        <category>面试</category>
-        <category>Java</category>
-        <category>笔记</category>
+        <category>面试笔记</category>
       </categories>
       <tags>
-        <tag>笔记</tag>
         <tag>Java</tag>
         <tag>面试</tag>
         <tag>Java基础</tag>
@@ -1832,9 +1814,7 @@
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Target(&#123;ElementType.TYPE_PARAMETER, ElementType.TYPE_USE&#125;)</span></span><br><span class="line"><span class="meta">@interface</span> MyAnnotation &#123;&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
-        <category>面试</category>
-        <category>Java</category>
-        <category>笔记</category>
+        <category>面试笔记</category>
       </categories>
   </entry>
   <entry>
@@ -2267,15 +2247,10 @@
 <p>sentinel down-after-milliseconds配置项只是一个哨兵在超过规定时间依旧没有得到响应后，会自己认为主机不可用。对于其他哨兵而言，并不是这样认为。哨兵会记录这个消息，当拥有认为主观下线的哨兵达到sentinel monitor所配置的数量时，就会发起一次投票，进行failover，此时哨兵会重写Redis的哨兵配置文件，以适应新场景的需要。</p>
 ]]></content>
       <categories>
-        <category>面试</category>
-        <category>SQL</category>
-        <category>笔记</category>
+        <category>面试笔记</category>
       </categories>
       <tags>
-        <tag>笔记</tag>
-        <tag>Java</tag>
         <tag>面试</tag>
-        <tag>SQL</tag>
         <tag>MySQL</tag>
         <tag>Redis</tag>
       </tags>
@@ -2334,12 +2309,9 @@
 <p>回答：字符流是由 Java 虚拟机将字节转换得到的，问题就出在这个过程还算是非常耗时，并且，如果我们不知道编码类型就很容易出现乱码问题。所以， I/O 流就干脆提供了一个直接操作字符的接口，方便我们平时对字符进行流操作。如果音频文件、图片等媒体文件用字节流比较好，如果涉及到字符的话使用字符流比较好。</p>
 ]]></content>
       <categories>
-        <category>面试</category>
-        <category>Java</category>
-        <category>笔记</category>
+        <category>面试笔记</category>
       </categories>
       <tags>
-        <tag>笔记</tag>
         <tag>Java</tag>
         <tag>面试</tag>
         <tag>I/O</tag>
@@ -2403,12 +2375,9 @@
 </ul>
 ]]></content>
       <categories>
-        <category>面试</category>
-        <category>Java</category>
-        <category>笔记</category>
+        <category>面试笔记</category>
       </categories>
       <tags>
-        <tag>笔记</tag>
         <tag>Java</tag>
         <tag>面试</tag>
         <tag>JVM</tag>
@@ -2431,18 +2400,15 @@
 <p>…..尚未完结，持续更新</p>
 ]]></content>
       <categories>
-        <category>编程</category>
-        <category>Java Web</category>
+        <category>Fix</category>
       </categories>
       <tags>
-        <tag>笔记</tag>
-        <tag>Java Web</tag>
-        <tag>Swagger</tag>
+        <tag>SpringBoot</tag>
       </tags>
   </entry>
   <entry>
-    <title>vue-搭建vue+element ui项目</title>
-    <url>/2020/11/21/vue-%E6%90%AD%E5%BB%BAvue+element-ui%E9%A1%B9%E7%9B%AE/</url>
+    <title>Vue搭建Vue+Element-ui项目</title>
+    <url>/2020/11/21/Vue-%E6%90%AD%E5%BB%BAVue+Element-ui%E9%A1%B9%E7%9B%AE/</url>
     <content><![CDATA[<h1 id="搭建Vue-Element-UI项目（通过Vue-UI）"><a href="#搭建Vue-Element-UI项目（通过Vue-UI）" class="headerlink" title="搭建Vue+Element-UI项目（通过Vue-UI）"></a>搭建Vue+Element-UI项目（通过Vue-UI）</h1><h2 id="1-启动命令行，进入Vue-UI"><a href="#1-启动命令行，进入Vue-UI" class="headerlink" title="1.启动命令行，进入Vue-UI"></a>1.启动命令行，进入Vue-UI</h2><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121094336554.png" alt="image-20201121094336554"></p>
 <p>输入<a href="http://localhost:8000，即可进入UI界面">http://localhost:8000，即可进入UI界面</a></p>
 <p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201121094647023.png" alt="image-20201121094647023"></p>
@@ -2487,9 +2453,7 @@
 <p><strong>至此，Vue+Element项目搭建完成，接下来就可以开始你的渐进式开发了！</strong></p>
 ]]></content>
       <categories>
-        <category>编程</category>
         <category>Vue</category>
-        <category>Element UI</category>
       </categories>
       <tags>
         <tag>Vue</tag>
@@ -2725,13 +2689,9 @@
 <p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201119210351394.png" alt="image-20201119210351394"></p>
 ]]></content>
       <categories>
-        <category>编程</category>
-        <category>Java Web</category>
         <category>笔记</category>
       </categories>
       <tags>
-        <tag>笔记</tag>
-        <tag>Java Web</tag>
         <tag>Swagger</tag>
       </tags>
   </entry>
@@ -2761,7 +2721,6 @@
 ]]></content>
       <categories>
         <category>教程</category>
-        <category>Git</category>
       </categories>
       <tags>
         <tag>Git</tag>
@@ -2907,12 +2866,9 @@
 ]]></content>
       <categories>
         <category>编程</category>
-        <category>Java Web</category>
       </categories>
       <tags>
-        <tag>Java</tag>
         <tag>Servlet</tag>
-        <tag>Java Web</tag>
       </tags>
   </entry>
   <entry>
@@ -2929,7 +2885,6 @@
 ]]></content>
       <categories>
         <category>编程</category>
-        <category>C</category>
       </categories>
       <tags>
         <tag>C语言</tag>
@@ -2956,7 +2911,6 @@
 ]]></content>
       <categories>
         <category>编程</category>
-        <category>C</category>
       </categories>
       <tags>
         <tag>C语言</tag>
@@ -2986,8 +2940,8 @@
         <category>影评</category>
       </categories>
       <tags>
-        <tag>里世界</tag>
         <tag>影评</tag>
+        <tag>里世界</tag>
       </tags>
   </entry>
   <entry>
@@ -3026,8 +2980,35 @@
         <category>影评</category>
       </categories>
       <tags>
-        <tag>里世界</tag>
         <tag>影评</tag>
+        <tag>里世界</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>睡前故事-相遇</title>
+    <url>/2020/11/16/%E7%9D%A1%E5%89%8D%E6%95%85%E4%BA%8B-%E7%9B%B8%E9%81%87/</url>
+    <content><![CDATA[<h1 id="相遇"><a href="#相遇" class="headerlink" title="相遇"></a>相遇</h1><p>骑士生活在m王国，有一天m王国的国王Arthur在外征战时被俘，但因为敌国的君主看到了Arthur的乐观与不屈，决定放了他，但抛给他一个难题“女人真正想要的是什么？”，若回答出来则可以获得自由，给予了一年期限。</p>
+<p>于是Arthur开始向身边的人询问这个问题，母亲、妹妹、牧师……但没人能给出满意的答案。</p>
+<a id="more"></a>
+
+<p>有一位智者找到Arthur，并告诉他，城堡外的森林里有一位女巫，但性格刁蛮古怪，要求离谱。</p>
+<p>眼看期限将至，无可奈何的Arthur找到了女巫，女巫答应回答他的问题，但条件是要和骑士结婚。</p>
+<p>看着眼前丑陋不堪，散发着难闻气味的女巫，再看看跟自己多年挚友，威武高大的骑士。Arthur拒绝了，他不忍看到自己为了自由而牺牲兄弟。</p>
+<p>骑士知道这个消息后，毅然决然地对Arthur说：”我愿意娶她，为了您和国家。“</p>
+<p>于是婚礼被公诸于世，而Arthur也得到了问题的答案”女人真正想要的，是主宰自己的命运。”</p>
+<p>每个人都知道女巫说出的答案是真理，毫无疑问Arthur恢复了自由。</p>
+<p>婚礼上，女巫没有形象的行为举止令Arthur觉得恶心并忍不住哭泣，但骑士却一如既往的谦和。</p>
+<p>新婚之夜，骑士不顾别人的阻拦毅然决然地走进新房，准备面对一切，然而一个从未见过面的绝世美女却躺在了他的床上，女巫说：“我在一天的时间里，一半是丑陋的女巫，一半是倾城的美女，骑士，你想我白天变成美女还是晚上变成美女？”</p>
+<p>骑士回答道：“既然你说女人真正想要的是主宰自己的命运，那么就由你自己决定吧！”</p>
+<p>女巫终于热泪盈眶，“我选择白天夜晚都是美丽的女人，因为我爱你！”</p>
+]]></content>
+      <categories>
+        <category>睡前故事</category>
+      </categories>
+      <tags>
+        <tag>里世界</tag>
+        <tag>睡前故事</tag>
+        <tag>骑士与女巫</tag>
       </tags>
   </entry>
   <entry>
@@ -3061,33 +3042,6 @@
 <p>森林之神从树中走出，缓缓的向着两人靠近。“恭喜你们，两个好孩子，你们是近十年来通过的唯一一对恋人。互相的爱让骑士能击退鳄鱼、逃出漩涡并进入结界，让女巫能进入结界、吃下记忆果实。孩子们，我祝福你们长长久久，爱能让你们突破任何艰难险阻。这是森林的出口，再见了，孩子们。”说罢，指向两人身后的丛林，丛林仿佛收到了召唤，分裂出一道缝隙。</p>
 <p>骑士和女巫牵着手，向森林之神点头，并向出口走去，踏出一步，便回到了来时的石路上。</p>
 <p>这次的经历让两人更加爱并信任彼此，考验的收获是手腕的红绳更加牢固了。</p>
-]]></content>
-      <categories>
-        <category>睡前故事</category>
-      </categories>
-      <tags>
-        <tag>里世界</tag>
-        <tag>睡前故事</tag>
-        <tag>骑士与女巫</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>睡前故事-相遇</title>
-    <url>/2020/11/16/%E7%9D%A1%E5%89%8D%E6%95%85%E4%BA%8B-%E7%9B%B8%E9%81%87/</url>
-    <content><![CDATA[<h1 id="相遇"><a href="#相遇" class="headerlink" title="相遇"></a>相遇</h1><p>骑士生活在m王国，有一天m王国的国王Arthur在外征战时被俘，但因为敌国的君主看到了Arthur的乐观与不屈，决定放了他，但抛给他一个难题“女人真正想要的是什么？”，若回答出来则可以获得自由，给予了一年期限。</p>
-<p>于是Arthur开始向身边的人询问这个问题，母亲、妹妹、牧师……但没人能给出满意的答案。</p>
-<a id="more"></a>
-
-<p>有一位智者找到Arthur，并告诉他，城堡外的森林里有一位女巫，但性格刁蛮古怪，要求离谱。</p>
-<p>眼看期限将至，无可奈何的Arthur找到了女巫，女巫答应回答他的问题，但条件是要和骑士结婚。</p>
-<p>看着眼前丑陋不堪，散发着难闻气味的女巫，再看看跟自己多年挚友，威武高大的骑士。Arthur拒绝了，他不忍看到自己为了自由而牺牲兄弟。</p>
-<p>骑士知道这个消息后，毅然决然地对Arthur说：”我愿意娶她，为了您和国家。“</p>
-<p>于是婚礼被公诸于世，而Arthur也得到了问题的答案”女人真正想要的，是主宰自己的命运。”</p>
-<p>每个人都知道女巫说出的答案是真理，毫无疑问Arthur恢复了自由。</p>
-<p>婚礼上，女巫没有形象的行为举止令Arthur觉得恶心并忍不住哭泣，但骑士却一如既往的谦和。</p>
-<p>新婚之夜，骑士不顾别人的阻拦毅然决然地走进新房，准备面对一切，然而一个从未见过面的绝世美女却躺在了他的床上，女巫说：“我在一天的时间里，一半是丑陋的女巫，一半是倾城的美女，骑士，你想我白天变成美女还是晚上变成美女？”</p>
-<p>骑士回答道：“既然你说女人真正想要的是主宰自己的命运，那么就由你自己决定吧！”</p>
-<p>女巫终于热泪盈眶，“我选择白天夜晚都是美丽的女人，因为我爱你！”</p>
 ]]></content>
       <categories>
         <category>睡前故事</category>
@@ -3161,12 +3115,9 @@
 ]]></content>
       <categories>
         <category>编程</category>
-        <category>Java Web</category>
       </categories>
       <tags>
-        <tag>Java</tag>
         <tag>Servlet</tag>
-        <tag>Java Web</tag>
       </tags>
   </entry>
 </search>

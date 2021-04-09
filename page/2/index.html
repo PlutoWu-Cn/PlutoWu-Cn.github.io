@@ -37,7 +37,7 @@
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : true,
+    isHome : false,
     isPost : false,
     lang   : 'zh-CN'
   };
@@ -1058,7 +1058,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://plutowu.top/2020/11/17/%E7%8B%A9%E7%8C%8E%E5%BD%B1%E8%AF%84/">
+    <link itemprop="mainEntityOfPage" href="http://plutowu.top/2020/11/16/Servlet/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/1.jpg">
@@ -1072,7 +1072,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/11/17/%E7%8B%A9%E7%8C%8E%E5%BD%B1%E8%AF%84/" class="post-title-link" itemprop="url">狩猎影评</a>
+            <a href="/2020/11/16/Servlet/" class="post-title-link" itemprop="url">Servlet</a>
         </h2>
 
         <div class="post-meta">
@@ -1084,14 +1084,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-11-17 11:53:49" itemprop="dateCreated datePublished" datetime="2020-11-17T11:53:49+08:00">2020-11-17</time>
+              <time title="创建时间：2020-11-16 12:24:49" itemprop="dateCreated datePublished" datetime="2020-11-16T12:24:49+08:00">2020-11-16</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-04-09 10:53:51" itemprop="dateModified" datetime="2021-04-09T10:53:51+08:00">2021-04-09</time>
+                <time title="修改时间：2021-04-09 10:49:10" itemprop="dateModified" datetime="2021-04-09T10:49:10+08:00">2021-04-09</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1099,7 +1099,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%BD%B1%E8%AF%84/" itemprop="url" rel="index"><span itemprop="name">影评</span></a>
+                  <a href="/categories/%E7%BC%96%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">编程</span></a>
                 </span>
             </span>
 
@@ -1109,7 +1109,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.4k</span>
+              <span>1.6k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -1128,116 +1128,23 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="狩猎"><a href="#狩猎" class="headerlink" title="狩猎"></a>狩猎</h1><h3 id="秋天萧瑟的气氛，狩猎的季节，猎物却是一个老好人"><a href="#秋天萧瑟的气氛，狩猎的季节，猎物却是一个老好人" class="headerlink" title="-秋天萧瑟的气氛，狩猎的季节，猎物却是一个老好人"></a>-秋天萧瑟的气氛，狩猎的季节，猎物却是一个老好人</h3><p>-节选自知乎个人创作</p>
-<p><img src="https://img-blog.csdnimg.cn/2020111714310397.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzgyNDEzOQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<p><em>一部好的电影会让观众在观看时和观看后陷入深深的思考，不论思考的是什么，或是伦理道德，亦或是错综复杂的剧情和演员精湛的演技，也可以是勾起你深埋于心底的一段回忆。</em></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/11/17/%E7%8B%A9%E7%8C%8E%E5%BD%B1%E8%AF%84/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
+          <p><strong><em>Welcome to my Blog! This is my first article. The following are my study notes for learning Servlet.</em></strong></p>
+<h1 id="Reasonable-use-of-SQL-statements"><a href="#Reasonable-use-of-SQL-statements" class="headerlink" title="Reasonable use of SQL statements"></a>Reasonable use of SQL statements</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">String sql = <span class="string">&quot;insert into T_BOOK(BID,BNAME,BAUTHER,BTYPE,BPRICE,BAMOUNT,BPUBDATE)&quot;</span>;</span><br><span class="line">sql=sql+<span class="string">&quot; values(&#x27;&quot;</span>+BID+<span class="string">&quot;&#x27;,&#x27;&quot;</span>+BNAME+<span class="string">&quot;&#x27;,&#x27;&quot;</span>+BAUTHER+<span class="string">&quot;&#x27;,&#x27;&quot;</span>+BTYPE+<span class="string">&quot;&#x27;,&#x27;&quot;</span>+BPRICE+<span class="string">&quot;&#x27;,&quot;</span>+BAMOUNT+<span class="string">&quot;,&#x27;&quot;</span>+BPUBDATE+<span class="string">&quot;&#x27;)&quot;</span>;</span><br><span class="line"></span><br><span class="line">String sql = <span class="string">&quot;update T_BOOK set BAMOUNT = &quot;</span>+BAMOUNT+<span class="string">&quot; where BID = &#x27;&quot;</span>+BID+<span class="string">&quot;&#x27;&quot;</span>;</span><br><span class="line"></span><br><span class="line">String sql = <span class="string">&quot;select * from T_BOOK where BNAME like &#x27;%&quot;</span>+input+<span class="string">&quot;%&#x27;&quot;</span>;</span><br><span class="line"></span><br><span class="line">String sql = <span class="string">&quot;select * from T_BOOK where BPRICE between &quot;</span>+Low+<span class="string">&quot; and &quot;</span>+High;</span><br></pre></td></tr></table></figure>
 
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
+<p><em>Proficiency in the SQL language is a prerequisite for implementing various operations through the servlet link to the database.</em></p>
+<p><em>Mastering the most basic insert, update and conditional search statements can achieve most database operations.</em></p>
+<hr>
+<h1 id="Connect-to-the-database-via-JDBC"><a href="#Connect-to-the-database-via-JDBC" class="headerlink" title="Connect to the database via JDBC"></a>Connect to the database via JDBC</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Class.forName(<span class="string">&quot;com.microsoft.sqlserver.jdbc.SQLServerDriver&quot;</span>).newInstance();</span><br><span class="line">			String url=<span class="string">&quot;jdbc:sqlserver://localhost:1433;databaseName=?&quot;</span>;</span><br><span class="line">			String user=<span class="string">&quot;user&quot;</span>;</span><br><span class="line">			String password=<span class="string">&quot;password&quot;</span>;</span><br><span class="line">			conn=DriverManager.getConnection(url, user, password);</span><br></pre></td></tr></table></figure>
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://plutowu.top/2020/11/17/%E8%BE%9B%E5%BE%B7%E5%8B%92%E7%9A%84%E5%90%8D%E5%8D%95%E5%BD%B1%E8%AF%84/">
+<p><em>The project adopting MVC mode is to use JDBC technology to connect to the database.</em></p>
+<p><em>Please add sqljdbc.jar in the lib folder of WEB-INF to ensure that JDBC can be successfully called.</em></p>
+<hr>
+<h1 id="Use-of-Servlet-annotations"><a href="#Use-of-Servlet-annotations" class="headerlink" title="Use of Servlet annotations"></a>Use of Servlet annotations</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@WebServlet(&quot;/Classname&quot;)</span></span><br></pre></td></tr></table></figure>
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/1.jpg">
-      <meta itemprop="name" content="Shiyuan Wu">
-      <meta itemprop="description" content="Designed to share happiness and learning">
-    </span>
+<p><em>Using Servlet annotations can eliminate extra comments in web.xml, making the program more concise and portable.</em></p>
+<hr>
+<p><strong>Thank you for reading, I hope these tips can help you learn Servlet better.</strong></p>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="PlutoWu的个人博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/11/17/%E8%BE%9B%E5%BE%B7%E5%8B%92%E7%9A%84%E5%90%8D%E5%8D%95%E5%BD%B1%E8%AF%84/" class="post-title-link" itemprop="url">辛德勒的名单影评</a>
-        </h2>
-
-        <div class="post-meta">
-        
-        
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-11-17 11:53:49" itemprop="dateCreated datePublished" datetime="2020-11-17T11:53:49+08:00">2020-11-17</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-03-11 10:56:13" itemprop="dateModified" datetime="2021-03-11T10:56:13+08:00">2021-03-11</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%BD%B1%E8%AF%84/" itemprop="url" rel="index"><span itemprop="name">影评</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.8k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="辛德勒的名单"><a href="#辛德勒的名单" class="headerlink" title="辛德勒的名单"></a>辛德勒的名单</h1><h3 id="暗黑中的一丝曙光"><a href="#暗黑中的一丝曙光" class="headerlink" title="暗黑中的一丝曙光"></a>暗黑中的一丝曙光</h3><p><img src="https://img-blog.csdnimg.cn/20201117121115471.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzgyNDEzOQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<p><strong>——Whoever saves one life ,saves the world entire .*</strong></p>
-<p><strong><em>（当你挽救了一条生命就等于挽救了全世界。）\</em></strong></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/11/17/%E8%BE%9B%E5%BE%B7%E5%8B%92%E7%9A%84%E5%90%8D%E5%8D%95%E5%BD%B1%E8%AF%84/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
       
     </div>
 
@@ -1255,7 +1162,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
   </nav>
 
 

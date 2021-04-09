@@ -242,13 +242,6 @@
   </url>
   
   <url>
-    <loc>http://plutowu.top/tags/%E7%BA%BF%E7%A8%8B/</loc>
-    <lastmod>2021-04-09</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://plutowu.top/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</loc>
     <lastmod>2021-04-09</lastmod>
     <changefreq>daily</changefreq>
@@ -256,14 +249,7 @@
   </url>
   
   <url>
-    <loc>http://plutowu.top/tags/Servlet/</loc>
-    <lastmod>2021-04-09</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://plutowu.top/tags/Java-Web/</loc>
+    <loc>http://plutowu.top/tags/%E7%BA%BF%E7%A8%8B/</loc>
     <lastmod>2021-04-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -271,6 +257,13 @@
   
   <url>
     <loc>http://plutowu.top/tags/Swagger/</loc>
+    <lastmod>2021-04-09</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://plutowu.top/tags/Java-Web/</loc>
     <lastmod>2021-04-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -291,7 +284,7 @@
   </url>
   
   <url>
-    <loc>http://plutowu.top/tags/C%E8%AF%AD%E8%A8%80/</loc>
+    <loc>http://plutowu.top/tags/Servlet/</loc>
     <lastmod>2021-04-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -306,6 +299,13 @@
   
   <url>
     <loc>http://plutowu.top/tags/Element-UI/</loc>
+    <lastmod>2021-04-09</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://plutowu.top/tags/C%E8%AF%AD%E8%A8%80/</loc>
     <lastmod>2021-04-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -475,14 +475,14 @@
   </url>
   
   <url>
-    <loc>http://plutowu.top/categories/%E7%BC%96%E7%A8%8B/C/</loc>
+    <loc>http://plutowu.top/categories/%E7%BC%96%E7%A8%8B/Vue/</loc>
     <lastmod>2021-04-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>http://plutowu.top/categories/%E7%BC%96%E7%A8%8B/Vue/</loc>
+    <loc>http://plutowu.top/categories/%E7%BC%96%E7%A8%8B/C/</loc>
     <lastmod>2021-04-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>

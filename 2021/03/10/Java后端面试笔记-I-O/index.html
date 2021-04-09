@@ -20,12 +20,12 @@
     var CONFIG = {"hostname":"plutowu.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="I&#x2F;O相关1.常见的I&#x2F;O模型有哪些？Java中BIO、NIO、AIO的区别？BIO (Blocking I&#x2F;O)BIO 属于同步阻塞 IO 模型 。 同步阻塞 IO 模型中，应用程序发起 read 调用后，会一直阻塞，直到在内核把数据拷贝到用户空间。  在客户端连接数量不高的情况下，是没问题的。但是，当面对十万甚至百万级连接的时候，传统的 BIO 模型是无能为力的。因此，我们需要一种更高效的 I">
+  <meta name="description" content="常见的I&#x2F;O模型有哪些？Java中BIO、NIO、AIO的区别？BIO (Blocking I&#x2F;O)BIO 属于同步阻塞 IO 模型 。 同步阻塞 IO 模型中，应用程序发起 read 调用后，会一直阻塞，直到在内核把数据拷贝到用户空间。  在客户端连接数量不高的情况下，是没问题的。但是，当面对十万甚至百万级连接的时候，传统的 BIO 模型是无能为力的。因此，我们需要一种更高效的 I&#x2F;O 处理模型">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java后端面试笔记-I&#x2F;O">
 <meta property="og:url" content="http://plutowu.top/2021/03/10/Java%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0-I-O/index.html">
 <meta property="og:site_name" content="PlutoWu的个人博客">
-<meta property="og:description" content="I&#x2F;O相关1.常见的I&#x2F;O模型有哪些？Java中BIO、NIO、AIO的区别？BIO (Blocking I&#x2F;O)BIO 属于同步阻塞 IO 模型 。 同步阻塞 IO 模型中，应用程序发起 read 调用后，会一直阻塞，直到在内核把数据拷贝到用户空间。  在客户端连接数量不高的情况下，是没问题的。但是，当面对十万甚至百万级连接的时候，传统的 BIO 模型是无能为力的。因此，我们需要一种更高效的 I">
+<meta property="og:description" content="常见的I&#x2F;O模型有哪些？Java中BIO、NIO、AIO的区别？BIO (Blocking I&#x2F;O)BIO 属于同步阻塞 IO 模型 。 同步阻塞 IO 模型中，应用程序发起 read 调用后，会一直阻塞，直到在内核把数据拷贝到用户空间。  在客户端连接数量不高的情况下，是没问题的。但是，当面对十万甚至百万级连接的时候，传统的 BIO 模型是无能为力的。因此，我们需要一种更高效的 I&#x2F;O 处理模型">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210310124137.png">
 <meta property="og:image" content="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210310124333.png">
@@ -36,7 +36,7 @@
 <meta property="og:image" content="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210311103940.png">
 <meta property="og:image" content="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210311103946.png">
 <meta property="article:published_time" content="2021-03-10T14:24:34.000Z">
-<meta property="article:modified_time" content="2021-04-09T02:34:13.384Z">
+<meta property="article:modified_time" content="2021-04-09T03:07:28.388Z">
 <meta property="article:author" content="Shiyuan Wu">
 <meta property="article:tag" content="Java">
 <meta property="article:tag" content="面试">
@@ -227,7 +227,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-04-09 10:34:13" itemprop="dateModified" datetime="2021-04-09T10:34:13+08:00">2021-04-09</time>
+                <time title="修改时间：2021-04-09 11:07:28" itemprop="dateModified" datetime="2021-04-09T11:07:28+08:00">2021-04-09</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -271,13 +271,13 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="I-O相关"><a href="#I-O相关" class="headerlink" title="I/O相关"></a>I/O相关</h1><h2 id="1-常见的I-O模型有哪些？Java中BIO、NIO、AIO的区别？"><a href="#1-常见的I-O模型有哪些？Java中BIO、NIO、AIO的区别？" class="headerlink" title="1.常见的I/O模型有哪些？Java中BIO、NIO、AIO的区别？"></a>1.常见的I/O模型有哪些？Java中BIO、NIO、AIO的区别？</h2><h3 id="BIO-Blocking-I-O"><a href="#BIO-Blocking-I-O" class="headerlink" title="BIO (Blocking I/O)"></a>BIO (Blocking I/O)</h3><p><strong>BIO 属于同步阻塞 IO 模型</strong> 。</p>
+        <h1 id="常见的I-O模型有哪些？Java中BIO、NIO、AIO的区别？"><a href="#常见的I-O模型有哪些？Java中BIO、NIO、AIO的区别？" class="headerlink" title="常见的I/O模型有哪些？Java中BIO、NIO、AIO的区别？"></a>常见的I/O模型有哪些？Java中BIO、NIO、AIO的区别？</h1><h2 id="BIO-Blocking-I-O"><a href="#BIO-Blocking-I-O" class="headerlink" title="BIO (Blocking I/O)"></a>BIO (Blocking I/O)</h2><p><strong>BIO 属于同步阻塞 IO 模型</strong> 。</p>
 <p>同步阻塞 IO 模型中，应用程序发起 read 调用后，会一直阻塞，直到在内核把数据拷贝到用户空间。</p>
 <p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210310124137.png"></p>
 <p>在客户端连接数量不高的情况下，是没问题的。但是，当面对十万甚至百万级连接的时候，传统的 BIO 模型是无能为力的。因此，我们需要一种更高效的 I/O 处理模型来应对更高的并发量。</p>
 <a id="more"></a>
 
-<h3 id="NIO-Non-blocking-New-I-O"><a href="#NIO-Non-blocking-New-I-O" class="headerlink" title="NIO (Non-blocking/New I/O)"></a>NIO (Non-blocking/New I/O)</h3><p>Java 中的 NIO 于 Java 1.4 中引入，对应 <code>java.nio</code> 包，提供了 <code>Channel</code> , <code>Selector</code>，<code>Buffer</code> 等抽象。NIO 中的 N 可以理解为 Non-blocking，不单纯是 New。它支持面向缓冲的，基于通道的 I/O 操作方法。 对于高负载、高并发的（网络）应用，应使用 NIO 。</p>
+<h2 id="NIO-Non-blocking-New-I-O"><a href="#NIO-Non-blocking-New-I-O" class="headerlink" title="NIO (Non-blocking/New I/O)"></a>NIO (Non-blocking/New I/O)</h2><p>Java 中的 NIO 于 Java 1.4 中引入，对应 <code>java.nio</code> 包，提供了 <code>Channel</code> , <code>Selector</code>，<code>Buffer</code> 等抽象。NIO 中的 N 可以理解为 Non-blocking，不单纯是 New。它支持面向缓冲的，基于通道的 I/O 操作方法。 对于高负载、高并发的（网络）应用，应使用 NIO 。</p>
 <p>Java 中的 NIO 可以看作是 <strong>I/O 多路复用模型</strong>。也有很多人认为，Java 中的 NIO 属于同步非阻塞 IO 模型。</p>
 <p>跟着我的思路往下看看，相信你会得到答案！</p>
 <p>我们先来看看 <strong>同步非阻塞 IO 模型</strong>。</p>
@@ -298,13 +298,13 @@
 <p><strong>IO 多路复用模型，通过减少无效的系统调用，减少了对 CPU 资源的消耗。</strong></p>
 <p>Java 中的 NIO ，有一个非常重要的<strong>选择器 ( Selector )</strong> 的概念，也可以被称为 <strong>多路复用器</strong>。通过它，只需要一个线程便可以管理多个客户端连接。当客户端数据到了之后，才会为其服务。</p>
 <p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210310124438.png"></p>
-<h3 id="AIO-Asynchronous-I-O"><a href="#AIO-Asynchronous-I-O" class="headerlink" title="AIO (Asynchronous I/O)"></a>AIO (Asynchronous I/O)</h3><p>AIO 也就是 NIO 2。Java 7 中引入了 NIO 的改进版 NIO 2,它是异步 IO 模型。</p>
+<h2 id="AIO-Asynchronous-I-O"><a href="#AIO-Asynchronous-I-O" class="headerlink" title="AIO (Asynchronous I/O)"></a>AIO (Asynchronous I/O)</h2><p>AIO 也就是 NIO 2。Java 7 中引入了 NIO 的改进版 NIO 2,它是异步 IO 模型。</p>
 <p>异步 IO 是基于事件和回调机制实现的，也就是应用操作之后会直接返回，不会堵塞在那里，当后台处理完成，操作系统会通知相应的线程进行后续的操作。</p>
 <p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210310124459.png"></p>
 <p>目前来说 AIO 的应用还不是很广泛。Netty 之前也尝试使用过 AIO，不过又放弃了。这是因为，Netty 使用了 AIO 之后，在 Linux 系统上的性能并没有多少提升。</p>
 <p>最后，来一张图，简单总结一下 Java 中的 BIO、NIO、AIO。</p>
 <p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210310124518.png"></p>
-<h2 id="2-Java-中的I-O流"><a href="#2-Java-中的I-O流" class="headerlink" title="2. Java 中的I/O流"></a>2. Java 中的I/O流</h2><ul>
+<h1 id="Java-中的I-O流"><a href="#Java-中的I-O流" class="headerlink" title="Java 中的I/O流"></a>Java 中的I/O流</h1><ul>
 <li>按照流的流向分，可以分为输入流和输出流；</li>
 <li>按照操作单元划分，可以划分为字节流和字符流；</li>
 <li>按照流的角色划分为节点流和处理流。</li>
@@ -318,7 +318,7 @@
 <p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210311103940.png"></p>
 <p>按操作对象分类结构图：</p>
 <p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210311103946.png"></p>
-<h3 id="既然有了字节流-为什么还要有字符流"><a href="#既然有了字节流-为什么还要有字符流" class="headerlink" title="既然有了字节流,为什么还要有字符流?"></a>既然有了字节流,为什么还要有字符流?</h3><p>问题本质想问：<strong>不管是文件读写还是网络发送接收，信息的最小存储单元都是字节，那为什么 I/O 流操作要分为字节流操作和字符流操作呢？</strong></p>
+<h2 id="既然有了字节流-为什么还要有字符流"><a href="#既然有了字节流-为什么还要有字符流" class="headerlink" title="既然有了字节流,为什么还要有字符流?"></a>既然有了字节流,为什么还要有字符流?</h2><p>问题本质想问：<strong>不管是文件读写还是网络发送接收，信息的最小存储单元都是字节，那为什么 I/O 流操作要分为字节流操作和字符流操作呢？</strong></p>
 <p>回答：字符流是由 Java 虚拟机将字节转换得到的，问题就出在这个过程还算是非常耗时，并且，如果我们不知道编码类型就很容易出现乱码问题。所以， I/O 流就干脆提供了一个直接操作字符的接口，方便我们平时对字符进行流操作。如果音频文件、图片等媒体文件用字节流比较好，如果涉及到字符的话使用字符流比较好。</p>
 
     </div>
@@ -442,7 +442,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#I-O%E7%9B%B8%E5%85%B3"><span class="nav-number">1.</span> <span class="nav-text">I&#x2F;O相关</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%B8%B8%E8%A7%81%E7%9A%84I-O%E6%A8%A1%E5%9E%8B%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9FJava%E4%B8%ADBIO%E3%80%81NIO%E3%80%81AIO%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="nav-number">1.1.</span> <span class="nav-text">1.常见的I&#x2F;O模型有哪些？Java中BIO、NIO、AIO的区别？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#BIO-Blocking-I-O"><span class="nav-number">1.1.1.</span> <span class="nav-text">BIO (Blocking I&#x2F;O)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NIO-Non-blocking-New-I-O"><span class="nav-number">1.1.2.</span> <span class="nav-text">NIO (Non-blocking&#x2F;New I&#x2F;O)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AIO-Asynchronous-I-O"><span class="nav-number">1.1.3.</span> <span class="nav-text">AIO (Asynchronous I&#x2F;O)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Java-%E4%B8%AD%E7%9A%84I-O%E6%B5%81"><span class="nav-number">1.2.</span> <span class="nav-text">2. Java 中的I&#x2F;O流</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%A2%E7%84%B6%E6%9C%89%E4%BA%86%E5%AD%97%E8%8A%82%E6%B5%81-%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E8%A6%81%E6%9C%89%E5%AD%97%E7%AC%A6%E6%B5%81"><span class="nav-number">1.2.1.</span> <span class="nav-text">既然有了字节流,为什么还要有字符流?</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84I-O%E6%A8%A1%E5%9E%8B%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9FJava%E4%B8%ADBIO%E3%80%81NIO%E3%80%81AIO%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">常见的I&#x2F;O模型有哪些？Java中BIO、NIO、AIO的区别？</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#BIO-Blocking-I-O"><span class="nav-number">1.1.</span> <span class="nav-text">BIO (Blocking I&#x2F;O)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NIO-Non-blocking-New-I-O"><span class="nav-number">1.2.</span> <span class="nav-text">NIO (Non-blocking&#x2F;New I&#x2F;O)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AIO-Asynchronous-I-O"><span class="nav-number">1.3.</span> <span class="nav-text">AIO (Asynchronous I&#x2F;O)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Java-%E4%B8%AD%E7%9A%84I-O%E6%B5%81"><span class="nav-number">2.</span> <span class="nav-text">Java 中的I&#x2F;O流</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%A2%E7%84%B6%E6%9C%89%E4%BA%86%E5%AD%97%E8%8A%82%E6%B5%81-%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E8%A6%81%E6%9C%89%E5%AD%97%E7%AC%A6%E6%B5%81"><span class="nav-number">2.1.</span> <span class="nav-text">既然有了字节流,为什么还要有字符流?</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -520,13 +520,13 @@
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">200k</span>
+    <span title="站点总字数">199k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">3:02</span>
+    <span title="站点阅读时长">3:01</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener external nofollow noreferrer" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener external nofollow noreferrer" target="_blank">NexT.Pisces</a> 强力驱动
   </div>

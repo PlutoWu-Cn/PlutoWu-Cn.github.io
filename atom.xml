@@ -6,7 +6,7 @@
   <link href="http://plutowu.top/atom.xml" rel="self"/>
   
   <link href="http://plutowu.top/"/>
-  <updated>2021-04-11T10:47:18.198Z</updated>
+  <updated>2021-04-11T14:55:19.250Z</updated>
   <id>http://plutowu.top/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="http://plutowu.top/2021/04/11/%E4%B8%AA%E4%BA%BA%E6%91%84%E5%BD%B1%E5%B9%B4%E5%BA%A6Top10-2020/"/>
     <id>http://plutowu.top/2021/04/11/%E4%B8%AA%E4%BA%BA%E6%91%84%E5%BD%B1%E5%B9%B4%E5%BA%A6Top10-2020/</id>
     <published>2021-04-11T10:25:59.000Z</published>
-    <updated>2021-04-11T10:47:18.198Z</updated>
+    <updated>2021-04-11T14:55:19.250Z</updated>
     
-    <content type="html"><![CDATA[<blockquote><p>芦苇荡</p></blockquote><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/Picture1.JPG"></p>]]></content>
+    <content type="html"><![CDATA[<blockquote><p>芦苇荡</p></blockquote><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/Picture1.JPG" style="zoom: 50%;" /><blockquote><p>家乡</p></blockquote><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/picture-1.jpg" style="zoom:50%;" /><blockquote><p>南风古灶</p></blockquote><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/IMG_0463-77.jpg" style="zoom:50%;" /><blockquote><p>浮世绘</p></blockquote><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1-3.JPG" style="zoom:50%;" /><blockquote><p>废弃水泥厂</p></blockquote><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20200405-_MG_1586_HDR.JPG" style="zoom:50%;" /><blockquote><p>牧</p></blockquote><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/2.JPG" style="zoom:50%;" /><blockquote><p>采蜜</p></blockquote><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/_MG_1705-%E5%B7%B2%E5%A2%9E%E5%BC%BA.JPG" style="zoom:50%;" /><blockquote><p>紫荆</p></blockquote><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1-11.JPG" style="zoom:50%;" /><blockquote><p>Love</p></blockquote><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/picture-1-denoise-sharpen-sharpen.jpg" style="zoom:50%;" /><blockquote><p>对称</p></blockquote><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1-10.JPG" style="zoom:50%;" />]]></content>
     
     
       
@@ -31,8 +31,7 @@
     <summary type="html">&lt;blockquote&gt;
 &lt;p&gt;芦苇荡&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;&lt;img src=&quot;https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/Picture1.JPG&quot;&gt;&lt;/p&gt;
-</summary>
+&lt;img src=&quot;https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/Picture1.JPG&quot; style=&quot;zoom: 50%;&quot; </summary>
       
     
     
@@ -462,22 +461,20 @@
     <link href="http://plutowu.top/2020/11/17/git-clone%E5%8A%A0%E9%80%9F%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/"/>
     <id>http://plutowu.top/2020/11/17/git-clone%E5%8A%A0%E9%80%9F%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</id>
     <published>2020-11-17T14:23:46.000Z</published>
-    <updated>2021-04-09T03:06:22.201Z</updated>
+    <updated>2021-04-11T11:03:15.530Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="Git-Clone速度过慢解决方案"><a href="#Git-Clone速度过慢解决方案" class="headerlink" title="Git Clone速度过慢解决方案"></a>Git Clone速度过慢解决方案</h1><h1 id="方案一-使用gitclone-com加速"><a href="#方案一-使用gitclone-com加速" class="headerlink" title="方案一 使用gitclone.com加速"></a>方案一 使用gitclone.com加速</h1><p><strong><em>访问gitclone加速的官网<a href="https://gitclone.com,可以通过搜索栏搜索克隆项目/">https://gitclone.com，可以通过搜索栏搜索克隆项目</a></em></strong></p><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201117222630897.png"></p><a id="more"></a><p><strong>其也提供了三种自定义加速方法（省去在GitClone搜索相应文件）</strong></p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">方法一（替换URL）</span><br><span class="line"></span><br><span class="line">git clone https://gitclone.com/github.com/tendermint/tendermint.git</span><br></pre></td></tr></table></figure><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">方法二（设置git参数）</span><br><span class="line"></span><br><span class="line">git config --global url.&quot;https://gitclone.com/&quot;.insteadOf https://</span><br><span class="line">git clone https://github.com/tendermint/tendermint.git</span><br></pre></td></tr></table></figure><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">方法三（使用cgit客户端）</span><br><span class="line"></span><br><span class="line">cgit clone https://github.com/tendermint/tendermint.git</span><br></pre></td></tr></table></figure><p><strong>搜索图例：</strong></p><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201117223120221.png"></p><h1 id="方案二-使用Gitee转载仓库"><a href="#方案二-使用Gitee转载仓库" class="headerlink" title="方案二 使用Gitee转载仓库"></a>方案二 使用Gitee转载仓库</h1><h2 id="登录gitee-com"><a href="#登录gitee-com" class="headerlink" title="登录gitee.com"></a>登录gitee.com</h2><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2020-11-17_23-27-48.png"></p><h2 id="获取GitHub仓库URL"><a href="#获取GitHub仓库URL" class="headerlink" title="获取GitHub仓库URL"></a>获取GitHub仓库URL</h2><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2020-11-17_23-32-22.png"></p><h2 id="填写URL"><a href="#填写URL" class="headerlink" title="填写URL"></a>填写URL</h2><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2020-11-17_23-34-39.png"></p><h2 id="拉取仓库到Gitee完成"><a href="#拉取仓库到Gitee完成" class="headerlink" title="拉取仓库到Gitee完成"></a>拉取仓库到Gitee完成</h2><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2020-11-17_23-36-37.png"></p><h2 id="git-clone仓库"><a href="#git-clone仓库" class="headerlink" title="git clone仓库"></a>git clone仓库</h2><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2020-11-17_23-38-41.png"></p><hr><p><strong>总的来说，两种方法中gitclone.com会出现时常不稳定的现象，不过大部分时间都能够以高速克隆仓库。不到必要时刻，不推荐使用gitee二次搬运仓库，因为流程较为繁琐</strong></p>]]></content>
+    <content type="html"><![CDATA[<h1 id="Git-Clone速度过慢解决方案"><a href="#Git-Clone速度过慢解决方案" class="headerlink" title="Git Clone速度过慢解决方案"></a>Git Clone速度过慢解决方案</h1><h2 id="方案一-使用gitclone-com加速"><a href="#方案一-使用gitclone-com加速" class="headerlink" title="方案一 使用gitclone.com加速"></a>方案一 使用gitclone.com加速</h2><p><strong><em>访问gitclone加速的官网<a href="https://gitclone.com,可以通过搜索栏搜索克隆项目/">https://gitclone.com，可以通过搜索栏搜索克隆项目</a></em></strong></p><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201117222630897.png"></p><a id="more"></a><p><strong>其也提供了三种自定义加速方法（省去在GitClone搜索相应文件）</strong></p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">方法一（替换URL）</span><br><span class="line"></span><br><span class="line">git clone https://gitclone.com/github.com/tendermint/tendermint.git</span><br></pre></td></tr></table></figure><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">方法二（设置git参数）</span><br><span class="line"></span><br><span class="line">git config --global url.&quot;https://gitclone.com/&quot;.insteadOf https://</span><br><span class="line">git clone https://github.com/tendermint/tendermint.git</span><br></pre></td></tr></table></figure><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">方法三（使用cgit客户端）</span><br><span class="line"></span><br><span class="line">cgit clone https://github.com/tendermint/tendermint.git</span><br></pre></td></tr></table></figure><p><strong>搜索图例：</strong></p><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201117223120221.png"></p><h2 id="方案二-使用Gitee转载仓库"><a href="#方案二-使用Gitee转载仓库" class="headerlink" title="方案二 使用Gitee转载仓库"></a>方案二 使用Gitee转载仓库</h2><h3 id="登录gitee-com"><a href="#登录gitee-com" class="headerlink" title="登录gitee.com"></a>登录gitee.com</h3><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2020-11-17_23-27-48.png"></p><h3 id="获取GitHub仓库URL"><a href="#获取GitHub仓库URL" class="headerlink" title="获取GitHub仓库URL"></a>获取GitHub仓库URL</h3><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2020-11-17_23-32-22.png"></p><h3 id="填写URL"><a href="#填写URL" class="headerlink" title="填写URL"></a>填写URL</h3><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2020-11-17_23-34-39.png"></p><h3 id="拉取仓库到Gitee完成"><a href="#拉取仓库到Gitee完成" class="headerlink" title="拉取仓库到Gitee完成"></a>拉取仓库到Gitee完成</h3><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2020-11-17_23-36-37.png"></p><h3 id="git-clone仓库"><a href="#git-clone仓库" class="headerlink" title="git clone仓库"></a>git clone仓库</h3><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2020-11-17_23-38-41.png"></p><hr><p><strong>总的来说，两种方法中gitclone.com会出现时常不稳定的现象，不过大部分时间都能够以高速克隆仓库。不到必要时刻，不推荐使用gitee二次搬运仓库，因为流程较为繁琐</strong></p>]]></content>
     
     
-    <summary type="html">&lt;h1 id=&quot;Git-Clone速度过慢解决方案&quot;&gt;&lt;a href=&quot;#Git-Clone速度过慢解决方案&quot; class=&quot;headerlink&quot; title=&quot;Git Clone速度过慢解决方案&quot;&gt;&lt;/a&gt;Git Clone速度过慢解决方案&lt;/h1&gt;&lt;h1 id=&quot;方案一-使用gitclone-com加速&quot;&gt;&lt;a href=&quot;#方案一-使用gitclone-com加速&quot; class=&quot;headerlink&quot; title=&quot;方案一 使用gitclone.com加速&quot;&gt;&lt;/a&gt;方案一 使用gitclone.com加速&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;&lt;em&gt;访问gitclone加速的官网&lt;a href=&quot;https://gitclone.com,可以通过搜索栏搜索克隆项目/&quot;&gt;https://gitclone.com，可以通过搜索栏搜索克隆项目&lt;/a&gt;&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+    <summary type="html">&lt;h1 id=&quot;Git-Clone速度过慢解决方案&quot;&gt;&lt;a href=&quot;#Git-Clone速度过慢解决方案&quot; class=&quot;headerlink&quot; title=&quot;Git Clone速度过慢解决方案&quot;&gt;&lt;/a&gt;Git Clone速度过慢解决方案&lt;/h1&gt;&lt;h2 id=&quot;方案一-使用gitclone-com加速&quot;&gt;&lt;a href=&quot;#方案一-使用gitclone-com加速&quot; class=&quot;headerlink&quot; title=&quot;方案一 使用gitclone.com加速&quot;&gt;&lt;/a&gt;方案一 使用gitclone.com加速&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;&lt;em&gt;访问gitclone加速的官网&lt;a href=&quot;https://gitclone.com,可以通过搜索栏搜索克隆项目/&quot;&gt;https://gitclone.com，可以通过搜索栏搜索克隆项目&lt;/a&gt;&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20201117222630897.png&quot;&gt;&lt;/p&gt;</summary>
     
     
     
-    <category term="教程" scheme="http://plutowu.top/categories/%E6%95%99%E7%A8%8B/"/>
+    <category term="Fix" scheme="http://plutowu.top/categories/Fix/"/>
     
     
     <category term="Git" scheme="http://plutowu.top/tags/Git/"/>
-    
-    <category term="教程" scheme="http://plutowu.top/tags/%E6%95%99%E7%A8%8B/"/>
     
   </entry>
   
@@ -638,9 +635,9 @@
     <category term="影评" scheme="http://plutowu.top/categories/%E5%BD%B1%E8%AF%84/"/>
     
     
-    <category term="里世界" scheme="http://plutowu.top/tags/%E9%87%8C%E4%B8%96%E7%95%8C/"/>
-    
     <category term="影评" scheme="http://plutowu.top/tags/%E5%BD%B1%E8%AF%84/"/>
+    
+    <category term="里世界" scheme="http://plutowu.top/tags/%E9%87%8C%E4%B8%96%E7%95%8C/"/>
     
   </entry>
   

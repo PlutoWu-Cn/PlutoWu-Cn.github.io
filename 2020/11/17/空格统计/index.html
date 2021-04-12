@@ -20,22 +20,22 @@
     var CONFIG = {"hostname":"plutowu.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="空格统计小程序-基于C语言首先，做这个程序的目的，是因为软件工程要求实例Jackson块图的实现，要求如下： 1）设计程序统计每个记录中空格字符的个数，输出数据的格式是，每读入一个记录（字符串）之后，另起一行打印出这个字符串及其空格数； 2）最后打印出文件中空格的总个数。">
+  <meta name="description" content="空格统计首先，做这个程序的目的，是因为软件工程要求实例Jackson块图的实现，要求如下： 1）设计程序统计每个记录中空格字符的个数，输出数据的格式是，每读入一个记录（字符串）之后，另起一行打印出这个字符串及其空格数； 2）最后打印出文件中空格的总个数。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="基于C语言的空格统计">
-<meta property="og:url" content="http://plutowu.top/2020/11/17/%E5%9F%BA%E4%BA%8EC%E8%AF%AD%E8%A8%80%E7%9A%84%E7%A9%BA%E6%A0%BC%E7%BB%9F%E8%AE%A1/index.html">
+<meta property="og:title" content="空格统计">
+<meta property="og:url" content="http://plutowu.top/2020/11/17/%E7%A9%BA%E6%A0%BC%E7%BB%9F%E8%AE%A1/index.html">
 <meta property="og:site_name" content="PlutoWu的个人博客">
-<meta property="og:description" content="空格统计小程序-基于C语言首先，做这个程序的目的，是因为软件工程要求实例Jackson块图的实现，要求如下： 1）设计程序统计每个记录中空格字符的个数，输出数据的格式是，每读入一个记录（字符串）之后，另起一行打印出这个字符串及其空格数； 2）最后打印出文件中空格的总个数。">
+<meta property="og:description" content="空格统计首先，做这个程序的目的，是因为软件工程要求实例Jackson块图的实现，要求如下： 1）设计程序统计每个记录中空格字符的个数，输出数据的格式是，每读入一个记录（字符串）之后，另起一行打印出这个字符串及其空格数； 2）最后打印出文件中空格的总个数。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20201117142918848.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzgyNDEzOQ==,size_16,color_FFFFFF,t_70#pic_center">
 <meta property="article:published_time" content="2020-11-17T03:59:50.000Z">
-<meta property="article:modified_time" content="2021-04-09T02:53:18.406Z">
+<meta property="article:modified_time" content="2021-04-11T15:13:30.714Z">
 <meta property="article:author" content="Shiyuan Wu">
 <meta property="article:tag" content="C语言">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://img-blog.csdnimg.cn/20201117142918848.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzgyNDEzOQ==,size_16,color_FFFFFF,t_70#pic_center">
 
-<link rel="canonical" href="http://plutowu.top/2020/11/17/%E5%9F%BA%E4%BA%8EC%E8%AF%AD%E8%A8%80%E7%9A%84%E7%A9%BA%E6%A0%BC%E7%BB%9F%E8%AE%A1/">
+<link rel="canonical" href="http://plutowu.top/2020/11/17/%E7%A9%BA%E6%A0%BC%E7%BB%9F%E8%AE%A1/">
 
 
 <script id="page-configurations">
@@ -48,7 +48,7 @@
   };
 </script>
 
-  <title>基于C语言的空格统计 | PlutoWu的个人博客</title>
+  <title>空格统计 | PlutoWu的个人博客</title>
   
 
 
@@ -186,7 +186,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://plutowu.top/2020/11/17/%E5%9F%BA%E4%BA%8EC%E8%AF%AD%E8%A8%80%E7%9A%84%E7%A9%BA%E6%A0%BC%E7%BB%9F%E8%AE%A1/">
+    <link itemprop="mainEntityOfPage" href="http://plutowu.top/2020/11/17/%E7%A9%BA%E6%A0%BC%E7%BB%9F%E8%AE%A1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/1.jpg">
@@ -199,7 +199,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          基于C语言的空格统计
+          空格统计
         </h1>
 
         <div class="post-meta">
@@ -218,7 +218,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-04-09 10:53:18" itemprop="dateModified" datetime="2021-04-09T10:53:18+08:00">2021-04-09</time>
+                <time title="修改时间：2021-04-11 23:13:30" itemprop="dateModified" datetime="2021-04-11T23:13:30+08:00">2021-04-11</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -262,7 +262,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="空格统计小程序-基于C语言"><a href="#空格统计小程序-基于C语言" class="headerlink" title="空格统计小程序-基于C语言"></a>空格统计小程序-基于C语言</h1><p><em>首先，做这个程序的目的，是因为软件工程要求实例Jackson块图的实现，要求如下：</em></p>
+        <h1 id="空格统计"><a href="#空格统计" class="headerlink" title="空格统计"></a>空格统计</h1><p><em>首先，做这个程序的目的，是因为软件工程要求实例<code>Jackson</code>块图的实现，要求如下：</em></p>
 <p><em>1）设计程序统计每个记录中空格字符的个数，输出数据的格式是，每读入一个记录（字符串）之后，另起一行打印出这个字符串及其空格数；</em></p>
 <p><em>2）最后打印出文件中空格的总个数。</em></p>
 <a id="more"></a>
@@ -274,7 +274,7 @@
 
 <hr>
 <p>此外还有Visio绘制的程序流程图</p>
-<p><img src="https://img-blog.csdnimg.cn/20201117142918848.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzgyNDEzOQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p><img src="/images/loading.gif" data-original="https://img-blog.csdnimg.cn/20201117142918848.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzgyNDEzOQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
 <hr>
 <p><strong>希望能在读写C语言读写方面对你有所启发和帮助！</strong></p>
 
@@ -300,7 +300,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://plutowu.top/2020/11/17/%E5%9F%BA%E4%BA%8EC%E8%AF%AD%E8%A8%80%E7%9A%84%E7%A9%BA%E6%A0%BC%E7%BB%9F%E8%AE%A1/" title="基于C语言的空格统计">http://plutowu.top/2020/11/17/基于C语言的空格统计/</a>
+    <a href="http://plutowu.top/2020/11/17/%E7%A9%BA%E6%A0%BC%E7%BB%9F%E8%AE%A1/" title="空格统计">http://plutowu.top/2020/11/17/空格统计/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener external nofollow noreferrer" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -385,7 +385,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%A9%BA%E6%A0%BC%E7%BB%9F%E8%AE%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F-%E5%9F%BA%E4%BA%8EC%E8%AF%AD%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">空格统计小程序-基于C语言</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%A9%BA%E6%A0%BC%E7%BB%9F%E8%AE%A1"><span class="nav-number">1.</span> <span class="nav-text">空格统计</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -554,5 +554,11 @@
 
   
 
-</body>
+<script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=o;var e=n.imageLazyLoadSetting.isSPA,i=n.imageLazyLoadSetting.preloadRatio||1,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function o(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight*i||document.documentElement.clientHeight*i)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},t.src!==i&&(n.src=i)}()}o(),n.addEventListener("scroll",function(){var t,e;t=o,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
 </html>

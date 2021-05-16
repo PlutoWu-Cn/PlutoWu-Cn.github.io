@@ -1,261 +1,261 @@
-
-
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
-
-
-
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/icon.png">
-  <link rel="icon" href="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/icon.png">
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-  
-  <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="Redis简单介绍简单来说 Redis 就是一个使用 C 语言开发的数据库，不过与传统数据库不同的是 Redis 的数据是存在内存中的 ，也就是它是内存数据库，所以读写速度非常快，因此 Redis 被广泛应用于缓存方向。
-另外，Redis 除了做缓存之外，Redis 也经常用来做分布式锁，甚至是消息队列。
-Redis 提供了多种数据类型来支持不同的业务场景。Redis 还支持事务 、持久化、Lua">
-  <meta name="author" content="PlutoWu">
-  <meta name="keywords" content="">
-  
-  <title>Java面试笔记-Redis - Pluto</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/P.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/P.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="/css/main.css">
 
 
-  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
-  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
 
-  
-    
-    
-      
-      
-        
-          
-          
-          
-        
-        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/themes/prism-tomorrow.min.css" />
-      
-      
-        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/plugins/line-numbers/prism-line-numbers.min.css" />
-      
-    
-  
-
-  
-    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
-  
-
-
-
-<!-- 主题依赖的图标库，不要自行修改 -->
-
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
-
-
-
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
-
-
-<link  rel="stylesheet" href="/css/main.css" />
-
-<!-- 自定义样式保持在最底部 -->
-
-
-  <script id="fluid-configs">
-    var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"plutowu.top","root":"/","version":"1.8.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"plutowu.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
-  <script  src="/js/utils.js" ></script>
-  <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="Pluto" type="application/atom+xml">
+
+  <meta name="description" content="Redis简单介绍简单来说 Redis 就是一个使用 C 语言开发的数据库，不过与传统数据库不同的是 Redis 的数据是存在内存中的 ，也就是它是内存数据库，所以读写速度非常快，因此 Redis 被广泛应用于缓存方向。 另外，Redis 除了做缓存之外，Redis 也经常用来做分布式锁，甚至是消息队列。 Redis 提供了多种数据类型来支持不同的业务场景。Redis 还支持事务 、持久化、Lua">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java面试笔记-Redis">
+<meta property="og:url" content="http://plutowu.top/2021/04/28/Java%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0-Redis/index.html">
+<meta property="og:site_name" content="Pluto">
+<meta property="og:description" content="Redis简单介绍简单来说 Redis 就是一个使用 C 语言开发的数据库，不过与传统数据库不同的是 Redis 的数据是存在内存中的 ，也就是它是内存数据库，所以读写速度非常快，因此 Redis 被广泛应用于缓存方向。 另外，Redis 除了做缓存之外，Redis 也经常用来做分布式锁，甚至是消息队列。 Redis 提供了多种数据类型来支持不同的业务场景。Redis 还支持事务 、持久化、Lua">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/redis-list.png">
+<meta property="og:image" content="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F%E6%83%85%E5%86%B5.png">
+<meta property="og:image" content="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/%E5%8A%A0%E5%85%A5%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8%E5%90%8E%E7%9A%84%E7%BC%93%E5%AD%98%E5%A4%84%E7%90%86%E6%B5%81%E7%A8%8B.png">
+<meta property="og:image" content="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/11320039-57a77ca2757d0924.png">
+<meta property="og:image" content="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/11320039-3f40b17c0412116c.png">
+<meta property="og:image" content="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20200821101342539.jpeg">
+<meta property="og:image" content="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20200821101421465.jpeg">
+<meta property="article:published_time" content="2021-04-28T02:40:06.000Z">
+<meta property="article:modified_time" content="2021-05-16T13:29:26.958Z">
+<meta property="article:author" content="PlutoWu">
+<meta property="article:tag" content="面试">
+<meta property="article:tag" content="Redis">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/redis-list.png">
+
+<link rel="canonical" href="http://plutowu.top/2021/04/28/Java%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0-Redis/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Java面试笔记-Redis | Pluto</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Pluto" type="application/atom+xml">
 </head>
 
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
 
-<body>
-  <header style="height: 70vh;">
-    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
-  <div class="container">
-    <a class="navbar-brand"
-       href="/">&nbsp;<strong>Pluto</strong>&nbsp;</a>
-
-    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <div class="animated-icon"><span></span><span></span><span></span></div>
-    </button>
-
-    <!-- Collapsible content -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ml-auto text-center">
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/">
-                <i class="iconfont icon-home-fill"></i>
-                主页
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/archives/">
-                <i class="iconfont icon-archive-fill"></i>
-                时间轴
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/categories/">
-                <i class="iconfont icon-category-fill"></i>
-                分类
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/tags/">
-                <i class="iconfont icon-tags-fill"></i>
-                标签
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/about/">
-                <i class="iconfont icon-user-fill"></i>
-                关于
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/links/">
-                <i class="iconfont icon-link-fill"></i>
-                友链
-              </a>
-            </li>
-          
-        
-        
-          <li class="nav-item" id="search-btn">
-            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
-                class="iconfont icon-search"></i>&nbsp;</a>
-          </li>
-        
-        
-          <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" href="javascript:" rel="external nofollow noreferrer">&nbsp;<i
-                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
-          </li>
-        
-      </ul>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
     </div>
   </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Pluto</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Programming | Photography | Film</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
 </nav>
 
-    <div class="banner" id="banner" parallax=true
-         style="background: url('https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/j10.png') no-repeat center center;
-           background-size: cover;">
-      <div class="full-bg-img">
-        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-          <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="Java面试笔记-Redis">
-              
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/PlutoWu-Cn" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener external nofollow noreferrer" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://plutowu.top/2021/04/28/Java%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0-Redis/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/1.jpg">
+      <meta itemprop="name" content="PlutoWu">
+      <meta itemprop="description" content="A Simple and Powerful Blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Pluto">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Java面试笔记-Redis
+        </h1>
+
+        <div class="post-meta">
+        
+        
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-04-28 10:40:06" itemprop="dateCreated datePublished" datetime="2021-04-28T10:40:06+08:00">2021-04-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-05-16 21:29:26" itemprop="dateModified" datetime="2021-05-16T21:29:26+08:00">2021-05-16</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">面试笔记</span></a>
+                </span>
             </span>
 
-            
-              <div class="mt-3">
-  
-  
-    <span class="post-meta">
-      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-04-28 10:40" pubdate>
-        2021年4月28日 上午
-      </time>
-    </span>
-  
-</div>
-
-<div class="mt-1">
-  
-    
-    <span class="post-meta mr-2">
-      <i class="iconfont icon-chart"></i>
-      7.9k 字
-    </span>
-  
-
-  
-    
-    <span class="post-meta mr-2">
-      <i class="iconfont icon-clock-fill"></i>
-      
-      
-      97
-       分钟
-    </span>
-  
-
-  
-  
-</div>
-
-            
-          </div>
-
           
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <main>
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
     
-      
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2021/04/28/Java%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0-Redis/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/04/28/Java%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0-Redis/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>18k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>16 分钟</span>
+            </span>
 
-<div class="container-fluid nopadding-x">
-  <div class="row nomargin-x">
-    <div class="d-none d-lg-block col-lg-2"></div>
-    <div class="col-lg-8 nopadding-x-md">
-      <div class="container nopadding-x-md" id="board-ctn">
-        <div class="py-5" id="board">
-          <article class="post-content mx-auto">
-            <!-- SEO header -->
-            <h1 style="display: none">Java面试笔记-Redis</h1>
-            
-            <div class="markdown-body">
-              <h1 id="Redis简单介绍"><a href="#Redis简单介绍" class="headerlink" title="Redis简单介绍"></a>Redis简单介绍</h1><p>简单来说 <strong>Redis 就是一个使用 C 语言开发的数据库</strong>，不过与传统数据库不同的是 <strong>Redis 的数据是存在内存中的</strong> ，也就是它是内存数据库，所以读写速度非常快，因此 Redis 被广泛应用于缓存方向。</p>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Redis简单介绍"><a href="#Redis简单介绍" class="headerlink" title="Redis简单介绍"></a>Redis简单介绍</h1><p>简单来说 <strong>Redis 就是一个使用 C 语言开发的数据库</strong>，不过与传统数据库不同的是 <strong>Redis 的数据是存在内存中的</strong> ，也就是它是内存数据库，所以读写速度非常快，因此 Redis 被广泛应用于缓存方向。</p>
 <p>另外，<strong>Redis 除了做缓存之外，Redis 也经常用来做分布式锁，甚至是消息队列。</strong></p>
 <p><strong>Redis 提供了多种数据类型来支持不同的业务场景。Redis 还支持事务 、持久化、Lua 脚本、多种集群方案。</strong></p>
 <p><strong>采用Redis或缓存是因为“高性能”和“高并发”</strong></p>
@@ -285,45 +285,16 @@ Redis 提供了多种数据类型来支持不同的业务场景。Redis 还支�
 </ol>
 <p>下面我们简单看看它的使用！</p>
 <p><strong>普通字符串的基本操作：</strong></p>
-<div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token number">127.0</span>.0.1:637<span class="token operator"><span class="token file-descriptor important">9</span>></span> <span class="token builtin class-name">set</span> key value <span class="token comment">#设置 key-value 类型的值</span>
-OK
-<span class="token number">127.0</span>.0.1:637<span class="token operator"><span class="token file-descriptor important">9</span>></span> get key <span class="token comment"># 根据 key 获得对应的 value</span>
-<span class="token string">"value"</span>
-<span class="token number">127.0</span>.0.1:637<span class="token operator"><span class="token file-descriptor important">9</span>></span> exists key  <span class="token comment"># 判断某个 key 是否存在</span>
-<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> <span class="token number">1</span>
-<span class="token number">127.0</span>.0.1:637<span class="token operator"><span class="token file-descriptor important">9</span>></span> strlen key <span class="token comment"># 返回 key 所储存的字符串值的长度。</span>
-<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> <span class="token number">5</span>
-<span class="token number">127.0</span>.0.1:637<span class="token operator"><span class="token file-descriptor important">9</span>></span> del key <span class="token comment"># 删除某个 key 对应的值</span>
-<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> <span class="token number">1</span>
-<span class="token number">127.0</span>.0.1:637<span class="token operator"><span class="token file-descriptor important">9</span>></span> get key
-<span class="token punctuation">(</span>nil<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; <span class="built_in">set</span> key value <span class="comment">#设置 key-value 类型的值</span></span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; get key <span class="comment"># 根据 key 获得对应的 value</span></span><br><span class="line"><span class="string">&quot;value&quot;</span></span><br><span class="line">127.0.0.1:6379&gt; exists key  <span class="comment"># 判断某个 key 是否存在</span></span><br><span class="line">(<span class="built_in">integer</span>) 1</span><br><span class="line">127.0.0.1:6379&gt; strlen key <span class="comment"># 返回 key 所储存的字符串值的长度。</span></span><br><span class="line">(<span class="built_in">integer</span>) 5</span><br><span class="line">127.0.0.1:6379&gt; del key <span class="comment"># 删除某个 key 对应的值</span></span><br><span class="line">(<span class="built_in">integer</span>) 1</span><br><span class="line">127.0.0.1:6379&gt; get key</span><br><span class="line">(nil)</span><br></pre></td></tr></table></figure>
 
 <p><strong>批量设置</strong> :</p>
-<div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token number">127.0</span>.0.1:637<span class="token operator"><span class="token file-descriptor important">9</span>></span> mset key1 value1 key2 value2 <span class="token comment"># 批量设置 key-value 类型的值</span>
-OK
-<span class="token number">127.0</span>.0.1:637<span class="token operator"><span class="token file-descriptor important">9</span>></span> mget key1 key2 <span class="token comment"># 批量获取多个 key 对应的 value</span>
-<span class="token number">1</span><span class="token punctuation">)</span> <span class="token string">"value1"</span>
-<span class="token number">2</span><span class="token punctuation">)</span> <span class="token string">"value2"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; mset key1 value1 key2 value2 <span class="comment"># 批量设置 key-value 类型的值</span></span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; mget key1 key2 <span class="comment"># 批量获取多个 key 对应的 value</span></span><br><span class="line">1) <span class="string">&quot;value1&quot;</span></span><br><span class="line">2) <span class="string">&quot;value2&quot;</span></span><br></pre></td></tr></table></figure>
 
 <p><strong>计数器（字符串的内容为整数的时候可以使用）：</strong></p>
-<div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token number">127.0</span>.0.1:637<span class="token operator"><span class="token file-descriptor important">9</span>></span> <span class="token builtin class-name">set</span> number <span class="token number">1</span>
-OK
-<span class="token number">127.0</span>.0.1:637<span class="token operator"><span class="token file-descriptor important">9</span>></span> incr number <span class="token comment"># 将 key 中储存的数字值增一</span>
-<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> <span class="token number">2</span>
-<span class="token number">127.0</span>.0.1:637<span class="token operator"><span class="token file-descriptor important">9</span>></span> get number
-<span class="token string">"2"</span>
-<span class="token number">127.0</span>.0.1:637<span class="token operator"><span class="token file-descriptor important">9</span>></span> decr number <span class="token comment"># 将 key 中储存的数字值减一</span>
-<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> <span class="token number">1</span>
-<span class="token number">127.0</span>.0.1:637<span class="token operator"><span class="token file-descriptor important">9</span>></span> get number
-<span class="token string">"1"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; <span class="built_in">set</span> number 1</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; incr number <span class="comment"># 将 key 中储存的数字值增一</span></span><br><span class="line">(<span class="built_in">integer</span>) 2</span><br><span class="line">127.0.0.1:6379&gt; get number</span><br><span class="line"><span class="string">&quot;2&quot;</span></span><br><span class="line">127.0.0.1:6379&gt; decr number <span class="comment"># 将 key 中储存的数字值减一</span></span><br><span class="line">(<span class="built_in">integer</span>) 1</span><br><span class="line">127.0.0.1:6379&gt; get number</span><br><span class="line"><span class="string">&quot;1&quot;</span></span><br></pre></td></tr></table></figure>
 
 <p><strong>过期</strong>：</p>
-<div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token number">127.0</span>.0.1:637<span class="token operator"><span class="token file-descriptor important">9</span>></span> expire key  <span class="token number">60</span> <span class="token comment"># 数据在 60s 后过期</span>
-<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> <span class="token number">1</span>
-<span class="token number">127.0</span>.0.1:637<span class="token operator"><span class="token file-descriptor important">9</span>></span> setex key <span class="token number">60</span> value <span class="token comment"># 数据在 60s 后过期 (setex:[set] + [ex]pire)</span>
-OK
-<span class="token number">127.0</span>.0.1:637<span class="token operator"><span class="token file-descriptor important">9</span>></span> ttl key <span class="token comment"># 查看数据还有多久过期</span>
-<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> <span class="token number">56</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; expire key  60 <span class="comment"># 数据在 60s 后过期</span></span><br><span class="line">(<span class="built_in">integer</span>) 1</span><br><span class="line">127.0.0.1:6379&gt; setex key 60 value <span class="comment"># 数据在 60s 后过期 (setex:[set] + [ex]pire)</span></span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; ttl key <span class="comment"># 查看数据还有多久过期</span></span><br><span class="line">(<span class="built_in">integer</span>) 56</span><br></pre></td></tr></table></figure>
 
 <h2 id="list"><a href="#list" class="headerlink" title="list"></a>list</h2><ol>
 <li><strong>介绍</strong> ：<strong>list</strong> 即是 <strong>链表</strong>。链表是一种非常常见的数据结构，特点是易于数据元素的插入和删除并且且可以灵活调整链表长度，但是链表的随机访问困难。许多高级编程语言都内置了链表的实现比如 Java 中的 <strong>LinkedList</strong>，但是 C 语言并没有实现链表，所以 Redis 实现了自己的链表数据结构。Redis 的 list 的实现为一个 <strong>双向链表</strong>，即可以支持反向查找和遍历，更方便操作，不过带来了部分额外的内存开销。</li>
@@ -332,42 +303,19 @@ OK
 </ol>
 <p>下面我们简单看看它的使用！</p>
 <p><strong>通过 <code>rpush/lpop</code> 实现队列：</strong></p>
-<div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token number">127.0</span>.0.1:637<span class="token operator"><span class="token file-descriptor important">9</span>></span> rpush myList value1 <span class="token comment"># 向 list 的头部（右边）添加元素</span>
-<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> <span class="token number">1</span>
-<span class="token number">127.0</span>.0.1:637<span class="token operator"><span class="token file-descriptor important">9</span>></span> rpush myList value2 value3 <span class="token comment"># 向list的头部（最右边）添加多个元素</span>
-<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> <span class="token number">3</span>
-<span class="token number">127.0</span>.0.1:637<span class="token operator"><span class="token file-descriptor important">9</span>></span> lpop myList <span class="token comment"># 将 list的尾部(最左边)元素取出</span>
-<span class="token string">"value1"</span>
-<span class="token number">127.0</span>.0.1:637<span class="token operator"><span class="token file-descriptor important">9</span>></span> lrange myList <span class="token number">0</span> <span class="token number">1</span> <span class="token comment"># 查看对应下标的list列表， 0 为 start,1为 end</span>
-<span class="token number">1</span><span class="token punctuation">)</span> <span class="token string">"value2"</span>
-<span class="token number">2</span><span class="token punctuation">)</span> <span class="token string">"value3"</span>
-<span class="token number">127.0</span>.0.1:637<span class="token operator"><span class="token file-descriptor important">9</span>></span> lrange myList <span class="token number">0</span> -1 <span class="token comment"># 查看列表中的所有元素，-1表示倒数第一</span>
-<span class="token number">1</span><span class="token punctuation">)</span> <span class="token string">"value2"</span>
-<span class="token number">2</span><span class="token punctuation">)</span> <span class="token string">"value3"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; rpush myList value1 <span class="comment"># 向 list 的头部（右边）添加元素</span></span><br><span class="line">(<span class="built_in">integer</span>) 1</span><br><span class="line">127.0.0.1:6379&gt; rpush myList value2 value3 <span class="comment"># 向list的头部（最右边）添加多个元素</span></span><br><span class="line">(<span class="built_in">integer</span>) 3</span><br><span class="line">127.0.0.1:6379&gt; lpop myList <span class="comment"># 将 list的尾部(最左边)元素取出</span></span><br><span class="line"><span class="string">&quot;value1&quot;</span></span><br><span class="line">127.0.0.1:6379&gt; lrange myList 0 1 <span class="comment"># 查看对应下标的list列表， 0 为 start,1为 end</span></span><br><span class="line">1) <span class="string">&quot;value2&quot;</span></span><br><span class="line">2) <span class="string">&quot;value3&quot;</span></span><br><span class="line">127.0.0.1:6379&gt; lrange myList 0 -1 <span class="comment"># 查看列表中的所有元素，-1表示倒数第一</span></span><br><span class="line">1) <span class="string">&quot;value2&quot;</span></span><br><span class="line">2) <span class="string">&quot;value3&quot;</span></span><br></pre></td></tr></table></figure>
 
 <p><strong>通过 <code>rpush/rpop</code> 实现栈：</strong></p>
-<div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token number">127.0</span>.0.1:637<span class="token operator"><span class="token file-descriptor important">9</span>></span> rpush myList2 value1 value2 value3
-<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> <span class="token number">3</span>
-<span class="token number">127.0</span>.0.1:637<span class="token operator"><span class="token file-descriptor important">9</span>></span> rpop myList2 <span class="token comment"># 将 list的头部(最右边)元素取出</span>
-<span class="token string">"value3"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></div>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; rpush myList2 value1 value2 value3</span><br><span class="line">(<span class="built_in">integer</span>) 3</span><br><span class="line">127.0.0.1:6379&gt; rpop myList2 <span class="comment"># 将 list的头部(最右边)元素取出</span></span><br><span class="line"><span class="string">&quot;value3&quot;</span></span><br></pre></td></tr></table></figure>
 
 <p>我专门花了一个图方便小伙伴们来理解：</p>
-<p><img src="/images/loading.gif" srcset="/img/loading.gif" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/redis-list.png" alt="redis list"></p>
+<p><img src="/images/loading.gif" data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/redis-list.png" alt="redis list"></p>
 <p><strong>通过 <code>lrange</code> 查看对应下标范围的列表元素：</strong></p>
-<div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token number">127.0</span>.0.1:637<span class="token operator"><span class="token file-descriptor important">9</span>></span> rpush myList value1 value2 value3
-<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> <span class="token number">3</span>
-<span class="token number">127.0</span>.0.1:637<span class="token operator"><span class="token file-descriptor important">9</span>></span> lrange myList <span class="token number">0</span> <span class="token number">1</span> <span class="token comment"># 查看对应下标的list列表， 0 为 start,1为 end</span>
-<span class="token number">1</span><span class="token punctuation">)</span> <span class="token string">"value1"</span>
-<span class="token number">2</span><span class="token punctuation">)</span> <span class="token string">"value2"</span>
-<span class="token number">127.0</span>.0.1:637<span class="token operator"><span class="token file-descriptor important">9</span>></span> lrange myList <span class="token number">0</span> -1 <span class="token comment"># 查看列表中的所有元素，-1表示倒数第一</span>
-<span class="token number">1</span><span class="token punctuation">)</span> <span class="token string">"value1"</span>
-<span class="token number">2</span><span class="token punctuation">)</span> <span class="token string">"value2"</span>
-<span class="token number">3</span><span class="token punctuation">)</span> <span class="token string">"value3"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; rpush myList value1 value2 value3</span><br><span class="line">(<span class="built_in">integer</span>) 3</span><br><span class="line">127.0.0.1:6379&gt; lrange myList 0 1 <span class="comment"># 查看对应下标的list列表， 0 为 start,1为 end</span></span><br><span class="line">1) <span class="string">&quot;value1&quot;</span></span><br><span class="line">2) <span class="string">&quot;value2&quot;</span></span><br><span class="line">127.0.0.1:6379&gt; lrange myList 0 -1 <span class="comment"># 查看列表中的所有元素，-1表示倒数第一</span></span><br><span class="line">1) <span class="string">&quot;value1&quot;</span></span><br><span class="line">2) <span class="string">&quot;value2&quot;</span></span><br><span class="line">3) <span class="string">&quot;value3&quot;</span></span><br></pre></td></tr></table></figure>
 
 <p>通过 <code>lrange</code> 命令，你可以基于 list 实现分页查询，性能非常高！</p>
 <p><strong>通过 <code>llen</code> 查看链表长度：</strong></p>
-<div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token number">127.0</span>.0.1:637<span class="token operator"><span class="token file-descriptor important">9</span>></span> llen myList
-<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> <span class="token number">3</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></div>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; llen myList</span><br><span class="line">(<span class="built_in">integer</span>) 3</span><br></pre></td></tr></table></figure>
 
 <h2 id="hash"><a href="#hash" class="headerlink" title="hash"></a>hash</h2><ol>
 <li><strong>介绍</strong> ：hash 类似于 JDK1.8 前的 HashMap，内部实现也差不多(数组 + 链表)。不过，Redis 的 hash 做了更多优化。另外，hash 是一个 string 类型的 field 和 value 的映射表，<strong>特别适合用于存储对象</strong>，后续操作的时候，你可以直接仅仅修改这个对象中的某个字段的值。 比如我们可以 hash 数据结构来存储用户信息，商品信息等等。</li>
@@ -375,32 +323,7 @@ OK
 <li><strong>应用场景:</strong> 系统中对象数据的存储。</li>
 </ol>
 <p>下面我们简单看看它的使用！</p>
-<div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token number">127.0</span>.0.1:637<span class="token operator"><span class="token file-descriptor important">9</span>></span> hset userInfoKey name <span class="token string">"guide"</span> description <span class="token string">"dev"</span> age <span class="token string">"24"</span>
-OK
-<span class="token number">127.0</span>.0.1:637<span class="token operator"><span class="token file-descriptor important">9</span>></span> hexists userInfoKey name <span class="token comment"># 查看 key 对应的 value中指定的字段是否存在。</span>
-<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> <span class="token number">1</span>
-<span class="token number">127.0</span>.0.1:637<span class="token operator"><span class="token file-descriptor important">9</span>></span> hget userInfoKey name <span class="token comment"># 获取存储在哈希表中指定字段的值。</span>
-<span class="token string">"guide"</span>
-<span class="token number">127.0</span>.0.1:637<span class="token operator"><span class="token file-descriptor important">9</span>></span> hget userInfoKey age
-<span class="token string">"24"</span>
-<span class="token number">127.0</span>.0.1:637<span class="token operator"><span class="token file-descriptor important">9</span>></span> hgetall userInfoKey <span class="token comment"># 获取在哈希表中指定 key 的所有字段和值</span>
-<span class="token number">1</span><span class="token punctuation">)</span> <span class="token string">"name"</span>
-<span class="token number">2</span><span class="token punctuation">)</span> <span class="token string">"guide"</span>
-<span class="token number">3</span><span class="token punctuation">)</span> <span class="token string">"description"</span>
-<span class="token number">4</span><span class="token punctuation">)</span> <span class="token string">"dev"</span>
-<span class="token number">5</span><span class="token punctuation">)</span> <span class="token string">"age"</span>
-<span class="token number">6</span><span class="token punctuation">)</span> <span class="token string">"24"</span>
-<span class="token number">127.0</span>.0.1:637<span class="token operator"><span class="token file-descriptor important">9</span>></span> hkeys userInfoKey <span class="token comment"># 获取 key 列表</span>
-<span class="token number">1</span><span class="token punctuation">)</span> <span class="token string">"name"</span>
-<span class="token number">2</span><span class="token punctuation">)</span> <span class="token string">"description"</span>
-<span class="token number">3</span><span class="token punctuation">)</span> <span class="token string">"age"</span>
-<span class="token number">127.0</span>.0.1:637<span class="token operator"><span class="token file-descriptor important">9</span>></span> hvals userInfoKey <span class="token comment"># 获取 value 列表</span>
-<span class="token number">1</span><span class="token punctuation">)</span> <span class="token string">"guide"</span>
-<span class="token number">2</span><span class="token punctuation">)</span> <span class="token string">"dev"</span>
-<span class="token number">3</span><span class="token punctuation">)</span> <span class="token string">"24"</span>
-<span class="token number">127.0</span>.0.1:637<span class="token operator"><span class="token file-descriptor important">9</span>></span> hset userInfoKey name <span class="token string">"GuideGeGe"</span> <span class="token comment"># 修改某个字段对应的值</span>
-<span class="token number">127.0</span>.0.1:637<span class="token operator"><span class="token file-descriptor important">9</span>></span> hget userInfoKey name
-<span class="token string">"GuideGeGe"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; hset userInfoKey name <span class="string">&quot;guide&quot;</span> description <span class="string">&quot;dev&quot;</span> age <span class="string">&quot;24&quot;</span></span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; hexists userInfoKey name <span class="comment"># 查看 key 对应的 value中指定的字段是否存在。</span></span><br><span class="line">(<span class="built_in">integer</span>) 1</span><br><span class="line">127.0.0.1:6379&gt; hget userInfoKey name <span class="comment"># 获取存储在哈希表中指定字段的值。</span></span><br><span class="line"><span class="string">&quot;guide&quot;</span></span><br><span class="line">127.0.0.1:6379&gt; hget userInfoKey age</span><br><span class="line"><span class="string">&quot;24&quot;</span></span><br><span class="line">127.0.0.1:6379&gt; hgetall userInfoKey <span class="comment"># 获取在哈希表中指定 key 的所有字段和值</span></span><br><span class="line">1) <span class="string">&quot;name&quot;</span></span><br><span class="line">2) <span class="string">&quot;guide&quot;</span></span><br><span class="line">3) <span class="string">&quot;description&quot;</span></span><br><span class="line">4) <span class="string">&quot;dev&quot;</span></span><br><span class="line">5) <span class="string">&quot;age&quot;</span></span><br><span class="line">6) <span class="string">&quot;24&quot;</span></span><br><span class="line">127.0.0.1:6379&gt; hkeys userInfoKey <span class="comment"># 获取 key 列表</span></span><br><span class="line">1) <span class="string">&quot;name&quot;</span></span><br><span class="line">2) <span class="string">&quot;description&quot;</span></span><br><span class="line">3) <span class="string">&quot;age&quot;</span></span><br><span class="line">127.0.0.1:6379&gt; hvals userInfoKey <span class="comment"># 获取 value 列表</span></span><br><span class="line">1) <span class="string">&quot;guide&quot;</span></span><br><span class="line">2) <span class="string">&quot;dev&quot;</span></span><br><span class="line">3) <span class="string">&quot;24&quot;</span></span><br><span class="line">127.0.0.1:6379&gt; hset userInfoKey name <span class="string">&quot;GuideGeGe&quot;</span> <span class="comment"># 修改某个字段对应的值</span></span><br><span class="line">127.0.0.1:6379&gt; hget userInfoKey name</span><br><span class="line"><span class="string">&quot;GuideGeGe&quot;</span></span><br></pre></td></tr></table></figure>
 
 <h2 id="set"><a href="#set" class="headerlink" title="set"></a>set</h2><ol>
 <li><strong>介绍 ：</strong> set 类似于 Java 中的 <code>HashSet</code> 。Redis 中的 set 类型是一种无序集合，集合中的元素没有先后顺序。当你需要存储一个列表数据，又不希望出现重复数据时，set 是一个很好的选择，并且 set 提供了判断某个成员是否在一个 set 集合内的重要接口，这个也是 list 所不能提供的。可以基于 set 轻易实现交集、并集、差集的操作。比如：你可以将一个用户所有的关注人存在一个集合中，将其所有粉丝存在一个集合。Redis 可以非常方便的实现如共同关注、共同粉丝、共同喜好等功能。这个过程也就是求交集的过程。</li>
@@ -408,47 +331,14 @@ OK
 <li><strong>应用场景:</strong> 需要存放的数据不能重复以及需要获取多个数据源交集和并集等场景</li>
 </ol>
 <p>下面我们简单看看它的使用！</p>
-<div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token number">127.0</span>.0.1:637<span class="token operator"><span class="token file-descriptor important">9</span>></span> sadd mySet value1 value2 <span class="token comment"># 添加元素进去</span>
-<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> <span class="token number">2</span>
-<span class="token number">127.0</span>.0.1:637<span class="token operator"><span class="token file-descriptor important">9</span>></span> sadd mySet value1 <span class="token comment"># 不允许有重复元素</span>
-<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> <span class="token number">0</span>
-<span class="token number">127.0</span>.0.1:637<span class="token operator"><span class="token file-descriptor important">9</span>></span> smembers mySet <span class="token comment"># 查看 set 中所有的元素</span>
-<span class="token number">1</span><span class="token punctuation">)</span> <span class="token string">"value1"</span>
-<span class="token number">2</span><span class="token punctuation">)</span> <span class="token string">"value2"</span>
-<span class="token number">127.0</span>.0.1:637<span class="token operator"><span class="token file-descriptor important">9</span>></span> scard mySet <span class="token comment"># 查看 set 的长度</span>
-<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> <span class="token number">2</span>
-<span class="token number">127.0</span>.0.1:637<span class="token operator"><span class="token file-descriptor important">9</span>></span> sismember mySet value1 <span class="token comment"># 检查某个元素是否存在set 中，只能接收单个元素</span>
-<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> <span class="token number">1</span>
-<span class="token number">127.0</span>.0.1:637<span class="token operator"><span class="token file-descriptor important">9</span>></span> sadd mySet2 value2 value3
-<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> <span class="token number">2</span>
-<span class="token number">127.0</span>.0.1:637<span class="token operator"><span class="token file-descriptor important">9</span>></span> sinterstore mySet3 mySet mySet2 <span class="token comment"># 获取 mySet 和 mySet2 的交集并存放在 mySet3 中</span>
-<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> <span class="token number">1</span>
-<span class="token number">127.0</span>.0.1:637<span class="token operator"><span class="token file-descriptor important">9</span>></span> smembers mySet3
-<span class="token number">1</span><span class="token punctuation">)</span> <span class="token string">"value2"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; sadd mySet value1 value2 <span class="comment"># 添加元素进去</span></span><br><span class="line">(<span class="built_in">integer</span>) 2</span><br><span class="line">127.0.0.1:6379&gt; sadd mySet value1 <span class="comment"># 不允许有重复元素</span></span><br><span class="line">(<span class="built_in">integer</span>) 0</span><br><span class="line">127.0.0.1:6379&gt; smembers mySet <span class="comment"># 查看 set 中所有的元素</span></span><br><span class="line">1) <span class="string">&quot;value1&quot;</span></span><br><span class="line">2) <span class="string">&quot;value2&quot;</span></span><br><span class="line">127.0.0.1:6379&gt; scard mySet <span class="comment"># 查看 set 的长度</span></span><br><span class="line">(<span class="built_in">integer</span>) 2</span><br><span class="line">127.0.0.1:6379&gt; sismember mySet value1 <span class="comment"># 检查某个元素是否存在set 中，只能接收单个元素</span></span><br><span class="line">(<span class="built_in">integer</span>) 1</span><br><span class="line">127.0.0.1:6379&gt; sadd mySet2 value2 value3</span><br><span class="line">(<span class="built_in">integer</span>) 2</span><br><span class="line">127.0.0.1:6379&gt; sinterstore mySet3 mySet mySet2 <span class="comment"># 获取 mySet 和 mySet2 的交集并存放在 mySet3 中</span></span><br><span class="line">(<span class="built_in">integer</span>) 1</span><br><span class="line">127.0.0.1:6379&gt; smembers mySet3</span><br><span class="line">1) <span class="string">&quot;value2&quot;</span></span><br></pre></td></tr></table></figure>
 
 <h2 id="sorted-set"><a href="#sorted-set" class="headerlink" title="sorted set"></a>sorted set</h2><ol>
 <li><strong>介绍：</strong> 和 set 相比，sorted set 增加了一个权重参数 score，使得集合中的元素能够按 score 进行有序排列，还可以通过 score 的范围来获取元素的列表。有点像是 Java 中 HashMap 和 TreeSet 的结合体。</li>
 <li><strong>常用命令：</strong> <code>zadd,zcard,zscore,zrange,zrevrange,zrem</code> 等。</li>
 <li><strong>应用场景：</strong> 需要对数据根据某个权重进行排序的场景。比如在直播系统中，实时排行信息包含直播间在线用户列表，各种礼物排行榜，弹幕消息（可以理解为按消息维度的消息排行榜）等信息。</li>
 </ol>
-<div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token number">127.0</span>.0.1:637<span class="token operator"><span class="token file-descriptor important">9</span>></span> zadd myZset <span class="token number">3.0</span> value1 <span class="token comment"># 添加元素到 sorted set 中 3.0 为权重</span>
-<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> <span class="token number">1</span>
-<span class="token number">127.0</span>.0.1:637<span class="token operator"><span class="token file-descriptor important">9</span>></span> zadd myZset <span class="token number">2.0</span> value2 <span class="token number">1.0</span> value3 <span class="token comment"># 一次添加多个元素</span>
-<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> <span class="token number">2</span>
-<span class="token number">127.0</span>.0.1:637<span class="token operator"><span class="token file-descriptor important">9</span>></span> zcard myZset <span class="token comment"># 查看 sorted set 中的元素数量</span>
-<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> <span class="token number">3</span>
-<span class="token number">127.0</span>.0.1:637<span class="token operator"><span class="token file-descriptor important">9</span>></span> zscore myZset value1 <span class="token comment"># 查看某个 value 的权重</span>
-<span class="token string">"3"</span>
-<span class="token number">127.0</span>.0.1:637<span class="token operator"><span class="token file-descriptor important">9</span>></span> zrange  myZset <span class="token number">0</span> -1 <span class="token comment"># 顺序输出某个范围区间的元素，0 -1 表示输出所有元素</span>
-<span class="token number">1</span><span class="token punctuation">)</span> <span class="token string">"value3"</span>
-<span class="token number">2</span><span class="token punctuation">)</span> <span class="token string">"value2"</span>
-<span class="token number">3</span><span class="token punctuation">)</span> <span class="token string">"value1"</span>
-<span class="token number">127.0</span>.0.1:637<span class="token operator"><span class="token file-descriptor important">9</span>></span> zrange  myZset <span class="token number">0</span> <span class="token number">1</span> <span class="token comment"># 顺序输出某个范围区间的元素，0 为 start  1 为 stop</span>
-<span class="token number">1</span><span class="token punctuation">)</span> <span class="token string">"value3"</span>
-<span class="token number">2</span><span class="token punctuation">)</span> <span class="token string">"value2"</span>
-<span class="token number">127.0</span>.0.1:637<span class="token operator"><span class="token file-descriptor important">9</span>></span> zrevrange  myZset <span class="token number">0</span> <span class="token number">1</span> <span class="token comment"># 逆序输出某个范围区间的元素，0 为 start  1 为 stop</span>
-<span class="token number">1</span><span class="token punctuation">)</span> <span class="token string">"value1"</span>
-<span class="token number">2</span><span class="token punctuation">)</span> <span class="token string">"value2"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; zadd myZset 3.0 value1 <span class="comment"># 添加元素到 sorted set 中 3.0 为权重</span></span><br><span class="line">(<span class="built_in">integer</span>) 1</span><br><span class="line">127.0.0.1:6379&gt; zadd myZset 2.0 value2 1.0 value3 <span class="comment"># 一次添加多个元素</span></span><br><span class="line">(<span class="built_in">integer</span>) 2</span><br><span class="line">127.0.0.1:6379&gt; zcard myZset <span class="comment"># 查看 sorted set 中的元素数量</span></span><br><span class="line">(<span class="built_in">integer</span>) 3</span><br><span class="line">127.0.0.1:6379&gt; zscore myZset value1 <span class="comment"># 查看某个 value 的权重</span></span><br><span class="line"><span class="string">&quot;3&quot;</span></span><br><span class="line">127.0.0.1:6379&gt; zrange  myZset 0 -1 <span class="comment"># 顺序输出某个范围区间的元素，0 -1 表示输出所有元素</span></span><br><span class="line">1) <span class="string">&quot;value3&quot;</span></span><br><span class="line">2) <span class="string">&quot;value2&quot;</span></span><br><span class="line">3) <span class="string">&quot;value1&quot;</span></span><br><span class="line">127.0.0.1:6379&gt; zrange  myZset 0 1 <span class="comment"># 顺序输出某个范围区间的元素，0 为 start  1 为 stop</span></span><br><span class="line">1) <span class="string">&quot;value3&quot;</span></span><br><span class="line">2) <span class="string">&quot;value2&quot;</span></span><br><span class="line">127.0.0.1:6379&gt; zrevrange  myZset 0 1 <span class="comment"># 逆序输出某个范围区间的元素，0 为 start  1 为 stop</span></span><br><span class="line">1) <span class="string">&quot;value1&quot;</span></span><br><span class="line">2) <span class="string">&quot;value2&quot;</span></span><br></pre></td></tr></table></figure>
 
 <h1 id="Redis-内存淘汰机制"><a href="#Redis-内存淘汰机制" class="headerlink" title="Redis 内存淘汰机制"></a>Redis 内存淘汰机制</h1><blockquote>
 <p>相关问题：MySQL 里有 2000w 数据，Redis 中只存 20w 的数据，如何保证 Redis 中的数据都是热点数据?</p>
@@ -469,36 +359,19 @@ OK
 </ol>
 <h1 id="缓存穿透"><a href="#缓存穿透" class="headerlink" title="缓存穿透"></a>缓存穿透</h1><h2 id="什么是缓存穿透？"><a href="#什么是缓存穿透？" class="headerlink" title="什么是缓存穿透？"></a>什么是缓存穿透？</h2><p>缓存穿透说简单点就是大量请求的 key 根本不存在于缓存中，导致请求直接到了数据库上，根本没有经过缓存这一层。举个例子：某个黑客故意制造我们缓存中不存在的 key 发起大量请求，导致大量请求落到数据库。</p>
 <h2 id="缓存穿透情况的处理流程是怎样的？"><a href="#缓存穿透情况的处理流程是怎样的？" class="headerlink" title="缓存穿透情况的处理流程是怎样的？"></a>缓存穿透情况的处理流程是怎样的？</h2><p>如下图所示，用户的请求最终都要跑到数据库中查询一遍。</p>
-<p><img src="/images/loading.gif" srcset="/img/loading.gif" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F%E6%83%85%E5%86%B5.png" alt="缓存穿透情况"></p>
+<p><img src="/images/loading.gif" data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F%E6%83%85%E5%86%B5.png" alt="缓存穿透情况"></p>
 <h2 id="有哪些解决办法？"><a href="#有哪些解决办法？" class="headerlink" title="有哪些解决办法？"></a>有哪些解决办法？</h2><p>最基本的就是首先做好参数校验，一些不合法的参数请求直接抛出异常信息返回给客户端。比如查询的数据库 id 不能小于 0、传入的邮箱格式不对的时候直接返回错误消息给客户端等等。</p>
 <p><strong>1）缓存无效 key</strong></p>
 <p>如果缓存和数据库都查不到某个 key 的数据就写一个到 Redis 中去并设置过期时间，具体命令如下： <code>SET key value EX 10086</code> 。这种方式可以解决请求的 key 变化不频繁的情况，如果黑客恶意攻击，每次构建不同的请求 key，会导致 Redis 中缓存大量无效的 key 。很明显，这种方案并不能从根本上解决此问题。如果非要用这种方式来解决穿透问题的话，尽量将无效的 key 的过期时间设置短一点比如 1 分钟。</p>
 <p>另外，这里多说一嘴，一般情况下我们是这样设计 key 的： <code>表名:列名:主键名:主键值</code> 。</p>
 <p>如果用 Java 代码展示的话，差不多是下面这样的：</p>
-<div class="code-wrapper"><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token class-name">Object</span> <span class="token function">getObjectInclNullById</span><span class="token punctuation">(</span><span class="token class-name">Integer</span> id<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token comment">// 从缓存中获取数据</span>
-    <span class="token class-name">Object</span> cacheValue <span class="token operator">=</span> cache<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>id<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token comment">// 缓存为空</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>cacheValue <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token comment">// 从数据库中获取</span>
-        <span class="token class-name">Object</span> storageValue <span class="token operator">=</span> storage<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>key<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token comment">// 缓存空对象</span>
-        cache<span class="token punctuation">.</span><span class="token function">set</span><span class="token punctuation">(</span>key<span class="token punctuation">,</span> storageValue<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token comment">// 如果存储数据为空，需要设置一个过期时间(300秒)</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>storageValue <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-            <span class="token comment">// 必须设置过期时间，否则有被攻击的风险</span>
-            cache<span class="token punctuation">.</span><span class="token function">expire</span><span class="token punctuation">(</span>key<span class="token punctuation">,</span> <span class="token number">60</span> <span class="token operator">*</span> <span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
-        <span class="token keyword">return</span> storageValue<span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-    <span class="token keyword">return</span> cacheValue<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Object <span class="title">getObjectInclNullById</span><span class="params">(Integer id)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 从缓存中获取数据</span></span><br><span class="line">    Object cacheValue = cache.get(id);</span><br><span class="line">    <span class="comment">// 缓存为空</span></span><br><span class="line">    <span class="keyword">if</span> (cacheValue == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="comment">// 从数据库中获取</span></span><br><span class="line">        Object storageValue = storage.get(key);</span><br><span class="line">        <span class="comment">// 缓存空对象</span></span><br><span class="line">        cache.set(key, storageValue);</span><br><span class="line">        <span class="comment">// 如果存储数据为空，需要设置一个过期时间(300秒)</span></span><br><span class="line">        <span class="keyword">if</span> (storageValue == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="comment">// 必须设置过期时间，否则有被攻击的风险</span></span><br><span class="line">            cache.expire(key, <span class="number">60</span> * <span class="number">5</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> storageValue;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> cacheValue;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p><strong>2）布隆过滤器</strong></p>
 <p>布隆过滤器是一个非常神奇的数据结构，通过它我们可以非常方便地判断一个给定数据是否存在于海量数据中。我们需要的就是判断 key 是否合法，有没有感觉布隆过滤器就是我们想要找的那个“人”。</p>
 <p>具体是这样做的：把所有可能存在的请求的值都存放在布隆过滤器中，当用户请求过来，先判断用户发来的请求的值是否存在于布隆过滤器中。不存在的话，直接返回请求参数错误信息给客户端，存在的话才会走下面的流程。</p>
 <p>加入布隆过滤器之后的缓存处理流程图如下。</p>
-<p><img src="/images/loading.gif" srcset="/img/loading.gif" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/%E5%8A%A0%E5%85%A5%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8%E5%90%8E%E7%9A%84%E7%BC%93%E5%AD%98%E5%A4%84%E7%90%86%E6%B5%81%E7%A8%8B.png" alt="image"></p>
+<p><img src="/images/loading.gif" data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/%E5%8A%A0%E5%85%A5%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8%E5%90%8E%E7%9A%84%E7%BC%93%E5%AD%98%E5%A4%84%E7%90%86%E6%B5%81%E7%A8%8B.png" alt="image"></p>
 <p>但是，需要注意的是布隆过滤器可能会存在误判的情况。总结来说就是： <strong>布隆过滤器说某个元素存在，小概率会误判。布隆过滤器说某个元素不在，那么这个元素一定不在。</strong></p>
 <p><em>为什么会出现误判的情况呢? 我们还要从布隆过滤器的原理来说！</em></p>
 <p>我们先来看一下，<strong>当一个元素加入布隆过滤器中的时候，会进行哪些操作：</strong></p>
@@ -528,7 +401,7 @@ OK
 </ol>
 <h1 id="Redis-哨兵-Sentinel-模式"><a href="#Redis-哨兵-Sentinel-模式" class="headerlink" title="Redis 哨兵(Sentinel)模式"></a>Redis 哨兵(Sentinel)模式</h1><p><strong>主从切换技术的方法是：当主服务器宕机后，需要手动把一台从服务器切换为主服务器，这就需要人工干预，费事费力，还会造成一段时间内服务不可用。</strong>这不是一种推荐的方式，更多时候，我们优先考虑<strong>哨兵模式</strong>。</p>
 <h2 id="哨兵模式概述"><a href="#哨兵模式概述" class="headerlink" title="哨兵模式概述"></a>哨兵模式概述</h2><p>哨兵模式是一种特殊的模式，首先Redis提供了哨兵的命令，哨兵是一个独立的进程，作为进程，它会独立运行。其原理是<strong>哨兵通过发送命令，等待Redis服务器响应，从而监控运行的多个Redis实例。</strong></p>
-<p><img src="/images/loading.gif" srcset="/img/loading.gif" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/11320039-57a77ca2757d0924.png" alt="img"></p>
+<p><img src="/images/loading.gif" data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/11320039-57a77ca2757d0924.png" alt="img"></p>
 <p>这里的哨兵有两个作用</p>
 <ul>
 <li>通过发送命令，让Redis服务器返回监控其运行状态，包括主服务器和从服务器。</li>
@@ -583,116 +456,23 @@ OK
 <td>26379</td>
 </tr>
 </tbody></table>
-<p><img src="/images/loading.gif" srcset="/img/loading.gif" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/11320039-3f40b17c0412116c.png" alt="img"></p>
+<p><img src="/images/loading.gif" data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/11320039-3f40b17c0412116c.png" alt="img"></p>
 <p>首先配置Redis的主从服务器，修改redis.conf文件如下</p>
-<div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 使得Redis服务器可以跨网络访问</span>
-<span class="token builtin class-name">bind</span> <span class="token number">0.0</span>.0.0
-<span class="token comment"># 设置密码</span>
-requirepass <span class="token string">"123456"</span>
-<span class="token comment"># 指定主服务器，注意：有关slaveof的配置只是配置从服务器，主服务器不需要配置</span>
-slaveof <span class="token number">192.168</span>.11.128 <span class="token number">6379</span>
-<span class="token comment"># 主服务器密码，注意：有关slaveof的配置只是配置从服务器，主服务器不需要配置</span>
-masterauth <span class="token number">123456</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使得Redis服务器可以跨网络访问</span></span><br><span class="line"><span class="built_in">bind</span> 0.0.0.0</span><br><span class="line"><span class="comment"># 设置密码</span></span><br><span class="line">requirepass <span class="string">&quot;123456&quot;</span></span><br><span class="line"><span class="comment"># 指定主服务器，注意：有关slaveof的配置只是配置从服务器，主服务器不需要配置</span></span><br><span class="line">slaveof 192.168.11.128 6379</span><br><span class="line"><span class="comment"># 主服务器密码，注意：有关slaveof的配置只是配置从服务器，主服务器不需要配置</span></span><br><span class="line">masterauth 123456</span><br></pre></td></tr></table></figure>
 
 <p>上述内容主要是配置Redis服务器，从服务器比主服务器多一个slaveof的配置和密码。</p>
 <p>配置3个哨兵，每个哨兵的配置都是一样的。在Redis安装目录下有一个sentinel.conf文件，copy一份进行修改</p>
-<div class="code-wrapper"><pre class="line-numbers language-css" data-language="css"><code class="language-css"># 禁止保护模式
-protected-mode no
-# 配置监听的主服务器，这里sentinel monitor代表监控，mymaster代表服务器的名称，可以自定义，192.168.11.128代表监控的主服务器，6379代表端口，2代表只有两个或两个以上的哨兵认为主服务器不可用的时候，才会进行failover操作。
-sentinel monitor mymaster 192.168.11.128 6379 2
-# sentinel author-pass定义服务的密码，mymaster是服务名称，123456是Redis服务器密码
-# sentinel auth-pass &lt;master-name> &lt;password>
-sentinel auth-pass mymaster 123456<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 禁止保护模式</span><br><span class="line"><span class="selector-tag">protected-mode</span> <span class="selector-tag">no</span></span><br><span class="line"># 配置监听的主服务器，这里<span class="selector-tag">sentinel</span> <span class="selector-tag">monitor</span>代表监控，<span class="selector-tag">mymaster</span>代表服务器的名称，可以自定义，192<span class="selector-class">.168</span><span class="selector-class">.11</span><span class="selector-class">.128</span>代表监控的主服务器，6379代表端口，2代表只有两个或两个以上的哨兵认为主服务器不可用的时候，才会进行<span class="selector-tag">failover</span>操作。</span><br><span class="line"><span class="selector-tag">sentinel</span> <span class="selector-tag">monitor</span> <span class="selector-tag">mymaster</span> 192<span class="selector-class">.168</span><span class="selector-class">.11</span><span class="selector-class">.128</span> 6379 2</span><br><span class="line"># <span class="selector-tag">sentinel</span> <span class="selector-tag">author-pass</span>定义服务的密码，<span class="selector-tag">mymaster</span>是服务名称，123456是<span class="selector-tag">Redis</span>服务器密码</span><br><span class="line"># <span class="selector-tag">sentinel</span> <span class="selector-tag">auth-pass</span> &lt;<span class="selector-tag">master-name</span>&gt; &lt;<span class="selector-tag">password</span>&gt;</span><br><span class="line"><span class="selector-tag">sentinel</span> <span class="selector-tag">auth-pass</span> <span class="selector-tag">mymaster</span> 123456</span><br></pre></td></tr></table></figure>
 
 <p>上述关闭了保护模式，便于测试。</p>
 <p>有了上述的修改，我们可以进入Redis的安装目录的src目录，通过下面的命令启动服务器和哨兵</p>
-<div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 启动Redis服务器进程</span>
-./redis-server <span class="token punctuation">..</span>/redis.conf
-<span class="token comment"># 启动哨兵进程</span>
-./redis-sentinel <span class="token punctuation">..</span>/sentinel.conf<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></div>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 启动Redis服务器进程</span></span><br><span class="line">./redis-server ../redis.conf</span><br><span class="line"><span class="comment"># 启动哨兵进程</span></span><br><span class="line">./redis-sentinel ../sentinel.conf</span><br></pre></td></tr></table></figure>
 
 <p>注意启动的顺序。<strong>首先是主机（192.168.11.128）的Redis服务进程，然后启动从机的服务进程，最后启动3个哨兵的服务进程。</strong></p>
-<h2 id="Java中使用哨兵模式"><a href="#Java中使用哨兵模式" class="headerlink" title="Java中使用哨兵模式"></a>Java中使用哨兵模式</h2><div class="code-wrapper"><pre class="line-numbers language-csharp" data-language="csharp"><code class="language-csharp"><span class="token comment">/**
- * 测试Redis哨兵模式
- * @author liu
- */</span>
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">TestSentinels</span> <span class="token punctuation">&#123;</span>
-    @<span class="token function">SuppressWarnings</span><span class="token punctuation">(</span><span class="token string">"resource"</span><span class="token punctuation">)</span>
-    @Test
-    <span class="token keyword">public</span> <span class="token return-type class-name"><span class="token keyword">void</span></span> <span class="token function">testSentinel</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token class-name">JedisPoolConfig</span> jedisPoolConfig <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">JedisPoolConfig</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        jedisPoolConfig<span class="token punctuation">.</span><span class="token function">setMaxTotal</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        jedisPoolConfig<span class="token punctuation">.</span><span class="token function">setMaxIdle</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        jedisPoolConfig<span class="token punctuation">.</span><span class="token function">setMinIdle</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token comment">// 哨兵信息</span>
-        <span class="token class-name">Set<span class="token punctuation">&lt;</span>String<span class="token punctuation">></span></span> sentinels <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">HashSet<span class="token punctuation">&lt;</span><span class="token punctuation">></span></span><span class="token punctuation">(</span>Arrays<span class="token punctuation">.</span><span class="token function">asList</span><span class="token punctuation">(</span><span class="token string">"192.168.11.128:26379"</span><span class="token punctuation">,</span>
-                <span class="token string">"192.168.11.129:26379"</span><span class="token punctuation">,</span><span class="token string">"192.168.11.130:26379"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token comment">// 创建连接池</span>
-        <span class="token class-name">JedisSentinelPool</span> pool <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">JedisSentinelPool</span><span class="token punctuation">(</span><span class="token string">"mymaster"</span><span class="token punctuation">,</span> sentinels<span class="token punctuation">,</span>jedisPoolConfig<span class="token punctuation">,</span><span class="token string">"123456"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token comment">// 获取客户端</span>
-        <span class="token class-name">Jedis</span> jedis <span class="token operator">=</span> pool<span class="token punctuation">.</span><span class="token function">getResource</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token comment">// 执行两个命令</span>
-        jedis<span class="token punctuation">.</span><span class="token keyword">set</span><span class="token punctuation">(</span><span class="token string">"mykey"</span><span class="token punctuation">,</span> <span class="token string">"myvalue"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token class-name">String</span> <span class="token keyword">value</span> <span class="token operator">=</span> jedis<span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span><span class="token string">"mykey"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        System<span class="token punctuation">.</span><span class="token keyword">out</span><span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token keyword">value</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+<h2 id="Java中使用哨兵模式"><a href="#Java中使用哨兵模式" class="headerlink" title="Java中使用哨兵模式"></a>Java中使用哨兵模式</h2><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 测试Redis哨兵模式</span></span><br><span class="line"><span class="comment"> * @author liu</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">TestSentinels</span> &#123;</span><br><span class="line">    @SuppressWarnings(<span class="string">&quot;resource&quot;</span>)</span><br><span class="line">    @Test</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testSentinel</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">        JedisPoolConfig jedisPoolConfig = <span class="keyword">new</span> JedisPoolConfig();</span><br><span class="line">        jedisPoolConfig.setMaxTotal(<span class="number">10</span>);</span><br><span class="line">        jedisPoolConfig.setMaxIdle(<span class="number">5</span>);</span><br><span class="line">        jedisPoolConfig.setMinIdle(<span class="number">5</span>);</span><br><span class="line">        <span class="comment">// 哨兵信息</span></span><br><span class="line">        Set&lt;String&gt; sentinels = <span class="keyword">new</span> HashSet&lt;&gt;(Arrays.asList(<span class="string">&quot;192.168.11.128:26379&quot;</span>,</span><br><span class="line">                <span class="string">&quot;192.168.11.129:26379&quot;</span>,<span class="string">&quot;192.168.11.130:26379&quot;</span>));</span><br><span class="line">        <span class="comment">// 创建连接池</span></span><br><span class="line">        JedisSentinelPool pool = <span class="keyword">new</span> JedisSentinelPool(<span class="string">&quot;mymaster&quot;</span>, sentinels,jedisPoolConfig,<span class="string">&quot;123456&quot;</span>);</span><br><span class="line">        <span class="comment">// 获取客户端</span></span><br><span class="line">        Jedis jedis = pool.getResource();</span><br><span class="line">        <span class="comment">// 执行两个命令</span></span><br><span class="line">        jedis.<span class="keyword">set</span>(<span class="string">&quot;mykey&quot;</span>, <span class="string">&quot;myvalue&quot;</span>);</span><br><span class="line">        String <span class="keyword">value</span> = jedis.<span class="keyword">get</span>(<span class="string">&quot;mykey&quot;</span>);</span><br><span class="line">        System.<span class="keyword">out</span>.println(<span class="keyword">value</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>上面是通过Jedis进行使用的，同样也可以使用Spring进行配置RedisTemplate使用。</p>
-<div class="code-wrapper"><pre class="line-numbers language-jsx" data-language="jsx"><code class="language-jsx"><span class="token operator">&lt;</span>bean id <span class="token operator">=</span> <span class="token string">"poolConfig"</span> <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"redis.clients.jedis.JedisPoolConfig"</span><span class="token operator">></span>
-    <span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span> 最大空闲数 <span class="token operator">--</span><span class="token operator">></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>property</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>maxIdle<span class="token punctuation">"</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>50<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>property</span><span class="token punctuation">></span></span>
-    <span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span> 最大连接数 <span class="token operator">--</span><span class="token operator">></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>property</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>maxTotal<span class="token punctuation">"</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>100<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>property</span><span class="token punctuation">></span></span>
-    <span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span> 最大等待时间 <span class="token operator">--</span><span class="token operator">></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>property</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>maxWaitMillis<span class="token punctuation">"</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>20000<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>property</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>bean</span><span class="token punctuation">></span></span>
-
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>bean</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>connectionFactory<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>org.springframework.data.redis.connection.jedis.JedisConnectionFactory<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token plain-text">
-    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>constructor-arg</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>poolConfig<span class="token punctuation">"</span></span> <span class="token attr-name">ref</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>poolConfig<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>constructor-arg</span><span class="token punctuation">></span></span><span class="token plain-text">
-    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>constructor-arg</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>sentinelConfig<span class="token punctuation">"</span></span> <span class="token attr-name">ref</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>sentinelConfig<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>constructor-arg</span><span class="token punctuation">></span></span><span class="token plain-text">
-    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>property</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>password<span class="token punctuation">"</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>123456<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>property</span><span class="token punctuation">></span></span><span class="token plain-text">
-</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>bean</span><span class="token punctuation">></span></span>
-
-<span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span> <span class="token constant">JDK</span>序列化器 <span class="token operator">--</span><span class="token operator">></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>bean</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>jdkSerializationRedisSerializer<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>org.springframework.data.redis.serializer.JdkSerializationRedisSerializer<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>bean</span><span class="token punctuation">></span></span>
-
-<span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span> String序列化器 <span class="token operator">--</span><span class="token operator">></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>bean</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>stringRedisSerializer<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>org.springframework.data.redis.serializer.StringRedisSerializer<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>bean</span><span class="token punctuation">></span></span>
-
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>bean</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>redisTemplate<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>org.springframework.data.redis.core.RedisTemplate<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token plain-text">
-    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>property</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>connectionFactory<span class="token punctuation">"</span></span> <span class="token attr-name">ref</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>connectionFactory<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>property</span><span class="token punctuation">></span></span><span class="token plain-text">
-    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>property</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>keySerializer<span class="token punctuation">"</span></span> <span class="token attr-name">ref</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>stringRedisSerializer<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>property</span><span class="token punctuation">></span></span><span class="token plain-text">
-    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>property</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>defaultSerializer<span class="token punctuation">"</span></span> <span class="token attr-name">ref</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>stringRedisSerializer<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>property</span><span class="token punctuation">></span></span><span class="token plain-text">
-    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>property</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>valueSerializer<span class="token punctuation">"</span></span> <span class="token attr-name">ref</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>jdkSerializationRedisSerializer<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>property</span><span class="token punctuation">></span></span><span class="token plain-text">
-</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>bean</span><span class="token punctuation">></span></span>
-
-<span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span> 哨兵配置 <span class="token operator">--</span><span class="token operator">></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>bean</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>sentinelConfig<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>org.springframework.data.redis.connection.RedisSentinelConfiguration<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token plain-text">
-    &lt;!-- 服务名称 -->
-    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>property</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>master<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token plain-text">
-        </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>bean</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>org.springframework.data.redis.connection.RedisNode<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token plain-text">
-            </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>property</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>name<span class="token punctuation">"</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>mymaster<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>property</span><span class="token punctuation">></span></span><span class="token plain-text">
-        </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>bean</span><span class="token punctuation">></span></span><span class="token plain-text">
-    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>property</span><span class="token punctuation">></span></span><span class="token plain-text">
-    &lt;!-- 哨兵服务IP和端口 -->
-    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>property</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>sentinels<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token plain-text">
-        </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>set</span><span class="token punctuation">></span></span><span class="token plain-text">
-            </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>bean</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>org.springframework.data.redis.connection.RedisNode<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token plain-text">
-                </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>constructor-arg</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>host<span class="token punctuation">"</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>192.168.11.128<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>constructor-arg</span><span class="token punctuation">></span></span><span class="token plain-text">
-                </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>constructor-arg</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>port<span class="token punctuation">"</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>26379<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>constructor-arg</span><span class="token punctuation">></span></span><span class="token plain-text">
-            </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>bean</span><span class="token punctuation">></span></span><span class="token plain-text">
-            </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>bean</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>org.springframework.data.redis.connection.RedisNode<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token plain-text">
-                </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>constructor-arg</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>host<span class="token punctuation">"</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>192.168.11.129<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>constructor-arg</span><span class="token punctuation">></span></span><span class="token plain-text">
-                </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>constructor-arg</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>port<span class="token punctuation">"</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>26379<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>constructor-arg</span><span class="token punctuation">></span></span><span class="token plain-text">
-            </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>bean</span><span class="token punctuation">></span></span><span class="token plain-text">
-            </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>bean</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>org.springframework.data.redis.connection.RedisNode<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token plain-text">
-                </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>constructor-arg</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>host<span class="token punctuation">"</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>192.168.11.130<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>constructor-arg</span><span class="token punctuation">></span></span><span class="token plain-text">
-                </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>constructor-arg</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>port<span class="token punctuation">"</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>26379<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>constructor-arg</span><span class="token punctuation">></span></span><span class="token plain-text">
-            </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>bean</span><span class="token punctuation">></span></span><span class="token plain-text">
-        </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>set</span><span class="token punctuation">></span></span><span class="token plain-text">
-    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>property</span><span class="token punctuation">></span></span><span class="token plain-text">
-</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>bean</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">&lt;bean id = <span class="string">&quot;poolConfig&quot;</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;redis.clients.jedis.JedisPoolConfig&quot;</span>&gt;</span><br><span class="line">    &lt;!-- 最大空闲数 --&gt;</span><br><span class="line">    &lt;property name=<span class="string">&quot;maxIdle&quot;</span> value=<span class="string">&quot;50&quot;</span>&gt;&lt;/property&gt;</span><br><span class="line">    &lt;!-- 最大连接数 --&gt;</span><br><span class="line">    &lt;property name=<span class="string">&quot;maxTotal&quot;</span> value=<span class="string">&quot;100&quot;</span>&gt;&lt;/property&gt;</span><br><span class="line">    &lt;!-- 最大等待时间 --&gt;</span><br><span class="line">    &lt;property name=<span class="string">&quot;maxWaitMillis&quot;</span> value=<span class="string">&quot;20000&quot;</span>&gt;&lt;/property&gt;</span><br><span class="line">&lt;/bean&gt;</span><br><span class="line"></span><br><span class="line">&lt;bean id=<span class="string">&quot;connectionFactory&quot;</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;org.springframework.data.redis.connection.jedis.JedisConnectionFactory&quot;</span>&gt;</span><br><span class="line">    &lt;<span class="title">constructor</span>-<span class="title">arg</span> <span class="title">name</span>=&quot;<span class="title">poolConfig</span>&quot; <span class="title">ref</span>=&quot;<span class="title">poolConfig</span>&quot;&gt;&lt;/<span class="title">constructor</span>-<span class="title">arg</span>&gt;</span><br><span class="line">    &lt;<span class="title">constructor</span>-<span class="title">arg</span> <span class="title">name</span>=&quot;<span class="title">sentinelConfig</span>&quot; <span class="title">ref</span>=&quot;<span class="title">sentinelConfig</span>&quot;&gt;&lt;/<span class="title">constructor</span>-<span class="title">arg</span>&gt;</span><br><span class="line">    &lt;<span class="title">property</span> <span class="title">name</span>=&quot;<span class="title">password</span>&quot; <span class="title">value</span>=&quot;123456&quot;&gt;&lt;/<span class="title">property</span>&gt;</span><br><span class="line">&lt;/<span class="title">bean</span>&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- <span class="title">JDK</span>序列化器 --&gt;</span><br><span class="line">&lt;<span class="title">bean</span> <span class="title">id</span>=&quot;<span class="title">jdkSerializationRedisSerializer</span>&quot; <span class="title">class</span>=&quot;<span class="title">org</span>.<span class="title">springframework</span>.<span class="title">data</span>.<span class="title">redis</span>.<span class="title">serializer</span>.<span class="title">JdkSerializationRedisSerializer</span>&quot;&gt;&lt;/<span class="title">bean</span>&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- <span class="title">String</span>序列化器 --&gt;</span><br><span class="line">&lt;<span class="title">bean</span> <span class="title">id</span>=&quot;<span class="title">stringRedisSerializer</span>&quot; <span class="title">class</span>=&quot;<span class="title">org</span>.<span class="title">springframework</span>.<span class="title">data</span>.<span class="title">redis</span>.<span class="title">serializer</span>.<span class="title">StringRedisSerializer</span>&quot;&gt;&lt;/<span class="title">bean</span>&gt;</span><br><span class="line"></span><br><span class="line">&lt;<span class="title">bean</span> <span class="title">id</span>=&quot;<span class="title">redisTemplate</span>&quot; <span class="title">class</span>=&quot;<span class="title">org</span>.<span class="title">springframework</span>.<span class="title">data</span>.<span class="title">redis</span>.<span class="title">core</span>.<span class="title">RedisTemplate</span>&quot;&gt;</span><br><span class="line">    &lt;<span class="title">property</span> <span class="title">name</span>=&quot;<span class="title">connectionFactory</span>&quot; <span class="title">ref</span>=&quot;<span class="title">connectionFactory</span>&quot;&gt;&lt;/<span class="title">property</span>&gt;</span><br><span class="line">    &lt;<span class="title">property</span> <span class="title">name</span>=&quot;<span class="title">keySerializer</span>&quot; <span class="title">ref</span>=&quot;<span class="title">stringRedisSerializer</span>&quot;&gt;&lt;/<span class="title">property</span>&gt;</span><br><span class="line">    &lt;<span class="title">property</span> <span class="title">name</span>=&quot;<span class="title">defaultSerializer</span>&quot; <span class="title">ref</span>=&quot;<span class="title">stringRedisSerializer</span>&quot;&gt;&lt;/<span class="title">property</span>&gt;</span><br><span class="line">    &lt;<span class="title">property</span> <span class="title">name</span>=&quot;<span class="title">valueSerializer</span>&quot; <span class="title">ref</span>=&quot;<span class="title">jdkSerializationRedisSerializer</span>&quot;&gt;&lt;/<span class="title">property</span>&gt;</span><br><span class="line">&lt;/<span class="title">bean</span>&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- 哨兵配置 --&gt;</span><br><span class="line">&lt;<span class="title">bean</span> <span class="title">id</span>=&quot;<span class="title">sentinelConfig</span>&quot; <span class="title">class</span>=&quot;<span class="title">org</span>.<span class="title">springframework</span>.<span class="title">data</span>.<span class="title">redis</span>.<span class="title">connection</span>.<span class="title">RedisSentinelConfiguration</span>&quot;&gt;</span><br><span class="line">    &lt;!-- 服务名称 --&gt;</span><br><span class="line">    &lt;<span class="title">property</span> <span class="title">name</span>=&quot;<span class="title">master</span>&quot;&gt;</span><br><span class="line">        &lt;<span class="title">bean</span> <span class="title">class</span>=&quot;<span class="title">org</span>.<span class="title">springframework</span>.<span class="title">data</span>.<span class="title">redis</span>.<span class="title">connection</span>.<span class="title">RedisNode</span>&quot;&gt;</span><br><span class="line">            &lt;<span class="title">property</span> <span class="title">name</span>=&quot;<span class="title">name</span>&quot; <span class="title">value</span>=&quot;<span class="title">mymaster</span>&quot;&gt;&lt;/<span class="title">property</span>&gt;</span><br><span class="line">        &lt;/<span class="title">bean</span>&gt;</span><br><span class="line">    &lt;/<span class="title">property</span>&gt;</span><br><span class="line">    &lt;!-- 哨兵服务<span class="title">IP</span>和端口 --&gt;</span><br><span class="line">    &lt;<span class="title">property</span> <span class="title">name</span>=&quot;<span class="title">sentinels</span>&quot;&gt;</span><br><span class="line">        &lt;<span class="title">set</span>&gt;</span><br><span class="line">            &lt;<span class="title">bean</span> <span class="title">class</span>=&quot;<span class="title">org</span>.<span class="title">springframework</span>.<span class="title">data</span>.<span class="title">redis</span>.<span class="title">connection</span>.<span class="title">RedisNode</span>&quot;&gt;</span><br><span class="line">                &lt;<span class="title">constructor</span>-<span class="title">arg</span> <span class="title">name</span>=&quot;<span class="title">host</span>&quot; <span class="title">value</span>=&quot;192.168.11.128&quot;&gt;&lt;/<span class="title">constructor</span>-<span class="title">arg</span>&gt;</span><br><span class="line">                &lt;<span class="title">constructor</span>-<span class="title">arg</span> <span class="title">name</span>=&quot;<span class="title">port</span>&quot; <span class="title">value</span>=&quot;26379&quot;&gt;&lt;/<span class="title">constructor</span>-<span class="title">arg</span>&gt;</span><br><span class="line">            &lt;/<span class="title">bean</span>&gt;</span><br><span class="line">            &lt;<span class="title">bean</span> <span class="title">class</span>=&quot;<span class="title">org</span>.<span class="title">springframework</span>.<span class="title">data</span>.<span class="title">redis</span>.<span class="title">connection</span>.<span class="title">RedisNode</span>&quot;&gt;</span><br><span class="line">                &lt;<span class="title">constructor</span>-<span class="title">arg</span> <span class="title">name</span>=&quot;<span class="title">host</span>&quot; <span class="title">value</span>=&quot;192.168.11.129&quot;&gt;&lt;/<span class="title">constructor</span>-<span class="title">arg</span>&gt;</span><br><span class="line">                &lt;<span class="title">constructor</span>-<span class="title">arg</span> <span class="title">name</span>=&quot;<span class="title">port</span>&quot; <span class="title">value</span>=&quot;26379&quot;&gt;&lt;/<span class="title">constructor</span>-<span class="title">arg</span>&gt;</span><br><span class="line">            &lt;/<span class="title">bean</span>&gt;</span><br><span class="line">            &lt;<span class="title">bean</span> <span class="title">class</span>=&quot;<span class="title">org</span>.<span class="title">springframework</span>.<span class="title">data</span>.<span class="title">redis</span>.<span class="title">connection</span>.<span class="title">RedisNode</span>&quot;&gt;</span><br><span class="line">                &lt;<span class="title">constructor</span>-<span class="title">arg</span> <span class="title">name</span>=&quot;<span class="title">host</span>&quot; <span class="title">value</span>=&quot;192.168.11.130&quot;&gt;&lt;/<span class="title">constructor</span>-<span class="title">arg</span>&gt;</span><br><span class="line">                &lt;<span class="title">constructor</span>-<span class="title">arg</span> <span class="title">name</span>=&quot;<span class="title">port</span>&quot; <span class="title">value</span>=&quot;26379&quot;&gt;&lt;/<span class="title">constructor</span>-<span class="title">arg</span>&gt;</span><br><span class="line">            &lt;/<span class="title">bean</span>&gt;</span><br><span class="line">        &lt;/<span class="title">set</span>&gt;</span><br><span class="line">    &lt;/<span class="title">property</span>&gt;</span><br><span class="line">&lt;/<span class="title">bean</span>&gt;</span><br></pre></td></tr></table></figure>
 
 <h2 id="哨兵模式的其他配置项"><a href="#哨兵模式的其他配置项" class="headerlink" title="哨兵模式的其他配置项"></a>哨兵模式的其他配置项</h2><table>
 <thead>
@@ -754,7 +534,7 @@ sentinel auth-pass mymaster 123456<span aria-hidden="true" class="line-numbers-r
 </ol>
 <h1 id="Redis的单线程与多线程"><a href="#Redis的单线程与多线程" class="headerlink" title="Redis的单线程与多线程"></a>Redis的单线程与多线程</h1><p>因为Redis是基于内存的操作，CPU不是Redis的瓶颈，Redis的瓶颈最有可能是机器内存的大小或者网络带宽。既然单线程容易实现，而且CPU不会成为瓶颈，那就顺理成章地采用单线程的方案了。</p>
 <h2 id="（1）IO多路复用"><a href="#（1）IO多路复用" class="headerlink" title="（1）IO多路复用"></a>（1）IO多路复用</h2><p>我们来看一下Redis顶层设计。</p>
-<p><img src="/images/loading.gif" srcset="/img/loading.gif" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20200821101342539.jpeg" alt="img"></p>
+<p><img src="/images/loading.gif" data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20200821101342539.jpeg" alt="img"></p>
 <p>FD是一个文件描述符，意思是表示当前文件处于可读、可写还是异常状态。使用 I/O 多路复用机制同时监听多个文件描述符的可读和可写状态。你可以理解为具有了多线程的特点。</p>
 <p>一旦受到网络请求就会在内存中快速处理，由于绝大多数的操作都是纯内存的，所以处理的速度会非常地快。也就是说在单线程模式下，即使连接的网络处理很多，因为有IO多路复用，依然可以在高速的内存处理中得到忽略。</p>
 <h2 id="（2）可维护性高"><a href="#（2）可维护性高" class="headerlink" title="（2）可维护性高"></a>（2）可维护性高</h2><p>多线程模型虽然在某些方面表现优异，但是它却引入了程序执行顺序的不确定性，带来了并发读写的一系列问题。单线程模式下，可以方便地进行调试和测试。</p>
@@ -765,231 +545,325 @@ sentinel auth-pass mymaster 123456<span aria-hidden="true" class="line-numbers-r
 <p>Redis 的多线程部分只是用来处理网络数据的读写和协议解析，执行命令仍然是单线程。之所以这么设计是不想 Redis 因为多线程而变得复杂，需要去控制 key、lua、事务，LPUSH/LPOP 等等的并发问题。</p>
 <p>Redis 在最新的几个版本中加入了一些可以被其他线程异步处理的删除操作，也就是我们在上面提到的 UNLINK、FLUSHALL ASYNC 和 FLUSHDB ASYNC，我们为什么会需要这些删除操作，而它们为什么需要通过多线程的方式异步处理？</p>
 <p>我们知道Redis可以使用del命令删除一个元素，如果这个元素非常大，可能占据了几十兆或者是几百兆，那么在短时间内是不能完成的，这样一来就需要多线程的异步支持。</p>
-<p><img src="/images/loading.gif" srcset="/img/loading.gif" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20200821101421465.jpeg" alt="img"></p>
+<p><img src="/images/loading.gif" data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20200821101421465.jpeg" alt="img"></p>
 <p>现在删除工作可以在后台进行。</p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>Redis 选择使用单线程模型处理客户端的请求主要还是因为 CPU 不是 Redis 服务器的瓶颈，所以使用多线程模型带来的性能提升并不能抵消它带来的开发成本和维护成本，系统的性能瓶颈也主要在网络 I/O 操作上；而 Redis 引入多线程操作也是出于性能上的考虑，对于一些大键值对的删除操作，通过多线程非阻塞地释放内存空间也能减少对 Redis 主线程阻塞的时间，提高执行的效率。</p>
 <p>一句话讲完：之前用单线程是因为基于内存速度快，而且多路复用有多路复用的作用，也就是足够了，现在引入是因为在某些操作要优化，比如删除操作，因此引入了多线程。</p>
 
-            </div>
-            <hr>
-            <div>
-              <div class="post-metas mb-3">
-                
-                  <div class="post-meta mr-3">
-                    <i class="iconfont icon-category"></i>
-                    
-                      <a class="hover-with-bg" href="/categories/%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0/">面试笔记</a>
-                    
-                  </div>
-                
-                
-                  <div class="post-meta">
-                    <i class="iconfont icon-tags"></i>
-                    
-                      <a class="hover-with-bg" href="/tags/%E9%9D%A2%E8%AF%95/">面试</a>
-                    
-                      <a class="hover-with-bg" href="/tags/Redis/">Redis</a>
-                    
-                  </div>
-                
-              </div>
-              
-                <p class="note note-warning">
-                  
-                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
-                  
-                </p>
-              
-              
-                <div class="post-prevnext">
-                  <article class="post-prev col-6">
-                    
-                    
-                      <a href="/2021/04/28/pRPC-Day2/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">pRPC-Day2</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
-                  </article>
-                  <article class="post-next col-6">
-                    
-                    
-                      <a href="/2021/04/24/pRPC-Day1/">
-                        <span class="hidden-mobile">pRPC-Day1</span>
-                        <span class="visible-mobile">下一篇</span>
-                        <i class="iconfont icon-arrowright"></i>
-                      </a>
-                    
-                  </article>
-                </div>
-              
-            </div>
-
-            
-          </article>
-        </div>
-      </div>
     </div>
+
     
-      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
-        <div id="toc">
-  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
-  <div class="toc-body" id="toc-body"></div>
+    
+    
+      
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2021\03\11\Java面试笔记-算法\" rel="bookmark">Java面试笔记-算法</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2021\04\28\Java面试笔记-数据结构\" rel="bookmark">Java面试笔记-数据结构</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2021\03\11\Java面试笔记-设计模式\" rel="bookmark">Java面试笔记-设计模式</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2021\03\11\Java面试笔记-线程\" rel="bookmark">Java面试笔记-线程</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2021\03\11\Java面试笔记-Java基础\" rel="bookmark">Java面试笔记-Java基础</a></div>
+    </li>
+  </ul>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>PlutoWu
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://plutowu.top/2021/04/28/Java%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0-Redis/" title="Java面试笔记-Redis">http://plutowu.top/2021/04/28/Java面试笔记-Redis/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener external nofollow noreferrer" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
 </div>
 
-      </div>
-    
-  </div>
-</div>
 
-<!-- Custom -->
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag"># 面试</a>
+              <a href="/tags/Redis/" rel="tag"># Redis</a>
+          </div>
+
+        
 
 
-    
-
-    
-      <a id="scroll-top-button" href="#" role="button">
-        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
-      </a>
-    
-
-    
-      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
-     aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
-        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body mx-3">
-        <div class="md-form mb-5">
-          <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v"
-                 for="local-search-input">关键词</label>
-        </div>
-        <div class="list-group" id="local-search-result"></div>
-      </div>
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/04/24/pRPC-Day1/" rel="prev" title="pRPC-Day1">
+      <i class="fa fa-chevron-left"></i> pRPC-Day1
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/04/28/pRPC-Day2/" rel="next" title="pRPC-Day2">
+      pRPC-Day2 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
   </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Redis%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.</span> <span class="nav-text">Redis简单介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Redis-%E5%92%8C-Memcached-%E7%9A%84%E5%8C%BA%E5%88%AB%E5%92%8C%E5%85%B1%E5%90%8C%E7%82%B9"><span class="nav-number">2.</span> <span class="nav-text">Redis 和 Memcached 的区别和共同点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Redis%E5%B8%B8%E8%A7%81%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="nav-number">3.</span> <span class="nav-text">Redis常见数据结构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#string"><span class="nav-number">3.1.</span> <span class="nav-text">string</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#list"><span class="nav-number">3.2.</span> <span class="nav-text">list</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hash"><span class="nav-number">3.3.</span> <span class="nav-text">hash</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#set"><span class="nav-number">3.4.</span> <span class="nav-text">set</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sorted-set"><span class="nav-number">3.5.</span> <span class="nav-text">sorted set</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Redis-%E5%86%85%E5%AD%98%E6%B7%98%E6%B1%B0%E6%9C%BA%E5%88%B6"><span class="nav-number">4.</span> <span class="nav-text">Redis 内存淘汰机制</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F"><span class="nav-number">5.</span> <span class="nav-text">缓存穿透</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F%EF%BC%9F"><span class="nav-number">5.1.</span> <span class="nav-text">什么是缓存穿透？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F%E6%83%85%E5%86%B5%E7%9A%84%E5%A4%84%E7%90%86%E6%B5%81%E7%A8%8B%E6%98%AF%E6%80%8E%E6%A0%B7%E7%9A%84%EF%BC%9F"><span class="nav-number">5.2.</span> <span class="nav-text">缓存穿透情况的处理流程是怎样的？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%89%E5%93%AA%E4%BA%9B%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95%EF%BC%9F"><span class="nav-number">5.3.</span> <span class="nav-text">有哪些解决办法？</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E9%9B%AA%E5%B4%A9"><span class="nav-number">6.</span> <span class="nav-text">缓存雪崩</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E7%BC%93%E5%AD%98%E9%9B%AA%E5%B4%A9%EF%BC%9F"><span class="nav-number">6.1.</span> <span class="nav-text">什么是缓存雪崩？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%89%E5%93%AA%E4%BA%9B%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95%EF%BC%9F-1"><span class="nav-number">6.2.</span> <span class="nav-text">有哪些解决办法？</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Redis-%E5%93%A8%E5%85%B5-Sentinel-%E6%A8%A1%E5%BC%8F"><span class="nav-number">7.</span> <span class="nav-text">Redis 哨兵(Sentinel)模式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%93%A8%E5%85%B5%E6%A8%A1%E5%BC%8F%E6%A6%82%E8%BF%B0"><span class="nav-number">7.1.</span> <span class="nav-text">哨兵模式概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis%E9%85%8D%E7%BD%AE%E5%93%A8%E5%85%B5%E6%A8%A1%E5%BC%8F"><span class="nav-number">7.2.</span> <span class="nav-text">Redis配置哨兵模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java%E4%B8%AD%E4%BD%BF%E7%94%A8%E5%93%A8%E5%85%B5%E6%A8%A1%E5%BC%8F"><span class="nav-number">7.3.</span> <span class="nav-text">Java中使用哨兵模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%93%A8%E5%85%B5%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%85%B6%E4%BB%96%E9%85%8D%E7%BD%AE%E9%A1%B9"><span class="nav-number">7.4.</span> <span class="nav-text">哨兵模式的其他配置项</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Redis%E4%BD%BF%E7%94%A8%E8%B7%B3%E8%A1%A8%E8%80%8C%E9%9D%9E%E7%BA%A2%E9%BB%91%E6%A0%91%E7%9A%84%E5%8E%9F%E5%9B%A0"><span class="nav-number">8.</span> <span class="nav-text">Redis使用跳表而非红黑树的原因</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Redis%E7%9A%84%E5%8D%95%E7%BA%BF%E7%A8%8B%E4%B8%8E%E5%A4%9A%E7%BA%BF%E7%A8%8B"><span class="nav-number">9.</span> <span class="nav-text">Redis的单线程与多线程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%EF%BC%881%EF%BC%89IO%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8"><span class="nav-number">9.1.</span> <span class="nav-text">（1）IO多路复用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EF%BC%882%EF%BC%89%E5%8F%AF%E7%BB%B4%E6%8A%A4%E6%80%A7%E9%AB%98"><span class="nav-number">9.2.</span> <span class="nav-text">（2）可维护性高</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EF%BC%883%EF%BC%89%E5%9F%BA%E4%BA%8E%E5%86%85%E5%AD%98%EF%BC%8C%E5%8D%95%E7%BA%BF%E7%A8%8B%E7%8A%B6%E6%80%81%E4%B8%8B%E6%95%88%E7%8E%87%E4%BE%9D%E7%84%B6%E9%AB%98"><span class="nav-number">9.3.</span> <span class="nav-text">（3）基于内存，单线程状态下效率依然高</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis%E5%BC%95%E5%85%A5%E5%A4%9A%E7%BA%BF%E7%A8%8B"><span class="nav-number">9.4.</span> <span class="nav-text">Redis引入多线程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">9.5.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="PlutoWu"
+      src="/images/1.jpg">
+  <p class="site-author-name" itemprop="name">PlutoWu</p>
+  <div class="site-description" itemprop="description">A Simple and Powerful Blog</div>
 </div>
-    
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">30</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
 
-    
-  </main>
 
-  <footer class="text-center mt-5 py-3">
-  <div class="footer-content">
-     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+
+      </div>
+      
+      
+		<script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+		<script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+		<div class="widget-wrap">
+			<h3 class="widget-title">Tag Cloud</h3>
+			<div id="myCanvasContainer" class="widget tagcloud">
+				<canvas width="250" height="250" id="resCanvas" style="width=100%">
+            <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C%E8%AF%AD%E8%A8%80/" rel="tag">C语言</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang/" rel="tag">Golang</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/I-O/" rel="tag">I/O</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JWT/" rel="tag">JWT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java%E5%9F%BA%E7%A1%80/" rel="tag">Java基础</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RPC/" rel="tag">RPC</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RabbitMQ/" rel="tag">RabbitMQ</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Servlet/" rel="tag">Servlet</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/" rel="tag">Spring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringBoot/" rel="tag">SpringBoot</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/" rel="tag">Swagger</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue3/" rel="tag">Vue3</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BD%B1%E8%AF%84/" rel="tag">影评</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%91%84%E5%BD%B1/" rel="tag">摄影</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A1%86%E6%9E%B6/" rel="tag">框架</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BA%BF%E7%A8%8B/" rel="tag">线程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%87%8C%E4%B8%96%E7%95%8C/" rel="tag">里世界</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag">面试</a><span class="tag-list-count">10</span></li></ul>
+				</canvas>
+			</div>
+		</div>
+		
+
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">PlutoWu</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">267k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">4:02</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener external nofollow noreferrer" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener external nofollow noreferrer" target="_blank">NexT.Pisces</a> 强力驱动
   </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="true"></script>
+    <script defer src="true"></script>
+    <script defer src="true"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   
 
   
 
-  
-</footer>
 
-
-  <!-- SCRIPTS -->
-  
-  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
-  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
-
-  <script>
-    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
-    NProgress.start()
-    window.addEventListener('load', function() {
-      NProgress.done();
-    })
-  </script>
-
-
-<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
-<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
-<script  src="/js/debouncer.js" ></script>
-<script  src="/js/events.js" ></script>
-<script  src="/js/plugins.js" ></script>
-
-<!-- Plugins -->
-
-
-  
-    <script  src="/js/img-lazyload.js" ></script>
-  
-
-
-
-  
-    
-  
-
-
-
-  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
-
-
-
-  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
-
-
-
-  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
-
-
-
-  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
-
-
-
-
-
-
-  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
-  <script>
-    (function (window, document) {
-      var typing = Fluid.plugins.typing;
-      var title = document.getElementById('subtitle').title;
-      
-      typing(title)
-      
-    })(window, document);
-  </script>
-
-
-
-  <script  src="/js/local-search.js" ></script>
-  <script>
-    (function () {
-      var path = "/local-search.xml";
-      $('#local-search-input').on('click', function() {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-      });
-      $('#modalSearch').on('shown.bs.modal', function() {
-        $('#local-search-input').focus();
-      });
-    })()
-  </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- 主题的启动项 保持在最底部 -->
-<script  src="/js/boot.js" ></script>
-
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'KaDYMq6sfBlwR6bo1cgJaQ0P-gzGzoHsz',
+      appKey     : 'Bq47qMh1BOVYR5n0l5AXXTUM',
+      placeholder: "Just go go",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
 
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><script>
             window.imageLazyLoadSetting = {

@@ -284,14 +284,14 @@
   </url>
   
   <url>
-    <loc>http://plutowu.top/tags/JVM/</loc>
+    <loc>http://plutowu.top/tags/I-O/</loc>
     <lastmod>2021-05-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>http://plutowu.top/tags/I-O/</loc>
+    <loc>http://plutowu.top/tags/JVM/</loc>
     <lastmod>2021-05-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -326,13 +326,6 @@
   </url>
   
   <url>
-    <loc>http://plutowu.top/tags/Git/</loc>
-    <lastmod>2021-05-16</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://plutowu.top/tags/Swagger/</loc>
     <lastmod>2021-05-16</lastmod>
     <changefreq>daily</changefreq>
@@ -340,7 +333,7 @@
   </url>
   
   <url>
-    <loc>http://plutowu.top/tags/RPC/</loc>
+    <loc>http://plutowu.top/tags/Git/</loc>
     <lastmod>2021-05-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -355,6 +348,13 @@
   
   <url>
     <loc>http://plutowu.top/tags/C%E8%AF%AD%E8%A8%80/</loc>
+    <lastmod>2021-05-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://plutowu.top/tags/RPC/</loc>
     <lastmod>2021-05-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -396,13 +396,6 @@
   </url>
   
   <url>
-    <loc>http://plutowu.top/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</loc>
-    <lastmod>2021-05-16</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://plutowu.top/tags/MySQL/</loc>
     <lastmod>2021-05-16</lastmod>
     <changefreq>daily</changefreq>
@@ -410,7 +403,21 @@
   </url>
   
   <url>
+    <loc>http://plutowu.top/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</loc>
+    <lastmod>2021-05-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://plutowu.top/tags/Redis/</loc>
+    <lastmod>2021-05-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://plutowu.top/tags/%E7%AE%97%E6%B3%95/</loc>
     <lastmod>2021-05-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -425,13 +432,6 @@
   
   <url>
     <loc>http://plutowu.top/tags/Spring/</loc>
-    <lastmod>2021-05-16</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://plutowu.top/tags/%E7%AE%97%E6%B3%95/</loc>
     <lastmod>2021-05-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -475,14 +475,14 @@
   </url>
   
   <url>
-    <loc>http://plutowu.top/categories/%E9%A1%B9%E7%9B%AE/</loc>
+    <loc>http://plutowu.top/categories/%E6%91%84%E5%BD%B1/</loc>
     <lastmod>2021-05-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>http://plutowu.top/categories/%E6%91%84%E5%BD%B1/</loc>
+    <loc>http://plutowu.top/categories/%E9%A1%B9%E7%9B%AE/</loc>
     <lastmod>2021-05-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>

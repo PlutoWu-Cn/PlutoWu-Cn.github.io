@@ -284,14 +284,14 @@
   </url>
   
   <url>
-    <loc>http://plutowu.top/tags/I-O/</loc>
+    <loc>http://plutowu.top/tags/JVM/</loc>
     <lastmod>2021-05-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>http://plutowu.top/tags/JVM/</loc>
+    <loc>http://plutowu.top/tags/I-O/</loc>
     <lastmod>2021-05-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -326,13 +326,6 @@
   </url>
   
   <url>
-    <loc>http://plutowu.top/tags/Swagger/</loc>
-    <lastmod>2021-05-16</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://plutowu.top/tags/Git/</loc>
     <lastmod>2021-05-16</lastmod>
     <changefreq>daily</changefreq>
@@ -340,7 +333,21 @@
   </url>
   
   <url>
+    <loc>http://plutowu.top/tags/Swagger/</loc>
+    <lastmod>2021-05-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://plutowu.top/tags/RPC/</loc>
+    <lastmod>2021-05-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://plutowu.top/tags/%E6%91%84%E5%BD%B1/</loc>
     <lastmod>2021-05-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -355,13 +362,6 @@
   
   <url>
     <loc>http://plutowu.top/tags/Vue3/</loc>
-    <lastmod>2021-05-16</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://plutowu.top/tags/%E6%91%84%E5%BD%B1/</loc>
     <lastmod>2021-05-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -389,13 +389,6 @@
   </url>
   
   <url>
-    <loc>http://plutowu.top/tags/MySQL/</loc>
-    <lastmod>2021-05-16</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://plutowu.top/tags/Java%E5%9F%BA%E7%A1%80/</loc>
     <lastmod>2021-05-16</lastmod>
     <changefreq>daily</changefreq>
@@ -404,6 +397,13 @@
   
   <url>
     <loc>http://plutowu.top/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</loc>
+    <lastmod>2021-05-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://plutowu.top/tags/MySQL/</loc>
     <lastmod>2021-05-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -482,14 +482,14 @@
   </url>
   
   <url>
-    <loc>http://plutowu.top/categories/Vue3/</loc>
+    <loc>http://plutowu.top/categories/%E6%91%84%E5%BD%B1/</loc>
     <lastmod>2021-05-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>http://plutowu.top/categories/%E6%91%84%E5%BD%B1/</loc>
+    <loc>http://plutowu.top/categories/Vue3/</loc>
     <lastmod>2021-05-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>

@@ -388,14 +388,11 @@ document.addEventListener('DOMContentLoaded', function () {
     const $article = document.getElementById('article-container')
 
     // main of scroll
-    window.tocScrollFn = function () {
-      return btf.throttle(function () {
-        const currentTop = window.scrollY || document.documentElement.scrollTop
-        scrollPercent(currentTop)
-        findHeadPosition(currentTop)
-      }, 100)()
-    }
-    window.addEventListener('scroll', tocScrollFn)
+    window.addEventListener('scroll', btf.throttle(function (e) {
+      const currentTop = window.scrollY || document.documentElement.scrollTop
+      scrollPercent(currentTop)
+      findHeadPosition(currentTop)
+    }, 100))
 
     const scrollPercent = function (currentTop) {
       const docHeight = $article.clientHeight
@@ -413,11 +410,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const updateAnchor = function (anchor) {
       if (window.history.replaceState && anchor !== window.location.hash) {
         if (!anchor) anchor = location.pathname
-        const title = GLOBAL_CONFIG_SITE.title
-        window.history.replaceState({
-          url: location.href,
-          title: title
-        }, title, anchor)
+        window.history.replaceState({}, '', anchor)
       }
     }
 

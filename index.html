@@ -1,1864 +1,983 @@
+
+
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
 <head>
   <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.4.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/P.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/P.png">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
-
-<link rel="stylesheet" href="/css/main.css">
-
-
-<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
-
-<script id="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"plutowu.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
-  </script>
-
-  <meta name="description" content="A Simple and Powerful Blog">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Pluto">
-<meta property="og:url" content="http://plutowu.top/index.html">
-<meta property="og:site_name" content="Pluto">
-<meta property="og:description" content="A Simple and Powerful Blog">
-<meta property="og:locale" content="zh_CN">
-<meta property="article:author" content="PlutoWu">
-<meta name="twitter:card" content="summary">
-
-<link rel="canonical" href="http://plutowu.top/">
-
-
-<script id="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : false,
-    isPost : false,
-    lang   : 'zh-CN'
-  };
-</script>
-
-  <title>Pluto</title>
+  <link rel="apple-touch-icon" sizes="76x76" href="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/icon.png">
+  <link rel="icon" href="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/icon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
   
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="A Simple and Powerful Blog">
+  <meta name="author" content="PlutoWu">
+  <meta name="keywords" content="">
+  
+  <title>Pluto</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
 
 
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
 
 
 
-  <noscript>
-  <style>
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
 
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
-  }
 
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
-</noscript>
+<link  rel="stylesheet" href="/css/main.css" />
 
-<link rel="alternate" href="/atom.xml" title="Pluto" type="application/atom+xml">
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"plutowu.top","root":"/","version":"1.8.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="Pluto" type="application/atom+xml">
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
 
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="切换导航栏">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
+<body>
+  <header style="height: 100vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Pluto</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                主页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                时间轴
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:" rel="external nofollow noreferrer">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
     </div>
   </div>
-
-  <div class="site-meta">
-
-    <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">Pluto</h1>
-      <span class="logo-line-after"><i></i></span>
-    </a>
-      <p class="site-subtitle" itemprop="description">Programming | Photography | Film</p>
-  </div>
-
-  <div class="site-nav-right">
-    <div class="toggle popup-trigger">
-    </div>
-  </div>
-</div>
-
-
-
-
-<nav class="site-nav">
-  <ul id="menu" class="menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
-
-  </li>
-  </ul>
 </nav>
 
-
-
-
-</div>
-    </header>
-
-    
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
-  <div class="reading-progress-bar"></div>
-
-  <a href="https://github.com/PlutoWu-Cn" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener external nofollow noreferrer" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
-
-
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
-
-          <div class="content index posts-expand">
-            
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://plutowu.top/2021/03/11/Java%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0-%E7%AE%97%E6%B3%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/1.jpg">
-      <meta itemprop="name" content="PlutoWu">
-      <meta itemprop="description" content="A Simple and Powerful Blog">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Pluto">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/03/11/Java%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0-%E7%AE%97%E6%B3%95/" class="post-title-link" itemprop="url">Java面试笔记-算法</a>
-        </h2>
-
-        <div class="post-meta">
-        
-        
-		<i class="fa fa-thumb-tack"></i>
-		<font color="RED">置顶</font>
-		<span class="post-meta-divider">|</span>
-		
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-03-11 18:19:59" itemprop="dateCreated datePublished" datetime="2021-03-11T18:19:59+08:00">2021-03-11</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-05-16 21:28:48" itemprop="dateModified" datetime="2021-05-16T21:28:48+08:00">2021-05-16</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">面试笔记</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2021/03/11/Java%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0-%E7%AE%97%E6%B3%95/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2021/03/11/Java%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0-%E7%AE%97%E6%B3%95/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>31k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>28 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="二叉树的先序、中序和后序遍历-Easy"><a href="#二叉树的先序、中序和后序遍历-Easy" class="headerlink" title="二叉树的先序、中序和后序遍历 (Easy)"></a>二叉树的先序、中序和后序遍历 (Easy)</h1><p>分别按照二叉树先序，中序和后序打印所有的节点。</p>
-<p><strong>示例1</strong></p>
-<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;</span><br><span class="line">输出：[[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>],[<span class="number">2</span>,<span class="number">1</span>,<span class="number">3</span>],[<span class="number">2</span>,<span class="number">3</span>,<span class="number">1</span>]]</span><br></pre></td></tr></table></figure>
-
-<p>二叉树遍历</p>
-<ul>
-<li>先序：root -&gt; left -&gt; right</li>
-<li>中序：left -&gt; root  -&gt; right</li>
-<li>后序：left -&gt; right-&gt; root  </li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * public class TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *   int val = 0;</span></span><br><span class="line"><span class="comment"> *   TreeNode left = null;</span></span><br><span class="line"><span class="comment"> *   TreeNode right = null;</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> root TreeNode类 the root of binary tree</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> int整型二维数组</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span>[][] threeOrders (TreeNode root) &#123;</span><br><span class="line">        <span class="comment">// write code here</span></span><br><span class="line">        <span class="keyword">int</span>[][] res = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">3</span>][getSize(root)];</span><br><span class="line">        order(res, root);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> i1 = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> i2 = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> i3 = <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">order</span><span class="params">(<span class="keyword">int</span>[][] res, TreeNode root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="keyword">null</span>) <span class="keyword">return</span>;</span><br><span class="line">        res[<span class="number">0</span>][i1++] = root.val;</span><br><span class="line">        order(res, root.left);</span><br><span class="line">        res[<span class="number">1</span>][i2++] = root.val;</span><br><span class="line">        order(res, root.right);</span><br><span class="line">        res[<span class="number">2</span>][i3++] = root.val;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getSize</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span> + getSize(root.left) + getSize(root.right);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/03/11/Java%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0-%E7%AE%97%E6%B3%95/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://plutowu.top/2021/05/16/Golang-Day4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/1.jpg">
-      <meta itemprop="name" content="PlutoWu">
-      <meta itemprop="description" content="A Simple and Powerful Blog">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Pluto">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/05/16/Golang-Day4/" class="post-title-link" itemprop="url">Golang-Day4</a>
-        </h2>
-
-        <div class="post-meta">
-        
-        
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/bg.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="A Gopher A Javaer">
               
-
-              <time title="创建时间：2021-05-16 14:31:03 / 修改时间：21:29:58" itemprop="dateCreated datePublished" datetime="2021-05-16T14:31:03+08:00">2021-05-16</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a>
-                </span>
             </span>
 
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2021/05/16/Golang-Day4/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2021/05/16/Golang-Day4/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>185</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="架构图"><a href="#架构图" class="headerlink" title="架构图"></a>架构图</h1><p><img src="/images/loading.gif" data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/Snipaste_2021-05-16_14-34-12.jpg"></p>
-<h1 id="版本一：构建基础Server"><a href="#版本一：构建基础Server" class="headerlink" title="版本一：构建基础Server"></a>版本一：构建基础Server</h1><h2 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h2><p><img src="/images/loading.gif" data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210516150100.png"></p>
-<h2 id="主程序"><a href="#主程序" class="headerlink" title="主程序"></a>主程序</h2><p><img src="/images/loading.gif" data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210516150237.png"></p>
-<h1 id="版本二：用户上线功能"><a href="#版本二：用户上线功能" class="headerlink" title="版本二：用户上线功能"></a>版本二：用户上线功能</h1><h2 id="添加一个用户端"><a href="#添加一个用户端" class="headerlink" title="添加一个用户端"></a>添加一个用户端</h2><p><img src="/images/loading.gif" data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210516154046.png"></p>
-<h2 id="补充修改服务端"><a href="#补充修改服务端" class="headerlink" title="补充修改服务端"></a>补充修改服务端</h2><p><img src="/images/loading.gif" data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210516154624.png"></p>
-<h1 id="版本三：用户消息广播机制"><a href="#版本三：用户消息广播机制" class="headerlink" title="版本三：用户消息广播机制"></a>版本三：用户消息广播机制</h1><p>完善handle处理业务⽅法，启动⼀个针对当前客户端的读goroutine</p>
-<p><img src="/images/loading.gif" data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210516155709.png"></p>
-<h1 id="版本四：用户业务层封装"><a href="#版本四：用户业务层封装" class="headerlink" title="版本四：用户业务层封装"></a>版本四：用户业务层封装</h1><p><img src="/images/loading.gif" data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210516161402.png"></p>
-<h1 id="版本五：在线用户查询"><a href="#版本五：在线用户查询" class="headerlink" title="版本五：在线用户查询"></a>版本五：在线用户查询</h1><p><img src="/images/loading.gif" data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210516162332.png"></p>
-<h1 id="版本六：修改用户名"><a href="#版本六：修改用户名" class="headerlink" title="版本六：修改用户名"></a>版本六：修改用户名</h1><p><img src="/images/loading.gif" data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210516163713.png"></p>
-<h1 id="版本七：超时强踢功能"><a href="#版本七：超时强踢功能" class="headerlink" title="版本七：超时强踢功能"></a>版本七：超时强踢功能</h1><p><img src="/images/loading.gif" data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210516164936.png"></p>
-<h1 id="版本八：私聊功能"><a href="#版本八：私聊功能" class="headerlink" title="版本八：私聊功能"></a>版本八：私聊功能</h1><p><img src="/images/loading.gif" data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210516181243.png"></p>
-<h1 id="版本九：客户端实现"><a href="#版本九：客户端实现" class="headerlink" title="版本九：客户端实现"></a>版本九：客户端实现</h1><h2 id="客户端类型定义与链接"><a href="#客户端类型定义与链接" class="headerlink" title="客户端类型定义与链接"></a>客户端类型定义与链接</h2><p><img src="/images/loading.gif" data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210516183818.png"></p>
-<h2 id="解析命令行"><a href="#解析命令行" class="headerlink" title="解析命令行"></a>解析命令行</h2><p><img src="/images/loading.gif" data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210516184623.png"></p>
-<h2 id="菜单显示"><a href="#菜单显示" class="headerlink" title="菜单显示"></a>菜单显示</h2><p><img src="/images/loading.gif" data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210516185930.png"></p>
-<h2 id="更新用户名"><a href="#更新用户名" class="headerlink" title="更新用户名"></a>更新用户名</h2><p><img src="/images/loading.gif" data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210516191232.png"></p>
-<h2 id="公聊模式"><a href="#公聊模式" class="headerlink" title="公聊模式"></a>公聊模式</h2><p><img src="/images/loading.gif" data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210516192114.png"></p>
-<h2 id="私聊模式"><a href="#私聊模式" class="headerlink" title="私聊模式"></a>私聊模式</h2><p><img src="/images/loading.gif" data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210516194007.png"></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://plutowu.top/2021/05/15/Golang-Day3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/1.jpg">
-      <meta itemprop="name" content="PlutoWu">
-      <meta itemprop="description" content="A Simple and Powerful Blog">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Pluto">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/05/15/Golang-Day3/" class="post-title-link" itemprop="url">Golang-Day3</a>
-        </h2>
-
-        <div class="post-meta">
-        
-        
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-05-15 10:35:24" itemprop="dateCreated datePublished" datetime="2021-05-15T10:35:24+08:00">2021-05-15</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-05-16 21:30:05" itemprop="dateModified" datetime="2021-05-16T21:30:05+08:00">2021-05-16</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2021/05/15/Golang-Day3/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2021/05/15/Golang-Day3/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>6.9k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>6 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="面向对象特征"><a href="#面向对象特征" class="headerlink" title="面向对象特征"></a>面向对象特征</h1><h2 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h2><p><strong>Java中的封装</strong></p>
-<p>Java语言中，封装是自然而来的，也是强制的。你所写的代码，都要属于某个类，某个class文件。类的属性封装了数据，方法则是对这些数据的操作。通过private和public来控制数据的可访问性</p>
-<p>每个类（java文件），自然的就是一个对象的模板</p>
-<p><strong>Go中的封装</strong></p>
-<p>Go语言并不是完全面向对象的。其实Go语言中并没有类和对象的概念</p>
-<p>首先，Go语言是完全可以写成面向过程风格的。Go语言中有很多的function是不属于任何对象的</p>
-<p>然后，Go语言中，封装有包范围的封装和结构体范围的封装</p>
-<p>Golang的封装特性体现在类名、属性名、方法名的首字母大写即表示对外（其他包）可以访问，否则只能在本包内访问</p>
-<p><img src="/images/loading.gif" data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210515103957376.png" alt="image-20210515103957376"></p>
-<h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2><p><strong>Java中的继承</strong></p>
-<p>Java语言中，继承通过extends关键字实现。有非常清晰的父类和子类的概念以及继承关系。Java不支持多继承</p>
-<p><strong>Go中的继承</strong></p>
-<p>Go语言中其实并没有继承。但是Go中确实只是提供了一种伪继承，通过embedding实现的“伪”继承</p>
-<p><strong>父类的定义以及方法</strong></p>
-<p><img src="/images/loading.gif" data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210515105218272.png" alt="image-20210515105218272"></p>
-<p><strong>子类的定义以及方法</strong></p>
-<p>子类的定义只需在结构体内加入父类名称即可认定为继承父类</p>
-<p><img src="/images/loading.gif" data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210515105432491.png" alt="image-20210515105432491"></p>
-<p>如此看起来Go语言中的继承是不是更像一种提供了语法糖的has-a的关系，并不是is-a的关系</p>
-<p>这里就引申出继承或是组合的问题</p>
-<p><strong>继承vs组合</strong></p>
-<table>
-<thead>
-<tr>
-<th></th>
-<th>继承</th>
-<th>组合</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>优点</td>
-<td>创建子类的对象时，无须创建父类的对象</td>
-<td>不破坏封装，整体类与局部类之间松耦合，彼此相对独立</td>
-</tr>
-<tr>
-<td></td>
-<td>子类能自动继承父类的接口</td>
-<td>具有较好的可扩展性</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td>支持动态组合。在运行时，整体对象可以选择不同类型的局部对象</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td>整体类可以对局部类进行包装，封装局部类的接口，提供新的接</td>
-</tr>
-<tr>
-<td>缺点</td>
-<td>子类不能改变父类的接口</td>
-<td>整体类不能自动获得和局部类同样的接口</td>
-</tr>
-<tr>
-<td></td>
-<td>破坏封装，子类与父类之间紧密耦合，子类依赖于父类的实现，子类缺乏独立性</td>
-<td>创建整体类的对象时，需要创建所有局部类的对象</td>
-</tr>
-<tr>
-<td></td>
-<td>不支持动态继承。在运行时，子类无法选择不同的父类</td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td>支持扩展，但是往往以增加系统结构的复杂度为代价</td>
-<td></td>
-</tr>
-</tbody></table>
-<p>那么合理选择继承和组合使用时机就很重要了</p>
-<ol>
-<li>除非考虑使用多态，否则优先使用组合</li>
-<li>要实现类似”多重继承“的设计的时候，使用组合</li>
-<li>要考虑多态又要考虑实现“多重继承”的时候，使用组合+接口</li>
-</ol>
-<h2 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h2><h3 id="基本要素"><a href="#基本要素" class="headerlink" title="基本要素"></a>基本要素</h3><p>方法重载也是多态的一种。但是Go语言中是不支持方法重载的</p>
-<p>两种语言都支持方法重写（Go中的伪继承，son如果重写了father中的方法，默认是会使用son的方法的）</p>
-<p>不过要注意的是，在Java中重写父类的非抽象方法，已经违背了里氏替换原则。而Go语言中是没有抽象方法一说的</p>
-<p>Go中的多态采用和JavaScript一样的鸭式辩型：如果一只鸟走路像鸭子，叫起来像鸭子，那么它就是一只鸭子。</p>
-<p>在Java中，我们要显式的使用implements关键字，声明一个类实现了某个接口，才能将这个类当做这个接口的一个实现来使用。在Go中，没有implements关键字。只要一个struct实现了某个接口规定的所有方法，就认为它实现了这个接口。</p>
-<p><strong>父类（接口）</strong></p>
-<p><img src="/images/loading.gif" data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210515110823989.png" alt="image-20210515110823989"></p>
-<p><strong>子类（实现父类所有方法）</strong></p>
-<p><img src="/images/loading.gif" data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210515110945513.png" alt="image-20210515110945513"></p>
-<p><strong>父类类型的变量（指针）指向（引用）子类的具体数据变量</strong></p>
-<p><img src="/images/loading.gif" data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210515111053027.png" alt="image-20210515111053027"></p>
-<p>理解了基本的接口的基本要素</p>
-<p>而接下来，我们来讨论一个老生常谈的问题：接口和抽象类的区别</p>
-<blockquote>
-<p>abstract class的核心在于，我知道一类物体的部分行为（和属性），但是不清楚另一部分的行为（和属性），所以我不能自己实例化（不知道的这部分）。如我们的例子，abstract class是Animal，那么我们可以定义他们胎生，恒定体温，run()等共同的行为，但是具体到“叫”这个行为时，得留着让非abstract的狗和猫等等子类具体实现。</p>
-<p>interface的核心在于，我只知道这个物体能干什么，具体是什么不需要遵从类的继承关系。如果我们定一个Shouter interface，狗有狗的叫法，猫有猫的叫法，只要能叫的对象都可以有shout()方法，只要这个对象实现了Shouter接口，我们就能把它当shouter使用，让它叫。</p>
-<p>所以abstract class和interface是不能互相替代的，interface不能定义（它只做了声明）共同的行为，事实上它也不能定义“非常量”的变量。而abstract class只是一种分类的抽象，它不能横跨类别来描述一类行为，它使得针对“别的分类方式”的抽象变得无法实现（所以需要接口来帮忙）。</p>
-</blockquote>
-<h3 id="interface"><a href="#interface" class="headerlink" title="interface"></a>interface</h3><h3 id="通用的万能类型"><a href="#通用的万能类型" class="headerlink" title="通用的万能类型"></a>通用的万能类型</h3><p><strong>interface{}</strong></p>
-<ul>
-<li>空接口</li>
-<li>int 、string、float32、 float64、struct …. 都实现了interface{}</li>
-<li>可以用interface{}类型引用任意的数据类型</li>
-</ul>
-<p><strong>类型断言</strong></p>
-<p><img src="/images/loading.gif" data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210515121319086.png" alt="image-20210515121319086"></p>
-<h1 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h1><h2 id="什么是反射"><a href="#什么是反射" class="headerlink" title="什么是反射"></a>什么是反射</h2><blockquote>
-<p>在计算机科学中，反射是指计算机程序在运行时（Run time）可以访问、检测和修改它本身状态或行为的一种能力。用比喻来说，反射就是程序在运行的时候能够“观察”并且修改自己的行为。</p>
-</blockquote>
-<p>实际上，它的本质是程序在运行期探知对象的类型信息和内存结构，不用反射能行吗？可以的！使用汇编语言，直接和内层打交道，什么信息不能获取？但是，当编程迁移到高级语言上来之后，就不行了！就只能通过<code>反射</code>来达到此项技能。</p>
-<p>不同语言的反射模型不尽相同，有些语言还不支持反射。《Go 语言圣经》中是这样定义反射的：</p>
-<blockquote>
-<p>Go 语言提供了一种机制在运行时更新变量和检查它们的值、调用它们的方法，但是在编译时并不知道这些变量的具体类型，这称为反射机制。</p>
-</blockquote>
-<h2 id="使用反射的理由"><a href="#使用反射的理由" class="headerlink" title="使用反射的理由"></a>使用反射的理由</h2><p>需要反射的 2 个常见场景：</p>
-<ol>
-<li>有时你需要编写一个函数，但是并不知道传给你的参数类型是什么，可能是没约定好；也可能是传入的类型很多，这些类型并不能统一表示。这时反射就会用的上了。</li>
-<li>有时候需要根据某些条件决定调用哪个函数，比如根据用户的输入来决定。这时就需要对函数和函数的参数进行反射，在运行期间动态地执行函数。</li>
-</ol>
-<p>在讲反射的原理以及如何用之前，还是说几点不使用反射的理由：</p>
-<ol>
-<li>与反射相关的代码，经常是难以阅读的。在软件工程中，代码可读性也是一个非常重要的指标。</li>
-<li>Go 语言作为一门静态语言，编码过程中，编译器能提前发现一些类型错误，但是对于反射代码是无能为力的。所以包含反射相关的代码，很可能会运行很久，才会出错，这时候经常是直接 panic，可能会造成严重的后果。</li>
-<li>反射对性能影响还是比较大的，比正常代码运行速度慢一到两个数量级。所以，对于一个项目中处于运行效率关键位置的代码，尽量避免使用反射特性。</li>
-</ol>
-<h2 id="反射的实现"><a href="#反射的实现" class="headerlink" title="反射的实现"></a>反射的实现</h2><p>Go 语言在 reflect 包里定义了各种类型，实现了反射的各种函数，通过它们可以在运行时检测类型的信息、改变类型的值。</p>
-<h2 id="变量的结构"><a href="#变量的结构" class="headerlink" title="变量的结构"></a>变量的结构</h2><p>reflect 包里定义了一个接口和一个结构体，即 <code>reflect.Type</code> 和 <code>reflect.Value</code>，它们提供很多函数来获取存储在接口里的类型信息。</p>
-<p><code>reflect.Type</code> 主要提供关于类型相关的信息，所以它和 <code>_type</code> 关联比较紧密；<code>reflect.Value</code> 则结合 <code>_type</code> 和 <code>data</code> 两者，因此程序员可以获取甚至改变类型的值。</p>
-<p><img src="/images/loading.gif" data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210515124057294.png" alt="image-20210515124057294"></p>
-<p><img src="/images/loading.gif" data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/57130652-bb060280-6dcc-11e9-9c63-6e2bc4e33509.png" alt="三者关系"></p>
-<h2 id="Reflect包"><a href="#Reflect包" class="headerlink" title="Reflect包"></a>Reflect包</h2><p>ValueOf()方法与TypeOf()方法是Reflect包中最常用的方法</p>
-<p><img src="/images/loading.gif" data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210515124851074.png" alt="image-20210515124851074"></p>
-<p><strong>Reflect具体方法的实现</strong></p>
-<p>通过 <code>Type()</code> 方法和 <code>Interface()</code> 方法可以打通 <code>interface</code>、<code>Type</code>、<code>Value</code> 三者。Type() 方法也可以返回变量的类型信息，与 reflect.TypeOf() 函数等价</p>
-<p>Interface() 方法可以将 Value 还原成原来的 interface</p>
-<p><img src="/images/loading.gif" data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210515130553372.png" alt="image-20210515130553372"></p>
-<h2 id="反射三大定律"><a href="#反射三大定律" class="headerlink" title="反射三大定律"></a>反射三大定律</h2><p>根据 Go 官方关于反射的博客，反射有三大定律：</p>
-<blockquote>
-<ol>
-<li>Reflection goes from interface value to reflection object.</li>
-<li>Reflection goes from reflection object to interface value.</li>
-<li>To modify a reflection object, the value must be settable.</li>
-</ol>
-</blockquote>
-<p>第一条是最基本的：反射是一种检测存储在 <code>interface</code> 中的类型和值机制。这可以通过 <code>TypeOf</code> 函数和 <code>ValueOf</code> 函数得到。</p>
-<p>第二条实际上和第一条是相反的机制，它将 <code>ValueOf</code> 的返回值通过 <code>Interface()</code> 函数反向转变成 <code>interface</code> 变量。</p>
-<p>前两条就是说 <code>接口型变量</code> 和 <code>反射类型对象</code> 可以相互转化，反射类型对象实际上就是指的前面说的 <code>reflect.Type</code> 和 <code>reflect.Value</code>。</p>
-<p>第三条不太好懂：如果需要操作一个反射变量，那么它必须是可设置的。反射变量可设置的本质是它存储了原变量本身，这样对反射变量的操作，就会反映到原变量本身；反之，如果反射变量不能代表原变量，那么操作了反射变量，不会对原变量产生任何影响，这会给使用者带来疑惑。所以第二种情况在语言层面是不被允许的。</p>
-<p>关于第三条，记住一句话：如果想要操作原变量，反射变量 <code>Value</code> 必须要 hold 住原变量的地址才行。</p>
-<h1 id="结构体标签"><a href="#结构体标签" class="headerlink" title="结构体标签"></a>结构体标签</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>通过 reflect.Type 获取结构体成员信息 reflect.StructField 结构中的 Tag 被称为结构体标签（Struct Tag）。结构体标签是对结构体字段的额外信息标签。</p>
-<p>JSON、BSON 等格式进行序列化及对象关系映射（Object Relational Mapping，简称 ORM）系统都会用到结构体标签，这些系统使用标签设定字段在处理时应该具备的特殊属性和可能发生的行为。这些信息都是静态的，无须实例化结构体，可以通过反射获取到。</p>
-<p><strong>提示</strong></p>
-<p>结构体标签（Struct Tag）类似于 C#中的特性（Attribute）。C# 允许在类、字段、方法等前面添加 Attribute，然后在反射系统中可以获取到这个属性系统。例如：</p>
-<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[<span class="meta">Conditional(<span class="meta-string">&quot;DEBUG&quot;</span>)</span>]</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Message</span>(<span class="params"><span class="built_in">string</span> msg</span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  Console.WriteLine(msg)；</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="结构体标签的格式"><a href="#结构体标签的格式" class="headerlink" title="结构体标签的格式"></a>结构体标签的格式</h2><p><img src="/images/loading.gif" data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210515131735936.png" alt="image-20210515131735936"></p>
-<h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><p><strong>从结构体标签中获取值</strong></p>
-<p>StructTag 拥有一些方法，可以进行 Tag 信息的解析和提取，如下所示：</p>
-<ul>
-<li>func(tag StructTag)Get(key string)string</li>
-<li>根据 Tag 中的键获取对应的值，例如 <code>key1:&quot;value1&quot;key2:&quot;value2&quot;</code> 的 Tag 中，可以传入“key1”获得“value1”。</li>
-<li>func(tag StructTag)Lookup(key string)(value string,ok bool)</li>
-<li>根据 Tag 中的键，查询值是否存在。</li>
-</ul>
-<p><strong>主要的应用有JSON编解码以及ORM映射关系</strong></p>
-<p>这里举一个JSON编解码的例子</p>
-<p><img src="/images/loading.gif" data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210515133102997.png" alt="image-20210515133102997"></p>
-<h1 id="高阶语法"><a href="#高阶语法" class="headerlink" title="高阶语法"></a>高阶语法</h1><h2 id="Goroutine"><a href="#Goroutine" class="headerlink" title="Goroutine"></a>Goroutine</h2><p><strong>Goroutine的理解</strong></p>
-<p>Go语言最大的特色就是从语言层面支持并发（Goroutine），Goroutine是Go中最基本的执行单元。</p>
-<p>事实上每一个Go程序至少有一个Goroutine：主Goroutine。当程序启动时，它会自动创建。</p>
-<ul>
-<li><p><strong>线程（Thread）</strong>：有时被称为轻量级进程(Lightweight Process，LWP），是程序执行流的最小单元。一个标准的线程由线程ID，当前指令指针(PC），寄存器集合和堆栈组成。另外，线程是进程中的一个实体，是被系统独立调度和分派的基本单位，线程自己不拥有系统资源，只拥有一点儿在运行中必不可少的资源，但它可与同属一个进程的其它线程共享进程所拥有的全部资源。</p>
-<p>线程拥有自己独立的栈和共享的堆，共享堆，不共享栈，线程的切换一般也由操作系统调度。</p>
-</li>
-<li><p><strong>协程（coroutine）</strong>：又称微线程与子例程（或者称为函数）一样，协程（coroutine）也是一种程序组件。相对子例程而言，协程更为一般和灵活，但在实践中使用没有子例程那样广泛。</p>
-<p>和线程类似，共享堆，不共享栈，协程的切换一般由程序员在代码中显式控制。它避免了上下文切换的额外耗费，兼顾了多线程的优点，简化了高并发程序的复杂。</p>
-</li>
-</ul>
-<p>Goroutine和其他语言的协程（coroutine）在使用方式上类似，但从字面意义上来看不同（一个是Goroutine，一个是coroutine），再就是协程是一种协作任务控制机制，在最简单的意义上，协程不是并发的，而Goroutine支持并发的。因此Goroutine可以理解为一种Go语言的协程。同时它可以运行在一个或多个线程上。</p>
-<p><strong>Go并发的实现原理</strong></p>
-<p>Go实现了两种并发形式。第一种是大家普遍认知的：多线程共享内存。其实就是Java或者C++等语言中的多线程开发。另外一种是Go语言特有的，也是Go语言推荐的：CSP（communicating sequential processes）并发模型。</p>
-<p>CSP并发模型是在1970年左右提出的概念，属于比较新的概念，不同于传统的多线程通过共享内存来通信，CSP讲究的是“以通信的方式来共享内存”。</p>
-<p>请记住下面这句话：</p>
-<blockquote>
-<p>DO NOT COMMUNICATE BY SHARING MEMORY; INSTEAD, SHARE MEMORY BY COMMUNICATING.<br>“不要以共享内存的方式来通信，相反，要通过通信来共享内存。”</p>
-</blockquote>
-<p>普通的线程并发模型，就是像Java、C++、或者Python，他们线程间通信都是通过共享内存的方式来进行的。非常典型的方式就是，在访问共享数据（例如数组、Map、或者某个结构体或对象）的时候，通过锁来访问，因此，在很多时候，衍生出一种方便操作的数据结构，叫做“线程安全的数据结构”。例如Java提供的包”java.util.concurrent”中的数据结构。Go中也实现了传统的线程并发模型。</p>
-<p>Go的CSP并发模型，是通过<code>goroutine</code>和<code>channel</code>来实现的。</p>
-<ul>
-<li><code>goroutine</code> 是Go语言中并发的执行单位。有点抽象，其实就是和传统概念上的”线程“类似，可以理解为”线程“。</li>
-<li><code>channel</code>是Go语言中各个并发结构体(<code>goroutine</code>)之前的通信机制。 通俗的讲，就是各个<code>goroutine</code>之间通信的”管道“，有点类似于Linux中的管道。</li>
-</ul>
-<p><strong>创建Goroutine</strong></p>
-<p>通过简单的创建一个父子Goroutine来说明创建一个Goroutine的过程，而如果父Goroutine被终止那么子Goroutine也无法运行</p>
-<p><img src="/images/loading.gif" data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210515153522732.png" alt="image-20210515153522732"></p>
-<p><strong>Goexit</strong></p>
-<p>runtime.Goexit()方法提供了退出当前Goroutine的解决方案</p>
-<p><img src="/images/loading.gif" data-original="C:/WINDOWS/system32/upload/image-20210515153916311.png" alt="image-20210515153916311"></p>
-<h2 id="Channel"><a href="#Channel" class="headerlink" title="Channel"></a>Channel</h2><h3 id="Channel的定义"><a href="#Channel的定义" class="headerlink" title="Channel的定义"></a>Channel的定义</h3><p>Channel  是 Golang中最核心的 feature 之一，因此理解 Channel 的原理对于学习和使用 Golang非常重要</p>
-<p>Channel 是 Goroutine 之间通信的一种方式，可以类比成 Unix 中的进程的通信方式管道</p>
-<p><img src="/images/loading.gif" data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210515161505466.png" alt="image-20210515161505466"></p>
-<h3 id="Channel-介绍"><a href="#Channel-介绍" class="headerlink" title="Channel 介绍"></a>Channel 介绍</h3><p>channel 提供了一种通信机制，通过它，一个 goroutine 可以想另一 goroutine 发送消息。channel 本身还需关联了一个类型，也就是 channel 可以发送数据的类型</p>
-<p>例如: 发送 int 类型消息的 channel 写作 chan int </p>
-<h3 id="Channel-创建"><a href="#Channel-创建" class="headerlink" title="Channel 创建"></a>Channel 创建</h3><p><img src="/images/loading.gif" data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210515162101757.png" alt="image-20210515162101757"></p>
-<h3 id="Channel的使用"><a href="#Channel的使用" class="headerlink" title="Channel的使用"></a><strong>Channel的使用</strong></h3><p><img src="/images/loading.gif" data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210515162508243.png" alt="image-20210515162508243"></p>
-<h3 id="无缓冲的Channel"><a href="#无缓冲的Channel" class="headerlink" title="无缓冲的Channel"></a>无缓冲的Channel</h3><p><img src="/images/loading.gif" data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210515162633311.png" alt="image-20210515162633311"></p>
-<ol>
-<li>在第 1 步，两个 goroutine 都到达通道，但哪个都没有开始执⾏发送或者接收</li>
-<li>在第 2 步，左侧的 goroutine 将它的⼿伸进了通道，这模拟了向通道发送数据的行为。这时，这个 goroutine 会在通道中被锁住，直到交换完成</li>
-<li>在第 3 步，右侧的 goroutine 将它的⼿放⼊通道，这模拟了从通道⾥接收数据。这个 goroutine ⼀样也会在通道中被锁住，直到交换完成</li>
-<li>在第 4 步和第 5 步，进⾏交换，并最终，在第 6 步，两个 goroutine 都将它们的⼿从通道⾥拿出来，这模拟了被锁住的 goroutine 得到释放。两个 goroutine 现在都可以去做其他事情了</li>
-</ol>
-<h3 id="有缓冲的Channel"><a href="#有缓冲的Channel" class="headerlink" title="有缓冲的Channel"></a>有缓冲的Channel</h3><p><img src="/images/loading.gif" data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210515162812850.png" alt="image-20210515162812850"></p>
-<ol>
-<li>在第 1 步，右侧的 goroutine 正在从通道接收⼀个值</li>
-<li>在第 2 步，右侧的这个 goroutine 独⽴完成了接收值的动作，⽽左侧的 goroutine 正在发送⼀个新值到通道</li>
-<li>在第 3 步，左侧的goroutine 还在向通道发送新值，⽽右侧的 goroutine 正在从通道接收另外⼀个值。这个步骤⾥的两个操作既不是同步的，也不会互相阻塞</li>
-<li>最后，在第 4 步，所有的发送和接收都完成，⽽通道⾥还有⼏个值，也有⼀些空间可以存更多的值</li>
-</ol>
-<p><strong>特点</strong></p>
-<ul>
-<li>当channel已经满，再向⾥⾯写数据，就会阻塞</li>
-<li>当channel为空，从⾥⾯取数据也会阻塞</li>
-</ul>
-<h3 id="关闭Channel"><a href="#关闭Channel" class="headerlink" title="关闭Channel"></a>关闭Channel</h3><p><img src="/images/loading.gif" data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210515163111968.png" alt="image-20210515163111968"></p>
-<ul>
-<li>channel不像⽂件⼀样需要经常去关闭，只有当你确实没有任何发送数据了，或者你想显式的结束range循环之类的，才去关闭channel</li>
-<li>关闭channel后，⽆法向channel再发送数据(引发 panic 错误后导致接收⽴即返回零值)</li>
-<li>关闭channel后，可以继续从channel接收数据</li>
-<li>对于nil channel，⽆论收发都会被阻塞</li>
-</ul>
-<h3 id="Channel与range"><a href="#Channel与range" class="headerlink" title="Channel与range"></a>Channel与range</h3><p><img src="/images/loading.gif" data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210515163411700.png" alt="image-20210515163411700"></p>
-<h3 id="Channel与select"><a href="#Channel与select" class="headerlink" title="Channel与select"></a>Channel与select</h3><p>单流程下⼀个go只能监控⼀个channel的状态，select可以完成监控多个channel的状态</p>
-<p>所以引入select来进行对多个channel的操作</p>
-<p><img src="/images/loading.gif" data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210515163728044.png" alt="image-20210515163728044"></p>
-<p>下面用一个斐波那契的简单实例来展示select的功能</p>
-<p><img src="/images/loading.gif" data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210515163923146.png" alt="image-20210515163923146"></p>
-<p><strong>总结：select具备多路channel的监控状态功能</strong></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://plutowu.top/2021/05/14/Golang-Day2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/1.jpg">
-      <meta itemprop="name" content="PlutoWu">
-      <meta itemprop="description" content="A Simple and Powerful Blog">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Pluto">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/05/14/Golang-Day2/" class="post-title-link" itemprop="url">Golang-Day2</a>
-        </h2>
-
-        <div class="post-meta">
-        
-        
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-05-14 19:09:59" itemprop="dateCreated datePublished" datetime="2021-05-14T19:09:59+08:00">2021-05-14</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-05-16 21:30:10" itemprop="dateModified" datetime="2021-05-16T21:30:10+08:00">2021-05-16</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2021/05/14/Golang-Day2/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2021/05/14/Golang-Day2/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.1k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="基础语法"><a href="#基础语法" class="headerlink" title="基础语法"></a>基础语法</h1><h2 id="defer关键字"><a href="#defer关键字" class="headerlink" title="defer关键字"></a>defer关键字</h2><p>defer关键字类似于C#的final关键字，可用于在程序退出前进行操作</p>
-<h3 id="知识点一-defer的执行顺序"><a href="#知识点一-defer的执行顺序" class="headerlink" title="知识点一 defer的执行顺序"></a>知识点一 defer的执行顺序</h3><p><img src="/images/loading.gif" data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210514195248235.png" alt="image-20210514195248235"></p>
-<p>可以看到加入defer关键字后，defer的执行顺序类似于一个栈</p>
-<p>所以执行顺序是fun3() -&gt; func2()-&gt; func1()</p>
-<p><img src="/images/loading.gif" data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210514195431556.png" alt="image-20210514195431556"></p>
-<h3 id="知识点二-defer和return的先后"><a href="#知识点二-defer和return的先后" class="headerlink" title="知识点二 defer和return的先后"></a>知识点二 defer和return的先后</h3><p><img src="/images/loading.gif" data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210514195727323.png" alt="image-20210514195727323"></p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">执行结果：</span><br><span class="line"><span class="keyword">return</span> <span class="function"><span class="keyword">func</span> <span class="title">called</span>...</span></span><br><span class="line"><span class="keyword">defer</span> <span class="function"><span class="keyword">func</span> <span class="title">called</span>...</span></span><br></pre></td></tr></table></figure>
-
-<p>结论：return之后的语句先执行，defer之后的语句后执行</p>
-<h2 id="切片-slice"><a href="#切片-slice" class="headerlink" title="切片 slice"></a>切片 slice</h2><h3 id="定长数组"><a href="#定长数组" class="headerlink" title="定长数组"></a>定长数组</h3><p><img src="/images/loading.gif" data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210514202035114.png" alt="image-20210514202035114"></p>
-<ul>
-<li><strong>数组的长度都是固定的</strong></li>
-<li><strong>固定长度的数组在传参时，是严格匹配数组类型的</strong></li>
-</ul>
-<p><img src="/images/loading.gif" data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210514202335938.png" alt="image-20210514202335938"></p>
-<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">运行结果如下，说明只是值拷贝，并非能够修改其中的值</span><br><span class="line"></span><br><span class="line"><span class="keyword">index</span> = <span class="number">0</span> <span class="keyword">value</span> = <span class="number">11</span></span><br><span class="line"><span class="keyword">index</span> = <span class="number">1</span> <span class="keyword">value</span> = <span class="number">22</span></span><br><span class="line"><span class="keyword">index</span> = <span class="number">2</span> <span class="keyword">value</span> = <span class="number">33</span></span><br><span class="line"><span class="keyword">index</span> = <span class="number">3</span> <span class="keyword">value</span> = <span class="number">44</span></span><br><span class="line"><span class="comment">------</span></span><br><span class="line"><span class="keyword">index</span> = <span class="number">0</span> <span class="keyword">value</span> = <span class="number">11</span></span><br><span class="line"><span class="keyword">index</span> = <span class="number">1</span> <span class="keyword">value</span> = <span class="number">22</span></span><br><span class="line"><span class="keyword">index</span> = <span class="number">2</span> <span class="keyword">value</span> = <span class="number">33</span></span><br><span class="line"><span class="keyword">index</span> = <span class="number">3</span> <span class="keyword">value</span> = <span class="number">44</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="动态数组"><a href="#动态数组" class="headerlink" title="动态数组"></a>动态数组</h3><p><img src="/images/loading.gif" data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210514205800864.png" alt="image-20210514205800864"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 数组类型---&gt;动态数组</span><br><span class="line">myArray type is []int</span><br><span class="line"></span><br><span class="line">&#x2F;* </span><br><span class="line">Go语言中只存在值传递（值的副本，或者指针的副本），不存在引用传递（和C++不一样）</span><br><span class="line">type slice struct &#123;</span><br><span class="line">        array unsafe.Pointer  &#x2F;&#x2F; 这里的指针是第一个元素的指针</span><br><span class="line">        len   int</span><br><span class="line">        cap   int</span><br><span class="line">&#125;</span><br><span class="line">之所以对slice的传递可以修改原slice数据，是因为使用了slice这个引用类型的指针进行的传递，但依旧是值传递</span><br><span class="line">*&#x2F;</span><br><span class="line"></span><br><span class="line">value &#x3D; 1</span><br><span class="line">value &#x3D; 2</span><br><span class="line">value &#x3D; 3</span><br><span class="line">value &#x3D; 4</span><br><span class="line">&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line">value &#x3D; 100  &lt;-----</span><br><span class="line">value &#x3D; 2</span><br><span class="line">value &#x3D; 3</span><br><span class="line">value &#x3D; 4</span><br></pre></td></tr></table></figure>
-
-<h3 id="声明方式"><a href="#声明方式" class="headerlink" title="声明方式"></a>声明方式</h3><p><img src="/images/loading.gif" data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210514204545987.png" alt="image-20210514204545987"></p>
-<h3 id="使用方式"><a href="#使用方式" class="headerlink" title="使用方式"></a>使用方式</h3><p><strong>切片容量的追加</strong></p>
-<p><img src="/images/loading.gif" data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210514230005702.png" alt="image-20210514230005702"></p>
-<p><strong>需要注意的点</strong></p>
-<ul>
-<li><p>slice里的len表示的是数组空间里存在有效值的数组长度，cap表示这个数组空间的大小</p>
-</li>
-<li><p>slice如果调用append后需要扩容，会重新开辟一块内存分配给新的切片，而不是在原来的基础上扩容</p>
-</li>
-<li><p>扩容时如果原容量小于1000，新的切片大小是原来的两倍 ，否则是原来的1.25倍</p>
-</li>
-</ul>
-<p><strong>切片的截取</strong></p>
-<p><img src="/images/loading.gif" data-original="C:/WINDOWS/system32/upload/image-20210514230836799.png" alt="image-20210514230836799"></p>
-<h2 id="map"><a href="#map" class="headerlink" title="map"></a>map</h2><p><strong>map的三种声明方式</strong></p>
-<p><img src="/images/loading.gif" data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210514231913229.png" alt="image-20210514231913229"></p>
-<p><strong>map的使用方式</strong></p>
-<p><img src="/images/loading.gif" data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210514232654776.png" alt="image-20210514232654776"></p>
-<h2 id="结构体"><a href="#结构体" class="headerlink" title="结构体"></a>结构体</h2><p><img src="/images/loading.gif" data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210514233535213.png" alt="image-20210514233535213"></p>
-<hr>
-<p>第二天就先学习到Go基础语法特性，第三题继续面向对象特征</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://plutowu.top/2021/05/12/Golang-Day1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/1.jpg">
-      <meta itemprop="name" content="PlutoWu">
-      <meta itemprop="description" content="A Simple and Powerful Blog">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Pluto">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/05/12/Golang-Day1/" class="post-title-link" itemprop="url">Golang-Day1</a>
-        </h2>
-
-        <div class="post-meta">
-        
-        
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-05-12 20:12:44" itemprop="dateCreated datePublished" datetime="2021-05-12T20:12:44+08:00">2021-05-12</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-05-16 21:22:41" itemprop="dateModified" datetime="2021-05-16T21:22:41+08:00">2021-05-16</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2021/05/12/Golang-Day1/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2021/05/12/Golang-Day1/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>2.2k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>该笔记是在熟练掌握一门后端语言（Java、C++）的基础上快速入门Golang</p>
-<p><img src="/images/loading.gif" data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210513193706.png"></p>
-<h1 id="Golang的语言特性"><a href="#Golang的语言特性" class="headerlink" title="Golang的语言特性"></a>Golang的语言特性</h1><h2 id="Golang的优势"><a href="#Golang的优势" class="headerlink" title="Golang的优势"></a>Golang的优势</h2><h3 id="部署简单"><a href="#部署简单" class="headerlink" title="部署简单"></a>部署简单</h3><ul>
-<li>可直接编译成机器码执行</li>
-<li>不依赖其他库</li>
-<li>直接运行即可部署</li>
-</ul>
-<h3 id="静态类型语言"><a href="#静态类型语言" class="headerlink" title="静态类型语言"></a>静态类型语言</h3><ul>
-<li>编译的时候即可检查出来隐藏的⼤多数问题</li>
-</ul>
-<h3 id="语言层面的并发"><a href="#语言层面的并发" class="headerlink" title="语言层面的并发"></a>语言层面的并发</h3><ul>
-<li>天生基因支持并发</li>
-<li>充分的利用多核</li>
-</ul>
-<h3 id="强大的标准库"><a href="#强大的标准库" class="headerlink" title="强大的标准库"></a>强大的标准库</h3><ul>
-<li><code>runtime</code>系统调度机制</li>
-<li>高效的 GC 垃圾回收</li>
-<li>丰富的标准库 （特别是网络库非常强大）</li>
-</ul>
-<h3 id="简单易学"><a href="#简单易学" class="headerlink" title="简单易学"></a>简单易学</h3><ul>
-<li>仅有25个关键字</li>
-<li>继承了C语言简洁基因，内嵌C语法支持</li>
-<li>面向对象特征</li>
-<li>跨平台支持</li>
-</ul>
-<h3 id="庞大的社区生态"><a href="#庞大的社区生态" class="headerlink" title="庞大的社区生态"></a>庞大的社区生态</h3><ul>
-<li>国外有 Google 和 Facebook 两大巨头使用，国内也有腾讯、七牛云、字节等一众大厂的簇拥</li>
-<li>具有明星级别的开源项目 Docker 和 Kubernetes，是云原生应用的重要基石</li>
-</ul>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/05/12/Golang-Day1/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://plutowu.top/2021/04/28/Java%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/1.jpg">
-      <meta itemprop="name" content="PlutoWu">
-      <meta itemprop="description" content="A Simple and Powerful Blog">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Pluto">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/04/28/Java%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="post-title-link" itemprop="url">Java面试笔记-数据结构</a>
-        </h2>
-
-        <div class="post-meta">
-        
-        
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-04-28 20:19:57" itemprop="dateCreated datePublished" datetime="2021-04-28T20:19:57+08:00">2021-04-28</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-05-16 21:28:55" itemprop="dateModified" datetime="2021-05-16T21:28:55+08:00">2021-05-16</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">面试笔记</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2021/04/28/Java%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2021/04/28/Java%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>21k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>19 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="红黑树深入剖析及-Java-实现"><a href="#红黑树深入剖析及-Java-实现" class="headerlink" title="红黑树深入剖析及 Java 实现"></a>红黑树深入剖析及 Java 实现</h1><p>转自<a target="_blank" rel="noopener external nofollow noreferrer" href="https://tech.meituan.com/2016/12/02/redblack-tree.html">美团技术专栏</a></p>
-<p>红黑树是平衡二叉查找树的一种。为了深入理解红黑树，我们需要从二叉查找树开始讲起。</p>
-<h2 id="BST"><a href="#BST" class="headerlink" title="BST"></a>BST</h2><p>二叉查找树（Binary Search Tree，简称BST）是一棵二叉树，它的左子节点的值比父节点的值要小，右节点的值要比父节点的值大。它的高度决定了它的查找效率。</p>
-<p>在理想的情况下，二叉查找树增删查改的时间复杂度为O(logN)（其中N为节点数），最坏的情况下为O(N)。当它的高度为logN+1时，我们就说二叉查找树是平衡的。</p>
-<p><img src="/images/loading.gif" data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210428191540.png"></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/04/28/Java%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://plutowu.top/2021/04/28/pRPC-Day2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/1.jpg">
-      <meta itemprop="name" content="PlutoWu">
-      <meta itemprop="description" content="A Simple and Powerful Blog">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Pluto">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/04/28/pRPC-Day2/" class="post-title-link" itemprop="url">pRPC-Day2</a>
-        </h2>
-
-        <div class="post-meta">
-        
-        
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-04-28 19:27:26" itemprop="dateCreated datePublished" datetime="2021-04-28T19:27:26+08:00">2021-04-28</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-05-16 21:31:25" itemprop="dateModified" datetime="2021-05-16T21:31:25+08:00">2021-05-16</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%A1%B9%E7%9B%AE/" itemprop="url" rel="index"><span itemprop="name">项目</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2021/04/28/pRPC-Day2/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2021/04/28/pRPC-Day2/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>4.6k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>4 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Netty简介"><a href="#Netty简介" class="headerlink" title="Netty简介"></a>Netty简介</h1><blockquote>
-<p>Netty 是一个利用 Java 的高级网络的能力，隐藏其背后的复杂性而提供一个易于使用的 API 的客户端/服务器框架。<br> Netty 是一个广泛使用的 Java 网络编程框架（Netty 在 2011 年获得了Duke’s Choice Award，见<a target="_blank" rel="noopener external nofollow noreferrer" href="https://links.jianshu.com/go?to=https://www.java.net/dukeschoice/2011">https://www.java.net/dukeschoice/2011</a>）。它活跃和成长于用户社区，像大型公司 Facebook 和 Instagram 以及流行 开源项目如 Infinispan, HornetQ, Vert.x, Apache Cassandra 和 Elasticsearch 等，都利用其强大的对于网络抽象的核心代码。</p>
-<p>摘自《Essential Netty In Action》</p>
-</blockquote>
-<p>Netty是一个NIO客户端服务器框架，可以快速轻松地开发网络应用程序，例如协议服务器和客户端。 它极大地简化和简化了诸如TCP和UDP套接字服务器之类的网络编程。</p>
-<p>“快速简便”并不意味着最终的应用程序将遭受可维护性或性能问题的困扰。 Netty经过精心设计，结合了许多协议（例如FTP，SMTP，HTTP以及各种基于二进制和文本的旧式协议）的实施经验。 结果，Netty成功地找到了一种无需妥协即可轻松实现开发，性能，稳定性和灵活性的方法。</p>
-<p><img src="/images/loading.gif" data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210428194735.png"></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/04/28/pRPC-Day2/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://plutowu.top/2021/04/28/Java%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0-Redis/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/1.jpg">
-      <meta itemprop="name" content="PlutoWu">
-      <meta itemprop="description" content="A Simple and Powerful Blog">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Pluto">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/04/28/Java%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0-Redis/" class="post-title-link" itemprop="url">Java面试笔记-Redis</a>
-        </h2>
-
-        <div class="post-meta">
-        
-        
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-04-28 10:40:06" itemprop="dateCreated datePublished" datetime="2021-04-28T10:40:06+08:00">2021-04-28</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-05-16 21:29:26" itemprop="dateModified" datetime="2021-05-16T21:29:26+08:00">2021-05-16</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">面试笔记</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2021/04/28/Java%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0-Redis/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2021/04/28/Java%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0-Redis/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>18k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>16 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Redis简单介绍"><a href="#Redis简单介绍" class="headerlink" title="Redis简单介绍"></a>Redis简单介绍</h1><p>简单来说 <strong>Redis 就是一个使用 C 语言开发的数据库</strong>，不过与传统数据库不同的是 <strong>Redis 的数据是存在内存中的</strong> ，也就是它是内存数据库，所以读写速度非常快，因此 Redis 被广泛应用于缓存方向。</p>
-<p>另外，<strong>Redis 除了做缓存之外，Redis 也经常用来做分布式锁，甚至是消息队列。</strong></p>
-<p><strong>Redis 提供了多种数据类型来支持不同的业务场景。Redis 还支持事务 、持久化、Lua 脚本、多种集群方案。</strong></p>
-<p><strong>采用Redis或缓存是因为“高性能”和“高并发”</strong></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/04/28/Java%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0-Redis/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://plutowu.top/2021/04/24/pRPC-Day1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/1.jpg">
-      <meta itemprop="name" content="PlutoWu">
-      <meta itemprop="description" content="A Simple and Powerful Blog">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Pluto">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/04/24/pRPC-Day1/" class="post-title-link" itemprop="url">pRPC-Day1</a>
-        </h2>
-
-        <div class="post-meta">
-        
-        
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-04-24 09:29:23" itemprop="dateCreated datePublished" datetime="2021-04-24T09:29:23+08:00">2021-04-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-05-16 21:30:52" itemprop="dateModified" datetime="2021-05-16T21:30:52+08:00">2021-05-16</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%A1%B9%E7%9B%AE/" itemprop="url" rel="index"><span itemprop="name">项目</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2021/04/24/pRPC-Day1/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2021/04/24/pRPC-Day1/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>12k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>11 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>关于项目所需技术栈，笔者会另外编写入门笔记。</p>
-<p>此项目基于<a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/Snailclimb/guide-rpc-framework">guide哥的自定义RPC框架</a>，仓库-<a target="_blank" rel="noopener external nofollow noreferrer" href="https://gitee.com/p1utowu/pluto-rpc-frame">https://gitee.com/p1utowu/pluto-rpc-frame</a></p>
-<h1 id="项目主要技术栈"><a href="#项目主要技术栈" class="headerlink" title="项目主要技术栈"></a>项目主要技术栈</h1><table>
-<thead>
-<tr>
-<th>Netty</th>
-<th>网络传输组件（基于NIO并优于原生NIO）</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><strong>Kyro</strong></td>
-<td><strong>序列化工具（替代JDK原生序列化）</strong></td>
-</tr>
-<tr>
-<td><strong>Zookeeper</strong></td>
-<td><strong>注册中心（负责服务地址的注册与查找）</strong></td>
-</tr>
-<tr>
-<td><strong>SPI</strong></td>
-<td><strong>服务提供发现机制（解耦）</strong></td>
-</tr>
-<tr>
-<td><strong>Spring</strong></td>
-<td><strong>提供注解服务用于注册消费</strong></td>
-</tr>
-</tbody></table>
-<h1 id="RPC框架设计"><a href="#RPC框架设计" class="headerlink" title="RPC框架设计"></a>RPC框架设计</h1><blockquote>
-<p>此处的RPC框架指的是：可以让客户端直接调用服务端方法就像调用本地方法一样简单的框架，例如Dubbo、gRPC等</p>
-<p>如果与HTTP协议产生联系，解析和封装HTTP请求与响应，那这些框架不能称为“RPC框架”，例如Feign和Spring Cloud Square</p>
-</blockquote>
-<p>最简单的RPC框架示意图如下</p>
-<p><img src="/images/loading.gif" data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210424095856335.png" alt="image-20210424095856335"></p>
-<p>服务提供端Server向注册中心注册服务，服务消费端Client通过注册中心获取服务相关信息，然后再通过网络请求服务端Server</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/04/24/pRPC-Day1/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://plutowu.top/2021/04/11/%E4%B8%AA%E4%BA%BA%E6%91%84%E5%BD%B1%E5%B9%B4%E5%BA%A6Top10-2020/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/1.jpg">
-      <meta itemprop="name" content="PlutoWu">
-      <meta itemprop="description" content="A Simple and Powerful Blog">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Pluto">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/04/11/%E4%B8%AA%E4%BA%BA%E6%91%84%E5%BD%B1%E5%B9%B4%E5%BA%A6Top10-2020/" class="post-title-link" itemprop="url">个人摄影年度Top10-2020</a>
-        </h2>
-
-        <div class="post-meta">
-        
-        
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-04-11 18:25:59" itemprop="dateCreated datePublished" datetime="2021-04-11T18:25:59+08:00">2021-04-11</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-05-16 21:32:55" itemprop="dateModified" datetime="2021-05-16T21:32:55+08:00">2021-05-16</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%91%84%E5%BD%B1/" itemprop="url" rel="index"><span itemprop="name">摄影</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2021/04/11/%E4%B8%AA%E4%BA%BA%E6%91%84%E5%BD%B1%E5%B9%B4%E5%BA%A6Top10-2020/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2021/04/11/%E4%B8%AA%E4%BA%BA%E6%91%84%E5%BD%B1%E5%B9%B4%E5%BA%A6Top10-2020/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>28</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote>
-<p>芦苇荡</p>
-</blockquote>
-<img src="/images/loading.gif" data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/Picture1.JPG" style="zoom: 50%;" />
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/04/11/%E4%B8%AA%E4%BA%BA%E6%91%84%E5%BD%B1%E5%B9%B4%E5%BA%A6Top10-2020/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
-  </nav>
-
-
-
+            
           </div>
+
           
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
-</script>
-
+            <div class="scroll-down-bar">
+              <i class="iconfont icon-arrowdown"></i>
+            </div>
+          
         </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          文章目录
-        </li>
-        <li class="sidebar-nav-overview">
-          站点概览
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
       </div>
-      <!--/noindex-->
+    </div>
+  </header>
 
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="PlutoWu"
-      src="/images/1.jpg">
-  <p class="site-author-name" itemprop="name">PlutoWu</p>
-  <div class="site-description" itemprop="description">A Simple and Powerful Blog</div>
-</div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">30</span>
-          <span class="site-state-item-name">日志</span>
+  <main>
+    
+      <div class="container nopadding-x-md">
+        <div class="py-5" id="board"
+          style=margin-top:0>
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2021/03/11/Java%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0-%E7%AE%97%E6%B3%95/" target="_self">
+          <img src="/images/loading.gif" srcset="/img/loading.gif" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/j9.png" alt="Java面试笔记-算法">
         </a>
       </div>
-      <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-        <span class="site-state-item-count">8</span>
-        <span class="site-state-item-name">分类</span></a>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/03/11/Java%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0-%E7%AE%97%E6%B3%95/">Java面试笔记-算法</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/03/11/Java%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0-%E7%AE%97%E6%B3%95/">
+          
+          
+            
+          
+          二叉树的先序、中序和后序遍历 (Easy)分别按照二叉树先序，中序和后序打印所有的节点。
+示例1
+输入：&#123;1,2,3&#125;
+输出：[[1,2,3],[2,1,3],[2,3,1]]
+
+二叉树遍历
+
+先序：root -&gt; left -&gt; right
+中序：left -&gt; root  -&gt; right
+后序：left -&gt; right-&gt; root 
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-03-11 18:19" pubdate>
+              2021-03-11
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0/">面试笔记</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Java/">Java</a>
+            
+              <a href="/tags/%E9%9D%A2%E8%AF%95/">面试</a>
+            
+              <a href="/tags/%E7%AE%97%E6%B3%95/">算法</a>
+            
+          </div>
+        
       </div>
-      <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-        <span class="site-state-item-count">26</span>
-        <span class="site-state-item-name">标签</span></a>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2021/05/16/Golang-Day4/" target="_self">
+          <img src="/images/loading.gif" srcset="/img/loading.gif" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/idx4.png" alt="Golang-Day4">
+        </a>
       </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/05/16/Golang-Day4/">Golang-Day4</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/05/16/Golang-Day4/">
+          
+          
+            
+          
+          架构图
+版本一：构建基础Server服务端
+主程序
+版本二：用户上线功能添加一个用户端
+补充修改服务端
+版本三：用户消息广播机制完善handle处理业务⽅法，启动⼀个针对当前客户端的读goroutine
+
+版本四：用户业务层封装
+版本五：在线用户查询
+版本六：修改用户名
+版本七：超时强踢功能
+版本八：私聊功能
+版本九：客户端实现客户端类型定义与链接
+解析命令行
+菜单显示
+更新用户名
+公聊模式
+私聊
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-05-16 14:31" pubdate>
+              2021-05-16
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Golang/">Golang</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2021/05/15/Golang-Day3/" target="_self">
+          <img src="/images/loading.gif" srcset="/img/loading.gif" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/idx3.png" alt="Golang-Day3">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/05/15/Golang-Day3/">Golang-Day3</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/05/15/Golang-Day3/">
+          
+          
+            
+          
+          面向对象特征封装Java中的封装
+Java语言中，封装是自然而来的，也是强制的。你所写的代码，都要属于某个类，某个class文件。类的属性封装了数据，方法则是对这些数据的操作。通过private和public来控制数据的可访问性
+每个类（java文件），自然的就是一个对象的模板
+Go中的封装
+Go语言并不是完全面向对象的。其实Go语言中并没有类和对象的概念
+首先，Go语言是完全可以写成面向过程风格
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-05-15 10:35" pubdate>
+              2021-05-15
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Golang/">Golang</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2021/05/14/Golang-Day2/" target="_self">
+          <img src="/images/loading.gif" srcset="/img/loading.gif" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/idx2.png" alt="Golang-Day2">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/05/14/Golang-Day2/">Golang-Day2</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/05/14/Golang-Day2/">
+          
+          
+            
+          
+          基础语法defer关键字defer关键字类似于C#的final关键字，可用于在程序退出前进行操作
+知识点一 defer的执行顺序
+可以看到加入defer关键字后，defer的执行顺序类似于一个栈
+所以执行顺序是fun3() -&gt; func2()-&gt; func1()
+
+知识点二 defer和return的先后
+执行结果：
+return func called...
+defer func 
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-05-14 19:09" pubdate>
+              2021-05-14
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Golang/">Golang</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2021/05/12/Golang-Day1/" target="_self">
+          <img src="/images/loading.gif" srcset="/img/loading.gif" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/idx.png" alt="Golang-Day1">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/05/12/Golang-Day1/">Golang-Day1</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/05/12/Golang-Day1/">
+          
+          
+            
+          
+          该笔记是在熟练掌握一门后端语言（Java、C++）的基础上快速入门Golang
+
+Golang的语言特性Golang的优势部署简单
+可直接编译成机器码执行
+不依赖其他库
+直接运行即可部署
+
+静态类型语言
+编译的时候即可检查出来隐藏的⼤多数问题
+
+语言层面的并发
+天生基因支持并发
+充分的利用多核
+
+强大的标准库
+runtime系统调度机制
+高效的 GC 垃圾回收
+丰富的标准库 （特别是网络库非常强大
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-05-12 20:12" pubdate>
+              2021-05-12
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Golang/">Golang</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2021/04/28/Java%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" target="_self">
+          <img src="/images/loading.gif" srcset="/img/loading.gif" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/j11.png" alt="Java面试笔记-数据结构">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/04/28/Java%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">Java面试笔记-数据结构</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/04/28/Java%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
+          
+          
+            
+          
+          红黑树深入剖析及 Java 实现转自美团技术专栏
+红黑树是平衡二叉查找树的一种。为了深入理解红黑树，我们需要从二叉查找树开始讲起。
+BST二叉查找树（Binary Search Tree，简称BST）是一棵二叉树，它的左子节点的值比父节点的值要小，右节点的值要比父节点的值大。它的高度决定了它的查找效率。
+在理想的情况下，二叉查找树增删查改的时间复杂度为O(logN)（其中N为节点数），最坏的情况下
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-04-28 20:19" pubdate>
+              2021-04-28
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0/">面试笔记</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Java/">Java</a>
+            
+              <a href="/tags/%E9%9D%A2%E8%AF%95/">面试</a>
+            
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2021/04/28/pRPC-Day2/" target="_self">
+          <img src="/images/loading.gif" srcset="/img/loading.gif" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/pRPC2.png" alt="pRPC-Day2">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/04/28/pRPC-Day2/">pRPC-Day2</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/04/28/pRPC-Day2/">
+          
+          
+            
+          
+          Netty简介
+Netty 是一个利用 Java 的高级网络的能力，隐藏其背后的复杂性而提供一个易于使用的 API 的客户端/服务器框架。 Netty 是一个广泛使用的 Java 网络编程框架（Netty 在 2011 年获得了Duke’s Choice Award，见https://www.java.net/dukeschoice/2011）。它活跃和成长于用户社区，像大型公司 Facebook
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-04-28 19:27" pubdate>
+              2021-04-28
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E9%A1%B9%E7%9B%AE/">项目</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/RPC/">RPC</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2021/04/28/Java%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0-Redis/" target="_self">
+          <img src="/images/loading.gif" srcset="/img/loading.gif" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/j10.png" alt="Java面试笔记-Redis">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/04/28/Java%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0-Redis/">Java面试笔记-Redis</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/04/28/Java%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0-Redis/">
+          
+          
+            
+          
+          Redis简单介绍简单来说 Redis 就是一个使用 C 语言开发的数据库，不过与传统数据库不同的是 Redis 的数据是存在内存中的 ，也就是它是内存数据库，所以读写速度非常快，因此 Redis 被广泛应用于缓存方向。
+另外，Redis 除了做缓存之外，Redis 也经常用来做分布式锁，甚至是消息队列。
+Redis 提供了多种数据类型来支持不同的业务场景。Redis 还支持事务 、持久化、Lua
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-04-28 10:40" pubdate>
+              2021-04-28
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0/">面试笔记</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E9%9D%A2%E8%AF%95/">面试</a>
+            
+              <a href="/tags/Redis/">Redis</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2021/04/24/pRPC-Day1/" target="_self">
+          <img src="/images/loading.gif" srcset="/img/loading.gif" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/pRPC.png" alt="pRPC-Day1">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/04/24/pRPC-Day1/">pRPC-Day1</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/04/24/pRPC-Day1/">
+          
+          
+            
+          
+          关于项目所需技术栈，笔者会另外编写入门笔记。
+此项目基于guide哥的自定义RPC框架，仓库-https://gitee.com/p1utowu/pluto-rpc-frame
+项目主要技术栈
+
+
+Netty
+网络传输组件（基于NIO并优于原生NIO）
+
+
+
+Kyro
+序列化工具（替代JDK原生序列化）
+
+
+Zookeeper
+注册中心（负责服务地址的注册与查找）
+
+
+SPI
+服务提供发现机制（解
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-04-24 09:29" pubdate>
+              2021-04-24
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E9%A1%B9%E7%9B%AE/">项目</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/RPC/">RPC</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2021/04/11/%E4%B8%AA%E4%BA%BA%E6%91%84%E5%BD%B1%E5%B9%B4%E5%BA%A6Top10-2020/" target="_self">
+          <img src="/images/loading.gif" srcset="/img/loading.gif" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/photograph.png" alt="个人摄影年度Top10-2020">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/04/11/%E4%B8%AA%E4%BA%BA%E6%91%84%E5%BD%B1%E5%B9%B4%E5%BA%A6Top10-2020/">个人摄影年度Top10-2020</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/04/11/%E4%B8%AA%E4%BA%BA%E6%91%84%E5%BD%B1%E5%B9%B4%E5%BA%A6Top10-2020/">
+          
+          
+            
+          
+          
+芦苇荡
+
+
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-04-11 18:25" pubdate>
+              2021-04-11
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E6%91%84%E5%BD%B1/">摄影</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%91%84%E5%BD%B1/">摄影</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+
+
+  <nav aria-label="navigation">
+    <span class="pagination" id="pagination">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/#board">2</a><a class="page-number" href="/page/3/#board">3</a><a class="extend next" rel="next" href="/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
+    </span>
   </nav>
-</div>
 
 
 
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      
-      
-		<script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
-		<script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
-		<div class="widget-wrap">
-			<h3 class="widget-title">Tag Cloud</h3>
-			<div id="myCanvasContainer" class="widget tagcloud">
-				<canvas width="250" height="250" id="resCanvas" style="width=100%">
-            <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C%E8%AF%AD%E8%A8%80/" rel="tag">C语言</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang/" rel="tag">Golang</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/I-O/" rel="tag">I/O</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JWT/" rel="tag">JWT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java%E5%9F%BA%E7%A1%80/" rel="tag">Java基础</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RPC/" rel="tag">RPC</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RabbitMQ/" rel="tag">RabbitMQ</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Servlet/" rel="tag">Servlet</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/" rel="tag">Spring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringBoot/" rel="tag">SpringBoot</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/" rel="tag">Swagger</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue3/" rel="tag">Vue3</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BD%B1%E8%AF%84/" rel="tag">影评</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%91%84%E5%BD%B1/" rel="tag">摄影</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A1%86%E6%9E%B6/" rel="tag">框架</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BA%BF%E7%A8%8B/" rel="tag">线程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%87%8C%E4%B8%96%E7%95%8C/" rel="tag">里世界</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag">面试</a><span class="tag-list-count">10</span></li></ul>
-				</canvas>
-			</div>
-		</div>
-		
+    
 
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
 
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
     </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-        
-
-<div class="copyright">
-  
-  &copy; 
-  <span itemprop="copyrightYear">2021</span>
-  <span class="with-love">
-    <i class="fa fa-user"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">PlutoWu</span>
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item-icon">
-      <i class="fa fa-area-chart"></i>
-    </span>
-      <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">267k</span>
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item-icon">
-      <i class="fa fa-coffee"></i>
-    </span>
-      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">4:02</span>
-</div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener external nofollow noreferrer" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener external nofollow noreferrer" target="_blank">NexT.Pisces</a> 强力驱动
   </div>
-
-        
-<div class="busuanzi-count">
-  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-user"></i>
-      </span>
-      <span class="site-uv" title="总访客量">
-        <span id="busuanzi_value_site_uv"></span>
-      </span>
-    </span>
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-eye"></i>
-      </span>
-      <span class="site-pv" title="总访问量">
-        <span id="busuanzi_value_site_pv"></span>
-      </span>
-    </span>
 </div>
+    
 
+    
+  </main>
 
-
-
-
-
-
-
-      </div>
-    </footer>
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
   </div>
-
-  
-  <script size="300" alpha="0.6" zIndex="-1" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
-  <script src="/lib/anime.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
-
-<script src="/js/utils.js"></script>
-
-<script src="/js/motion.js"></script>
-
-
-<script src="/js/schemes/pisces.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
-
-
-  <script defer src="/lib/three/three.min.js"></script>
-    <script defer src="true"></script>
-    <script defer src="true"></script>
-    <script defer src="true"></script>
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   
 
   
 
+  
+</footer>
 
-<script>
-NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
-  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
-    var GUEST = ['nick', 'mail', 'link'];
-    var guest = 'nick,mail,link';
-    guest = guest.split(',').filter(item => {
-      return GUEST.includes(item);
-    });
-    new Valine({
-      el         : '#valine-comments',
-      verify     : false,
-      notify     : false,
-      appId      : 'KaDYMq6sfBlwR6bo1cgJaQ0P-gzGzoHsz',
-      appKey     : 'Bq47qMh1BOVYR5n0l5AXXTUM',
-      placeholder: "Just go go",
-      avatar     : 'mm',
-      meta       : guest,
-      pageSize   : '10' || 10,
-      visitor    : false,
-      lang       : '' || 'zh-cn',
-      path       : location.pathname,
-      recordIP   : false,
-      serverURLs : ''
-    });
-  }, window.Valine);
-});
-</script>
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+    
+  
+
+
+
+
+
+
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
 
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><script>
             window.imageLazyLoadSetting = {

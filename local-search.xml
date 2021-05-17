@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>WSL2安装指南</title>
+    <link href="/2021/05/17/WSL2%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97/"/>
+    <url>/2021/05/17/WSL2%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97/</url>
+    
+    <content type="html"><![CDATA[<h1 id="版本要求"><a href="#版本要求" class="headerlink" title="版本要求"></a>版本要求</h1><p><strong>安装WSL2对系统版本有硬性要求</strong></p><ul><li>Windows 10运行在<code>版本2004</code>的<code>内部版本19041</code>或更高版本</li><li>检查版本：Win + R，键入winver。若内部版本低于19041，请更新到最新的Windows版本继续操作</li></ul><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210517145759.png"></p><p><strong>升级Windows（若版本达到要求，请跳过此步骤）</strong></p><p>Win + S 搜索<code>Windows预览体验计划</code>，加入预览体验计划以获取最新版本，并在<code>Windows更新</code>下检查更新并更新版本</p><h1 id="WSL的安装"><a href="#WSL的安装" class="headerlink" title="WSL的安装"></a>WSL的安装</h1><ul><li>使用<code>管理员</code>权限打开PowerShell</li><li>启用“ 适用于Linux的Windows子系统 ”选项，此操作为启用WSL</li></ul><div class="code-wrapper"><pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell">dism<span class="token punctuation">.</span>exe <span class="token operator">/</span>online <span class="token operator">/</span><span class="token function">enable-feature</span> <span class="token operator">/</span>featurename:Microsoft<span class="token operator">-</span>Windows<span class="token operator">-</span>Subsystem<span class="token operator">-</span>Linux <span class="token operator">/</span>all <span class="token operator">/</span>norestart<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div><ul><li>升级到WSL2，启动“ 虚拟机平台 ”可选组件</li></ul><div class="code-wrapper"><pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell">dism<span class="token punctuation">.</span>exe <span class="token operator">/</span>online <span class="token operator">/</span><span class="token function">enable-feature</span> <span class="token operator">/</span>featurename:VirtualMachinePlatform <span class="token operator">/</span>all <span class="token operator">/</span>norestart<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div><ul><li><code>重启电脑</code>，并以<code>管理员</code>权限打开PowerShell，键入以下命令将WSL2设置为默认版本</li></ul><div class="code-wrapper"><pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell">wsl <span class="token operator">--</span><span class="token function">set-default</span><span class="token operator">-</span>version 2<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div><p>提示如下内容即为安装WSL2成功</p><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210517150720.png"></p><h1 id="安装Linux分发版"><a href="#安装Linux分发版" class="headerlink" title="安装Linux分发版"></a>安装Linux分发版</h1><p>选择你所需要的系统和版本即可</p><ul><li><p>打开 <a href="https://aka.ms/wslstore">Microsoft Store</a>，并选择你所需要的 Linux 分发版</p><p>单击以下链接可直达每个分发版的 Microsoft Store 页面</p><p><a href="https://www.microsoft.com/store/apps/9pjn388hp8c9">Ubuntu 16.04 LTS</a><br><a href="https://www.microsoft.com/store/apps/9N9TNGVNDL3Q">Ubuntu 18.04 LTS</a><br><a href="https://www.microsoft.com/store/apps/9n6svws3rx71">Ubuntu 20.04 LTS</a><br><a href="https://www.microsoft.com/store/apps/9NJFZK00FGKV">openSUSE Leap 15.1</a><br><a href="https://www.microsoft.com/store/apps/9MZ3D1TRP8T1">SUSE Linux Enterprise Server 12 SP5</a><br><a href="https://www.microsoft.com/store/apps/9PN498VPMF3Z">SUSE Linux Enterprise Server 15 SP1</a><br><a href="https://www.microsoft.com/store/apps/9PKR34TNCV07">Kali Linux</a><br><a href="https://www.microsoft.com/store/apps/9MSVKQC78PK6">Debian GNU/Linux</a><br><a href="https://www.microsoft.com/store/apps/9n6gdm4k2hnc">Fedora Remix for WSL</a><br><a href="https://www.microsoft.com/store/apps/9NV1GV1PXZ6P">Pengwin</a><br><a href="https://www.microsoft.com/store/apps/9N8LP0X93VCP">Pengwin Enterprise</a><br><a href="https://www.microsoft.com/store/apps/9p804crf0395">Alpine WSL</a></p></li><li><p>如图，在所在页面，选择获取即可开始安装</p></li></ul><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210517151504.png"></p><ul><li><p>等待片刻，你就可以点击Win键在开始界面查看到已安装的Linux分发版，此时建议<code>重启</code>，可以尽量减少报错风险</p></li><li><p>初次运行需要设置账号及密码，设置完毕即可开始WSL之旅</p></li></ul><h1 id="Windows-Teminal的协同操作"><a href="#Windows-Teminal的协同操作" class="headerlink" title="Windows Teminal的协同操作"></a>Windows Teminal的协同操作</h1><p>Windows Teminal可以在微软商店一键安装，操作不再赘述</p><p>安装Windows Teminal后可以在选项栏中找到所安装的Linux分发版</p><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210517151949.png"></p><p>点击设置可以进行，默认终端等设置（新版本无需修改JSON文件，已经具备图形化操作）</p><h1 id="安装Docker-Desktop"><a href="#安装Docker-Desktop" class="headerlink" title="安装Docker Desktop"></a>安装Docker Desktop</h1><ol><li>进入Docker Desktop<a href="https://www.docker.com/products/docker-desktop">下载地址</a>，点击Download for Windows</li><li>跟随步骤安装即可，注意勾选支持WSL选项</li><li>完成安装，进行如下图设置</li></ol><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210517152432.png"></p><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210517152502.png"></p><ol start="4"><li>便可在Windows Teminal的WSL2终端中直接进行Docker的操作</li></ol><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210517152601.png"></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>安装指南</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>WSL2</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Golang-Day4</title>
     <link href="/2021/05/16/Golang-Day4/"/>
     <url>/2021/05/16/Golang-Day4/</url>

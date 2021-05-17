@@ -195,33 +195,31 @@
     
     
       <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2021/03/11/Java%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0-%E7%AE%97%E6%B3%95/" target="_self">
-          <img src="/images/loading.gif" srcset="/img/loading.gif" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/j9.png" alt="Java面试笔记-算法">
+        <a href="/2021/05/17/WSL2%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97/" target="_self">
+          <img src="/images/loading.gif" srcset="/img/loading.gif" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/WSL2%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97.png" alt="WSL2安装指南">
         </a>
       </div>
     
     <article class="col-12 col-md-8 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/03/11/Java%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0-%E7%AE%97%E6%B3%95/">Java面试笔记-算法</a>
+        <a href="/2021/05/17/WSL2%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97/">WSL2安装指南</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/03/11/Java%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0-%E7%AE%97%E6%B3%95/">
+        <a href="/2021/05/17/WSL2%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97/">
           
           
             
           
-          二叉树的先序、中序和后序遍历 (Easy)分别按照二叉树先序，中序和后序打印所有的节点。
-示例1
-输入：&#123;1,2,3&#125;
-输出：[[1,2,3],[2,1,3],[2,3,1]]
+          版本要求安装WSL2对系统版本有硬性要求
 
-二叉树遍历
+Windows 10运行在版本2004的内部版本19041或更高版本
+检查版本：Win + R，键入winver。若内部版本低于19041，请更新到最新的Windows版本继续操作
 
-先序：root -&gt; left -&gt; right
-中序：left -&gt; root  -&gt; right
-后序：left -&gt; right-&gt; root 
+
+升级Windows（若版本达到要求，请跳过此步骤）
+Win + S 搜索Windows预览体验计划，加入预览体验计划以获取最新版本，并在Windows更新下检查更新并更新
         </a>
       </p>
 
@@ -229,8 +227,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-03-11 18:19" pubdate>
-              2021-03-11
+            <time datetime="2021-05-17 14:51" pubdate>
+              2021-05-17
             </time>
           </div>
         
@@ -238,7 +236,7 @@
           <div class="post-meta mr-3">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0/">面试笔记</a>
+              <a href="/categories/%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97/">安装指南</a>
             
           </div>
         
@@ -246,11 +244,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/Java/">Java</a>
-            
-              <a href="/tags/%E9%9D%A2%E8%AF%95/">面试</a>
-            
-              <a href="/tags/%E7%AE%97%E6%B3%95/">算法</a>
+              <a href="/tags/WSL2/">WSL2</a>
             
           </div>
         
@@ -979,11 +973,11 @@ SPI
 <script  src="/js/boot.js" ></script>
 
 
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><script>
+<script>
             window.imageLazyLoadSetting = {
                 isSPA: false,
                 preloadRatio: 1,
                 processImages: null,
             };
-        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=o;var e=n.imageLazyLoadSetting.isSPA,i=n.imageLazyLoadSetting.preloadRatio||1,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function o(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight*i||document.documentElement.clientHeight*i)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},t.src!==i&&(n.src=i)}()}o(),n.addEventListener("scroll",function(){var t,e;t=o,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=o;var e=n.imageLazyLoadSetting.isSPA,i=n.imageLazyLoadSetting.preloadRatio||1,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function o(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight*i||document.documentElement.clientHeight*i)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},t.src!==i&&(n.src=i)}()}o(),n.addEventListener("scroll",function(){var t,e;t=o,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
 </html>

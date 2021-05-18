@@ -70,7 +70,7 @@ Redis 提供了多种数据类型来支持不同的业务场景。Redis 还支�
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"plutowu.top","root":"/","version":"1.8.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+    var CONFIG = {"hostname":"plutowu.top","root":"/","version":"1.8.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
@@ -352,7 +352,7 @@ OK
 <span class="token string">"value3"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></div>
 
 <p>我专门花了一个图方便小伙伴们来理解：</p>
-<p><img src="/images/loading.gif" srcset="/img/loading.gif" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/redis-list.png" alt="redis list"></p>
+<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/redis-list.png" alt="redis list"></p>
 <p><strong>通过 <code>lrange</code> 查看对应下标范围的列表元素：</strong></p>
 <div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token number">127.0</span>.0.1:637<span class="token operator"><span class="token file-descriptor important">9</span>></span> rpush myList value1 value2 value3
 <span class="token punctuation">(</span>integer<span class="token punctuation">)</span> <span class="token number">3</span>
@@ -469,7 +469,7 @@ OK
 </ol>
 <h1 id="缓存穿透"><a href="#缓存穿透" class="headerlink" title="缓存穿透"></a>缓存穿透</h1><h2 id="什么是缓存穿透？"><a href="#什么是缓存穿透？" class="headerlink" title="什么是缓存穿透？"></a>什么是缓存穿透？</h2><p>缓存穿透说简单点就是大量请求的 key 根本不存在于缓存中，导致请求直接到了数据库上，根本没有经过缓存这一层。举个例子：某个黑客故意制造我们缓存中不存在的 key 发起大量请求，导致大量请求落到数据库。</p>
 <h2 id="缓存穿透情况的处理流程是怎样的？"><a href="#缓存穿透情况的处理流程是怎样的？" class="headerlink" title="缓存穿透情况的处理流程是怎样的？"></a>缓存穿透情况的处理流程是怎样的？</h2><p>如下图所示，用户的请求最终都要跑到数据库中查询一遍。</p>
-<p><img src="/images/loading.gif" srcset="/img/loading.gif" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F%E6%83%85%E5%86%B5.png" alt="缓存穿透情况"></p>
+<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F%E6%83%85%E5%86%B5.png" alt="缓存穿透情况"></p>
 <h2 id="有哪些解决办法？"><a href="#有哪些解决办法？" class="headerlink" title="有哪些解决办法？"></a>有哪些解决办法？</h2><p>最基本的就是首先做好参数校验，一些不合法的参数请求直接抛出异常信息返回给客户端。比如查询的数据库 id 不能小于 0、传入的邮箱格式不对的时候直接返回错误消息给客户端等等。</p>
 <p><strong>1）缓存无效 key</strong></p>
 <p>如果缓存和数据库都查不到某个 key 的数据就写一个到 Redis 中去并设置过期时间，具体命令如下： <code>SET key value EX 10086</code> 。这种方式可以解决请求的 key 变化不频繁的情况，如果黑客恶意攻击，每次构建不同的请求 key，会导致 Redis 中缓存大量无效的 key 。很明显，这种方案并不能从根本上解决此问题。如果非要用这种方式来解决穿透问题的话，尽量将无效的 key 的过期时间设置短一点比如 1 分钟。</p>
@@ -498,7 +498,7 @@ OK
 <p>布隆过滤器是一个非常神奇的数据结构，通过它我们可以非常方便地判断一个给定数据是否存在于海量数据中。我们需要的就是判断 key 是否合法，有没有感觉布隆过滤器就是我们想要找的那个“人”。</p>
 <p>具体是这样做的：把所有可能存在的请求的值都存放在布隆过滤器中，当用户请求过来，先判断用户发来的请求的值是否存在于布隆过滤器中。不存在的话，直接返回请求参数错误信息给客户端，存在的话才会走下面的流程。</p>
 <p>加入布隆过滤器之后的缓存处理流程图如下。</p>
-<p><img src="/images/loading.gif" srcset="/img/loading.gif" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/%E5%8A%A0%E5%85%A5%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8%E5%90%8E%E7%9A%84%E7%BC%93%E5%AD%98%E5%A4%84%E7%90%86%E6%B5%81%E7%A8%8B.png" alt="image"></p>
+<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/%E5%8A%A0%E5%85%A5%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8%E5%90%8E%E7%9A%84%E7%BC%93%E5%AD%98%E5%A4%84%E7%90%86%E6%B5%81%E7%A8%8B.png" alt="image"></p>
 <p>但是，需要注意的是布隆过滤器可能会存在误判的情况。总结来说就是： <strong>布隆过滤器说某个元素存在，小概率会误判。布隆过滤器说某个元素不在，那么这个元素一定不在。</strong></p>
 <p><em>为什么会出现误判的情况呢? 我们还要从布隆过滤器的原理来说！</em></p>
 <p>我们先来看一下，<strong>当一个元素加入布隆过滤器中的时候，会进行哪些操作：</strong></p>
@@ -528,7 +528,7 @@ OK
 </ol>
 <h1 id="Redis-哨兵-Sentinel-模式"><a href="#Redis-哨兵-Sentinel-模式" class="headerlink" title="Redis 哨兵(Sentinel)模式"></a>Redis 哨兵(Sentinel)模式</h1><p><strong>主从切换技术的方法是：当主服务器宕机后，需要手动把一台从服务器切换为主服务器，这就需要人工干预，费事费力，还会造成一段时间内服务不可用。</strong>这不是一种推荐的方式，更多时候，我们优先考虑<strong>哨兵模式</strong>。</p>
 <h2 id="哨兵模式概述"><a href="#哨兵模式概述" class="headerlink" title="哨兵模式概述"></a>哨兵模式概述</h2><p>哨兵模式是一种特殊的模式，首先Redis提供了哨兵的命令，哨兵是一个独立的进程，作为进程，它会独立运行。其原理是<strong>哨兵通过发送命令，等待Redis服务器响应，从而监控运行的多个Redis实例。</strong></p>
-<p><img src="/images/loading.gif" srcset="/img/loading.gif" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/11320039-57a77ca2757d0924.png" alt="img"></p>
+<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/11320039-57a77ca2757d0924.png" alt="img"></p>
 <p>这里的哨兵有两个作用</p>
 <ul>
 <li>通过发送命令，让Redis服务器返回监控其运行状态，包括主服务器和从服务器。</li>
@@ -583,7 +583,7 @@ OK
 <td>26379</td>
 </tr>
 </tbody></table>
-<p><img src="/images/loading.gif" srcset="/img/loading.gif" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/11320039-3f40b17c0412116c.png" alt="img"></p>
+<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/11320039-3f40b17c0412116c.png" alt="img"></p>
 <p>首先配置Redis的主从服务器，修改redis.conf文件如下</p>
 <div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 使得Redis服务器可以跨网络访问</span>
 <span class="token builtin class-name">bind</span> <span class="token number">0.0</span>.0.0
@@ -754,7 +754,7 @@ sentinel auth-pass mymaster 123456<span aria-hidden="true" class="line-numbers-r
 </ol>
 <h1 id="Redis的单线程与多线程"><a href="#Redis的单线程与多线程" class="headerlink" title="Redis的单线程与多线程"></a>Redis的单线程与多线程</h1><p>因为Redis是基于内存的操作，CPU不是Redis的瓶颈，Redis的瓶颈最有可能是机器内存的大小或者网络带宽。既然单线程容易实现，而且CPU不会成为瓶颈，那就顺理成章地采用单线程的方案了。</p>
 <h2 id="（1）IO多路复用"><a href="#（1）IO多路复用" class="headerlink" title="（1）IO多路复用"></a>（1）IO多路复用</h2><p>我们来看一下Redis顶层设计。</p>
-<p><img src="/images/loading.gif" srcset="/img/loading.gif" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20200821101342539.jpeg" alt="img"></p>
+<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20200821101342539.jpeg" alt="img"></p>
 <p>FD是一个文件描述符，意思是表示当前文件处于可读、可写还是异常状态。使用 I/O 多路复用机制同时监听多个文件描述符的可读和可写状态。你可以理解为具有了多线程的特点。</p>
 <p>一旦受到网络请求就会在内存中快速处理，由于绝大多数的操作都是纯内存的，所以处理的速度会非常地快。也就是说在单线程模式下，即使连接的网络处理很多，因为有IO多路复用，依然可以在高速的内存处理中得到忽略。</p>
 <h2 id="（2）可维护性高"><a href="#（2）可维护性高" class="headerlink" title="（2）可维护性高"></a>（2）可维护性高</h2><p>多线程模型虽然在某些方面表现优异，但是它却引入了程序执行顺序的不确定性，带来了并发读写的一系列问题。单线程模式下，可以方便地进行调试和测试。</p>
@@ -765,7 +765,7 @@ sentinel auth-pass mymaster 123456<span aria-hidden="true" class="line-numbers-r
 <p>Redis 的多线程部分只是用来处理网络数据的读写和协议解析，执行命令仍然是单线程。之所以这么设计是不想 Redis 因为多线程而变得复杂，需要去控制 key、lua、事务，LPUSH/LPOP 等等的并发问题。</p>
 <p>Redis 在最新的几个版本中加入了一些可以被其他线程异步处理的删除操作，也就是我们在上面提到的 UNLINK、FLUSHALL ASYNC 和 FLUSHDB ASYNC，我们为什么会需要这些删除操作，而它们为什么需要通过多线程的方式异步处理？</p>
 <p>我们知道Redis可以使用del命令删除一个元素，如果这个元素非常大，可能占据了几十兆或者是几百兆，那么在短时间内是不能完成的，这样一来就需要多线程的异步支持。</p>
-<p><img src="/images/loading.gif" srcset="/img/loading.gif" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20200821101421465.jpeg" alt="img"></p>
+<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20200821101421465.jpeg" alt="img"></p>
 <p>现在删除工作可以在后台进行。</p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>Redis 选择使用单线程模型处理客户端的请求主要还是因为 CPU 不是 Redis 服务器的瓶颈，所以使用多线程模型带来的性能提升并不能抵消它带来的开发成本和维护成本，系统的性能瓶颈也主要在网络 I/O 操作上；而 Redis 引入多线程操作也是出于性能上的考虑，对于一些大键值对的删除操作，通过多线程非阻塞地释放内存空间也能减少对 Redis 主线程阻塞的时间，提高执行的效率。</p>
 <p>一句话讲完：之前用单线程是因为基于内存速度快，而且多路复用有多路复用的作用，也就是足够了，现在引入是因为在某些操作要优化，比如删除操作，因此引入了多线程。</p>
@@ -991,11 +991,11 @@ sentinel auth-pass mymaster 123456<span aria-hidden="true" class="line-numbers-r
 <script  src="/js/boot.js" ></script>
 
 
-<script>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><script>
             window.imageLazyLoadSetting = {
                 isSPA: false,
                 preloadRatio: 1,
                 processImages: null,
             };
-        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=o;var e=n.imageLazyLoadSetting.isSPA,i=n.imageLazyLoadSetting.preloadRatio||1,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function o(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight*i||document.documentElement.clientHeight*i)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},t.src!==i&&(n.src=i)}()}o(),n.addEventListener("scroll",function(){var t,e;t=o,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=o;var e=n.imageLazyLoadSetting.isSPA,i=n.imageLazyLoadSetting.preloadRatio||1,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function o(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight*i||document.documentElement.clientHeight*i)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},t.src!==i&&(n.src=i)}()}o(),n.addEventListener("scroll",function(){var t,e;t=o,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
 </html>

@@ -68,7 +68,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"plutowu.top","root":"/","version":"1.8.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+    var CONFIG = {"hostname":"plutowu.top","root":"/","version":"1.8.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
@@ -261,16 +261,16 @@
 <p>首先，Go语言是完全可以写成面向过程风格的。Go语言中有很多的function是不属于任何对象的</p>
 <p>然后，Go语言中，封装有包范围的封装和结构体范围的封装</p>
 <p>Golang的封装特性体现在类名、属性名、方法名的首字母大写即表示对外（其他包）可以访问，否则只能在本包内访问</p>
-<p><img src="/images/loading.gif" srcset="/img/loading.gif" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210515103957376.png" alt="image-20210515103957376"></p>
+<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210515103957376.png" alt="image-20210515103957376"></p>
 <h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2><p><strong>Java中的继承</strong></p>
 <p>Java语言中，继承通过extends关键字实现。有非常清晰的父类和子类的概念以及继承关系。Java不支持多继承</p>
 <p><strong>Go中的继承</strong></p>
 <p>Go语言中其实并没有继承。但是Go中确实只是提供了一种伪继承，通过embedding实现的“伪”继承</p>
 <p><strong>父类的定义以及方法</strong></p>
-<p><img src="/images/loading.gif" srcset="/img/loading.gif" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210515105218272.png" alt="image-20210515105218272"></p>
+<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210515105218272.png" alt="image-20210515105218272"></p>
 <p><strong>子类的定义以及方法</strong></p>
 <p>子类的定义只需在结构体内加入父类名称即可认定为继承父类</p>
-<p><img src="/images/loading.gif" srcset="/img/loading.gif" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210515105432491.png" alt="image-20210515105432491"></p>
+<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210515105432491.png" alt="image-20210515105432491"></p>
 <p>如此看起来Go语言中的继承是不是更像一种提供了语法糖的has-a的关系，并不是is-a的关系</p>
 <p>这里就引申出继承或是组合的问题</p>
 <p><strong>继承vs组合</strong></p>
@@ -335,11 +335,11 @@
 <p>Go中的多态采用和JavaScript一样的鸭式辩型：如果一只鸟走路像鸭子，叫起来像鸭子，那么它就是一只鸭子。</p>
 <p>在Java中，我们要显式的使用implements关键字，声明一个类实现了某个接口，才能将这个类当做这个接口的一个实现来使用。在Go中，没有implements关键字。只要一个struct实现了某个接口规定的所有方法，就认为它实现了这个接口。</p>
 <p><strong>父类（接口）</strong></p>
-<p><img src="/images/loading.gif" srcset="/img/loading.gif" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210515110823989.png" alt="image-20210515110823989"></p>
+<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210515110823989.png" alt="image-20210515110823989"></p>
 <p><strong>子类（实现父类所有方法）</strong></p>
-<p><img src="/images/loading.gif" srcset="/img/loading.gif" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210515110945513.png" alt="image-20210515110945513"></p>
+<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210515110945513.png" alt="image-20210515110945513"></p>
 <p><strong>父类类型的变量（指针）指向（引用）子类的具体数据变量</strong></p>
-<p><img src="/images/loading.gif" srcset="/img/loading.gif" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210515111053027.png" alt="image-20210515111053027"></p>
+<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210515111053027.png" alt="image-20210515111053027"></p>
 <p>理解了基本的接口的基本要素</p>
 <p>而接下来，我们来讨论一个老生常谈的问题：接口和抽象类的区别</p>
 <blockquote>
@@ -354,7 +354,7 @@
 <li>可以用interface{}类型引用任意的数据类型</li>
 </ul>
 <p><strong>类型断言</strong></p>
-<p><img src="/images/loading.gif" srcset="/img/loading.gif" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210515121319086.png" alt="image-20210515121319086"></p>
+<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210515121319086.png" alt="image-20210515121319086"></p>
 <h1 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h1><h2 id="什么是反射"><a href="#什么是反射" class="headerlink" title="什么是反射"></a>什么是反射</h2><blockquote>
 <p>在计算机科学中，反射是指计算机程序在运行时（Run time）可以访问、检测和修改它本身状态或行为的一种能力。用比喻来说，反射就是程序在运行的时候能够“观察”并且修改自己的行为。</p>
 </blockquote>
@@ -377,14 +377,14 @@
 <h2 id="反射的实现"><a href="#反射的实现" class="headerlink" title="反射的实现"></a>反射的实现</h2><p>Go 语言在 reflect 包里定义了各种类型，实现了反射的各种函数，通过它们可以在运行时检测类型的信息、改变类型的值。</p>
 <h2 id="变量的结构"><a href="#变量的结构" class="headerlink" title="变量的结构"></a>变量的结构</h2><p>reflect 包里定义了一个接口和一个结构体，即 <code>reflect.Type</code> 和 <code>reflect.Value</code>，它们提供很多函数来获取存储在接口里的类型信息。</p>
 <p><code>reflect.Type</code> 主要提供关于类型相关的信息，所以它和 <code>_type</code> 关联比较紧密；<code>reflect.Value</code> 则结合 <code>_type</code> 和 <code>data</code> 两者，因此程序员可以获取甚至改变类型的值。</p>
-<p><img src="/images/loading.gif" srcset="/img/loading.gif" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210515124057294.png" alt="image-20210515124057294"></p>
-<p><img src="/images/loading.gif" srcset="/img/loading.gif" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/57130652-bb060280-6dcc-11e9-9c63-6e2bc4e33509.png" alt="三者关系"></p>
+<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210515124057294.png" alt="image-20210515124057294"></p>
+<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/57130652-bb060280-6dcc-11e9-9c63-6e2bc4e33509.png" alt="三者关系"></p>
 <h2 id="Reflect包"><a href="#Reflect包" class="headerlink" title="Reflect包"></a>Reflect包</h2><p>ValueOf()方法与TypeOf()方法是Reflect包中最常用的方法</p>
-<p><img src="/images/loading.gif" srcset="/img/loading.gif" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210515124851074.png" alt="image-20210515124851074"></p>
+<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210515124851074.png" alt="image-20210515124851074"></p>
 <p><strong>Reflect具体方法的实现</strong></p>
 <p>通过 <code>Type()</code> 方法和 <code>Interface()</code> 方法可以打通 <code>interface</code>、<code>Type</code>、<code>Value</code> 三者。Type() 方法也可以返回变量的类型信息，与 reflect.TypeOf() 函数等价</p>
 <p>Interface() 方法可以将 Value 还原成原来的 interface</p>
-<p><img src="/images/loading.gif" srcset="/img/loading.gif" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210515130553372.png" alt="image-20210515130553372"></p>
+<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210515130553372.png" alt="image-20210515130553372"></p>
 <h2 id="反射三大定律"><a href="#反射三大定律" class="headerlink" title="反射三大定律"></a>反射三大定律</h2><p>根据 Go 官方关于反射的博客，反射有三大定律：</p>
 <blockquote>
 <ol>
@@ -408,7 +408,7 @@ public static void Message(string msg)
   Console.WriteLine(msg)；
 &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 
-<h2 id="结构体标签的格式"><a href="#结构体标签的格式" class="headerlink" title="结构体标签的格式"></a>结构体标签的格式</h2><p><img src="/images/loading.gif" srcset="/img/loading.gif" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210515131735936.png" alt="image-20210515131735936"></p>
+<h2 id="结构体标签的格式"><a href="#结构体标签的格式" class="headerlink" title="结构体标签的格式"></a>结构体标签的格式</h2><p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210515131735936.png" alt="image-20210515131735936"></p>
 <h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><p><strong>从结构体标签中获取值</strong></p>
 <p>StructTag 拥有一些方法，可以进行 Tag 信息的解析和提取，如下所示：</p>
 <ul>
@@ -419,7 +419,7 @@ public static void Message(string msg)
 </ul>
 <p><strong>主要的应用有JSON编解码以及ORM映射关系</strong></p>
 <p>这里举一个JSON编解码的例子</p>
-<p><img src="/images/loading.gif" srcset="/img/loading.gif" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210515133102997.png" alt="image-20210515133102997"></p>
+<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210515133102997.png" alt="image-20210515133102997"></p>
 <h1 id="高阶语法"><a href="#高阶语法" class="headerlink" title="高阶语法"></a>高阶语法</h1><h2 id="Goroutine"><a href="#Goroutine" class="headerlink" title="Goroutine"></a>Goroutine</h2><p><strong>Goroutine的理解</strong></p>
 <p>Go语言最大的特色就是从语言层面支持并发（Goroutine），Goroutine是Go中最基本的执行单元。</p>
 <p>事实上每一个Go程序至少有一个Goroutine：主Goroutine。当程序启动时，它会自动创建。</p>
@@ -447,25 +447,25 @@ public static void Message(string msg)
 </ul>
 <p><strong>创建Goroutine</strong></p>
 <p>通过简单的创建一个父子Goroutine来说明创建一个Goroutine的过程，而如果父Goroutine被终止那么子Goroutine也无法运行</p>
-<p><img src="/images/loading.gif" srcset="/img/loading.gif" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210515153522732.png" alt="image-20210515153522732"></p>
+<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210515153522732.png" alt="image-20210515153522732"></p>
 <p><strong>Goexit</strong></p>
 <p>runtime.Goexit()方法提供了退出当前Goroutine的解决方案</p>
-<p><img src="/images/loading.gif" srcset="/img/loading.gif" lazyload data-original="C:/WINDOWS/system32/upload/image-20210515153916311.png" alt="image-20210515153916311"></p>
+<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="C:/WINDOWS/system32/upload/image-20210515153916311.png" alt="image-20210515153916311"></p>
 <h2 id="Channel"><a href="#Channel" class="headerlink" title="Channel"></a>Channel</h2><h3 id="Channel的定义"><a href="#Channel的定义" class="headerlink" title="Channel的定义"></a>Channel的定义</h3><p>Channel  是 Golang中最核心的 feature 之一，因此理解 Channel 的原理对于学习和使用 Golang非常重要</p>
 <p>Channel 是 Goroutine 之间通信的一种方式，可以类比成 Unix 中的进程的通信方式管道</p>
-<p><img src="/images/loading.gif" srcset="/img/loading.gif" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210515161505466.png" alt="image-20210515161505466"></p>
+<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210515161505466.png" alt="image-20210515161505466"></p>
 <h3 id="Channel-介绍"><a href="#Channel-介绍" class="headerlink" title="Channel 介绍"></a>Channel 介绍</h3><p>channel 提供了一种通信机制，通过它，一个 goroutine 可以想另一 goroutine 发送消息。channel 本身还需关联了一个类型，也就是 channel 可以发送数据的类型</p>
 <p>例如: 发送 int 类型消息的 channel 写作 chan int </p>
-<h3 id="Channel-创建"><a href="#Channel-创建" class="headerlink" title="Channel 创建"></a>Channel 创建</h3><p><img src="/images/loading.gif" srcset="/img/loading.gif" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210515162101757.png" alt="image-20210515162101757"></p>
-<h3 id="Channel的使用"><a href="#Channel的使用" class="headerlink" title="Channel的使用"></a><strong>Channel的使用</strong></h3><p><img src="/images/loading.gif" srcset="/img/loading.gif" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210515162508243.png" alt="image-20210515162508243"></p>
-<h3 id="无缓冲的Channel"><a href="#无缓冲的Channel" class="headerlink" title="无缓冲的Channel"></a>无缓冲的Channel</h3><p><img src="/images/loading.gif" srcset="/img/loading.gif" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210515162633311.png" alt="image-20210515162633311"></p>
+<h3 id="Channel-创建"><a href="#Channel-创建" class="headerlink" title="Channel 创建"></a>Channel 创建</h3><p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210515162101757.png" alt="image-20210515162101757"></p>
+<h3 id="Channel的使用"><a href="#Channel的使用" class="headerlink" title="Channel的使用"></a><strong>Channel的使用</strong></h3><p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210515162508243.png" alt="image-20210515162508243"></p>
+<h3 id="无缓冲的Channel"><a href="#无缓冲的Channel" class="headerlink" title="无缓冲的Channel"></a>无缓冲的Channel</h3><p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210515162633311.png" alt="image-20210515162633311"></p>
 <ol>
 <li>在第 1 步，两个 goroutine 都到达通道，但哪个都没有开始执⾏发送或者接收</li>
 <li>在第 2 步，左侧的 goroutine 将它的⼿伸进了通道，这模拟了向通道发送数据的行为。这时，这个 goroutine 会在通道中被锁住，直到交换完成</li>
 <li>在第 3 步，右侧的 goroutine 将它的⼿放⼊通道，这模拟了从通道⾥接收数据。这个 goroutine ⼀样也会在通道中被锁住，直到交换完成</li>
 <li>在第 4 步和第 5 步，进⾏交换，并最终，在第 6 步，两个 goroutine 都将它们的⼿从通道⾥拿出来，这模拟了被锁住的 goroutine 得到释放。两个 goroutine 现在都可以去做其他事情了</li>
 </ol>
-<h3 id="有缓冲的Channel"><a href="#有缓冲的Channel" class="headerlink" title="有缓冲的Channel"></a>有缓冲的Channel</h3><p><img src="/images/loading.gif" srcset="/img/loading.gif" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210515162812850.png" alt="image-20210515162812850"></p>
+<h3 id="有缓冲的Channel"><a href="#有缓冲的Channel" class="headerlink" title="有缓冲的Channel"></a>有缓冲的Channel</h3><p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210515162812850.png" alt="image-20210515162812850"></p>
 <ol>
 <li>在第 1 步，右侧的 goroutine 正在从通道接收⼀个值</li>
 <li>在第 2 步，右侧的这个 goroutine 独⽴完成了接收值的动作，⽽左侧的 goroutine 正在发送⼀个新值到通道</li>
@@ -477,19 +477,19 @@ public static void Message(string msg)
 <li>当channel已经满，再向⾥⾯写数据，就会阻塞</li>
 <li>当channel为空，从⾥⾯取数据也会阻塞</li>
 </ul>
-<h3 id="关闭Channel"><a href="#关闭Channel" class="headerlink" title="关闭Channel"></a>关闭Channel</h3><p><img src="/images/loading.gif" srcset="/img/loading.gif" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210515163111968.png" alt="image-20210515163111968"></p>
+<h3 id="关闭Channel"><a href="#关闭Channel" class="headerlink" title="关闭Channel"></a>关闭Channel</h3><p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210515163111968.png" alt="image-20210515163111968"></p>
 <ul>
 <li>channel不像⽂件⼀样需要经常去关闭，只有当你确实没有任何发送数据了，或者你想显式的结束range循环之类的，才去关闭channel</li>
 <li>关闭channel后，⽆法向channel再发送数据(引发 panic 错误后导致接收⽴即返回零值)</li>
 <li>关闭channel后，可以继续从channel接收数据</li>
 <li>对于nil channel，⽆论收发都会被阻塞</li>
 </ul>
-<h3 id="Channel与range"><a href="#Channel与range" class="headerlink" title="Channel与range"></a>Channel与range</h3><p><img src="/images/loading.gif" srcset="/img/loading.gif" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210515163411700.png" alt="image-20210515163411700"></p>
+<h3 id="Channel与range"><a href="#Channel与range" class="headerlink" title="Channel与range"></a>Channel与range</h3><p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210515163411700.png" alt="image-20210515163411700"></p>
 <h3 id="Channel与select"><a href="#Channel与select" class="headerlink" title="Channel与select"></a>Channel与select</h3><p>单流程下⼀个go只能监控⼀个channel的状态，select可以完成监控多个channel的状态</p>
 <p>所以引入select来进行对多个channel的操作</p>
-<p><img src="/images/loading.gif" srcset="/img/loading.gif" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210515163728044.png" alt="image-20210515163728044"></p>
+<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210515163728044.png" alt="image-20210515163728044"></p>
 <p>下面用一个斐波那契的简单实例来展示select的功能</p>
-<p><img src="/images/loading.gif" srcset="/img/loading.gif" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210515163923146.png" alt="image-20210515163923146"></p>
+<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210515163923146.png" alt="image-20210515163923146"></p>
 <p><strong>总结：select具备多路channel的监控状态功能</strong></p>
 
             </div>
@@ -711,11 +711,11 @@ public static void Message(string msg)
 <script  src="/js/boot.js" ></script>
 
 
-<script>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><script>
             window.imageLazyLoadSetting = {
                 isSPA: false,
                 preloadRatio: 1,
                 processImages: null,
             };
-        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=o;var e=n.imageLazyLoadSetting.isSPA,i=n.imageLazyLoadSetting.preloadRatio||1,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function o(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight*i||document.documentElement.clientHeight*i)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},t.src!==i&&(n.src=i)}()}o(),n.addEventListener("scroll",function(){var t,e;t=o,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=o;var e=n.imageLazyLoadSetting.isSPA,i=n.imageLazyLoadSetting.preloadRatio||1,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function o(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight*i||document.documentElement.clientHeight*i)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},t.src!==i&&(n.src=i)}()}o(),n.addEventListener("scroll",function(){var t,e;t=o,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
 </html>

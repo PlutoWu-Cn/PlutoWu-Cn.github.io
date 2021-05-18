@@ -42,7 +42,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"plutowu.top","root":"/","version":"1.8.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+    var CONFIG = {"hostname":"plutowu.top","root":"/","version":"1.8.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
@@ -195,8 +195,69 @@
     
     
       <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2021/03/10/Java%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0-I-O/" target="_self">
+          <img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/j2.png" alt="Java面试笔记-I/O">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/03/10/Java%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0-I-O/">Java面试笔记-I/O</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/03/10/Java%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0-I-O/">
+          
+          
+            
+          
+          常见的I/O模型有哪些？Java中BIO、NIO、AIO的区别？BIO (Blocking I/O)BIO 属于同步阻塞 IO 模型 。
+同步阻塞 IO 模型中，应用程序发起 read 调用后，会一直阻塞，直到在内核把数据拷贝到用户空间。
+
+在客户端连接数量不高的情况下，是没问题的。但是，当面对十万甚至百万级连接的时候，传统的 BIO 模型是无能为力的。因此，我们需要一种更高效的 I/O 处理模型
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-03-10 22:24" pubdate>
+              2021-03-10
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0/">面试笔记</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Java/">Java</a>
+            
+              <a href="/tags/%E9%9D%A2%E8%AF%95/">面试</a>
+            
+              <a href="/tags/I-O/">I/O</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
         <a href="/2021/03/09/Java%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0-JVM/" target="_self">
-          <img src="/images/loading.gif" srcset="/img/loading.gif" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/j1.png" alt="Java面试笔记-JVM">
+          <img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/j1.png" alt="Java面试笔记-JVM">
         </a>
       </div>
     
@@ -264,7 +325,7 @@ JCOD
     
       <div class="col-12 col-md-4 m-auto index-img">
         <a href="/2020/11/21/SpringBoot-bug%E8%A7%A3%E5%86%B3/" target="_self">
-          <img src="/images/loading.gif" srcset="/img/loading.gif" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/bug.png" alt="SpringBoot-bug解决">
+          <img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/bug.png" alt="SpringBoot-bug解决">
         </a>
       </div>
     
@@ -323,7 +384,7 @@ public class CrosConfig implements WebMvcConfigurer &#123;
     
       <div class="col-12 col-md-4 m-auto index-img">
         <a href="/2020/11/21/%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BAVue%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" target="_self">
-          <img src="/images/loading.gif" srcset="/img/loading.gif" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/vue.png" alt="快速搭建Vue开发环境">
+          <img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/vue.png" alt="快速搭建Vue开发环境">
         </a>
       </div>
     
@@ -379,7 +440,7 @@ public class CrosConfig implements WebMvcConfigurer &#123;
     
       <div class="col-12 col-md-4 m-auto index-img">
         <a href="/2020/11/19/Swagger%E7%AC%94%E8%AE%B0/" target="_self">
-          <img src="/images/loading.gif" srcset="/img/loading.gif" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/swagger.png" alt="Swagger笔记">
+          <img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/swagger.png" alt="Swagger笔记">
         </a>
       </div>
     
@@ -848,11 +909,11 @@ Reasonable use of SQL statementsString sql = "insert into T_BOOK(BID,BNAME,BAUTH
 <script  src="/js/boot.js" ></script>
 
 
-<script>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><script>
             window.imageLazyLoadSetting = {
                 isSPA: false,
                 preloadRatio: 1,
                 processImages: null,
             };
-        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=o;var e=n.imageLazyLoadSetting.isSPA,i=n.imageLazyLoadSetting.preloadRatio||1,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function o(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight*i||document.documentElement.clientHeight*i)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},t.src!==i&&(n.src=i)}()}o(),n.addEventListener("scroll",function(){var t,e;t=o,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=o;var e=n.imageLazyLoadSetting.isSPA,i=n.imageLazyLoadSetting.preloadRatio||1,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function o(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight*i||document.documentElement.clientHeight*i)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},t.src!==i&&(n.src=i)}()}o(),n.addEventListener("scroll",function(){var t,e;t=o,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
 </html>

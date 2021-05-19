@@ -210,7 +210,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      0 字
+      2.4k 字
     </span>
   
 
@@ -220,7 +220,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1
+      26
        分钟
     </span>
   
@@ -253,7 +253,110 @@
             <h1 style="display: none">Golang-Day6</h1>
             
             <div class="markdown-body">
-              
+              <h1 id="Golang-“调度器”的由来"><a href="#Golang-“调度器”的由来" class="headerlink" title="Golang “调度器”的由来"></a>Golang “调度器”的由来</h1><h2 id="单线程时代不需要调度器"><a href="#单线程时代不需要调度器" class="headerlink" title="单线程时代不需要调度器"></a>单线程时代不需要调度器</h2><p>早期的操作系统每一个单个程序就是一个进程，直到一个程序执行完毕才能接着执行下一个程序，这就是所谓的“单线程时代”，即串行执行。</p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://img.kancloud.cn/30/f7/30f77ecceb7ae3b3f0911bf7c8904599_1586x1184.png" alt="早期单进程操作系统"></p>
+<p>早期的操作系统有两个问题：</p>
+<ol>
+<li>单一的执行流程，计算机只能串行的单个执行程序</li>
+<li>进程阻塞带来的CPU资源浪费</li>
+</ol>
+<p>后续发展的操作系统具备了<strong>多线程并发</strong>，即当一个程序阻塞时，切换到另外等待执行的程序，这样就能最大限度的利用CPU资源</p>
+<h2 id="多进程-线程时代的调度器"><a href="#多进程-线程时代的调度器" class="headerlink" title="多进程/线程时代的调度器"></a>多进程/线程时代的调度器</h2><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://img.kancloud.cn/de/49/de49ef2a1ef0fc553754b5ea87e133a6_1522x1332.png" alt="多线程/线程操作系统"></p>
+<p>在此阶段，虽然解决了阻塞的问题但进程拥有太大的操作时间，例如创建、销毁等需要极大的时间，CPU仍然需要一大部分时间进行进程调度</p>
+<p><strong>那么该如何提高CPU的利用率呢？</strong></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://img.kancloud.cn/b1/d1/b1d10153ae6c22754d38328379fa395f_1442x976.png" alt="CPU工作情况"></p>
+<p>很明显，CPU调度切换的是进程和线程。尽管线程看起来很美好，但实际上多线程开发设计会变得更加复杂，要考虑很多同步竞争等问题，如锁、竞争冲突等。</p>
+<h2 id="协程登场"><a href="#协程登场" class="headerlink" title="协程登场"></a>协程登场</h2><p>多进程、多线程已经提高了系统的并发能力，但是在当今互联网高并发场景下，为每个任务都创建一个线程是不现实的，因为会消耗大量的内存(进程虚拟内存会占用4GB[32位操作系统], 而线程也要大约4MB)。</p>
+<p>大量的进程/线程出现了新的问题</p>
+<ul>
+<li>高内存占用</li>
+<li>调度的高消耗CPU</li>
+</ul>
+<p>好了，然后工程师们就发现，其实一个线程分为“内核态“线程和”用户态“线程。</p>
+<p>一个“用户态线程”必须要绑定一个“内核态线程”，但是CPU并不知道有“用户态线程”的存在，它只知道它运行的是一个“内核态线程”(Linux的PCB进程控制块)。</p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://img.kancloud.cn/47/e3/47e396eea8f0e71532356197412d52f1_1294x1106.png" alt="线程图解"></p>
+<p>再去细化去分类一下，内核线程依然叫“线程(thread)”，用户线程叫“协程(co-routine)”。</p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://img.kancloud.cn/45/9d/459db145d4e702994548a1757238946f_1248x1064.png" alt="协程图解"></p>
+<p>既然一个协程(co-routine)可以绑定一个线程(thread)，那么能不能多个协程(co-routine)绑定一个或者多个线程(thread)上呢。</p>
+<p> 之后，我们就看到了有3中协程和线程的映射关系：</p>
+<blockquote>
+<h4 id="N-1关系"><a href="#N-1关系" class="headerlink" title="N:1关系"></a>N:1关系</h4></blockquote>
+<p>N个协程绑定1个线程，优点就是协程在用户态线程即完成切换，不会陷入到内核态，这种切换非常的轻量快速。但也有很大的缺点，1个进程的所有协程都绑定在1个线程上</p>
+<p>缺点：</p>
+<ul>
+<li>某个程序用不了硬件的多核加速能力</li>
+<li>一旦某协程阻塞，造成线程阻塞，本进程的其他协程都无法执行了，根本就没有并发的能力了。</li>
+</ul>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://img.kancloud.cn/f8/d7/f8d715899f6db333d37f2bf738116bfd_1352x1092.png" alt="N:1"></p>
+<blockquote>
+<h4 id="1-1-关系"><a href="#1-1-关系" class="headerlink" title="1:1 关系"></a>1:1 关系</h4></blockquote>
+<p>1个协程绑定1个线程，这种最容易实现。协程的调度都由CPU完成了，不存在N:1缺点，</p>
+<p>缺点：</p>
+<ul>
+<li>协程的创建、删除和切换的代价都由CPU完成，有点略显昂贵了。</li>
+</ul>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://img.kancloud.cn/cf/9a/cf9a59f9776bf4c9cbbad6103b6c5e5a_1322x1112.png" alt="1:1"></p>
+<blockquote>
+<h4 id="M-N关系"><a href="#M-N关系" class="headerlink" title="M:N关系"></a>M:N关系</h4></blockquote>
+<p>M个协程绑定1个线程，是N:1和1:1类型的结合，克服了以上2种模型的缺点，但实现起来最为复杂。</p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://img.kancloud.cn/00/37/0037f6c2e12ad82a912990bba3e0085c_1336x1112.png" alt="M:N"></p>
+<p> 协程跟线程是有区别的，线程由CPU调度是抢占式的，<strong>协程由用户态调度是协作式的</strong>，一个协程让出CPU后，才执行下一个协程。</p>
+<h2 id="Golang的协程-goroutine"><a href="#Golang的协程-goroutine" class="headerlink" title="Golang的协程-goroutine"></a>Golang的协程-goroutine</h2><p><strong>Go为了提供更容易使用的并发方法</strong>，<strong>使用了goroutine和channel</strong>。goroutine来自协程的概念，让一组可复用的函数运行在一组线程之上，即使有协程阻塞，该线程的其他协程也可以被<code>runtime</code>调度，转移到其他可运行的线程上。最关键的是，程序员看不到这些底层的细节，这就降低了编程的难度，提供了更容易的并发。</p>
+<p>Go中，协程被称为goroutine，它非常轻量，一个goroutine只占几KB，并且这几KB就足够goroutine运行完，这就能在有限的内存空间内支持大量goroutine，支持了更多的并发。虽然一个goroutine的栈只占几KB，但实际是可伸缩的，如果需要更多内容，<code>runtime</code>会自动为goroutine分配。</p>
+<p>Goroutine特点：</p>
+<ul>
+<li>占用内存更小（几kb）</li>
+<li>调度更灵活(runtime调度)</li>
+</ul>
+<h1 id="Golang的GMP模型"><a href="#Golang的GMP模型" class="headerlink" title="Golang的GMP模型"></a>Golang的GMP模型</h1><h2 id="GMP调度模型"><a href="#GMP调度模型" class="headerlink" title="GMP调度模型"></a>GMP调度模型</h2><p>Go 语言的调度器用于在线程上分配 Goroutine，并在 <code>runtime/proc.go</code> 定义以下三个概念：</p>
+<div class="code-wrapper"><pre class="line-numbers language-go" data-language="go"><code class="language-go">G <span class="token operator">-</span> goroutine<span class="token punctuation">.</span>
+M <span class="token operator">-</span> worker thread<span class="token punctuation">,</span> or machine<span class="token punctuation">.</span>
+P <span class="token operator">-</span> processor<span class="token punctuation">,</span> a resource that is required to execute Go code<span class="token punctuation">.</span>
+    M must have an associated P to execute Go code<span class="token punctuation">[</span><span class="token operator">...</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></div>
+
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://img.kancloud.cn/eb/fe/ebfe3e28315f12a08fbb4ffaee32e046_1024x768.png" alt="GMP模型"></p>
+<ol>
+<li><strong>全局队列</strong>（Global Queue）：存放等待运行的G。</li>
+<li><strong>P的本地队列</strong>：同全局队列类似，存放的也是等待运行的G，存的数量有限，不超过256个。新建G’时，G’优先加入到P的本地队列，如果队列满了，则会把本地队列中一半的G移动到全局队列。</li>
+<li><strong>P列表</strong>：所有的P都在程序启动时创建，并保存在数组中，最多有<code>GOMAXPROCS</code>(可配置)个。</li>
+<li><strong>M</strong>：线程想运行任务就得获取P，从P的本地队列获取G，P队列为空时，M也会尝试从全局队列<strong>拿</strong>一批G放到P的本地队列，或从其他P的本地队列<strong>偷</strong>一半放到自己P的本地队列。M运行G，G执行之后，M会从P获取下一个G，不断重复下去。</li>
+</ol>
+<p><em>Goroutine调度器和OS调度器是通过M结合起来的，每个M都代表了1个内核线程，OS调度器负责把内核线程分配到CPU的核上执行。</em></p>
+<blockquote>
+<h4 id="有关P和M的个数问题"><a href="#有关P和M的个数问题" class="headerlink" title="有关P和M的个数问题"></a>有关P和M的个数问题</h4></blockquote>
+<p>1、P的数量：</p>
+<ul>
+<li>由启动时环境变量<code>$GOMAXPROCS</code>或者是由<code>runtime</code>的方法<code>GOMAXPROCS()</code>决定。这意味着在程序执行的任意时刻都只有<code>$GOMAXPROCS</code>个goroutine在同时运行。</li>
+</ul>
+<p>2、M的数量:</p>
+<ul>
+<li>go语言本身的限制：go程序启动时，会设置M的最大数量，默认10000.但是内核很难支持这么多的线程数，所以这个限制可以忽略。</li>
+<li>runtime/debug中的SetMaxThreads函数，设置M的最大数量</li>
+<li>一个M阻塞了，会创建新的M。</li>
+</ul>
+<p>M与P的数量没有绝对关系，一个M阻塞，P就会去创建或者切换另一个M，所以，即使P的默认数量是1，也有可能会创建很多个M出来。</p>
+<blockquote>
+<h4 id="P和M何时会被创建"><a href="#P和M何时会被创建" class="headerlink" title="P和M何时会被创建"></a>P和M何时会被创建</h4></blockquote>
+<p>1、P何时创建：在确定了P的最大数量n后，运行时系统会根据这个数量创建n个P。</p>
+<p>2、M何时创建：没有足够的M来关联P并运行其中的可运行的G。比如所有的M此时都阻塞住了，而P中还有很多就绪任务，就会去寻找空闲的M，而没有空闲的，就会去创建新的M。</p>
+<h2 id="调度器的设计策略"><a href="#调度器的设计策略" class="headerlink" title="调度器的设计策略"></a>调度器的设计策略</h2><p><strong>复用线程</strong>：避免频繁的创建、销毁线程，而是对线程的复用。</p>
+<p>1）work stealing机制</p>
+<p> 当本线程无可运行的G时，尝试从其他线程绑定的P偷取G，而不是销毁线程。</p>
+<p>2）hand off机制</p>
+<p> 当本线程因为G进行系统调用阻塞时，线程释放绑定的P，把P转移给其他空闲的线程执行。</p>
+<p><strong>利用并行</strong>：<code>GOMAXPROCS</code>设置P的数量，最多有<code>GOMAXPROCS</code>个线程分布在多个CPU上同时运行。<code>GOMAXPROCS</code>也限制了并发的程度，比如<code>GOMAXPROCS = 核数/2</code>，则最多利用了一半的CPU核进行并行。</p>
+<p><strong>抢占</strong>：在coroutine中要等待一个协程主动让出CPU才执行下一个协程，在Go中，一个goroutine最多占用CPU 10ms，防止其他goroutine被饿死，这就是goroutine不同于coroutine的一个地方。</p>
+<p><strong>全局G队列</strong>：在新的调度器中依然有全局G队列，但功能已经被弱化了，当M执行work stealing从其他P偷不到G时，它可以从全局G队列获取G。</p>
+<h2 id="go-func-调度流程"><a href="#go-func-调度流程" class="headerlink" title="go func() 调度流程"></a>go func() 调度流程</h2><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://img.kancloud.cn/76/4f/764f7be119026cc16314e87628e4013f_1920x1080.jpeg" alt="go func()调度流程"></p>
+<p>从上图我们可以分析出几个结论：</p>
+<p> 1、我们通过 go func()来创建一个goroutine；</p>
+<p> 2、有两个存储G的队列，一个是局部调度器P的本地队列、一个是全局G队列。新创建的G会先保存在P的本地队列中，如果P的本地队列已经满了就会保存在全局的队列中；</p>
+<p> 3、G只能运行在M中，一个M必须持有一个P，M与P是1：1的关系。M会从P的本地队列弹出一个可执行状态的G来执行，如果P的本地队列为空，就会想其他的MP组合偷取一个可执行的G来执行；</p>
+<p> 4、一个M调度G执行的过程是一个循环机制；</p>
+<p> 5、当M执行某一个G时候如果发生了syscall或则其余阻塞操作，M会阻塞，如果当前有一些G在执行，runtime会把这个线程M从P中摘除(detach)，然后再创建一个新的操作系统的线程(如果有空闲的线程可用就复用空闲线程)来服务于这个P；</p>
+<p> 6、当M系统调用结束时候，这个G会尝试获取一个空闲的P执行，并放入到这个P的本地队列。如果获取不到P，那么这个线程M变成休眠状态， 加入到空闲线程中，然后这个G会被放入全局队列中c。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.kancloud.cn/aceld/golang/1958305">Golang修养之路</a></p>
+
             </div>
             <hr>
             <div>

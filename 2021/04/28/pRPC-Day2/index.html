@@ -260,16 +260,16 @@ Netty 是一个利用 Java 的高级网络的能力，隐藏其背后的复杂�
 </blockquote>
 <p>Netty是一个NIO客户端服务器框架，可以快速轻松地开发网络应用程序，例如协议服务器和客户端。 它极大地简化和简化了诸如TCP和UDP套接字服务器之类的网络编程。</p>
 <p>“快速简便”并不意味着最终的应用程序将遭受可维护性或性能问题的困扰。 Netty经过精心设计，结合了许多协议（例如FTP，SMTP，HTTP以及各种基于二进制和文本的旧式协议）的实施经验。 结果，Netty成功地找到了一种无需妥协即可轻松实现开发，性能，稳定性和灵活性的方法。</p>
-<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210428194735.png"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210428194735.png"></p>
 <span id="more"></span>
 
 <p>Netty是一款基于NIO（Nonblocking I/O，非阻塞IO）开发的网络通信框架，对比于BIO（Blocking I/O，阻塞IO），他的并发性能得到了很大提高，两张图让你了解BIO和NIO的区别：</p>
-<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1089449-546a563c9822ce16.png" alt="img"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1089449-546a563c9822ce16.png" alt="img"></p>
 <hr>
-<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1089449-9eebe781fba495fd.png" alt="img"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1089449-9eebe781fba495fd.png" alt="img"></p>
 <h1 id="使用-Netty（基于-NIO）替代-BIO-实现网络传输"><a href="#使用-Netty（基于-NIO）替代-BIO-实现网络传输" class="headerlink" title="使用 Netty（基于 NIO）替代 BIO 实现网络传输"></a>使用 Netty（基于 NIO）替代 BIO 实现网络传输</h1><p>Netty 使用不同的事件来通知状态的改变或者是操作的状态。事件可能包括：<br>- 连接已被激活或者连接失活<br>- 数据读取；<br>- 用户事件；<br>- 错误事件。<br>- 打开或者关闭到远程节点的连接；<br>- 将数据写到或者冲刷到套接字。</p>
 <p>每个事件都可以被分发给 ChannelHandler 类中的某个用户实现的方法。这是将事件驱动范式直接转换为应用程序逻辑处理比较理想的位置。</p>
-<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210428194855.png"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210428194855.png"></p>
 <p>对每个事件可以进行，记录日志，数据转换，应用程序逻辑处理等操作，</p>
 <p>Netty 提供了大量预定义的可以开箱即用的 ChannelHandler 实现，包括用于各种协议（如 HTTP 和 SSL/TLS）的 ChannelHandler。</p>
 <p>在项目中，定制 ChannelHandler服务器处理客户端发送的数据</p>
@@ -285,15 +285,15 @@ Netty 是一个利用 Java 的高级网络的能力，隐藏其背后的复杂�
 <h1 id="Netty的ByteBuf"><a href="#Netty的ByteBuf" class="headerlink" title="Netty的ByteBuf"></a>Netty的ByteBuf</h1><p>ByteBuf就是Netty提供使用的缓冲区，类似JDK的Buffer，但是比它的功能更加强大，例如：</p>
 <p>1，ByteBuffer长度固定，需要我们编码进行控制；</p>
 <p>2，ByteBuffer只有一个标识位置的指针position，读写操作的时候需要手工调用flip()、clear()、rewind()等来进行操作；</p>
-<p>3，ByteBuffer的API功能有限，一些高级和实用的特性支持不够好，需要自己实现，而Netty提供的ByteBuf则进行在JDK ByteBuffer的基础上完善了这些功能。<br><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210428195948.png"></p>
+<p>3，ByteBuffer的API功能有限，一些高级和实用的特性支持不够好，需要自己实现，而Netty提供的ByteBuf则进行在JDK ByteBuffer的基础上完善了这些功能。<br><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210428195948.png"></p>
 <p>一、ByteBuffer的工作原理，核心概念：</p>
 <p>byte[] buff:buff即内部用于缓存的数组；</p>
 <p>position：当前读取的位置；</p>
 <p>mark：为某一读过的位置做标记，便于某些时候回退到该位置</p>
 <p>capacity：初始化时候的容量；</p>
-<p>limit：读写的上限，limit&lt;=capacity。<br><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210428200159.png"></p>
+<p>limit：读写的上限，limit&lt;=capacity。<br><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210428200159.png"></p>
 <p>二、Netty的ByteBuf的工作原理，它和ByteBuffer的不同主要体现在position，改为了writeIndex和readIndex，而且它的put方法做了自动扩容功能。</p>
-<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210428200228.png"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210428200228.png"></p>
 <p>三、ByteBuf的常用的功能</p>
 <p>1，顺序读操作（read），就是从ByteBuf中进行读数据，包括不同返回的数据类型，不同索引，不同长度的读取等功能非常丰富。</p>
 <p>  2，顺序写操作（write），就是向ByteBuf进行写数据，包括写入不同类型boolean，int，long，ByteBuf，byte[]等，以及写入后writerIndex的操作，还有在指定的索引写入指定length的数据，功能也是非常丰富。</p>
@@ -307,7 +307,7 @@ Netty 是一个利用 Java 的高级网络的能力，隐藏其背后的复杂�
 <p>   10，转换成标准的ByteBuffer，由于底层JDK进行网络读写的时候都是使用的ByteBuffer，所以ByteBuf提供（也必须）两者的各种相互转换，例如：nioBuffer()，还有有参方法。</p>
 <p>   11，随机读写（set和get），除了顺序读写之外，ByteBuf还支持随机读写，即可以随机指定读写的索引位置。</p>
 <h1 id="Netty中的粘包与拆包"><a href="#Netty中的粘包与拆包" class="headerlink" title="Netty中的粘包与拆包"></a>Netty中的粘包与拆包</h1><h2 id="TCP粘包和拆包"><a href="#TCP粘包和拆包" class="headerlink" title="TCP粘包和拆包"></a>TCP粘包和拆包</h2><p>TCP是个“流”协议，所谓流，就是没有界限的一串数据。TCP底层并不了解上层业务数据的具体含义，它会根据TCP缓冲区的实际情况进行包的划分，所以在业务上认为，一个完整的包可能会被TCP拆分成多个包进行发送，也有可能把多个小的包封装成一个大的数据包发送，这就是所谓的TCP粘包和拆包问题。</p>
-<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210428200657.png"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210428200657.png"></p>
 <p>如图所示，假设客户端分别发送了两个数据包D1和D2给服务端，由于服务端一次读取到的字节数是不确定的，故可能存在以下4种情况。</p>
 <ol>
 <li>服务端分两次读取到了两个独立的数据包，分别是D1和D2，没有粘包和拆包；</li>
@@ -317,8 +317,8 @@ Netty 是一个利用 Java 的高级网络的能力，隐藏其背后的复杂�
 </ol>
 <p>如果此时服务端TCP接收滑窗非常小，而数据包D1和D2比较大，很有可能会发生第五种可能，即服务端分多次才能将D1和D2包接收完全，期间发生多次拆包。</p>
 <h2 id="项目中通过重新设计协议解决"><a href="#项目中通过重新设计协议解决" class="headerlink" title="项目中通过重新设计协议解决"></a>项目中通过重新设计协议解决</h2><p><strong>客户端与服务端通信协议（数据包结构）重新设计</strong> ，可以将原有的 <code>RpcRequest</code>和 <code>RpcReuqest</code> 对象作为消息体，然后增加如下字段（可以参考：《Netty 入门实战小册》和 Dubbo 框架对这块的设计）</p>
-<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1619611808(1).jpg"></p>
-<h1 id="Netty实现长连接-心跳机制"><a href="#Netty实现长连接-心跳机制" class="headerlink" title="Netty实现长连接-心跳机制"></a>Netty实现长连接-心跳机制</h1><p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210428201243.png"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1619611808(1).jpg"></p>
+<h1 id="Netty实现长连接-心跳机制"><a href="#Netty实现长连接-心跳机制" class="headerlink" title="Netty实现长连接-心跳机制"></a>Netty实现长连接-心跳机制</h1><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210428201243.png"></p>
 <h2 id="何为心跳"><a href="#何为心跳" class="headerlink" title="何为心跳"></a>何为心跳</h2><p>顾名思义, 所谓 <strong>心跳</strong>, 即在 TCP 长连接中, 客户端和服务器之间定期发送的一种特殊的数据包, 通知对方自己还在线, 以确保 TCP 连接的有效性.</p>
 <h2 id="为什么需要心跳"><a href="#为什么需要心跳" class="headerlink" title="为什么需要心跳"></a>为什么需要心跳</h2><p>因为网络的不可靠性, 有可能在 TCP 保持长连接的过程中, 由于某些突发情况, 例如网线被拔出, 突然掉电等, 会造成服务器和客户端的连接中断. 在这些突发情况下, 如果恰好服务器和客户端之间没有交互的话, 那么它们是不能在短时间内发现对方已经掉线的. 为了解决这个问题, 我们就需要引入 <strong>心跳</strong> 机制. 心跳机制的工作原理是: 在服务器和客户端之间一定时间内没有数据交互时, 即处于 idle 状态时, 客户端或服务器会发送一个特殊的数据包给对方, 当接收方收到这个数据报文后, 也立即发送一个特殊的数据报文, 回应发送方, 此即一个 PING-PONG 交互. 自然地, 当某一端收到心跳消息后, 就知道了对方仍然在线, 这就确保 TCP 连接的有效性.</p>
 <h2 id="如何实现心跳"><a href="#如何实现心跳" class="headerlink" title="如何实现心跳"></a>如何实现心跳</h2><p>我们可以通过两种方式实现心跳机制:</p>

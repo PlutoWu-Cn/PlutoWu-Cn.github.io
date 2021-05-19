@@ -262,11 +262,11 @@ MQ(Message Queue) : 翻译为 消息队列 ,通过典型的 生产者 和 消费
 
 <h2 id="MQ的作用"><a href="#MQ的作用" class="headerlink" title="MQ的作用"></a>MQ的作用</h2><p>消息队列已经逐渐成为企业IT系统内部通信的核心手段。它具有低耦合、可靠投递、广播、流量控制、最终一致性等一系列功能，成为异步RPC的主要手段之一。当今市面上有很多主流的消息中间件，如老牌的ActiveMQ、RabbitMQ，炙手可热的Kafka，阿里巴巴自主开发RocketMQ等。</p>
 <h3 id="应用解耦"><a href="#应用解耦" class="headerlink" title="应用解耦"></a>应用解耦</h3><p>场景：双11是购物狂节,用户下单后,订单系统需要通知库存系统,传统的做法就是订单系统调用库存系统的接口</p>
-<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210406232705211.png" alt="image-20210406232705211"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210406232705211.png" alt="image-20210406232705211"></p>
 <p>这种做法有一个缺点:</p>
 <p>当库存系统出现故障时，订单就会失败。 </p>
 <p>订单系统和库存系统高耦合—&gt;引入消息队列</p>
-<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210406233036598.png" alt="image-20210406233036598"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210406233036598.png" alt="image-20210406233036598"></p>
 <ul>
 <li><code>订单系统:</code>用户下单后，订单系统完成持久化处理，将消息写入消息队列，返回用户订单下单成功。</li>
 <li><code>库存系统:</code>订阅下单的消息,获取下单消息，进行库操作。 就算库存系统出现故障，消息队列也能保证消息的可靠投递，不会导致消息丢失。</li>
@@ -279,7 +279,7 @@ MQ(Message Queue) : 翻译为 消息队列 ,通过典型的 生产者 和 消费
 <li>可以控制活动人数，超过此一定阀值的订单直接丢弃</li>
 <li>可以缓解短时间的高流量压垮应用（应用程序按自己的最大处理能力获取订单）</li>
 </ul>
-<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210407092232882.png" alt="image-20210407092232882"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210407092232882.png" alt="image-20210407092232882"></p>
 <ol>
 <li><p>用户发送请求，服务器接收后，首先写入消息队列，若加入消息队列长度超过最大值，则直接抛弃用户请求或跳转到错误页面。</p>
 </li>
@@ -287,23 +287,23 @@ MQ(Message Queue) : 翻译为 消息队列 ,通过典型的 生产者 和 消费
 </li>
 </ol>
 <h3 id="消息分发"><a href="#消息分发" class="headerlink" title="消息分发"></a>消息分发</h3><p>多个服务对数据感兴趣，只需监听同一类消息即可处理。</p>
-<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210407092801130.png" alt="image-20210407092801130"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210407092801130.png" alt="image-20210407092801130"></p>
 <p>例如A产生数据，B对数据感兴趣。如果没有消息队列A每次处理完需要调用一下B服务。过了一段时间C对数据也感性，A就需要改代码，调用B服务，调用C服务。只要有服务需要，A服务都要改动代码，没有便捷性。</p>
-<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210407093359894.png" alt="image-20210407093359894"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210407093359894.png" alt="image-20210407093359894"></p>
 <p>加入消息队列后，A只需发送一次信息，B对消息感兴趣，只需监听信息。同样的C感兴趣，也只需监听信息。A服务作为基础服务则不须改动。</p>
 <h3 id="异步消息"><a href="#异步消息" class="headerlink" title="异步消息"></a>异步消息</h3><p>场景说明：用户注册后，需要发注册邮件和注册短信，传统的做法有两种 1. 串行方式  2. 并行方式</p>
 <ul>
 <li><code>串行方式：</code>将注册信息写入数据库后，发送注册邮件，再发送注册短信，以上三个任务全部完成后才返回给客户端。 这样就产生一个问题，邮件，短信并不是用户必须要等待其响应，这就浪费了大部分时间到响应请求上。</li>
 </ul>
-<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210407095734009.png" alt="image-20210407095734009"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210407095734009.png" alt="image-20210407095734009"></p>
 <ul>
 <li><code>并行方式：</code>将注册信息写入数据库后，发送邮件的同时，发送短信，以上三个任务完成后，返回给客户端。并行方式相较于串行能略微提高处理的时间。</li>
 </ul>
-<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210407100711498.png" alt="image-20210407100711498"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210407100711498.png" alt="image-20210407100711498"></p>
 <ul>
 <li><p><code>消息队列：</code>假设三个业务节点分别使用50ms，串行方式使用时间150ms，并行方式使用时间100ms。虽然并行已经提高处理时间，但是，前面说过，邮件和短信的响应对正常访问网站无影响，客户端没有必要等其发送完成才显示注册成功，应该是写入数据库后即刻返回。 </p>
 <p><strong>消息队列: 引入消息队列后，把发送邮件，短信这些不必要等待响应的业务逻辑异步处理</strong></p>
-<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210407101316780.png" alt="image-20210407101316780"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210407101316780.png" alt="image-20210407101316780"></p>
 <p>由此可以看出，引入消息队列后，用户的响应时间就等于写入数据库的时间+写入消息队列的时间(可以忽略不计)，引入消息队列处理后，响应时间是串行的3倍，是并行的2倍。</p>
 <h2 id="常用MQ的对比"><a href="#常用MQ的对比" class="headerlink" title="常用MQ的对比"></a>常用MQ的对比</h2><div class="code-wrapper"><pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown"><span class="token title important"><span class="token punctuation">#</span> 1.ActiveMQ</span>
 	ActiveMQ 是Apache出品，最流行的，能力强劲的开源消息总线。它是一个完全支持JMS规范的的消息中间件。丰富的API,多种集群架构模式让ActiveMQ在业界成为老牌的消息中间件,在中小型企业颇受欢迎!
@@ -323,12 +323,12 @@ MQ(Message Queue) : 翻译为 消息队列 ,通过典型的 生产者 和 消费
 <h1 id="RabbitMQ引言"><a href="#RabbitMQ引言" class="headerlink" title="RabbitMQ引言"></a>RabbitMQ引言</h1><h2 id="RabbitMQ"><a href="#RabbitMQ" class="headerlink" title="RabbitMQ"></a>RabbitMQ</h2><blockquote>
 <p><strong>RabbitMQ</strong>是实现了高级消息队列协议（<a target="_blank" rel="noopener external nofollow noreferrer" href="https://baike.baidu.com/item/AMQP/8354716?fr=aladdin">AMQP</a>）的开源消息代理软件（亦称面向消息的中间件）。RabbitMQ服务器是用<a target="_blank" rel="noopener external nofollow noreferrer" href="https://baike.baidu.com/item/Erlang">Erlang</a>语言编写的，而群集和故障转移则是构建在<a target="_blank" rel="noopener external nofollow noreferrer" href="https://baike.baidu.com/item/%E5%BC%80%E6%94%BE%E7%94%B5%E4%BF%A1%E5%B9%B3%E5%8F%B0">开放电信平台</a>框架上的。所有主要的编程语言均有与其代理接口通讯的客户端库。</p>
 </blockquote>
-<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210407103237748.png" alt="image-20210407103237748"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210407103237748.png" alt="image-20210407103237748"></p>
 <h2 id="AMQP"><a href="#AMQP" class="headerlink" title="AMQP"></a>AMQP</h2><blockquote>
 <p>AMQP，即Advanced Message Queuing Protocol，一个提供统一消息服务的应用层标准高级消息队列协议，是应用层协议的一个开放标准，为面向消息的中间件设计。基于此协议的客户端与消息中间件可传递消息，并不受客户端/中间件不同产品，不同的开发语言等条件的限制。</p>
 <p>AMQP在2003年时被提出，最早用于解决金融领不同平台之间的消息传递交互问题。更准确的说是一种binary wire-level protocol（链接协议）。这是其和JMS的本质差别，AMQP不从API层进行限定，而是直接定义网络交换的数据格式。这使得实现了AMQP的provider天然性就是跨平台的。</p>
 </blockquote>
-<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/131925_mGta_1759553.png" alt="131925_mGta_1759553.png"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/131925_mGta_1759553.png" alt="131925_mGta_1759553.png"></p>
 <h1 id="RabbitMQ的安装-CentOS-7-x"><a href="#RabbitMQ的安装-CentOS-7-x" class="headerlink" title="RabbitMQ的安装(CentOS 7.x)"></a>RabbitMQ的安装(CentOS 7.x)</h1><h2 id="通过Docker"><a href="#通过Docker" class="headerlink" title="通过Docker"></a>通过Docker</h2><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">docker run -it --rm --name rabbitmq -p <span class="token number">5672</span>:5672 -p <span class="token number">15672</span>:15672 rabbitmq:3-management<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
 
 <p><em>–rm(关闭容器时删除容器)</em></p>
@@ -354,7 +354,7 @@ MQ(Message Queue) : 翻译为 消息队列 ,通过典型的 生产者 和 消费
 </ol>
 <div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">vim</span> /etc/rabbitmq/rabbitmq.config<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
 
-<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210407111624188.png" alt="image-20210407111624188"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210407111624188.png" alt="image-20210407111624188"></p>
 <ol start="4">
 <li> 开启RabbitMQ可视化管理插件</li>
 </ol>
@@ -369,11 +369,11 @@ systemctl status rabbitmq-server<span aria-hidden="true" class="line-numbers-row
 
 
 
-<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210407112254962.png" alt="image-20210407112254962"></p>
-<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210407112315496.png" alt="image-20210407112315496"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210407112254962.png" alt="image-20210407112254962"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210407112315496.png" alt="image-20210407112315496"></p>
 <p><strong>至此，RabbitMQ安装完毕</strong></p>
-<h1 id="RabbitMQ支持的消息模型"><a href="#RabbitMQ支持的消息模型" class="headerlink" title="RabbitMQ支持的消息模型"></a>RabbitMQ支持的消息模型</h1><p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210407113101359.png" alt="image-20210407113101359"></p>
-<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210407113119982.png" alt="image-20210407113119982"></p>
+<h1 id="RabbitMQ支持的消息模型"><a href="#RabbitMQ支持的消息模型" class="headerlink" title="RabbitMQ支持的消息模型"></a>RabbitMQ支持的消息模型</h1><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210407113101359.png" alt="image-20210407113101359"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210407113119982.png" alt="image-20210407113119982"></p>
 <p>需要在项目中使用需提前加入RabbitMQ依赖</p>
 <div class="code-wrapper"><pre class="line-numbers language-xml" data-language="xml"><code class="language-xml"><span class="token comment">&lt;!--  引入rabbitmq的相关依赖  --></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
@@ -382,7 +382,7 @@ systemctl status rabbitmq-server<span aria-hidden="true" class="line-numbers-row
       <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>5.7.2<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 
-<h2 id="Hello-World模型"><a href="#Hello-World模型" class="headerlink" title="Hello World模型"></a>Hello World模型</h2><p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210407113754874.png" alt="image-20210407113754874"></p>
+<h2 id="Hello-World模型"><a href="#Hello-World模型" class="headerlink" title="Hello World模型"></a>Hello World模型</h2><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210407113754874.png" alt="image-20210407113754874"></p>
 <ul>
 <li>P (Provider) ：生产者，也就是要发送消息的程序</li>
 <li>C (Consumer) ：消费者—&gt;消息的接受者，会一直等待消息到来。</li>
@@ -534,9 +534,9 @@ systemctl status rabbitmq-server<span aria-hidden="true" class="line-numbers-row
 
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 
-<h3 id="测试结果"><a href="#测试结果" class="headerlink" title="测试结果"></a>测试结果</h3><p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210407123500251.png" alt="image-20210407123500251"></p>
+<h3 id="测试结果"><a href="#测试结果" class="headerlink" title="测试结果"></a>测试结果</h3><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210407123500251.png" alt="image-20210407123500251"></p>
 <p><strong>成功接受生产者提供的信息，测试完毕。</strong></p>
-<h2 id="Work-Queues-模型"><a href="#Work-Queues-模型" class="headerlink" title="Work Queues 模型"></a>Work Queues 模型</h2><p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/python-two.png" alt="img"></p>
+<h2 id="Work-Queues-模型"><a href="#Work-Queues-模型" class="headerlink" title="Work Queues 模型"></a>Work Queues 模型</h2><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/python-two.png" alt="img"></p>
 <p><code>Work queues</code>，也被称为（<code>Task queues</code>），任务模型。</p>
 <p>当消息处理比较耗时的时候，可能生产消息的速度会远远大于消息的消费速度。长此以往，消息就会堆积越来越多，无法及时处理。此时就可以使用work 模型：<strong>让多个消费者绑定到一个队列，共同消费队列中的消息。</strong></p>
 <p>队列中的消息一旦消费，就会消失，因此任务是不会被重复执行的。</p>
@@ -622,12 +622,12 @@ systemctl status rabbitmq-server<span aria-hidden="true" class="line-numbers-row
 
 <p>依次类推写出Consumer2.java，同时启动并测试即可观察到如下结果</p>
 <h3 id="测试结果-1"><a href="#测试结果-1" class="headerlink" title="测试结果"></a>测试结果</h3><p>正常开启（开启自动确认并无休眠）即可观察到两个消费者遵循轮询消费</p>
-<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210407124915144.png" alt="image-20210407124915144"></p>
-<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210407124937591.png" alt="image-20210407124937591"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210407124915144.png" alt="image-20210407124915144"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210407124937591.png" alt="image-20210407124937591"></p>
 <p>在两个消费者均加入每次只能消费一条信息的限制，且在Consumer1.java中加入休眠并启用手动确认可实现抢占式获取信息</p>
-<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210407124503181.png" alt="image-20210407124503181"></p>
-<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210407124520218.png" alt="image-20210407124520218"></p>
-<h2 id="Fanout-模型"><a href="#Fanout-模型" class="headerlink" title="Fanout 模型"></a>Fanout 模型</h2><p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210407125357499.png" alt="image-20210407125357499"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210407124503181.png" alt="image-20210407124503181"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210407124520218.png" alt="image-20210407124520218"></p>
+<h2 id="Fanout-模型"><a href="#Fanout-模型" class="headerlink" title="Fanout 模型"></a>Fanout 模型</h2><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210407125357499.png" alt="image-20210407125357499"></p>
 <p>Fanout 模型（也称 Publish/Subscribe 模型）是一种广播模型，也就是一个生产者可以发一个消息，进行广播，让多个消费者消费同一个消息。</p>
 <p><strong>在广播模式下，消息发送流程是这样的：</strong></p>
 <ul>
@@ -714,11 +714,11 @@ systemctl status rabbitmq-server<span aria-hidden="true" class="line-numbers-row
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 
 <p>依次类推Consumer2以及Consumer3</p>
-<h3 id="测试结果-2"><a href="#测试结果-2" class="headerlink" title="测试结果"></a>测试结果</h3><p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210407144020032.png" alt="image-20210407144020032"></p>
-<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210407144045936.png" alt="image-20210407144045936"></p>
-<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210407144101427.png" alt="image-20210407144101427"></p>
+<h3 id="测试结果-2"><a href="#测试结果-2" class="headerlink" title="测试结果"></a>测试结果</h3><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210407144020032.png" alt="image-20210407144020032"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210407144045936.png" alt="image-20210407144045936"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210407144101427.png" alt="image-20210407144101427"></p>
 <p><strong>三个消费者均能接收到同一个交换机的信息，测试完毕</strong></p>
-<h2 id="Routing-模型"><a href="#Routing-模型" class="headerlink" title="Routing 模型"></a>Routing 模型</h2><p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210407144304560.png" alt="image-20210407144304560"></p>
+<h2 id="Routing-模型"><a href="#Routing-模型" class="headerlink" title="Routing 模型"></a>Routing 模型</h2><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210407144304560.png" alt="image-20210407144304560"></p>
 <p>在 Fanout 模式中，一条消息，会被所有订阅的队列都消费。但是，在某些场景下，我们希望不同的消息被不同的队列消费。</p>
 <p>这时就要用到 <code>Direct </code>类型的 Exchange 。</p>
 <p>在 <code>Direct </code>模型下：</p>
@@ -821,11 +821,11 @@ systemctl status rabbitmq-server<span aria-hidden="true" class="line-numbers-row
         channel<span class="token punctuation">.</span><span class="token function">queueBind</span><span class="token punctuation">(</span>queue<span class="token punctuation">,</span>exchangeName<span class="token punctuation">,</span><span class="token string">"warning"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></div>
 
 <h3 id="测试结果-3"><a href="#测试结果-3" class="headerlink" title="测试结果"></a>测试结果</h3><p>发送Routing Key为error的信息时，由于两者都绑定了此Key所以都能接受到信息</p>
-<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210407145223014.png" alt="image-20210407145223014"></p>
-<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210407145238424.png" alt="image-20210407145238424"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210407145223014.png" alt="image-20210407145223014"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210407145238424.png" alt="image-20210407145238424"></p>
 <p>而发送Routing Key为info的信息时，只有绑定了此Key的消费者2才能接收到信息</p>
-<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210407145449087.png" alt="image-20210407145449087"></p>
-<h2 id="Topics-模型"><a href="#Topics-模型" class="headerlink" title="Topics 模型"></a>Topics 模型</h2><p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210407145605180.png" alt="image-20210407145605180"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210407145449087.png" alt="image-20210407145449087"></p>
+<h2 id="Topics-模型"><a href="#Topics-模型" class="headerlink" title="Topics 模型"></a>Topics 模型</h2><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210407145605180.png" alt="image-20210407145605180"></p>
 <p><code>Topics</code> 类型的 <code>Exchange</code> 与 <code>Direct</code> 相比，都是可以根据 <code>Routing Key</code> 把消息路由到不同的队列。</p>
 <p>只不过<code>Topic </code>类型 <code>Exchange</code> 可以让队列在绑定 <code>Routing key</code> 的时候使用通配符。</p>
 <p>这种模型 <code>Routing Key</code> 一般都是由一个或多个单词组成，多个单词之间以”.”分割，例如：<code> item.insert</code></p>
@@ -920,11 +920,11 @@ systemctl status rabbitmq-server<span aria-hidden="true" class="line-numbers-row
 <div class="code-wrapper"><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// 绑定交换机和队列 动态通配符形式 routingKey</span>
         channel<span class="token punctuation">.</span><span class="token function">queueBind</span><span class="token punctuation">(</span>queue<span class="token punctuation">,</span>exchangeName<span class="token punctuation">,</span><span class="token string">"user.#"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></div>
 
-<h3 id="测试结果-4"><a href="#测试结果-4" class="headerlink" title="测试结果"></a>测试结果</h3><p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210407150234072.png" alt="image-20210407150234072"></p>
-<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210407150244812.png" alt="image-20210407150244812"></p>
+<h3 id="测试结果-4"><a href="#测试结果-4" class="headerlink" title="测试结果"></a>测试结果</h3><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210407150234072.png" alt="image-20210407150234072"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210407150244812.png" alt="image-20210407150244812"></p>
 <p>若Routing Key为user.delete.map，则只有通配符为#的消费者2能接收到信息</p>
-<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210407150346970.png" alt="image-20210407150346970"></p>
-<h2 id="RPC-模型"><a href="#RPC-模型" class="headerlink" title="RPC 模型"></a>RPC 模型</h2><p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210407150810242.png" alt="image-20210407150810242"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210407150346970.png" alt="image-20210407150346970"></p>
+<h2 id="RPC-模型"><a href="#RPC-模型" class="headerlink" title="RPC 模型"></a>RPC 模型</h2><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210407150810242.png" alt="image-20210407150810242"></p>
 <p>在 <code>Work Queues</code> 模型中，我们学习了如何使用工作队列在多个工作人员之间分配耗时的任务。</p>
 <p>但是，如果我们需要在远程计算机上运行功能并等待结果怎么办？那就可以用 <code>RPC</code> 模型（远程过程调用）。</p>
 <p>我们将使用 <code>RabbitMQ</code> 构建 <code>RPC</code> 系统：客户端和可伸缩 <code>RPC</code> 服务器。由于我们没有值得分配的耗时任务，因此我们将创建一个虚拟 <code>RPC</code> 服务，该服务返回斐波那契数。</p>
@@ -936,7 +936,7 @@ systemctl status rabbitmq-server<span aria-hidden="true" class="line-numbers-row
 <li>客户端等待答复队列中的数据。出现消息时，它将检查 correlationId 属性。如果它与请求中的值匹配，则将响应返回给应用程序。</li>
 </ul>
 <p><strong>消息的属性</strong></p>
-<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/8198a936fd6340fbbdfde354b0aebb14.png" alt="image-20200922232442807"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/8198a936fd6340fbbdfde354b0aebb14.png" alt="image-20200922232442807"></p>
 <h3 id="实现代码-5"><a href="#实现代码-5" class="headerlink" title="实现代码"></a>实现代码</h3><p><strong>RPCClient.java</strong></p>
 <div class="code-wrapper"><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">import</span> <span class="token namespace">com<span class="token punctuation">.</span>rabbitmq<span class="token punctuation">.</span>client<span class="token punctuation">.</span></span><span class="token operator">*</span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> <span class="token namespace">utils<span class="token punctuation">.</span></span><span class="token class-name">RabbitMQUtils</span><span class="token punctuation">;</span>
@@ -1112,9 +1112,9 @@ systemctl status rabbitmq-server<span aria-hidden="true" class="line-numbers-row
     <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 
-<h3 id="测试结果-5"><a href="#测试结果-5" class="headerlink" title="测试结果"></a>测试结果</h3><p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210407151813017.png" alt="image-20210407151813017"></p>
-<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210407151725294.png" alt="image-20210407151725294"></p>
-<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/820533c7b41e94dd59eb5c6dc7e7e572.png" alt="image-20200923112003146"></p>
+<h3 id="测试结果-5"><a href="#测试结果-5" class="headerlink" title="测试结果"></a>测试结果</h3><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210407151813017.png" alt="image-20210407151813017"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210407151725294.png" alt="image-20210407151725294"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/820533c7b41e94dd59eb5c6dc7e7e572.png" alt="image-20200923112003146"></p>
 <blockquote>
 <p>参考：<a target="_blank" rel="noopener external nofollow noreferrer" href="https://blog.csdn.net/Hedon954/article/details/108802009?utm_medium=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromMachineLearnPai2~default-5.control&amp;dist_request_id=&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromMachineLearnPai2~default-5.control">https://blog.csdn.net/Hedon954/article/details/108802009?utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromMachineLearnPai2%7Edefault-5.control&amp;dist_request_id=&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromMachineLearnPai2%7Edefault-5.control</a></p>
 </blockquote>
@@ -1192,7 +1192,7 @@ systemctl status rabbitmq-server<span aria-hidden="true" class="line-numbers-row
 
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 
-<h3 id="测试结果-6"><a href="#测试结果-6" class="headerlink" title="测试结果"></a>测试结果</h3><p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210407152945872.png" alt="image-20210407152945872"></p>
+<h3 id="测试结果-6"><a href="#测试结果-6" class="headerlink" title="测试结果"></a>测试结果</h3><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210407152945872.png" alt="image-20210407152945872"></p>
 <h2 id="Work-Queues-模型-1"><a href="#Work-Queues-模型-1" class="headerlink" title="Work Queues 模型"></a>Work Queues 模型</h2><h3 id="代码实现-1"><a href="#代码实现-1" class="headerlink" title="代码实现"></a>代码实现</h3><p><strong>WorkConsumer.java</strong></p>
 <div class="code-wrapper"><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">package</span> <span class="token namespace">cn<span class="token punctuation">.</span>plutowu<span class="token punctuation">.</span>work</span><span class="token punctuation">;</span>
 
@@ -1231,7 +1231,7 @@ systemctl status rabbitmq-server<span aria-hidden="true" class="line-numbers-row
         <span class="token punctuation">&#125;</span>
     <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 
-<h3 id="测试结果-7"><a href="#测试结果-7" class="headerlink" title="测试结果"></a>测试结果</h3><p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210407153310564.png" alt="image-20210407153310564"></p>
+<h3 id="测试结果-7"><a href="#测试结果-7" class="headerlink" title="测试结果"></a>测试结果</h3><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210407153310564.png" alt="image-20210407153310564"></p>
 <p>遵循了轮询规则，把信息分配到两个消费者上</p>
 <h2 id="Fanout-模型-1"><a href="#Fanout-模型-1" class="headerlink" title="Fanout 模型"></a>Fanout 模型</h2><h3 id="代码实现-2"><a href="#代码实现-2" class="headerlink" title="代码实现"></a>代码实现</h3><p><strong>FanoutConsumer.java</strong></p>
 <div class="code-wrapper"><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">package</span> <span class="token namespace">cn<span class="token punctuation">.</span>plutowu<span class="token punctuation">.</span>fanout</span><span class="token punctuation">;</span>
@@ -1279,7 +1279,7 @@ systemctl status rabbitmq-server<span aria-hidden="true" class="line-numbers-row
             rabbitTemplate<span class="token punctuation">.</span><span class="token function">convertAndSend</span><span class="token punctuation">(</span><span class="token string">"logs"</span><span class="token punctuation">,</span><span class="token string">""</span><span class="token punctuation">,</span><span class="token string">"Fanout模型的message"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 
-<h3 id="测试结果-8"><a href="#测试结果-8" class="headerlink" title="测试结果"></a>测试结果</h3><p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210407153541651.png" alt="image-20210407153541651"></p>
+<h3 id="测试结果-8"><a href="#测试结果-8" class="headerlink" title="测试结果"></a>测试结果</h3><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210407153541651.png" alt="image-20210407153541651"></p>
 <p>再绑定同一个交换机的情况下，两个消费者均接收到此信息</p>
 <h2 id="Routing-模型-1"><a href="#Routing-模型-1" class="headerlink" title="Routing 模型"></a>Routing 模型</h2><h3 id="实现代码-6"><a href="#实现代码-6" class="headerlink" title="实现代码"></a>实现代码</h3><p><strong>RouteConsumer.java</strong></p>
 <div class="code-wrapper"><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">package</span> <span class="token namespace">cn<span class="token punctuation">.</span>plutowu<span class="token punctuation">.</span>route</span><span class="token punctuation">;</span>
@@ -1329,9 +1329,9 @@ systemctl status rabbitmq-server<span aria-hidden="true" class="line-numbers-row
     <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 
 <h3 id="测试结果-9"><a href="#测试结果-9" class="headerlink" title="测试结果"></a>测试结果</h3><p>发送Routing Key —–&gt; error 两个消费者皆可接收</p>
-<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210407153757266.png" alt="image-20210407153757266"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210407153757266.png" alt="image-20210407153757266"></p>
 <p>发送Routing Key —–&gt; info 只有消费者2能接收</p>
-<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210407153922909.png" alt="image-20210407153922909"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210407153922909.png" alt="image-20210407153922909"></p>
 <h2 id="Topics-模型-1"><a href="#Topics-模型-1" class="headerlink" title="Topics 模型"></a>Topics 模型</h2><h3 id="实现代码-7"><a href="#实现代码-7" class="headerlink" title="实现代码"></a>实现代码</h3><p><strong>TopicConsumer.java</strong></p>
 <div class="code-wrapper"><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">package</span> <span class="token namespace">cn<span class="token punctuation">.</span>plutowu<span class="token punctuation">.</span>topic</span><span class="token punctuation">;</span>
 
@@ -1380,14 +1380,14 @@ systemctl status rabbitmq-server<span aria-hidden="true" class="line-numbers-row
     <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 
 <h3 id="测试结果-10"><a href="#测试结果-10" class="headerlink" title="测试结果"></a>测试结果</h3><p>发送user.save均可接收</p>
-<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210407190939641.png" alt="image-20210407190939641"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210407190939641.png" alt="image-20210407190939641"></p>
 <p>发送prodece.save只有消费者2可以接收</p>
-<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="upload/image-20210407191250129.png" alt="image-20210407191250129"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="upload/image-20210407191250129.png" alt="image-20210407191250129"></p>
 <h1 id="RabbitMQ集群"><a href="#RabbitMQ集群" class="headerlink" title="RabbitMQ集群"></a>RabbitMQ集群</h1><h2 id="普通集群（副本集群）"><a href="#普通集群（副本集群）" class="headerlink" title="普通集群（副本集群）"></a>普通集群（副本集群）</h2><blockquote>
 <p>默认情况下：RabbitMQ 代理操作所需的所有数据/状态都将跨所有节点复制。</p>
 <p>这方面的一个例外是消息队列，默认情况下，==消息队列仅位于一个节点上==，尽管它们可以从所有节点看到和访问</p>
 </blockquote>
-<h3 id="架构图"><a href="#架构图" class="headerlink" title="架构图"></a>架构图</h3><p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/84a1bafff8258770fa501cd48df5b1c8.png" alt="image-20200924224004549"></p>
+<h3 id="架构图"><a href="#架构图" class="headerlink" title="架构图"></a>架构图</h3><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/84a1bafff8258770fa501cd48df5b1c8.png" alt="image-20200924224004549"></p>
 <p>核心解决问题: <code>当集群中某一时刻master节点宕机,可以对Quene中信息,进行备份。</code></p>
 <h3 id="集群搭建"><a href="#集群搭建" class="headerlink" title="集群搭建"></a>集群搭建</h3><div class="code-wrapper"><pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown"><span class="token title important"><span class="token punctuation">#</span> 0.集群规划</span>
 	node1: 10.15.0.3  mq1  master 主节点
@@ -1434,7 +1434,7 @@ systemctl status rabbitmq-server<span aria-hidden="true" class="line-numbers-row
 <h2 id="镜像集群"><a href="#镜像集群" class="headerlink" title="镜像集群"></a>镜像集群</h2><blockquote>
 <p>镜像队列机制就是将队列在三个节点之间设置主从关系，消息会在三个节点之间进行自动同步，且如果其中一个节点不可用，并不会导致消息丢失或服务不可用的情况，提升MQ集群的整体高可用性。</p>
 </blockquote>
-<h3 id="架构图-1"><a href="#架构图-1" class="headerlink" title="架构图"></a>架构图</h3><p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/565dedc3055a9abe2ab413be4ded9730.png" alt="image-20200925082814401"></p>
+<h3 id="架构图-1"><a href="#架构图-1" class="headerlink" title="架构图"></a>架构图</h3><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/565dedc3055a9abe2ab413be4ded9730.png" alt="image-20200925082814401"></p>
 <h3 id="集群搭建-1"><a href="#集群搭建-1" class="headerlink" title="集群搭建"></a>集群搭建</h3><div class="code-wrapper"><pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown"><span class="token title important"><span class="token punctuation">#</span> 0.策略说明</span>
 	rabbitmqctl set_policy <span class="token url">[<span class="token content">-p &lt;vhost></span>] [<span class="token variable">--priority &lt;priority></span>]</span> [--apply-to <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>apply-to</span><span class="token punctuation">></span></span>] <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>name</span><span class="token punctuation">></span></span> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>pattern</span><span class="token punctuation">></span></span>  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>definition</span><span class="token punctuation">></span></span>
 	-p Vhost： 可选参数，针对指定vhost下的queue进行设置

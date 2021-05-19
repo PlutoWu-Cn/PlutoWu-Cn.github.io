@@ -185,7 +185,7 @@ MySQL索引使用的数据结构主要有BTree索引 和 哈希索引 ">
 </nav>
 
     <div class="banner" id="banner" parallax=true
-         style="background: url('https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/j4.png') no-repeat center center;
+         style="background: url('https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/ja4.png') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
@@ -304,7 +304,7 @@ MySQL索引使用的数据结构主要有BTree索引 和 哈希索引 ">
 </blockquote>
 <h1 id="事务的含义与特性-ACID"><a href="#事务的含义与特性-ACID" class="headerlink" title="事务的含义与特性(ACID)"></a>事务的含义与特性(ACID)</h1><p>事务是逻辑上的一组操作，要么都执行，要么都不执行。</p>
 <p>事务最经典也经常被拿出来说例子就是转账了。假如小明要给小红转账1000元，这个转账会涉及到两个关键操作就是：将小明的余额减少1000元，将小红的余额增加1000元。万一在这两个操作之间突然出现错误比如银行系统崩溃，导致小明余额减少而小红的余额没有增加，这样就不对了。事务就是保证这两个关键操作要么都成功，要么都要失败。</p>
-<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210310193336.png"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210310193336.png"></p>
 <ol>
 <li> <strong>原子性：</strong> 事务是最小的执行单位，不允许分割。事务的原子性确保动作要么全部完成，要么完全不起作用；</li>
 <li> <strong>一致性：</strong> 执行事务前后，数据保持一致，例如转账业务中，无论事务是否成功，转账者和收款人的总额应该是不变的；</li>
@@ -370,15 +370,15 @@ MySQL索引使用的数据结构主要有BTree索引 和 哈希索引 ">
 <h1 id="MySQL的内连接和外连接"><a href="#MySQL的内连接和外连接" class="headerlink" title="MySQL的内连接和外连接"></a>MySQL的内连接和外连接</h1><blockquote>
 <p>内连接</p>
 </blockquote>
-<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/986203-20170328114511029-1891784394.png" alt="img"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/986203-20170328114511029-1891784394.png" alt="img"></p>
 <blockquote>
 <p>左外连接</p>
 </blockquote>
-<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/986203-20170328114619748-1184886553.png" alt="img"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/986203-20170328114619748-1184886553.png" alt="img"></p>
 <blockquote>
 <p>右外连接</p>
 </blockquote>
-<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/986203-20170328114729811-38208863.png" alt="img"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/986203-20170328114729811-38208863.png" alt="img"></p>
 <blockquote>
 <p>全连接（全外连接）</p>
 </blockquote>

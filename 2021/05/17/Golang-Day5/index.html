@@ -210,7 +210,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.1k 字
+      2.6k 字
     </span>
   
 
@@ -220,7 +220,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      22
+      28
        分钟
     </span>
   
@@ -254,12 +254,15 @@
             
             <div class="markdown-body">
               <p>垃圾回收(Garbage Collection，简称GC)是编程语言中提供的自动的内存管理机制，自动释放不需要的对象，让出存储器资源，无需程序员手动执行。</p>
-<p> Golang中的垃圾回收主要应用三色标记法，GC过程和其他用户goroutine可并发运行，但需要一定时间的**STW(stop the world)**，STW的过程中，CPU不执行用户代码，全部用于垃圾回收，这个过程的影响很大，Golang进行了多次的迭代优化来解决这个问题。</p>
+<p> Golang中的垃圾回收主要应用三色标记法，GC过程和其他用户goroutine可并发运行，但需要一定时间的STW(stop the world)，STW的过程中，CPU不执行用户代码，全部用于垃圾回收，这个过程的影响很大，Golang进行了多次的迭代优化来解决这个问题。</p>
 <h1 id="Go-V1-3之前的标记-清除-mark-and-sweep-算法"><a href="#Go-V1-3之前的标记-清除-mark-and-sweep-算法" class="headerlink" title="Go V1.3之前的标记-清除(mark and sweep)算法"></a>Go V1.3之前的标记-清除(mark and sweep)算法</h1><p>标记清除算法有两个主要步骤：即标记(Mark phase)和清楚(Sweep phase)</p>
 <p><strong>第一步</strong>，暂停程序业务逻辑，找出不可达的对象，做上标记。第二步，回收标记好的对象</p>
 <p>这两步操作非常简单，但需要注意的是中间会有<code>STW(stop the world)</code>，即让程序暂停，这一点是对程序的使用体验非常致命的</p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://img.kancloud.cn/01/60/0160c38ec63623f3108550ff648f0959_1494x1248.png" alt="img"></p>
 <p><strong>第二步</strong>，开始标记，程序找出它所有可达的对象，并做上标记</p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://img.kancloud.cn/36/32/3632e8ce6e28998dd370298c5f2f2815_1548x1230.png" alt="img"></p>
 <p><strong>第三步</strong>，标记完了之后，然后开始清除未标记的对象</p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://img.kancloud.cn/3e/a9/3ea9ec35364a573c669f5f32c03c8b50_1344x1326.png" alt="img"></p>
 <p><strong>第四步</strong>，停止暂停，程序继续运行。然后循环重复这个过程，直到process程序生命周期结束</p>
 <h1 id="标记-清除-mark-and-sweep-算法的缺点"><a href="#标记-清除-mark-and-sweep-算法的缺点" class="headerlink" title="标记-清除(mark and sweep)算法的缺点"></a>标记-清除(mark and sweep)算法的缺点</h1><ul>
 <li>STW，即stop the world，会让程序出现卡顿（这一点最为致命）</li>
@@ -267,19 +270,30 @@
 <li>清除数据会产生Heap碎片</li>
 </ul>
 <p>Go V1.3版本之前就是通过以上算法来实施GC的，流程如下</p>
-<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/c7da67305d321015d28af3f505ccc748_2426x578.png" alt="GoV1.3前 GC过程"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/c7da67305d321015d28af3f505ccc748_2426x578.png" alt="GoV1.3前 GC过程"></p>
 <p>Go V1.3 做了简单的优化，将STW提前，减少STW暂停的时间范围，如下所示</p>
-<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/7fc93a9ae9387d34e9843eb1edec31fe_2410x520.png" alt="GoV1.3 GC过程"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/7fc93a9ae9387d34e9843eb1edec31fe_2410x520.png" alt="GoV1.3 GC过程"></p>
 <p>STW是这个版本GC最致命的缺点，接下来的Go V1.5版本依靠<strong>三色并发标记法</strong>来进行优化</p>
 <h1 id="Go-V1-5的三色并发标记法"><a href="#Go-V1-5的三色并发标记法" class="headerlink" title="Go V1.5的三色并发标记法"></a>Go V1.5的三色并发标记法</h1><p><strong>三色标记法</strong>实际上就是通过三个阶段的标记来确定清楚的对象的状态</p>
 <p><strong>第一步</strong>，程序创建伊始，全部对象标记为白色并放入白色集合</p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://img.kancloud.cn/4a/0c/4a0c45a0aafa546feaab109dd6d97d89_2152x1364.png" alt="img"></p>
 <p>注意：所谓“程序“，是一些对象的根节点集合</p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://img.kancloud.cn/e3/a5/e3a5759be1646a805ca4a12b0fbadfaa_1920x1080.jpeg" alt="img"></p>
 <p><strong>第二步</strong>，每次GC回收开始，从根节点遍历所有对象，将遍历到的对象从白色集合放入灰色集合</p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://img.kancloud.cn/47/e0/47e0df9bb3e6a8dbf2c067cf1458d6e6_1920x1080.jpeg" alt="img"></p>
 <p><strong>第三步</strong>，遍历灰色集合，将灰色对象引用的对象从白色集合放入灰色集合，将灰色对象放入黑色集合</p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://img.kancloud.cn/75/50/755096e23bf5b8110de33ae8899ab35f_1920x1080.jpeg" alt="img"></p>
 <p><strong>第四步</strong>，重复<strong>第三步</strong>，直至灰色集合中无任何对象</p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://img.kancloud.cn/82/41/8241e5b771f6265d704220955531ecbd_1920x1080.jpeg" alt="img"></p>
 <p><strong>第五步</strong>，回收所有白色集合的对象</p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://img.kancloud.cn/a9/e1/a9e16da6ef4eb3b5e9da9ba2e0387b16_1920x1080.jpeg" alt="img"></p>
 <p>上述即是<code>三色并发标记法</code>的具体流程</p>
-<h1 id="没有STW的三色标记法"><a href="#没有STW的三色标记法" class="headerlink" title="没有STW的三色标记法"></a>没有STW的三色标记法</h1><p>在三色标记法中，有两种问题如果同时发生便会造成对象丢失</p>
+<h1 id="没有STW的三色标记法"><a href="#没有STW的三色标记法" class="headerlink" title="没有STW的三色标记法"></a>没有STW的三色标记法</h1><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://img.kancloud.cn/6b/18/6b18a939e13214cd648251520bdc146f_1920x1080.jpeg" alt="img"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://img.kancloud.cn/fc/15/fc15a2549f89a685bd93ec96d9479468_1920x1080.jpeg" alt="img"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://img.kancloud.cn/cc/be/ccbef3f78a00821cd6135b64ec0f96bd_1920x1080.jpeg" alt="img"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://img.kancloud.cn/20/a0/20a03b3e350d754fd3e958a3a5634d52_1920x1080.jpeg" alt="img"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://img.kancloud.cn/0d/a1/0da11e89ed4d4bfe80ac19a4afd0c680_1920x1080.jpeg" alt="img"></p>
+<p>在三色标记法中，有两种问题如果同时发生便会造成对象丢失</p>
 <ol>
 <li>一个白色对象被黑色对象引用**(白色被挂在黑色下)**</li>
 <li>灰色对象与它之间的可达关系的白色对象遭到破坏**(灰色同时丢了该白色)**</li>
@@ -289,10 +303,12 @@
 <li>强三色不变式</li>
 </ul>
 <p>不存在黑色对象引用到白色对象的指针，强制性的不允许黑色对象引用白色对象</p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://img.kancloud.cn/40/dd/40dd8d5e63aa3b7ec4104d7da162178f_1920x1080.jpeg" alt="img"></p>
 <ul>
 <li>弱三色不变式</li>
 </ul>
 <p>所有被黑色对象引用的白色对象都处于灰色保护状态。即黑色对象可以引用白色对象，白色对象存在其他灰色对象对它的引用，或者可达它链路上游存在灰色对象</p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://img.kancloud.cn/86/76/8676a065ee333c705a93e28362de9a17_1920x1080.jpeg" alt="img"></p>
 <h2 id="插入屏障"><a href="#插入屏障" class="headerlink" title="插入屏障"></a>插入屏障</h2><p><code>具体操作</code>：在A对象引用B对象的时候，B对象被标记为灰色。(将B挂在A下游，B必须被标记为灰色)</p>
 <p><code>满足</code>：<strong>强三色不变式</strong>。(不存在黑色对象引用白色对象的情况了， 因为白色会强制变成灰色)</p>
 <p>伪码如下:</p>
@@ -309,6 +325,18 @@
 A.添加下游对象(C, B)     &#x2F;&#x2F;A 将下游对象C 更换为B，  B被标记为灰色<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></div>
 
 <p> 这段伪码逻辑就是写屏障，我们知道，黑色对象的内存槽有两种位置， <code>栈</code>和<code>堆</code>。栈空间的特点是容量小，但是要求相应速度快，因为函数调用弹出频繁使用，所以“插入屏障”机制，在<strong>栈空间的对象操作中不使用</strong>。 而仅仅使用在堆空间对象的操作中。</p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://img.kancloud.cn/16/57/16572fc059aeafe81256ec0922c6189e_1920x1080.jpeg" alt="img"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://img.kancloud.cn/de/ad/dead5c7327aa36a9dd6491fcd8ae75be_1920x1080.jpeg" alt="img"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://img.kancloud.cn/29/42/294216ca5997f0df13b621781a47cd24_1920x1080.jpeg" alt="img"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://img.kancloud.cn/62/c3/62c363973c3baf17dee6871b8fd5fd79_1920x1080.jpeg" alt="img"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://img.kancloud.cn/54/57/545783724293dc5769123f2ead384eda_1920x1080.jpeg" alt="img"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://img.kancloud.cn/b3/53/b3536074823deff4ee9a0d50706c2caf_1920x1080.jpeg" alt="img"></p>
+<p>但是如果栈不添加，当全部三色标记扫描之后，栈上有可能依然存在白色对象被引用的情况(如上图的对象9)。所以要对栈重新进行三色标记扫描， 但这次为了对象不丢失,，要对本次标记扫描启动STW暂停。直到栈空间的三色标记结束。</p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://img.kancloud.cn/4a/24/4a2463054b2f336d5f1ee08409e32f11_1920x1080.jpeg" alt="img"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://img.kancloud.cn/89/5e/895ea8ca38e0c80f8dc8e5f6445c207f_1920x1080.jpeg" alt="img"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://img.kancloud.cn/9c/c7/9cc7fd99761d60d386d2ca87d3a01fbd_1920x1080.jpeg" alt="img"></p>
+<p>最后将栈和堆空间扫描剩余的全部 白色节点清除。这次STW大约的时间在10~100ms间。</p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://img.kancloud.cn/58/cb/58cb90c72f84312af826b22fc3cbbb15_1920x1080.jpeg" alt="img"></p>
 <h2 id="删除屏障"><a href="#删除屏障" class="headerlink" title="删除屏障"></a>删除屏障</h2><p><code>具体操作</code>：被删除的对象，如果自身为灰色或者白色，那么被标记为灰色。</p>
 <p><code>满足</code>：<strong>弱三色不变式</strong>。 (保护灰色对象到白色对象的路径不会断)</p>
 <p>伪代码：</p>
@@ -326,6 +354,13 @@ A.添加下游对象(C, B)     &#x2F;&#x2F;A 将下游对象C 更换为B，  B�
 <div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">A.添加下游对象(B, nil)   &#x2F;&#x2F;A对象，删除B对象的引用。  B被A删除，被标记为灰(如果B之前为白)
 A.添加下游对象(B, C)		 &#x2F;&#x2F;A对象，更换下游B变成C。   B被A删除，被标记为灰(如果B之前为白)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></div>
 
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://img.kancloud.cn/65/f2/65f2b58b0b3a1b20f26dcde525315599_1920x1080.jpeg" alt="img"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://img.kancloud.cn/d2/f2/d2f2a76d2aaf5c16cf9b7c094073fbbc_1920x1080.jpeg" alt="img"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://img.kancloud.cn/dc/78/dc7866c2f884a1c245630c3ed91644e5_1920x1080.jpeg" alt="img"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://img.kancloud.cn/c2/f0/c2f05206cd9ae498025973c8bc763daa_1920x1080.jpeg" alt="img"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://img.kancloud.cn/a8/54/a8541799ee4f9e598bef49136d448ade_1920x1080.jpeg" alt="img"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://img.kancloud.cn/fc/17/fc176d88b2eab093ebd5aee643e0677a_1920x1080.jpeg" alt="img"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://img.kancloud.cn/8e/d3/8ed3690aa81a7ee78a1ce739c0adab38_1920x1080.jpeg" alt="img"></p>
 <h1 id="Go-V1-8的混合写屏障-hybrid-write-barrier-机制"><a href="#Go-V1-8的混合写屏障-hybrid-write-barrier-机制" class="headerlink" title="Go V1.8的混合写屏障(hybrid write barrier)机制"></a>Go V1.8的混合写屏障(hybrid write barrier)机制</h1><p>插入写屏障和删除写屏障的短板：</p>
 <ul>
 <li>插入写屏障：结束时需要STW来重新扫描栈，标记栈上引用的白色对象的存活；</li>
@@ -354,6 +389,50 @@ A.添加下游对象(B, C)		 &#x2F;&#x2F;A对象，更换下游B变成C。   B�
 <blockquote>
 <p>这里我们注意， 屏障技术是不在栈上应用的，因为要保证栈的运行效率。</p>
 </blockquote>
+<h2 id="混合写屏障的具体场景分析"><a href="#混合写屏障的具体场景分析" class="headerlink" title="混合写屏障的具体场景分析"></a>混合写屏障的具体场景分析</h2><p> GC开始：扫描栈区，将可达对象全部标记为黑</p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://img.kancloud.cn/45/2c/452c55637b22078abad29786241d5000_1920x1080.jpeg" alt="img"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://img.kancloud.cn/42/aa/42aa1f73230061792851a43ce495acb6_1920x1080.jpeg" alt="img"></p>
+<p>场景一： 对象被一个堆对象删除引用，成为栈对象的下游</p>
+<blockquote>
+<p>伪代码</p>
+</blockquote>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F;前提：堆对象4-&gt;对象7 &#x3D; 对象7；  &#x2F;&#x2F;对象7 被 对象4引用
+栈对象1-&gt;对象7 &#x3D; 堆对象7；  &#x2F;&#x2F;将堆对象7 挂在 栈对象1 下游
+堆对象4-&gt;对象7 &#x3D; null；    &#x2F;&#x2F;对象4 删除引用 对象7<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></div>
+
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://img.kancloud.cn/64/c7/64c76eea3706c37f160b8345b7b3742c_1920x1080.jpeg" alt="img"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://img.kancloud.cn/4d/67/4d6728d276d2786017cde37b824333aa_1920x1080.jpeg" alt="img"></p>
+<p>场景二： 对象被一个栈对象删除引用，成为另一个栈对象的下游</p>
+<blockquote>
+<p>伪代码</p>
+</blockquote>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">new 栈对象9；
+对象8-&gt;对象3 &#x3D; 对象3；      &#x2F;&#x2F;将栈对象3 挂在 栈对象9 下游
+对象2-&gt;对象3 &#x3D; null；      &#x2F;&#x2F;对象2 删除引用 对象3<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></div>
+
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://img.kancloud.cn/be/ed/beedb81ec3cd5a4813aaa5bce1341949_1920x1080.jpeg" alt="img"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://img.kancloud.cn/48/56/48569d6dfb8ac6f1b0d6238a9d8150b3_1920x1080.jpeg" alt="img"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://img.kancloud.cn/46/e6/46e6be62e880e0f5796bc1e6f050b512_1920x1080.jpeg" alt="img"></p>
+<p>场景三：对象被一个堆对象删除引用，成为另一个堆对象的下游</p>
+<blockquote>
+<p>伪代码</p>
+</blockquote>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">堆对象10-&gt;对象7 &#x3D; 堆对象7；       &#x2F;&#x2F;将堆对象7 挂在 堆对象10 下游
+堆对象4-&gt;对象7 &#x3D; null；         &#x2F;&#x2F;对象4 删除引用 对象7<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></div>
+
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://img.kancloud.cn/a6/b7/a6b76e3f99029e603dbfe49fc7da30e8_1920x1080.jpeg" alt="img"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://img.kancloud.cn/d0/1e/d01e30f003f4a40e439d1a68ced89f34_1920x1080.jpeg" alt="img"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://img.kancloud.cn/ef/af/efaf7b7e32498db84eea797ed11201bf_1920x1080.jpeg" alt="img"></p>
+<p>场景四：对象从一个栈对象删除引用，成为另一个堆对象的下游</p>
+<blockquote>
+<p>伪代码</p>
+</blockquote>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">堆对象10-&gt;对象7 &#x3D; 堆对象7；       &#x2F;&#x2F;将堆对象7 挂在 堆对象10 下游
+堆对象4-&gt;对象7 &#x3D; null；         &#x2F;&#x2F;对象4 删除引用 对象7<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></div>
+
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://img.kancloud.cn/a3/a7/a3a7d82de782d14d28fa5999b7d5b36d_1920x1080.jpeg" alt="img"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://img.kancloud.cn/17/9c/179c86e25de0f0d0dbb24f371229d19d_1920x1080.jpeg" alt="img"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://img.kancloud.cn/7a/cb/7acb9b30746955ae0467ca2871a69e01_1920x1080.jpeg" alt="img"></p>
 <p>Golang中的混合写屏障满足<code>弱三色不变式</code>，结合了删除写屏障和插入写屏障的优点，只需要在开始时并发扫描各个goroutine的栈，使其变黑并一直保持，这个过程不需要STW，而标记结束后，因为栈在扫描后始终是黑色的，也无需再进行re-scan操作了，减少了STW的时间。</p>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>以上便是Golang的GC全部的标记-清除逻辑及场景演示全过程</p>
 <p>GoV1.3- 普通标记清除法，整体过程需要启动STW，效率极低</p>
@@ -393,6 +472,12 @@ A.添加下游对象(B, C)		 &#x2F;&#x2F;A对象，更换下游B变成C。   B�
                 <div class="post-prevnext">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2021/05/18/Golang-Day6/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Golang-Day6</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">

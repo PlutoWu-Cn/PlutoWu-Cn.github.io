@@ -303,14 +303,14 @@ SPI
 <p>如果与HTTP协议产生联系，解析和封装HTTP请求与响应，那这些框架不能称为“RPC框架”，例如Feign和Spring Cloud Square</p>
 </blockquote>
 <p>最简单的RPC框架示意图如下</p>
-<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210424095856335.png" alt="image-20210424095856335"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210424095856335.png" alt="image-20210424095856335"></p>
 <p>服务提供端Server向注册中心注册服务，服务消费端Client通过注册中心获取服务相关信息，然后再通过网络请求服务端Server</p>
 <span id="more"></span>
 
 
 
 <p>作为RPC框架的佼佼者Dubbo的架构如下</p>
-<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210424101041142.png" alt="image-20210424101041142"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210424101041142.png" alt="image-20210424101041142"></p>
 <p>RPC框架不仅需要提供最基础的服务发现功能，还需要提供负载均衡、容错重连等功能，如此才是一个完整的RPC框架</p>
 <p>下列为设计RPC框架的大体思路：</p>
 <ol>
@@ -325,7 +325,7 @@ SPI
 </blockquote>
 <h3 id="SPI简介"><a href="#SPI简介" class="headerlink" title="SPI简介"></a>SPI简介</h3><p>SPI全称Service Provider Interface，是Java提供的一套用来被第三方实现或者扩展的API，它可以用来启用框架扩展和替换组件。</p>
 <p>整体机制图如下：</p>
-<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/5618238-5d8948367cb9b18e.png" alt="img"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/5618238-5d8948367cb9b18e.png" alt="img"></p>
 <p>Java SPI 实际上是“<strong>基于接口的编程＋策略模式＋配置文件</strong>”组合实现的动态加载机制。</p>
 <p>系统设计的各个抽象，往往有很多不同的实现方案，在面向的对象的设计里，一般推荐模块之间基于接口编程，模块之间不对实现类进行硬编码。一旦代码里涉及具体的实现类，就违反了可拔插的原则，如果需要替换一种实现，就需要修改代码。为了实现在模块装配的时候能不在程序里动态指明，这就需要一种服务发现机制。<br> Java SPI就是提供这样的一个机制：为某个接口寻找服务实现的机制。有点类似IOC的思想，就是将装配的控制权移到程序之外，在模块化设计中这个机制尤其重要。所以SPI的核心思想就是<strong>解耦</strong>。</p>
 <h3 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h3><p>概括地说，适用于：<strong>调用者根据实际使用需要，启用、扩展、或者替换框架的实现策略</strong></p>
@@ -344,7 +344,7 @@ SPI
 <li>SPI的实现类必须携带一个不带参数的构造方法；</li>
 </ol>
 <h3 id="在项目中的具体实现（自定义实现）"><a href="#在项目中的具体实现（自定义实现）" class="headerlink" title="在项目中的具体实现（自定义实现）"></a>在项目中的具体实现（自定义实现）</h3><p><strong>项目创建的“接口全限定名”为命名的文件</strong></p>
-<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210425154005467.png" alt="image-20210425154005467"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210425154005467.png" alt="image-20210425154005467"></p>
 <p><strong>参照Dubbo源码编写的ExtensionLoader类</strong></p>
 <div class="code-wrapper"><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">final</span> <span class="token keyword">class</span> <span class="token class-name">ExtensionLoader</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">></span></span> <span class="token punctuation">&#123;</span>
 

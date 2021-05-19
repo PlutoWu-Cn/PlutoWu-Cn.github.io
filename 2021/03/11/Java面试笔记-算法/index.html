@@ -192,7 +192,7 @@
 </nav>
 
     <div class="banner" id="banner" parallax=true
-         style="background: url('https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/j9.png') no-repeat center center;
+         style="background: url('https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/ja9.png') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
@@ -334,7 +334,7 @@
 
 <h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p><strong>I. 按层打印：</strong> 题目要求的二叉树的 <code>从上至下</code> 打印（即按层打印），又称为二叉树的 <code>广度优先搜索</code>（BFS）。BFS 通常借助 <code>队列</code> 的先入先出特性来实现。</p>
 <p><strong>II. 每层打印到一行：</strong> 将本层全部节点打印到一行，并将下一层全部节点加入队列，以此类推，即可分为多行打印。</p>
-<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/59e0600588ffdc2f34b4b563193b56c1f678743637e2754e2a9be0e7facc5d48-Picture1.png" alt="Picture1.png"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/59e0600588ffdc2f34b4b563193b56c1f678743637e2754e2a9be0e7facc5d48-Picture1.png" alt="Picture1.png"></p>
 <h2 id="算法流程"><a href="#算法流程" class="headerlink" title="算法流程"></a>算法流程</h2><ol>
 <li><strong>特例处理：</strong> 当根节点为空，则返回空列表 <code>[]</code> ；</li>
 <li><strong>初始化：</strong> 打印结果列表 <code>res = []</code> ，包含根节点的队列 <code>queue = [root]</code> ；</li>
@@ -400,7 +400,7 @@
 <li>在中序遍历中搜索根节点 <code>node</code> 的索引 ，可将 中序遍历 划分为<code> [ 左子树 | 根节点 | 右子树 ]</code> 。</li>
 <li>根据中序遍历中的左 / 右子树的节点数量，可将 前序遍历 划分为 <code>[ 根节点 | 左子树 | 右子树 ]</code> 。</li>
 </ol>
-<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210428203555.png"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210428203555.png"></p>
 <blockquote>
 <p>通过以上三步，可确定 <strong>三个节点</strong> ：1.树的根节点、2.左子树根节点、3.右子树根节点。<br>对于树的左、右子树，仍可使用以上步骤划分子树的左右子树。</p>
 </blockquote>
@@ -477,10 +477,10 @@
 
 <h1 id="二叉树转双向链表-Medium"><a href="#二叉树转双向链表-Medium" class="headerlink" title="二叉树转双向链表 (Medium)"></a>二叉树转双向链表 (Medium)</h1><p>输入一棵二叉搜索树，将该二叉搜索树转换成一个排序的循环双向链表。要求不能创建任何新的节点，只能调整树中节点指针的指向。</p>
 <p>为了让您更好地理解问题，以下面的二叉搜索树为例：</p>
-<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/bstdlloriginalbst.png" alt="img"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/bstdlloriginalbst.png" alt="img"></p>
 <p>我们希望将这个二叉搜索树转化为双向循环链表。链表中的每个节点都有一个前驱和后继指针。对于双向循环链表，第一个节点的前驱是最后一个节点，最后一个节点的后继是第一个节点。</p>
 <p>下图展示了上面的二叉搜索树转化成的链表。“head” 表示指向链表中有最小元素的节点。</p>
-<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/bstdllreturndll.png" alt="img"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/bstdllreturndll.png" alt="img"></p>
 <p>特别地，我们希望可以就地完成转换操作。当转化完成以后，树中节点的左指针需要指向前驱，树中节点的右指针需要指向后继。还需要返回链表中的第一个节点的指针。</p>
 <h2 id="解题思路-2"><a href="#解题思路-2" class="headerlink" title="解题思路"></a>解题思路</h2><p>本文解法基于性质：二叉搜索树的中序遍历为 <strong>递增序列</strong> 。<br>将 二叉搜索树 转换成一个 “排序的循环双向链表” ，其中包含三个要素：</p>
 <ol>
@@ -488,7 +488,7 @@
 <li><strong>双向链表</strong>： 在构建相邻节点的引用关系时，设前驱节点 <code>pre</code> 和当前节点 <code>cur</code> ，不仅应构建 <code>pre.right = cur</code> ，也应构建 <code>cur.left = pre</code> 。</li>
 <li><strong>循环链表</strong>： 设链表头节点 <code>head</code> 和尾节点 <code>tail</code> ，则应构建 <code>head.left = tail</code> 和 <code>tail.right = head</code> 。</li>
 </ol>
-<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1599401091-PKIjds-Picture1.png" alt="Picture1.png"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1599401091-PKIjds-Picture1.png" alt="Picture1.png"></p>
 <p><strong>中序遍历</strong> 为对二叉树作 “左、根、右” 顺序遍历，递归实现如下：</p>
 <div class="code-wrapper"><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// 打印中序遍历</span>
 <span class="token keyword">void</span> <span class="token function">dfs</span><span class="token punctuation">(</span><span class="token class-name">Node</span> root<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
@@ -557,7 +557,7 @@
 <div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">0 &lt;&#x3D; 节点个数 &lt;&#x3D; 5000<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
 
 <h2 id="解法一-栈"><a href="#解法一-栈" class="headerlink" title="解法一 栈"></a>解法一 栈</h2><p>最简单的一种方式就是使用栈，因为栈是先进后出的。实现原理就是把链表节点一个个入栈，当全部入栈完之后再一个个出栈，出栈的时候在把出栈的结点串成一个新的链表。原理如下</p>
-<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/343fd7cce80394422565b4beef398236832cc9ae0f77a85ebceacebe214785af-image.png" alt="image.png"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/343fd7cce80394422565b4beef398236832cc9ae0f77a85ebceacebe214785af-image.png" alt="image.png"></p>
 <!-- more -->
 
 <div class="code-wrapper"><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">&#123;</span>	
@@ -586,7 +586,7 @@
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 
 <h2 id="解法二-双指针迭代"><a href="#解法二-双指针迭代" class="headerlink" title="解法二 双指针迭代"></a>解法二 双指针迭代</h2><p>我们可以申请两个指针，第一个指针叫 pre，最初是指向 null 的。<br>第二个指针 cur 指向 head，然后不断遍历 cur。<br>每次迭代到 cur，都将 cur 的 next 指向 pre，然后 pre 和 cur 前进一位。<br>都迭代完了(cur 变成 null 了)，pre 就是最后一个节点了。<br>动画演示如下：</p>
-<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/%E8%BF%AD%E4%BB%A3.gif"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/%E8%BF%AD%E4%BB%A3.gif"></p>
 <div class="code-wrapper"><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">&#123;</span>
 	<span class="token keyword">public</span> <span class="token class-name">ListNode</span> <span class="token function">reverseList</span><span class="token punctuation">(</span><span class="token class-name">ListNode</span> head<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
 		<span class="token comment">//申请节点，pre和 cur，pre指向null</span>
@@ -609,7 +609,7 @@
 <h2 id="解法三-递归"><a href="#解法三-递归" class="headerlink" title="解法三 递归"></a>解法三 递归</h2><p>递归的两个条件：</p>
 <p>终止条件是当前节点或者下一个节点==null<br>在函数内部，改变节点的指向，也就是 head 的下一个节点指向 head 递归函数那句</p>
 <p>head.next.next = head<br>很不好理解，其实就是 head 的下一个节点指向head。<br>递归函数中每次返回的 cur 其实只最后一个节点，在递归函数内部，改变的是当前节点的指向。<br>动画演示如下：</p>
-<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/%E9%80%92%E5%BD%92.gif"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/%E9%80%92%E5%BD%92.gif"></p>
 <div class="code-wrapper"><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">&#123;</span>
 	<span class="token keyword">public</span> <span class="token class-name">ListNode</span> <span class="token function">reverseList</span><span class="token punctuation">(</span><span class="token class-name">ListNode</span> head<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
 		<span class="token comment">//递归终止条件是当前为空，或者下一个节点为空</span>
@@ -642,7 +642,7 @@
 <p>解决方案：初始化一个辅助节点 <code>dum</code> 作为合并链表的伪头节点，将各节点添加至 <code>dum</code> 之后。</p>
 </li>
 </ul>
-<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/550cc70957ea76ec0c04dfe4b5623a216b5fdfc7917c800a600b46da0a6aee50-Picture17.png" alt="Picture17.png"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/550cc70957ea76ec0c04dfe4b5623a216b5fdfc7917c800a600b46da0a6aee50-Picture17.png" alt="Picture17.png"></p>
 <h2 id="算法流程-2"><a href="#算法流程-2" class="headerlink" title="算法流程"></a>算法流程</h2><ol>
 <li><strong>初始化：</strong> 伪头节点 <code>dum</code> ，节点 <code>cur</code> 指向 <code>dum</code> 。</li>
 <li><strong>循环合并：</strong> 当 <em>l1</em> 或  <em>l2</em> 为空时跳出；<ol>
@@ -835,8 +835,8 @@
 <p>时间复杂度：O(N<sup>2</sup>)。<br>空间复杂度：O(N<sup>2</sup>)，二维 dp 问题，一个状态得用二维有序数对表示，因此空间复杂度是 O(N<sup>2</sup>)。</p>
 <p>下面分别展示了错误的填表顺序和正确的填表顺序，以便大家理解动态规划要满足「无后效性」的意思。</p>
 <p>说明：表格中的数字表示「填表顺序」，从 1 开始。表格外的箭头和数字也表示「填表顺序」，与表格中的数字含义一致。</p>
-<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/4a24bbe4e55421f4f7d199b14e961eff792146092dd9a0c18cf06c824728407c-image.png" alt="image.png"></p>
-<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/7e9d1f1dbe2095b0609233faa03b224ab32adf832515de1ce15b496f2cbdf0ab-image.png" alt="image.png"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/4a24bbe4e55421f4f7d199b14e961eff792146092dd9a0c18cf06c824728407c-image.png" alt="image.png"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/7e9d1f1dbe2095b0609233faa03b224ab32adf832515de1ce15b496f2cbdf0ab-image.png" alt="image.png"></p>
 <p>下面这段代码只有内层循环和上文代码1.0不同，已经标注在注释中。</p>
 <div class="code-wrapper"><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span></span><span class="token class-name">Arrays</span><span class="token punctuation">;</span>
 
@@ -912,9 +912,9 @@
 <li>奇数回文串的“中心”是一个具体的字符，例如：回文串 <code>&quot;aba&quot;</code> 的中心是字符 <code>&quot;b&quot;</code>；</li>
 <li>偶数回文串的“中心”是位于中间的两个字符的“空隙”，例如：回文串串 <code>&quot;abba&quot;</code> 的中心是两个 <code>&quot;b&quot;</code> 中间的那个“空隙”。</li>
 </ul>
-<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/572db4731d6a0e32ee9c14773ed476068bebb88883335bc7415cb0b43762303a.jpg" alt="图 1 ：奇数回文串与偶数回文串"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/572db4731d6a0e32ee9c14773ed476068bebb88883335bc7415cb0b43762303a.jpg" alt="图 1 ：奇数回文串与偶数回文串"></p>
 <p>我们看一下一个字符串可能的回文子串的中心在哪里？</p>
-<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/3c4ca880f2dd7463e15ddf7bbd59e2f7d11434b7dbc69b55893660012726ee88.jpg" alt="图 2：枚举可能的所有回文中心"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/3c4ca880f2dd7463e15ddf7bbd59e2f7d11434b7dbc69b55893660012726ee88.jpg" alt="图 2：枚举可能的所有回文中心"></p>
 <p>我们可以设计一个方法，兼容以上两种情况：</p>
 <ol>
 <li>如果传入重合的索引编码，进行中心扩散，此时得到的回文子串的长度是奇数；</li>
@@ -990,7 +990,7 @@
 <h2 id="解法2：冒泡排序BubbleSort"><a href="#解法2：冒泡排序BubbleSort" class="headerlink" title="解法2：冒泡排序BubbleSort"></a>解法2：冒泡排序BubbleSort</h2><p><strong>以升序排列为例：</strong>将第一个元素和第二个元素比较，若前者大于后者，则交换两者的位置，再将第二个元素与第三个元素比较，若前者大于后者则交换两者位置，以此类推直到倒数第二个元素与最后一个元素比较，若前者大于后者，则交换两者位置。这样一轮比较下来将会把序列中最大的元素移至序列末尾，这样就安排好了最大数的位置，接下来只需对剩下的（n-1）个元素，重复上述操作即可。</p>
 <p><strong>时间复杂度：</strong><br>若原数组本身就是有序的（这是最好情况），仅需n-1次比较就可完成，时间复杂度依然为O(n）；<br>若是倒序，比较次数为 n-1+n-2+…+1=n(n-1)/2，交换次数和比较次数等值。所以，其时间复杂度依然为O(n2）</p>
 <p><strong>空间复杂度：</strong><br>使用常数个辅助单元：O(1）</p>
-<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210411151031.png"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210411151031.png"></p>
 <div class="code-wrapper"><pre class="line-numbers language-java" data-language="java"><code class="language-java">    <span class="token keyword">public</span> <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token class-name">MySort</span> <span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> arr<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
         <span class="token keyword">if</span><span class="token punctuation">(</span>arr<span class="token punctuation">.</span>length<span class="token operator">&lt;</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
             <span class="token keyword">return</span> arr<span class="token punctuation">;</span>
@@ -1121,8 +1121,8 @@
 <li>归并排序（MERGE-SORT）是利用归并的思想实现的排序方法，该算法采用经典的分治（divide-and-conquer）策略（分治法将问题分(divide)成一些小的问题然后递归求解，而治(conquer)的阶段则将分的阶段得到的各答案”修补”在一起，即分而治之)。</li>
 <li>归并排序是稳定排序，它也是一种十分高效的排序，能利用完全二叉树特性的排序一般性能都不会太差。java中Arrays.sort()采用了一种名为TimSort的排序算法，就是归并排序的优化版本。从上文的图中可看出，每次合并操作的平均时间复杂度为O(n)，而完全二叉树的深度为|log2n|。总的平均时间复杂度为O(nlogn)。而且，归并排序的最好，最坏，平均时间复杂度均为O(nlogn)。</li>
 </ul>
-<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210411152135.png"></p>
-<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210411152152.png"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210411152135.png"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210411152152.png"></p>
 <div class="code-wrapper"><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span></span><span class="token operator">*</span><span class="token punctuation">;</span>
 <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">&#123;</span>
   <span class="token comment">/**
@@ -1172,7 +1172,7 @@
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 
 <h2 id="解法5：堆排序HeapSort"><a href="#解法5：堆排序HeapSort" class="headerlink" title="解法5：堆排序HeapSort"></a>解法5：堆排序HeapSort</h2><p>堆结构就是将一颗完全二叉树映射到数组中的一种存储方式</p>
-<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210411152416.png"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210411152416.png"></p>
 <ul>
 <li><strong>heapInsert和heapify</strong><br>大根堆最重要的两个操作就是heapInsert和happify，前者是当一个元素加入到大根堆时应该自底向上与其父结点比较，若大于父结点则交换；后者是当堆中某个结点的数值发生变化时，应不断向下与其孩子结点中的最大值比较，若小于则交换。下面是对应的代码：</li>
 </ul>
@@ -1202,7 +1202,7 @@
 <ul>
 <li><strong>利用heapify排序</strong></li>
 </ul>
-<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210411152539.png"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210411152539.png"></p>
 <div class="code-wrapper"><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token class-name">MySort</span> <span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> arr<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
    <span class="token function">heapSort</span><span class="token punctuation">(</span>arr<span class="token punctuation">)</span><span class="token punctuation">;</span>
    <span class="token keyword">return</span> arr<span class="token punctuation">;</span>
@@ -1260,13 +1260,13 @@
 <li>最大优先队列，无论入队顺序，当前最大的元素优先出队；</li>
 <li>最小优先队列，无论入队顺序，当前最小的元素优先出队；<br>比如有一个最大优先队列，它的最大元素是8，那么虽然元素8并不是队首元素，但出队的时候仍然让元素8首先出队：</li>
 </ol>
-<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210411152704.png"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210411152704.png"></p>
 <p>优先级队列，也叫二叉堆、堆（不要和内存中的堆区搞混了，一个是内存区域，一个是数据结构）。<br>​堆的本质上是一种完全二叉树，分为：</p>
 <ul>
 <li>小根堆：树中每个非叶子结点都不大于其左右孩子结点的值，也就是根节点最小的堆，图a</li>
 <li>大根堆：树中每个非叶子结点都不小于其左右孩子结点的值，也就是根节点最大的堆，图b</li>
 </ul>
-<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210411152720.png"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210411152720.png"></p>
 <div class="code-wrapper"><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token class-name">MySort</span> <span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> arr<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
    <span class="token comment">// PriorityQueue&lt;Integer> queue=new PriorityQueue&lt;Integer>();</span>
    <span class="token class-name">PriorityQueue</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Integer</span><span class="token punctuation">></span></span> queue<span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">PriorityQueue</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Comparator</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Integer</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
@@ -1564,7 +1564,7 @@ lRUCache.get(4);    &#x2F;&#x2F; 返回 4<span aria-hidden="true" class="line-nu
 <li><strong>双栈可实现列表倒序：</strong> 设有含三个元素的栈 A = [1,2,3] 和空栈 B = []。若循环执行 A 元素出栈并添加入栈 B ，直到栈 A 为空，则 A = [] , B = [3,2,1] ，即 <strong>栈 B 元素实现栈 A 元素倒序</strong> 。</li>
 <li><strong>利用栈 B 删除队首元素：</strong> 倒序后，B 执行出栈则相当于删除了 A 的栈底元素，即对应队首元素。</li>
 </ul>
-<p><img src="/images/loading.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/b813bda09374058f18449b18cc6536a5b8670d5a7b65867eb65b32066c79c1ae-Picture0.png" alt="Picture0.png"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/b813bda09374058f18449b18cc6536a5b8670d5a7b65867eb65b32066c79c1ae-Picture0.png" alt="Picture0.png"></p>
 <h2 id="函数设计"><a href="#函数设计" class="headerlink" title="函数设计"></a>函数设计</h2><blockquote>
 <p>题目只要求实现 <strong>加入队尾</strong><code>appendTail()</code> 和 <strong>删除队首</strong><code>deleteHead()</code> 两个函数的正常工作，因此我们可以设计栈 <code>A</code> 用于加入队尾操作，栈 <code>B</code> 用于将元素倒序，从而实现删除队首元素。</p>
 </blockquote>

@@ -366,7 +366,7 @@ runtime系统调度机制
 <li>所有Exception都用Error来处理</li>
 <li>对C的降级处理，并非无缝衔接，没有C降级到ASM那么完美（主要是序列化问题）</li>
 </ul>
-<h1 id="Golang的基础语法"><a href="#Golang的基础语法" class="headerlink" title="Golang的基础语法"></a>Golang的基础语法</h1><h2 id="从hello-world进入Golang的世界"><a href="#从hello-world进入Golang的世界" class="headerlink" title="从hello world进入Golang的世界"></a>从hello world进入Golang的世界</h2><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/carbon.png" alt="carbon"></p>
+<h1 id="Golang的基础语法"><a href="#Golang的基础语法" class="headerlink" title="Golang的基础语法"></a>Golang的基础语法</h1><h2 id="从hello-world进入Golang的世界"><a href="#从hello-world进入Golang的世界" class="headerlink" title="从hello world进入Golang的世界"></a>从hello world进入Golang的世界</h2><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/carbon.png"></p>
 <ul>
 <li><p>Golang中的表达式，以”;”结尾或者不以”;”结尾都可以，但建议不添加</p>
 </li>
@@ -419,7 +419,7 @@ runtime系统调度机制
 </ul>
 </li>
 </ul>
-<h3 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a><strong>示例代码</strong></h3><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/2.png" alt="2"></p>
+<h3 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a><strong>示例代码</strong></h3><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/2.png"></p>
 <h2 id="常量与iota"><a href="#常量与iota" class="headerlink" title="常量与iota"></a>常量与iota</h2><h3 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h3><p>常量由关键字const声明，类似于Java中的Enum枚举类型</p>
 <div class="code-wrapper"><pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">const</span> a <span class="token builtin">int</span> <span class="token operator">=</span> <span class="token number">1</span>
 
@@ -434,12 +434,12 @@ runtime系统调度机制
     a<span class="token punctuation">,</span> b<span class="token punctuation">,</span> c <span class="token operator">=</span> <span class="token boolean">iota</span><span class="token punctuation">,</span> <span class="token boolean">iota</span><span class="token punctuation">,</span> <span class="token boolean">iota</span>
 <span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></div>
 
-<h3 id="示例代码-1"><a href="#示例代码-1" class="headerlink" title="示例代码"></a>示例代码</h3><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/3.png" alt="3"></p>
+<h3 id="示例代码-1"><a href="#示例代码-1" class="headerlink" title="示例代码"></a>示例代码</h3><p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/3.png"></p>
 <h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><h3 id="多返回值"><a href="#多返回值" class="headerlink" title="多返回值"></a>多返回值</h3><p>Golang拥有多种方式返回多个返回值，如下代码</p>
-<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/4.png" alt="4"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/4.png"></p>
 <h3 id="init函数与import导包"><a href="#init函数与import导包" class="headerlink" title="init函数与import导包"></a>init函数与import导包</h3><p><strong>init函数</strong></p>
 <p>程序入口为main，循环往后寻找import，如果无下一层import则执行init()方法，而后才执行main()方法</p>
-<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210513202135359.png" alt="image-20210513202135359"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210513202135359.png"></p>
 <p><strong>项目结构</strong></p>
 <div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">$GOPATH&#x2F;GolangStudy&#x2F;5.init&#x2F;
 ├── lib1&#x2F;
@@ -451,7 +451,7 @@ runtime系统调度机制
 <p><strong>示例代码</strong></p>
 <p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/5.png"></p>
 <p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/6.png"></p>
-<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210513202924710.png" alt="image-20210513202924710"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210513202924710.png"></p>
 <p>运行结果即可一窥代码运行顺序</p>
 <div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">lib1.init()...
 lib2.init()...
@@ -476,10 +476,10 @@ lib2Test()...<span aria-hidden="true" class="line-numbers-rows"><span></span><sp
 <h2 id="指针"><a href="#指针" class="headerlink" title="指针"></a><a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.cnblogs.com/tongye/p/9650573.html">指针</a></h2><p>指针通道即和C语言一致，这里就不再过多赘述</p>
 <p>指针也就是内存地址，指针变量是用来存放内存地址的变量。就像其他变量或常量一样，您必须在使用指针存储其他变量地址之前，对其进行声明。</p>
 <p>以下为一个简单例子</p>
-<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210513203353733.png" alt="image-20210513203353733"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210513203353733.png"></p>
 <p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210513203408898.png" alt="image-20210513203408898"></p>
 <p><strong>示例代码</strong></p>
-<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210513203602230.png" alt="image-20210513203602230"></p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/image-20210513203602230.png"></p>
 <p>示例代码通过一个swap()函数来体现指针的作用，即swap的是内存地址而并非单纯引用值</p>
 <hr>
 <p>第一天的Golang之旅就暂时到这，第二天继续学习基础语法</p>
@@ -598,6 +598,30 @@ lib2Test()...<span aria-hidden="true" class="line-numbers-rows"><span></span><sp
      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
   </div>
   
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
 
   
 
@@ -655,6 +679,8 @@ lib2Test()...<span aria-hidden="true" class="line-numbers-rows"><span></span><sp
   <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
 
 
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
 

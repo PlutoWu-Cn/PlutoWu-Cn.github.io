@@ -212,7 +212,7 @@ MySQL索引使用的数据结构主要有BTree索引 和 哈希索引 ">
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      5.7k 字
+      9.1k 字
     </span>
   
 
@@ -222,7 +222,7 @@ MySQL索引使用的数据结构主要有BTree索引 和 哈希索引 ">
       <i class="iconfont icon-clock-fill"></i>
       
       
-      59
+      97
        分钟
     </span>
   
@@ -423,6 +423,150 @@ MySQL索引使用的数据结构主要有BTree索引 和 哈希索引 ">
 <li>对于资源竞争严重（线程冲突严重）的情况，CAS自旋的概率会比较大，从而浪费更多的CPU资源，效率低于synchronized。</li>
 </ol>
 <p>补充： Java并发编程这个领域中<code>synchronized</code>关键字一直都是元老级的角色，很久之前很多人都会称它为 <strong>“重量级锁”</strong> 。但是，在JavaSE 1.6之后进行了主要包括为了减少获得锁和释放锁带来的性能消耗而引入的 <strong>偏向锁</strong> 和 <strong>轻量级锁</strong> 以及其它<strong>各种优化</strong>之后变得在某些情况下并不是那么重了。<code>synchronized</code>的底层实现主要依靠 <strong>Lock-Free</strong> 的队列，基本思路是 <strong>自旋后阻塞</strong>，<strong>竞争切换后继续竞争锁</strong>，<strong>稍微牺牲了公平性，但获得了高吞吐量</strong>。在线程冲突较少的情况下，可以获得和CAS类似的性能；而线程冲突严重的情况下，性能远高于CAS。</p>
+<h1 id="MVCC"><a href="#MVCC" class="headerlink" title="MVCC"></a>MVCC</h1><p>MVCC(Multi-Version Concurrency Control)，就是多版本并发控制。MVCC 是一种并发控制的方法，一般在数据库管理系统中，实现对数据库的并发访问。</p>
+<h2 id="MVCC解决的问题"><a href="#MVCC解决的问题" class="headerlink" title="MVCC解决的问题"></a>MVCC解决的问题</h2><p>一般解决不可重复读和幻读问题，是采用锁机制实现，有没有一种乐观锁的问题去处理，可以采用 MVCC 机制的设计，可以用来解决这个问题。取代行锁，降低系统开销。</p>
+<ul>
+<li>读写之间阻塞的问题，通过 MVCC 可以让读写互相不阻塞，读不相互阻塞，写不阻塞读，这样可以提升数据并发处理能力。</li>
+<li>降低了死锁的概率，这个是因为 MVCC 采用了乐观锁的方式，读取数据时，不需要加锁，写操作，只需要锁定必要的行。</li>
+<li>解决了一致性读的问题，当我们朝向某个数据库在时间点的快照是，只能看到这个时间点之前事务提交更新的结果，不能看到时间点之后事务提交的更新结果。</li>
+</ul>
+<h2 id="快照读与当前读"><a href="#快照读与当前读" class="headerlink" title="快照读与当前读"></a>快照读与当前读</h2><p>快照读，读取的是<strong>快照数据</strong>，不加锁的简单 Select 都属于快照读。</p>
+<div class="code-wrapper"><pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> <span class="token operator">*</span> <span class="token keyword">FROM</span> player <span class="token keyword">WHERE</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
+
+<p>当前读就是读的是<strong>最新数据</strong>，而不是历史的数据，加锁的 SELECT，或者对数据进行增删改都会进行当前读。</p>
+<div class="code-wrapper"><pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> <span class="token operator">*</span> <span class="token keyword">FROM</span> player <span class="token keyword">LOCK</span> <span class="token operator">IN</span> <span class="token keyword">SHARE</span> <span class="token keyword">MODE</span><span class="token punctuation">;</span>
+<span class="token keyword">SELECT</span> <span class="token keyword">FROM</span> player <span class="token keyword">FOR</span> <span class="token keyword">UPDATE</span><span class="token punctuation">;</span>
+<span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> player <span class="token keyword">values</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token keyword">DELETE</span> <span class="token keyword">FROM</span> player <span class="token keyword">WHERE</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token keyword">UPDATE</span> player <span class="token keyword">SET</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+
+<h2 id="InnoDB-的-MVCC-实现"><a href="#InnoDB-的-MVCC-实现" class="headerlink" title="InnoDB 的 MVCC 实现"></a>InnoDB 的 MVCC 实现</h2><p>InnoDB 是如何存储记录多个版本的？这些数据是事务版本号，行记录中的隐藏列和Undo Log。</p>
+<h3 id="事务版本号"><a href="#事务版本号" class="headerlink" title="事务版本号"></a>事务版本号</h3><p>每开启一个日志，都会从数据库中获得一个事务ID（也称为事务版本号），这个事务 ID 是自增的，通过 ID 大小，可以判断事务的时间顺序。</p>
+<h3 id="行记录的隐藏列"><a href="#行记录的隐藏列" class="headerlink" title="行记录的隐藏列"></a>行记录的隐藏列</h3><ol>
+<li>row_id :隐藏的行 ID ,用来生成默认的聚集索引。如果创建数据表时没指定聚集索引，这时 InnoDB 就会用这个隐藏 ID 来创建聚集索引。采用聚集索引的方式可以提升数据的查找效率。</li>
+<li>trx_id: 操作这个数据事务 ID ，也就是最后一个对数据插入或者更新的事务 ID 。</li>
+<li>roll_ptr:回滚指针，指向这个记录的 Undo Log 信息。</li>
+</ol>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://pic4.zhimg.com/80/v2-6c8554423406f0e4481b9b8b0b800863_720w.jpg" alt="img"></p>
+<h3 id="Undo-Log"><a href="#Undo-Log" class="headerlink" title="Undo Log"></a>Undo Log</h3><p>InnoDB 将行记录快照保存在 Undo Log 里。</p>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://pic4.zhimg.com/80/v2-dbf9e8c10cffbba915de717847512f4f_720w.jpg" alt="img"></p>
+<p>数据行通过快照记录都通过链表的结构的串联了起来，每个快照都保存了 trx_id 事务ID，如果要找到历史快照，就可以通过遍历回滚指针的方式进行查找。</p>
+<h2 id="Read-View"><a href="#Read-View" class="headerlink" title="Read View"></a>Read View</h2><p>如果一个事务要查询行记录，需要读取哪个版本的行记录呢？ Read View 就是来解决这个问题的。Read View 可以帮助我们解决可见性问题。 Read View 保存了<strong>当前事务开启时所有活跃的事务列表</strong>。换个角度，可以理解为: <strong>Read View 保存了不应该让这个事务看到的其他事务 ID 列表。</strong></p>
+<ol>
+<li>trx_ids 系统当前正在活跃的事务ID集合。</li>
+<li>low_limit_id ,活跃事务的最大的事务 ID。</li>
+<li>up_limit_id 活跃的事务中最小的事务 ID。</li>
+<li>creator_trx_id，创建这个 ReadView 的事务ID。</li>
+</ol>
+<p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://pic3.zhimg.com/80/v2-c22fd92467b2c69f626634e9a5dd0d8e_720w.jpg" alt="img"></p>
+<p>如果当前事务的 creator_trx_id 想要读取某个行记录，这个行记录ID 的trx_id ，这样会有以下的情况：</p>
+<ul>
+<li>如果 trx_id &lt; 活跃的最小事务ID（up_limit_id）,也就是说这个行记录在<strong>这些活跃的事务创建前就已经提交了，那么这个行记录对当前事务是可见的。</strong></li>
+<li>如果trx_id &gt; 活跃的最大事务ID（low_limit_id），这个说明行记录在这些活跃的事务之后才创建，说明<strong>这个行记录对当前事务是不可见的。</strong></li>
+<li>如果 up_limit_id &lt; trx_id &lt;low_limit_id,说明该记录需要在 trx_ids 集合中，可能还处于活跃状态，因此我们需要在 trx_ids 集合中遍历 ，如果trx_id 存在于 trx_ids 集合中，证明这个事务 trx_id 还处于活跃状态，不可见，否则 ，trx_id 不存在于 trx_ids 集合中，说明事务trx_id 已经提交了，这行记录是可见的。</li>
+</ul>
+<h2 id="如何查询一条记录"><a href="#如何查询一条记录" class="headerlink" title="如何查询一条记录"></a>如何查询一条记录</h2><ol>
+<li>获取事务自己的版本号，即 事务ID</li>
+<li>获取 Read View</li>
+<li>查询得到的数据，然后 Read View 中的事务版本号进行比较。</li>
+<li>如果不符合 ReadView 规则， 那么就需要 UndoLog 中历史快照；</li>
+<li>最后返回符合规则的数据</li>
+</ol>
+<p>InnoDB 实现多版本控制 （MVCC）是通过 ReadView+ UndoLog 实现的，UndoLog 保存了历史快照，ReadView 规则帮助判断当前版本的数据是否可见。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li>如果事务隔离级别是 ReadCommit ，一个事务的每一次 Select 都会去查一次ReadView ，每次查询的Read View 不同，就可能会造成不可重复读或者幻读的情况。</li>
+<li>如果事务的隔离级别是可重读，为了避免不可重读读，一个事务只在第一次 Select 的时候会获取一次Read View ，然后后面索引的Select 会复用这个 ReadView。</li>
+</ul>
+<h1 id="锁"><a href="#锁" class="headerlink" title="锁"></a>锁</h1><h2 id="InnoDB中的锁"><a href="#InnoDB中的锁" class="headerlink" title="InnoDB中的锁"></a>InnoDB中的锁</h2><p>InnoDB实现了<strong>行级锁</strong>，可以分为两种类型：<strong>共享</strong>（S）锁定和<strong>排他</strong>（X）锁定。</p>
+<ul>
+<li>共享（S）锁允许持有该锁的事务读取一行，所有又叫<strong>读锁</strong></li>
+<li>排他（X）锁允许持有该锁的事务更新或删除行，所以又叫<strong>写锁</strong>。</li>
+</ul>
+<p>多个事务并发执行时，如果事务T1在某一行r上持有<strong>共享（S）锁</strong>，那么事务T2的对这行r的锁请求将按以下方式处理：</p>
+<ul>
+<li>T2对<strong>S锁</strong>的请求可以立即获得批准。T1和T2都在r上保持了<strong>S锁</strong>。</li>
+<li>T2对<strong>X锁</strong>的请求不能获取批准。</li>
+</ul>
+<p>如果事务T1在某一行r上拥有<strong>排他（X）锁</strong>，则事务T2不能获取锁（不论是<strong>S锁</strong>还是<strong>X锁</strong>）</p>
+<p>换言之，S锁和S锁是兼容的，S锁和X锁是冲突的，X锁和X锁是冲突的</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>S锁</th>
+<th>X锁</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>S锁</td>
+<td>冲突</td>
+<td><em>冲突</em></td>
+</tr>
+<tr>
+<td>X锁</td>
+<td><em>冲突</em></td>
+<td><em>冲突</em></td>
+</tr>
+</tbody></table>
+<p>但是<strong>共享锁</strong>和<strong>排它锁</strong>并不是指具体的两种锁，而是指<strong>两类</strong>锁。<br>同样的<strong>乐观锁</strong>和<strong>悲观锁</strong>也不是指具体的锁，而是指两类锁。乐观锁是乐观的认为每次都不会发生冲突，只会在更新的时候检查要更新的值有没有被别人修改过，因为没有加锁，所以乐观锁又叫<strong>无锁</strong>。在数据库中一般是用MVCC实现乐观锁，在Java中用CAS实现乐观锁。至于悲观锁就是悲观的认为每次都会发生冲突，所以每次修改都需要加锁。</p>
+<h2 id="表锁"><a href="#表锁" class="headerlink" title="表锁"></a>表锁</h2><p><strong>表锁</strong>是MySQL中粒度最大的一种锁，简单粗暴的锁住整张表，实现简单所以支持的并发度低。InnoDB和MyIASM都支持表锁，表锁分为<strong>共享（S）锁</strong>和<strong>排他（X）锁</strong>。<br><strong>表锁</strong>的特点是实现简单，并发度低。加锁快，开销小。不会出现死锁。</p>
+<h2 id="行锁"><a href="#行锁" class="headerlink" title="行锁"></a>行锁</h2><p><strong>行锁</strong>是MySQL中粒度最细的一种锁，每次只锁住要操作的那一行。实现复杂，支持的并发度高。只有InnoDB支持行锁。行锁也分为<strong>共享（S）锁</strong>和<strong>排他（X）锁</strong>。行锁是对<strong>索引</strong>的锁定。例如SELECT c1 FROM t WHERE c1 = 10 FOR UPDATE，防止任何其他事务插入，更新或删除t.c1值为10的行。行锁始终锁定<strong>索引</strong>，对于没有创建索引的表，InnoDB创建一个<strong>隐藏的聚簇索引</strong>并将该索引用于行锁。<br><strong>行锁</strong>的特点是实现复杂，并发度高。加锁慢，开销大。会出现死锁。</p>
+<h2 id="意向锁（Intention-Locks）"><a href="#意向锁（Intention-Locks）" class="headerlink" title="意向锁（Intention Locks）"></a>意向锁（Intention Locks）</h2><p>InnoDB支持多种粒度锁定，允许<strong>行锁</strong>和<strong>表锁</strong>并存。为了使在多个粒度级别上的锁定变得切实可行，InnoDB实现了<strong>意图锁</strong>。<strong>意向锁是表级锁</strong>，表示事务稍后对表中的行需要上哪种类型的锁（<strong>共享锁</strong>或<strong>排他锁</strong>）。有两种类型的意图锁：<br>* <strong>意向共享锁</strong>（IS）表示事务打算给数据行加行<strong>共享锁</strong>，事务在给一个数据行加共享锁前必须先取得该表的 IS 锁。<br>* <strong>意向排他锁</strong>（IX）表示事务打算给数据行加行<strong>排他锁</strong>，事务在给一个数据行加排他锁前必须先取得该表的 IX 锁。</p>
+<p>SELECT … LOCK IN SHARE MODE设置<strong>IS锁定</strong>，而SELECT … FOR UPDATE设置<strong>IX锁定</strong>。</p>
+<p><strong>表级锁</strong>之间的兼容性如下</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>X锁</th>
+<th>IX锁</th>
+<th>S锁</th>
+<th>IS锁</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>X锁</td>
+<td>冲突</td>
+<td>冲突</td>
+<td>冲突</td>
+<td>冲突</td>
+</tr>
+<tr>
+<td>IX锁</td>
+<td>冲突</td>
+<td>兼容</td>
+<td>冲突</td>
+<td>兼容</td>
+</tr>
+<tr>
+<td>S锁</td>
+<td>冲突</td>
+<td>冲突</td>
+<td>兼容</td>
+<td>兼容</td>
+</tr>
+<tr>
+<td>IS锁</td>
+<td>冲突</td>
+<td>兼容</td>
+<td>兼容</td>
+<td>兼容</td>
+</tr>
+</tbody></table>
+<p>要想理解这个表，首先得理解为什么要有意向锁（Intention Locks），关于意向锁的作用，官方文档上给出了这么一句话：</p>
+<blockquote>
+<p>Intention locks do not block anything except full table requests (for example, LOCK TABLES … WRITE). The main purpose of intention locks is to show that someone is locking a row, or going to lock a row in the table.</p>
+</blockquote>
+<p><strong>意向锁</strong>不会阻止任何其他请求，除了（锁定）全表请求（例如LOCK TABLES … WRITE）外。<strong>意向锁</strong>定的主要目的是：声明已经有事务<strong>正在锁定</strong>表中的行，或者<strong>即将锁定</strong>表中的行。</p>
+<p>这句话透露出了意向锁虽然是表锁，但是和行锁是完全兼容的（包括<strong>共享锁</strong>和<strong>排它锁</strong>）。但是声明表中的行正在被锁定或者即将被锁定，有什么用呢？</p>
+<p>假设事务A给表中某一行加了排它锁，而事务B想给这个表加一个全表的排他锁，这时候事务B就需要判断当前表中到底有没有排他锁，如果有的话，是不能成功加上去表的排它锁的。此时，如果没有意向锁，事务B只能遍历整个索引去判断，这样无疑是低效的。为了解决这个问题，MySQL引入了意向锁。当事务A给某一行加了排它锁或者共享锁后，会分别在表上加<strong>意向排它锁</strong>（IX）或者<strong>意向共享锁</strong>（IS），这时，事务B就可很轻松的判断当前表是否有<strong>行锁</strong>，这也就是前文所说的：为了使在多个粒度级别上的锁定变得切实可行，InnoDB实现了<strong>意图锁</strong>。</p>
+<p>理解了意图锁的作用，再来看看上面的表格。S锁和X锁之间的兼容性前文已经理清了，还剩下IX和IS之间以及S/X和IS/IX的兼容性。</p>
+<p>由于某一行被加了S锁或者X锁后，表上都会加上对应的IS锁和IX锁。另一个事务想锁住另一条记录，也得加上对应的IS锁或者IX锁，所以IS和IS、IS和IX以及IX和IX必定是兼容的，不然整个表最多只能上一个行锁。</p>
+<p>至于S锁、X锁和IS锁、IX锁的兼容性则需与分情况讨论了。当整个表上了X锁之后，再也不能上别的X锁或者S锁了，所以X锁和IS、IX都是冲突的。当整个表上了S锁之后，不能再上X锁了，但是还可以上S锁，所以S锁和IX锁是冲突的，但是和IS锁是兼容的。</p>
+<h2 id="间隙锁（Gap-Locks）"><a href="#间隙锁（Gap-Locks）" class="headerlink" title="间隙锁（Gap Locks）"></a>间隙锁（Gap Locks）</h2><p>间隙锁锁定的是索引记录之间的间隙，或者在第一个或最后一个索引记录之前的间隙。例如SELECT c1 FROM t WHERE c1 BETWEEN 10 and 20 FOR UPDATE，可以防止其他事务将t.c1为15的记录插入表中，因为这两个值之间的间隙是被锁定的。<br>间隙可能跨越单个索引值，多个索引值，甚至为空。<br>间隙锁的唯一目的是防止其他事务在间隙中插入数据。间隙锁可以<strong>共存</strong>。一个事务执行的间隙锁，不会阻止另一事务对相同的间隙进行间隙锁定。</p>
+<h2 id="Next-Key-Locks"><a href="#Next-Key-Locks" class="headerlink" title="Next-Key Locks"></a>Next-Key Locks</h2><p>Next-Key Locks是索引记录上的<strong>行锁</strong>和<strong>索引记录之前的间隙上的间隙锁</strong>的组合。如果一个session在索引中的记录R上具有<strong>共享</strong>或<strong>排他锁</strong>，则另一session不能按照索引顺序在R之前的间隙中插入新的索引记录。<br>默认情况下，InnoDB设置的事务隔离级别是REPEATABLE READ。在这种情况下，InnoDB使用<strong>Next-Key Locks</strong>进行搜索和索引扫描，这可以防止幻读（虚读）。关于MySQL隔离级别相关的问题，请参考：面试官：MySQL事务是怎么实现的</p>
+<h2 id="插入意图锁（Insert-Intention-Locks）"><a href="#插入意图锁（Insert-Intention-Locks）" class="headerlink" title="插入意图锁（Insert Intention Locks）"></a>插入意图锁（Insert Intention Locks）</h2><p>插入意图锁是在行插入之前，通过INSERT操作设置的<strong>间隙锁</strong>的一种类型。如果多个事务想要在<strong>同一个间隙</strong>中插入不同的值（也就是插入的位置不同），则这多个事务均不会被阻塞。假设有索引记录，其值分别为4和7。单独的事务分别尝试插入值5和6，在获得插入行的排他锁之前，每个事务都使用插入意图锁来锁定4和7之间的间隙，但不会互相阻塞，因为插入的行是无冲突的。</p>
+<h2 id="自增锁（AUTO-INC-Locks）"><a href="#自增锁（AUTO-INC-Locks）" class="headerlink" title="自增锁（AUTO-INC Locks）"></a>自增锁（AUTO-INC Locks）</h2><p>AUTO-INC锁是一种特殊的<strong>表级锁</strong>，由事务插入具有AUTO_INCREMENT列的表中获得。在最简单的情况下，如果一个事务正在向表中插入值，则任何其他事务都必须等待这个事务在该表中进行插入，以便第一个事务插入的行接收连续的主键值。</p>
 
             </div>
             <hr>
@@ -540,6 +684,30 @@ MySQL索引使用的数据结构主要有BTree索引 和 哈希索引 ">
      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
   </div>
   
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
 
   
 
@@ -597,6 +765,8 @@ MySQL索引使用的数据结构主要有BTree索引 和 哈希索引 ">
   <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
 
 
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
 

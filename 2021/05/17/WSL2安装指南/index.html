@@ -16,7 +16,14 @@
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="A Simple and Powerful Blog">
+  <meta name="description" content="版本要求安装WSL2对系统版本有硬性要求
+
+Windows 10运行在版本2004的内部版本19041或更高版本
+检查版本：Win + R，键入winver。若内部版本低于19041，请更新到最新的Windows版本继续操作
+
+
+升级Windows（若版本达到要求，请跳过此步骤）
+Win + S 搜索Windows预览体验计划，加入预览体验计划以获取最新版本，并在Windows更新下检查更新并更新">
   <meta name="author" content="PlutoWu">
   <meta name="keywords" content="">
   
@@ -72,7 +79,7 @@
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="Pluto" type="application/atom+xml">
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Pluto" type="application/atom+xml">
 </head>
 
 
@@ -210,7 +217,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      549 字
+      550 字
     </span>
   
 
@@ -261,11 +268,13 @@
 <p><img src="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/1.gif" srcset="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210518124444.png" lazyload data-original="https://plutowu-blogimgs.oss-cn-guangzhou.aliyuncs.com/img/20210517145759.png"></p>
 <p><strong>升级Windows（若版本达到要求，请跳过此步骤）</strong></p>
 <p>Win + S 搜索<code>Windows预览体验计划</code>，加入预览体验计划以获取最新版本，并在<code>Windows更新</code>下检查更新并更新版本</p>
+<span id="more"></span>
+
 <h1 id="WSL的安装"><a href="#WSL的安装" class="headerlink" title="WSL的安装"></a>WSL的安装</h1><ul>
 <li>使用<code>管理员</code>权限打开PowerShell</li>
 <li>启用“ 适用于Linux的Windows子系统 ”选项，此操作为启用WSL</li>
 </ul>
-<div class="code-wrapper"><pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell">dism<span class="token punctuation">.</span>exe <span class="token operator">/</span>online <span class="token operator">/</span><span class="token function">enable-feature</span> <span class="token operator">/</span>featurename:Microsoft<span class="token operator">-</span>Windows<span class="token operator">-</span>Subsystem<span class="token operator">-</span>Linux <span class="token operator">/</span>all <span class="token operator">/</span>norestart<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
+<div class="code-wrapper"><pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell">dism<span class="token punctuation">.</span>exe <span class="token operator">/</span>online <span class="token operator">/</span><span class="token function">enable-feature</span> <span class="token operator">/</span>featurename:Microsoft-Windows-Subsystem-Linux <span class="token operator">/</span>all <span class="token operator">/</span>norestart<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
 
 <ul>
 <li>升级到WSL2，启动“ 虚拟机平台 ”可选组件</li>
@@ -283,7 +292,7 @@
 <ul>
 <li><p>打开 <a target="_blank" rel="noopener external nofollow noreferrer" href="https://aka.ms/wslstore">Microsoft Store</a>，并选择你所需要的 Linux 分发版</p>
 <p>单击以下链接可直达每个分发版的 Microsoft Store 页面</p>
-<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.microsoft.com/store/apps/9pjn388hp8c9">Ubuntu 16.04 LTS</a><br><a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.microsoft.com/store/apps/9N9TNGVNDL3Q">Ubuntu 18.04 LTS</a><br><a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.microsoft.com/store/apps/9n6svws3rx71">Ubuntu 20.04 LTS</a><br><a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.microsoft.com/store/apps/9NJFZK00FGKV">openSUSE Leap 15.1</a><br><a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.microsoft.com/store/apps/9MZ3D1TRP8T1">SUSE Linux Enterprise Server 12 SP5</a><br><a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.microsoft.com/store/apps/9PN498VPMF3Z">SUSE Linux Enterprise Server 15 SP1</a><br><a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.microsoft.com/store/apps/9PKR34TNCV07">Kali Linux</a><br><a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.microsoft.com/store/apps/9MSVKQC78PK6">Debian GNU/Linux</a><br><a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.microsoft.com/store/apps/9n6gdm4k2hnc">Fedora Remix for WSL</a><br><a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.microsoft.com/store/apps/9NV1GV1PXZ6P">Pengwin</a><br><a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.microsoft.com/store/apps/9N8LP0X93VCP">Pengwin Enterprise</a><br><a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.microsoft.com/store/apps/9p804crf0395">Alpine WSL</a></p>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.microsoft.com/store/apps/9pjn388hp8c9">Ubuntu 16.04 LTS</a><br><a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.microsoft.com/store/apps/9N9TNGVNDL3Q">Ubuntu 18.04 LTS</a><br><a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.microsoft.com/store/apps/9n6svws3rx71">Ubuntu 20.04 LTS</a><br><a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.microsoft.com/store/apps/9NJFZK00FGKV">openSUSE Leap 15.1</a><br><a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.microsoft.com/store/apps/9MZ3D1TRP8T1">SUSE Linux Enterprise Server 12 SP5</a><br><a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.microsoft.com/store/apps/9PN498VPMF3Z">SUSE Linux Enterprise Server 15 SP1</a><br><a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.microsoft.com/store/apps/9PKR34TNCV07">Kali Linux</a><br><a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.microsoft.com/store/apps/9MSVKQC78PK6">Debian GNU&#x2F;Linux</a><br><a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.microsoft.com/store/apps/9n6gdm4k2hnc">Fedora Remix for WSL</a><br><a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.microsoft.com/store/apps/9NV1GV1PXZ6P">Pengwin</a><br><a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.microsoft.com/store/apps/9N8LP0X93VCP">Pengwin Enterprise</a><br><a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.microsoft.com/store/apps/9p804crf0395">Alpine WSL</a></p>
 </li>
 <li><p>如图，在所在页面，选择获取即可开始安装</p>
 </li>
@@ -556,11 +565,18 @@
 <script  src="/js/boot.js" ></script>
 
 
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><script>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script>
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
             window.imageLazyLoadSetting = {
                 isSPA: false,
                 preloadRatio: 1,
                 processImages: null,
             };
-        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=o;var e=n.imageLazyLoadSetting.isSPA,i=n.imageLazyLoadSetting.preloadRatio||1,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function o(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight*i||document.documentElement.clientHeight*i)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},t.src!==i&&(n.src=i)}()}o(),n.addEventListener("scroll",function(){var t,e;t=o,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(r){r.imageLazyLoadSetting.processImages=t;var e=r.imageLazyLoadSetting.isSPA,n=r.imageLazyLoadSetting.preloadRatio||1,c=a();function a(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(){e&&(c=a());for(var t,o=0;o<c.length;o++)0<=(t=(t=c[o]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(r.innerHeight*n||document.documentElement.clientHeight*n)&&function(){var t,e,n,a,i=c[o];e=function(){c=c.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(n=new Image,a=t.getAttribute("data-original"),n.onload=function(){t.src=a,t.removeAttribute("data-original"),e&&e()},t.src!==a&&(n.src=a))}()}function i(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",i),r.addEventListener("resize",i),r.addEventListener("orientationchange",i)}(this);</script></body>
 </html>
